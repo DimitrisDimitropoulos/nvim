@@ -1,0 +1,14 @@
+{
+  "snip1": {
+    "prefix": "lua",
+    "body": [
+      "lualualua"
+    ]
+  },
+  "snip2": {
+    "prefix": "lua",
+    "body": [
+      "$1 test"
+    ]
+  }
+}
