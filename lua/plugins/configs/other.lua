@@ -1,39 +1,22 @@
-require("bufferline").setup({
-  options = {
-    themable = true,
-    offsets = {
-      {
-        filetype = "NvimTree",
-        highlight = "NvimTreeNormal",
-      },
+require("mason").setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
+    },
+    keymaps = {
+      toggle_server_expand = "<CR>",
+      install_server = "i",
+      update_server = "u",
+      check_server_version = "c",
+      update_all_servers = "U",
+      check_outdated_servers = "C",
+      uninstall_server = "X",
+      cancel_installation = "<C-c>",
     },
   },
 })
-
---Aerial setup for file ouline
--- require("aerial").setup {}
-
---[[ -- Mini library modules setup
-require("mini.files").setup {
-  mappings = {
-    close = "q",
-    go_in = "<Left>",
-    go_in_plus = "L",
-    go_out = "<Right>",
-    go_out_plus = "H",
-    reset = "<BS>",
-    show_help = "g?",
-    synchronize = "=",
-    trim_left = "<",
-    trim_right = ">",
-  },
-  windows = {
-    max_number = math.huge,
-    preview = true,
-    width_focus = 50,
-    width_nofocus = 15,
-  },
-} ]]
 
 -- Mini textobjects
 require("mini.ai").setup({
@@ -67,16 +50,3 @@ require("mini.splitjoin").setup({})
 require("mini.bracketed").setup({})
 -- Mini jump extension to FfTf
 require("mini.jump").setup({})
-
--- require("mini.comment").setup {
---   mappings = {
---     comment_line = "<leader>/",
---   },
--- }
-
--- clangd setup
--- require("clangd_extensions").prepare()
--- require("clangd_extensions").setup()
-
---rust tools
--- require("rust-tools").setup {}
