@@ -2,16 +2,11 @@ local plugins = {
   "nvim-lua/plenary.nvim",
 
   -- -- colorscheme
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  -- {
-  --   "navarasu/onedark.nvim",
-  --   priority = 1000,
-  --   config = function()
-  --     require("onedark").setup({
-  --       style = "darker",
-  --     })
-  --   end,
-  -- },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+  },
 
   -- file tree
   {
@@ -40,7 +35,6 @@ local plugins = {
     end,
   },
 
-
   -- statusline
 
   {
@@ -51,9 +45,7 @@ local plugins = {
     end,
   },
 
-  -- we use cmp plugin only when in insert mode
-  -- so lets lazyload it at InsertEnter event, to know all the events check h-events
-  -- completion , now all of these plugins are dependent on cmp, we load them after cmp
+  -- CMP config and dependencies
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -64,6 +56,7 @@ local plugins = {
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lua",
+      "onsails/lspkind-nvim",
 
       -- snippets
       --list of default snippets
@@ -72,8 +65,13 @@ local plugins = {
       -- snippets engine
       {
         "L3MON4D3/LuaSnip",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
+        -- config = function()
+        --   require("luasnip.loaders.from_vscode").lazy_load()
+        -- end,
+        dependencies = "rafamadriz/friendly-snippets",
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("plugins.configs.luasnip").luasnip(opts)
         end,
       },
 
@@ -139,6 +137,11 @@ local plugins = {
       require("plugins.configs.telescope")
     end,
   },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build =
+    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  },
 
   -- git status on signcolumn etc
   {
@@ -155,6 +158,32 @@ local plugins = {
     config = function()
       require("Comment").setup()
     end,
+  },
+  {
+    "github/copilot.vim",
+    event = "InsertEnter",
+  },
+  {
+    "beauwilliams/focus.nvim",
+    event = "BufLeave",
+    -- keys = { "<C-h>", "<C-j>", "<C-k>", "<C-l>", "<C-w>" },
+    -- keys = {"<leader>qf"},
+    config = function()
+      require("focus").setup()
+    end,
+  },
+  {
+    "goolord/alpha-nvim",
+    enabled = true,
+    lazy = false,
+    config = function()
+      require("plugins.configs.alpha")
+    end,
+  },
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    event = "InsertEnter",
   },
 }
 

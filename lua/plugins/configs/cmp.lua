@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local lspkind = require("lspkind")
 
 cmp.setup({
   snippet = {
@@ -7,17 +8,19 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<Up>"] = cmp.mapping.select_prev_item(),
+    ["<Down>"] = cmp.mapping.select_next_item(),
+    ["<A-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<A-u>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-e>"] = cmp.mapping.close(),
 
-    -- luasnip
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif require("luasnip").expand_or_jumpable() then
+    ["<CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    }),
+    ["<A-j>"] = cmp.mapping(function(fallback)
+      if require("luasnip").expand_or_jumpable() then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
       else
         fallback()
@@ -26,10 +29,8 @@ cmp.setup({
       "i",
       "s",
     }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif require("luasnip").jumpable(-1) then
+    ["<A-k>"] = cmp.mapping(function(fallback)
+      if require("luasnip").jumpable(-1) then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
       else
         fallback()
@@ -46,4 +47,7 @@ cmp.setup({
     { name = "nvim_lua" },
     { name = "path" },
   }),
+  formatting = {
+    format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }),
+  },
 })

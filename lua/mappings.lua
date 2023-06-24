@@ -79,6 +79,7 @@ keymapp(
   { desc = "find all" },
   opts
 )
+keymapp(n, "<leader>f;", "<cmd> Telescope commands <CR>", { desc = "find commands" }, opts)
 keymapp(n, "<leader>lg", "<cmd> Telescope live_grep <CR>", { desc = "live grep" }, opts)
 keymapp(n, "<leader>fs", "<cmd> Telescope grep_string <CR>", { desc = "" }, opts)
 keymapp(n, "<leader>fb", "<cmd> Telescope buffers <CR>", { desc = "find buffers" }, opts)
@@ -87,7 +88,7 @@ keymapp(n, "<leader>fh", "<cmd> Telescope help_tags <CR>", { desc = "find help t
 keymapp(n, "<leader>fr", "<cmd> Telescope oldfiles <CR>", { desc = "find old files" }, opts)
 keymapp(n, "<leader>fk", "<cmd> Telescope keymaps <CR>", { desc = "find keymaps" }, opts)
 keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
-keymapp(n, "<leader>", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
+keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
 keymapp(n, "<leader>dd", "<cmd> Telescope diagnostics <CR>", { desc = "find diagnostics" }, opts)
 keymapp(n, "<leader>ch", "<cmd> Telescope command_history <CR>", { desc = "find command history" }, opts)
 keymapp(
