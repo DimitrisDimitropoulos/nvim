@@ -3,20 +3,54 @@ if not line_ok then
   return
 end
 
-local one_monokai = {
-  fg = "#abb2bf",
-  -- i want a little bit lighter
-  bg = "#282c34",
-  green = "#98c379",
-  yellow = "#e5c07b",
+local gruvbox = {
+  fg = "#ebdbb2",
+  bg = "#3c3836",
+  black = "#3c3836",
+  -- skyblue = "#83a598",
+  cyan = "#3c3836",
+  green = "#b8bb26",
+  oceanblue = "#3c3836",
+  blue = "#3c3836",
+  darkblue = "#3c3836",
+  magenta = "#d3869b",
+  orange = "#d65d0e",
+  red = "#fb4934",
+  violet = "#b16286",
+  white = "#ebdbb2",
+  yellow = "#fabd2f",
+  purple = "#c678dd",
+}
+
+--[[ local one_monokai = {
   purple = "#c678dd",
   orange = "#d19a66",
   peanut = "#f6d5a4",
   red = "#e06c75",
-  aqua = "#61afef",
+  -- aqua = "#61afef",
   darkblue = "#494D64",
   dark_red = "#f75f5f",
-}
+  -- "#494D64",
+  -- "#ED8796",
+  yellow = "#EED49F",
+  aqua = "#8AADF4",
+  -- "#F5BDE6",
+  -- "#8BD5CA",
+  -- "#B8C0E0",
+  -- /* 8 bright colors */
+  -- "#5B6078",
+  -- "#ED8796",
+  green = "#A6DA95",
+  -- "#EED49F",
+  -- "#8AADF4",
+  -- "#F5BDE6",
+  -- "#8BD5CA",
+  -- "#A5ADCB",
+  -- i want a dark brown
+  fg = "#F4DBD6", --[[  default foreground colour  ]]
+-- bg = "#f6d5a4",
+-- [258] = "#F4DBD6", /*575268*/
+-- } ]]
 
 local vi_mode_colors = {
   NORMAL = "green",
@@ -209,7 +243,7 @@ local right = {
   c.file_type,
   c.file_encoding,
   c.position,
-  c.line_percentage,
+  -- c.line_percentage,
   -- c.scroll_bar,
 }
 
@@ -228,6 +262,6 @@ local components = {
 
 feline.setup({
   components = components,
-  theme = one_monokai,
+  theme = gruvbox,
   vi_mode_colors = vi_mode_colors,
 })
