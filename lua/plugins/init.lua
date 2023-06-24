@@ -209,6 +209,14 @@ local plugins = {
       require("plugins.configs.other")
     end,
   },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+    lazy = true,
+    config = function()
+      require("trouble").setup()
+    end,
+  },
 }
 
 require("lazy").setup(plugins, require("plugins.configs.lazy"))
