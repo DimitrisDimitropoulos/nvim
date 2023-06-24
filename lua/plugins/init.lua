@@ -35,15 +35,31 @@ local plugins = {
     end,
   },
 
-  -- statusline
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("plugins.configs.lualine")
+  --   end,
+  -- },
 
   {
-    "echasnovski/mini.statusline",
+    "freddiehaddad/feline.nvim",
     lazy = false,
     config = function()
-      require("mini.statusline").setup({ set_vim_settings = true })
+      require("plugins.configs.feline")
     end,
   },
+
+  -- -- statusline
+  -- {
+  --   "rebelot/heirline.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("plugins.configs.heirline")
+  --   end,
+  -- },
 
   -- CMP config and dependencies
   {
@@ -98,7 +114,12 @@ local plugins = {
     build = ":MasonUpdate",
     cmd = { "Mason", "MasonInstall" },
     config = function()
-      require("mason").setup()
+      local apps = require("plugins.configs.mason")
+      require("plugins.configs.mason")
+      vim.api.nvim_create_user_command("MasonInstallAll", function()
+        vim.cmd("MasonInstall " .. table.concat(apps.ensure_installed, " "))
+      end, {})
+      vim.g.mason_binaries_list = apps.ensure_installed
     end,
   },
 
@@ -184,6 +205,9 @@ local plugins = {
     "echasnovski/mini.nvim",
     version = false,
     event = "InsertEnter",
+    config = function()
+      require("plugins.configs.other")
+    end,
   },
 }
 
