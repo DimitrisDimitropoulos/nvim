@@ -2,7 +2,6 @@ require("options")
 require("mappings")
 require("commands")
 
-
 -- bootstrap plugins & lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" -- path where its going to be installed
 
@@ -21,4 +20,5 @@ vim.opt.rtp:prepend(lazypath)
 
 require("plugins")
 
-require("catppuccin").load()
+-- require("catppuccin").load()
+vim.cmd.colorscheme("melange")
