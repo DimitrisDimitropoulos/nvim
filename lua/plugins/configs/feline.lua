@@ -20,6 +20,7 @@ local gruvbox = {
   white = "#ebdbb2",
   yellow = "#fabd2f",
   purple = "#c678dd",
+  peanut = "#f6d5a4",
 }
 
 --[[ local one_monokai = {
@@ -53,14 +54,14 @@ local gruvbox = {
 -- } ]]
 
 local vi_mode_colors = {
-  NORMAL = "green",
+  NORMAL = "peanut",
   OP = "green",
   INSERT = "yellow",
   VISUAL = "purple",
   LINES = "orange",
   BLOCK = "dark_red",
   REPLACE = "red",
-  COMMAND = "aqua",
+  COMMAND = "green",
 }
 
 local c = {
@@ -72,6 +73,7 @@ local c = {
         -- padding = "center", -- Uncomment for extra padding.
       },
     },
+    priority = 10, -- Necessary to appear while truncated
     hl = function()
       return {
         fg = require("feline.providers.vi_mode").get_mode_color(),
@@ -98,9 +100,11 @@ local c = {
     hl = {
       fg = "green",
       bg = "darkblue",
+      truncate_hide = true,
     },
     left_sep = "block",
     right_sep = "block",
+    truncate_hide = true,
   },
   gitDiffRemoved = {
     provider = "git_diff_removed",
@@ -110,6 +114,7 @@ local c = {
     },
     left_sep = "block",
     right_sep = "block",
+    truncate_hide = true,
   },
   gitDiffChanged = {
     provider = "git_diff_changed",
@@ -119,6 +124,7 @@ local c = {
     },
     left_sep = "block",
     right_sep = "right_filled",
+    truncate_hide = true,
   },
   separator = {
     provider = "",
@@ -153,19 +159,22 @@ local c = {
     hl = {
       fg = "aqua",
     },
+    truncate_hide = true,
   },
   diagnostic_info = {
     provider = "diagnostic_info",
+    truncate_hide = true,
   },
   lsp_client_names = {
     provider = "lsp_client_names",
     hl = {
-      fg = "purple",
+      fg = "violet",
       bg = "darkblue",
       style = "bold",
     },
     left_sep = "left_filled",
     right_sep = "block",
+    truncate_hide = true,
   },
   file_type = {
     provider = {
@@ -176,12 +185,13 @@ local c = {
       },
     },
     hl = {
-      fg = "red",
+      fg = "peanut",
       bg = "darkblue",
       style = "bold",
     },
     left_sep = "block",
     right_sep = "block",
+    truncate_hide = true,
   },
   file_encoding = {
     provider = "file_encoding",
@@ -192,6 +202,7 @@ local c = {
     },
     left_sep = "block",
     right_sep = "block",
+    truncate_hide = true,
   },
   position = {
     provider = "position",
@@ -202,6 +213,7 @@ local c = {
     },
     left_sep = "block",
     right_sep = "block",
+    truncate_hide = true,
   },
   line_percentage = {
     provider = "line_percentage",
@@ -212,6 +224,7 @@ local c = {
     },
     left_sep = "block",
     right_sep = "block",
+    truncate_hide = true,
   },
   scroll_bar = {
     provider = "scroll_bar",
@@ -220,6 +233,17 @@ local c = {
       style = "bold",
     },
   },
+}
+
+local middle = {}
+
+local right = {
+  c.lsp_client_names,
+  c.file_type,
+  c.file_encoding,
+  c.position,
+  -- c.line_percentage,
+  -- c.scroll_bar,
 }
 
 local left = {
@@ -234,17 +258,6 @@ local left = {
   c.diagnostic_info,
   c.diagnostic_hints,
   c.separator,
-}
-
-local middle = {}
-
-local right = {
-  c.lsp_client_names,
-  c.file_type,
-  c.file_encoding,
-  c.position,
-  -- c.line_percentage,
-  -- c.scroll_bar,
 }
 
 local components = {
