@@ -21,8 +21,12 @@ opt.mouse = "a"
 
 -- Numbers
 opt.number = true
+opt.numberwidth = 2
 opt.relativenumber = true
 opt.ruler = false
+
+-- disable nvim intro
+opt.shortmess:append("sI")
 
 opt.signcolumn = "yes"
 opt.splitbelow = true
@@ -35,6 +39,11 @@ opt.timeoutlen = 400
 opt.updatetime = 250
 
 vim.g.vscode_snippets_path = "~/.config/nvim/snippets/"
+
+-- disable some default providers
+for _, provider in ipairs({ "node", "perl", "python3", "ruby" }) do
+  vim.g["loaded_" .. provider .. "_provider"] = 0
+end
 
 -- add binaries installed by mason.nvim to path
 -- local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
