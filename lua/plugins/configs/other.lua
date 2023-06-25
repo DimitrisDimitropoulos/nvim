@@ -50,3 +50,14 @@ require("mini.splitjoin").setup({})
 require("mini.bracketed").setup({})
 -- Mini jump extension to FfTf
 require("mini.jump").setup({})
+
+require("colorizer").setup({
+  filetypes = {
+    "css",
+    "javascript",
+    "lua",
+    html = {
+      mode = "foreground",
+    },
+  },
+})

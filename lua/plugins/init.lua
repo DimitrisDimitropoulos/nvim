@@ -220,6 +220,13 @@ local plugins = {
       require("trouble").setup()
     end,
   },
+  {
+    "NvChad/nvim-colorizer.lua",
+  },
+  {
+    "lervag/vimtex",
+    ft = "tex",
+  },
 }
 
 require("lazy").setup(plugins, require("plugins.configs.lazy"))

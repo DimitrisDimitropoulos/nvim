@@ -72,10 +72,20 @@ lspconfig.lua_ls.setup({
 })
 
 -- setup multiple servers with same default options
-local servers = { "tsserver", "html", "cssls" }
+local servers = {
+  "tsserver",
+  "html",
+  "cssls",
+  "texlab",
+}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
     capabilities = capabilities,
   })
 end
+
+lspconfig.clangd.setup({
+  capabilities = capabilities,
+  cmd = { "clangd", "--background-index", "--clang-tidy" },
+})
