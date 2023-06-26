@@ -1,5 +1,5 @@
 local present, null_ls = pcall(require, "null-ls")
-local helpers = require("null-ls.helpers")
+-- local helpers = require("null-ls.helpers")
 
 if not present then
   return
@@ -26,24 +26,24 @@ local bins = {
   diagnostics.chktex,
   format.latexindent,
 
-  --shell
+  --Shell
   diagnostics.shellcheck,
   format.beautysh,
 
-  -- rust
+  -- Rust
   format.rustfmt,
 
-  -- python
+  -- Python
   format.black,
   diagnostics.flake8,
 
-  -- haskell
+  -- Haskell
   format.fourmolu,
 }
 
-helpers.generator_factory({
-  multiple_files = true,
-})
+-- helpers.generator_factory({
+--   multiple_files = true,
+-- })
 
 null_ls.setup({
   debug = true,
