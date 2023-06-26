@@ -18,10 +18,32 @@ require("mason").setup({
   },
 })
 
+require("indent_blankline").setup({
+  indentLine_enabled = 1,
+  filetype_exclude = {
+    "help",
+    "terminal",
+    "lazy",
+    "lspinfo",
+    "TelescopePrompt",
+    "TelescopeResults",
+    "mason",
+    "Alpha",
+    "",
+  },
+  buftype_exclude = { "terminal" },
+  show_trailing_blankline_indent = false,
+  show_first_indent_level = false,
+  show_current_context = true,
+  show_current_context_start = true,
+  indent_blankline_use_treesitter = true,
+})
+
 -- Mini textobjects
 require("mini.ai").setup({
   custom_textobjects = {
-    Z = function(ai_type)
+    -- Whole buffer textobject
+    z = function(ai_type)
       local n_lines = vim.fn.line("$")
       local start_line, end_line = 1, n_lines
       if ai_type == "i" then
@@ -60,24 +82,4 @@ require("colorizer").setup({
       mode = "foreground",
     },
   },
-})
-
-require("indent_blankline").setup({
-  indentLine_enabled = 1,
-  filetype_exclude = {
-    "help",
-    "terminal",
-    "lazy",
-    "lspinfo",
-    "TelescopePrompt",
-    "TelescopeResults",
-    "mason",
-    "",
-  },
-  buftype_exclude = { "terminal" },
-  show_trailing_blankline_indent = false,
-  show_first_indent_level = false,
-  show_current_context = true,
-  show_current_context_start = true,
-  indent_blankline_use_treesitter = true,
 })

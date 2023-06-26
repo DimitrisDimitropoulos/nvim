@@ -1,7 +1,7 @@
 local plugins = {
   "nvim-lua/plenary.nvim",
 
-  -- -- colorscheme
+  -- colorscheme
   {
     "savq/melange-nvim",
     -- "ellisonleao/gruvbox.nvim",
@@ -84,9 +84,6 @@ local plugins = {
       -- snippets engine
       {
         "L3MON4D3/LuaSnip",
-        -- config = function()
-        --   require("luasnip.loaders.from_vscode").lazy_load()
-        -- end,
         dependencies = "rafamadriz/friendly-snippets",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
@@ -115,7 +112,14 @@ local plugins = {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
-    cmd = { "Mason", "MasonInstall" },
+    cmd = {
+      "Mason",
+      "MasonInstall",
+      "MasonInstallAll",
+      "MasonUninstall",
+      "MasonUninstallAll",
+      "MasonLog",
+    },
     config = function()
       local apps = require("plugins.configs.mason")
       require("plugins.configs.mason")
@@ -129,7 +133,10 @@ local plugins = {
   -- lsp
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
     config = function()
       require("plugins.configs.lspconfig")
     end,
@@ -147,7 +154,10 @@ local plugins = {
   -- indent lines
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
   },
 
   -- files finder etc
@@ -167,7 +177,10 @@ local plugins = {
   -- git status on signcolumn etc
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
     config = function()
       require("gitsigns").setup()
     end,
@@ -175,7 +188,10 @@ local plugins = {
 
   {
     "numToStr/Comment.nvim",
-    keys = { "gc", "gb" },
+    keys = {
+      "gc",
+      "gb",
+    },
     config = function()
       require("Comment").setup()
     end,
