@@ -23,36 +23,6 @@ local gruvbox = {
   peanut = "#f6d5a4",
 }
 
---[[ local one_monokai = {
-  purple = "#c678dd",
-  orange = "#d19a66",
-  peanut = "#f6d5a4",
-  red = "#e06c75",
-  -- aqua = "#61afef",
-  darkblue = "#494D64",
-  dark_red = "#f75f5f",
-  -- "#494D64",
-  -- "#ED8796",
-  yellow = "#EED49F",
-  aqua = "#8AADF4",
-  -- "#F5BDE6",
-  -- "#8BD5CA",
-  -- "#B8C0E0",
-  -- /* 8 bright colors */
-  -- "#5B6078",
-  -- "#ED8796",
-  green = "#A6DA95",
-  -- "#EED49F",
-  -- "#8AADF4",
-  -- "#F5BDE6",
-  -- "#8BD5CA",
-  -- "#A5ADCB",
-  -- i want a dark brown
-  fg = "#F4DBD6", --[[  default foreground colour  ]]
--- bg = "#f6d5a4",
--- [258] = "#F4DBD6", /*575268*/
--- } ]]
-
 local vi_mode_colors = {
   NORMAL = "peanut",
   OP = "green",
