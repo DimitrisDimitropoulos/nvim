@@ -1,9 +1,6 @@
 {
   "Latex-Table": {
-    "prefix": [
-      "table",
-      "tabu"
-    ],
+    "prefix": ["table", "tabu"],
     "body": [
       "",
       "\\begin{table}[h]",
@@ -40,11 +37,7 @@
     "description": "A table snippet"
   },
   "Latex-Figure": {
-    "prefix": [
-      "figure",
-      "Figure",
-      "diagram"
-    ],
+    "prefix": ["figure", "Figure", "diagram"],
     "body": [
       "\\begin{figure}[h]",
       "    \\center",
@@ -56,11 +49,7 @@
     "description": "A figure snippet"
   },
   "Latex-beginning": {
-    "prefix": [
-      "begin",
-      "start",
-      "beginning"
-    ],
+    "prefix": ["begin", "start", "beginning"],
     "body": [
       "\\documentclass[a4paper, 12pt, ]{article}",
       "\\usepackage[LGR]{fontenc}",
@@ -119,11 +108,7 @@
     "description": "A beginning for latex articles snippet"
   },
   "Latex-itemize": {
-    "prefix": [
-      "itemize",
-      "item",
-      "Item"
-    ],
+    "prefix": ["itemize", "item", "Item"],
     "body": [
       "\\begin{itemize}",
       "    \\item",
@@ -137,29 +122,12 @@
     "description": "An item snippet latex"
   },
   "Latex-equation": {
-    "prefix": [
-      "equation",
-      "$$",
-      "$",
-      "Equation",
-      "eq"
-    ],
-    "body": [
-      "\\begin{equation}\\label{${1:tag}}",
-      "      $2  ",
-      "\\end{equation}",
-      "$0"
-    ],
+    "prefix": ["equation", "$$", "$", "Equation", "eq"],
+    "body": ["\\begin{equation}\\label{eq:$1}", "$2", "\\end{equation}", "$0"],
     "description": "An equation snippet"
   },
   "Bibliography-BOOK-style": {
-    "prefix": [
-      "book",
-      "Book",
-      "βιβλίο",
-      "Βιβλίο",
-      "BOOK"
-    ],
+    "prefix": ["book", "Book", "βιβλίο", "Βιβλίο", "BOOK"],
     "body": [
       "@book{ref_here,",
       "  title     = \"\",",
@@ -172,12 +140,7 @@
     "description": "A book reference snippet"
   },
   "Bibliography-ARTICLE-style": {
-    "prefix": [
-      "article",
-      "ARTICLE",
-      "Article",
-      "άρθρο"
-    ],
+    "prefix": ["article", "ARTICLE", "Article", "άρθρο"],
     "body": [
       "@article{,",
       "  author  = \", .\",",
@@ -192,19 +155,12 @@
     "description": "An article Bibliography snippet"
   },
   "latin": {
-    "prefix": [
-      "\te",
-      "latin"
-    ],
+    "prefix": ["\te", "latin"],
     "body": "\\textlatin{${1:text}}",
     "description": "textlatin"
   },
   "frame": {
-    "prefix": [
-      "frame",
-      "φραμε",
-      "\frame"
-    ],
+    "prefix": ["frame", "φραμε", "\frame"],
     "body": [
       "\\begin{frame}",
       "\\frametitle{${1:title}}",
@@ -214,10 +170,7 @@
     "description": "frame"
   },
   "environment": {
-    "prefix": [
-      "environment",
-      "\begin"
-    ],
+    "prefix": ["environment", "\begin"],
     "body": [
       "\\begin{${1:environment}}",
       "${2:text}",
@@ -236,252 +189,157 @@
     "description": "fraction-snippet"
   },
   "theta": {
-    "prefix": [
-      ".θ",
-      "th"
-    ],
+    "prefix": [".θ", "th"],
     "body": "\\theta",
     "description": "math conceal"
   },
   "omega": {
-    "prefix": [
-      ".ω",
-      "omega"
-    ],
+    "prefix": [".ω", "omega"],
     "body": "\\omega",
     "description": "math conceal"
   },
   "epsilon": {
-    "prefix": [
-      ".ε",
-      "eps"
-    ],
+    "prefix": [".ε", "eps"],
     "body": "\\varepsilon",
     "description": "math conceal"
   },
   "ksi": {
-    "prefix": [
-      ".ξ",
-      "ks"
-    ],
+    "prefix": [".ξ", "ks"],
     "body": "\\xi",
     "description": "math conceal"
   },
   "psi": {
-    "prefix": [
-      ".ψ",
-      "ps"
-    ],
+    "prefix": [".ψ", "ps"],
     "body": "\\psi",
     "description": "math conceal"
   },
   "pi": {
-    "prefix": [
-      ".π",
-      "pi"
-    ],
+    "prefix": [".π", "pi"],
     "body": "\\pi",
     "description": "math conceal"
   },
   "lambda": {
-    "prefix": [
-      ".λ",
-      "lam"
-    ],
+    "prefix": [".λ", "lam"],
     "body": "\\lambda",
     "description": "math conceal"
   },
   "delta": {
-    "prefix": [
-      ".δ",
-      "del"
-    ],
+    "prefix": [".δ", "del"],
     "body": "\\delta",
     "description": "math conceal"
   },
   "rho": {
-    "prefix": [
-      ".ρ",
-      "rho"
-    ],
+    "prefix": [".ρ", "rho"],
     "body": "\\rho",
     "description": "math conceal"
   },
   "sigma": {
-    "prefix": [
-      ".σ",
-      "sigma"
-    ],
+    "prefix": [".σ", "sigma"],
     "body": "\\sigma",
     "description": "math conceal"
   },
   "gamma": {
-    "prefix": [
-      ".γ",
-      "gamma"
-    ],
+    "prefix": [".γ", "gamma"],
     "body": "\\gamma",
     "description": "math conceal"
   },
   "mu": {
-    "prefix": [
-      ".μ",
-      "mu"
-    ],
+    "prefix": [".μ", "mu"],
     "body": "\\mu",
     "description": "math conceal"
   },
   "zeta": {
-    "prefix": [
-      ".ζ",
-      "zeta"
-    ],
+    "prefix": [".ζ", "zeta"],
     "body": "\\zeta",
     "description": "math conceal"
   },
   "tau": {
-    "prefix": [
-      ".τ",
-      "tau"
-    ],
+    "prefix": [".τ", "tau"],
     "body": "\\tau",
     "description": "math conceal"
   },
   "iota": {
-    "prefix": [
-      ".ι",
-      "iota"
-    ],
+    "prefix": [".ι", "iota"],
     "body": "\\iota",
     "description": "math conceal"
   },
   "cdot": {
-    "prefix": [
-      "dot",
-      "cdot"
-    ],
+    "prefix": ["dot", "cdot"],
     "body": "\\cdot",
     "description": "math dot product"
   },
   "squareroot": {
-    "prefix": [
-      "sqrt",
-      "suareroot"
-    ],
+    "prefix": ["sqrt", "suareroot"],
     "body": "\\sqrt{${1:math}}",
     "description": "sqrt conceal"
   },
   "integral": {
-    "prefix": [
-      "int",
-      "integral"
-    ],
+    "prefix": ["int", "integral"],
     "body": "\\int",
     "description": "integral conceal"
   },
   "cos": {
-    "prefix": [
-      "cos",
-      "cosine"
-    ],
+    "prefix": ["cos", "cosine"],
     "body": "\\cos (${1:math})",
     "description": "math conceal"
   },
   "sin": {
-    "prefix": [
-      "sin",
-      "sine"
-    ],
+    "prefix": ["sin", "sine"],
     "body": "\\sin (${1:math})",
     "description": "math conceal"
   },
   "tan": {
-    "prefix": [
-      "tan",
-      "tangent"
-    ],
+    "prefix": ["tan", "tangent"],
     "body": "\\tan (${1:math})",
     "description": "math conceal"
   },
   "log": {
-    "prefix": [
-      "log",
-      "logarith"
-    ],
+    "prefix": ["log", "logarith"],
     "body": "\\log (${1:math})",
     "description": "math conceal"
   },
   "ln": {
-    "prefix": [
-      "ln",
-      "lnlog"
-    ],
+    "prefix": ["ln", "lnlog"],
     "body": "\\ln (${1:math})",
     "description": "math conceal"
   },
   "infinity": {
-    "prefix": [
-      "infinity",
-      "apeiro"
-    ],
+    "prefix": ["infinity", "apeiro"],
     "body": "\\infty",
     "description": "math conceal"
   },
   "vector": {
-    "prefix": [
-      "vec",
-      "overvec"
-    ],
+    "prefix": ["vec", "overvec"],
     "body": "\\vec{${1:math}}",
     "description": "math conceal"
   },
   "over_dot": {
-    "prefix": [
-      "odot",
-      "overdot"
-    ],
+    "prefix": ["odot", "overdot"],
     "body": "\\dot{${1:math}}",
     "description": "math conceal"
   },
   "over_ddot": {
-    "prefix": [
-      "oddot",
-      "overddot"
-    ],
+    "prefix": ["oddot", "overddot"],
     "body": "\\ddot{${1:math}}",
     "description": "math conceal"
   },
   "parentheses": {
-    "prefix": [
-      "parentheses",
-      "parenth"
-    ],
+    "prefix": ["parentheses", "parenth"],
     "body": "\\left(${1:math}\\right)",
     "description": "math conceal"
   },
   "square_bracket": {
-    "prefix": [
-      "bracket",
-      "square_bracket"
-    ],
+    "prefix": ["bracket", "square_bracket"],
     "body": "\\left[${1:math}\\right]",
     "description": "math conceal"
   },
   "sign": {
-    "prefix": [
-      "sign",
-      "name",
-      "dimitris",
-      "δημήτρης"
-    ],
+    "prefix": ["sign", "name", "dimitris", "δημήτρης"],
     "body": "Δημήτριος Δημητρό$\\varpi$ουλος",
     "description": "Signature"
   },
   "proportional": {
-    "prefix": [
-      "analog",
-      "proportional"
-    ],
+    "prefix": ["analog", "proportional"],
     "body": "\\propto",
     "description": "math conceal"
   },
@@ -496,12 +354,7 @@
     "description": "bibliography"
   },
   "Signature": {
-    "prefix": [
-      "Sign",
-      "Name",
-      "Dimitris",
-      "Δημήτρης"
-    ],
+    "prefix": ["Sign", "Name", "Dimitris", "Δημήτρης"],
     "body": "Δημητρό\\char982\\char547λος",
     "description": "Signature-unicode version"
   },
@@ -522,11 +375,7 @@
   },
   "contents": {
     "prefix": "contents",
-    "body": [
-      "\\newpage",
-      "\\section{Περιεχόμενα}",
-      "\\tableofcontents"
-    ],
+    "body": ["\\newpage", "\\section{Περιεχόμενα}", "\\tableofcontents"],
     "description": "contents"
   },
   "align -LaTeX": {
@@ -542,9 +391,7 @@
   "derivative-LaTeX": {
     "scope": "",
     "prefix": "deriv",
-    "body": [
-      "\\frac{d${1:f}}{d${2:x}} $0"
-    ]
+    "body": ["\\frac{d${1:f}}{d${2:x}} $0"]
   },
   "cases-LaTeX": {
     "scope": "",
@@ -577,10 +424,7 @@
     ]
   },
   "Simple-table-LaTeX": {
-    "prefix": [
-      "stable",
-      "stabu"
-    ],
+    "prefix": ["stable", "stabu"],
     "body": [
       "",
       "\\begin{table}[h]",
@@ -599,10 +443,7 @@
     "description": "A table snippet"
   },
   "Description": {
-    "prefix": [
-      "description",
-      "περιγραφή"
-    ],
+    "prefix": ["description", "περιγραφή"],
     "body": [
       "\\\\begin{description}",
       "\t\\item[$1] $0",
@@ -611,82 +452,42 @@
     "description": "Description"
   },
   "Enumerate": {
-    "prefix": [
-      "enum",
-      "απαρίθμηση",
-      "enumerate"
-    ],
-    "body": [
-      "\\\\begin{enumerate}",
-      "\t\\item $0",
-      "\\\\end{enumerate}"
-    ],
+    "prefix": ["enum", "απαρίθμηση", "enumerate"],
+    "body": ["\\\\begin{enumerate}", "\t\\item $0", "\\\\end{enumerate}"],
     "description": "Enumerate"
   },
   "underline": {
-    "prefix": [
-      "underline",
-      "υπογράμμιση"
-    ],
-    "body": [
-      "\\underline{${1:underline}}$0"
-    ],
+    "prefix": ["underline", "υπογράμμιση"],
+    "body": ["\\underline{${1:underline}}$0"],
     "description": "underline"
   },
   "after-underline": {
-    "prefix": [
-      "aunderline",
-      "αυπογράμμιση"
-    ],
-    "body": [
-      "\\underline{${CLIPBOARD: $1}}$0"
-    ],
+    "prefix": ["aunderline", "αυπογράμμιση"],
+    "body": ["\\underline{${CLIPBOARD: $1}}$0"],
     "description": "underline"
   },
   "curent-date": {
-    "prefix": [
-      "date",
-      "ημερομηνία"
-    ],
-    "body": [
-      "\\date{$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}"
-    ],
+    "prefix": ["date", "ημερομηνία"],
+    "body": ["\\date{$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}"],
     "description": "curent date"
   },
   "echo": {
     "prefix": "echo",
-    "body": [
-      "echo ${TM_SELECTED_TEXT}"
-    ]
+    "body": ["echo ${TM_SELECTED_TEXT}"]
   },
   "Summation-Series": {
-    "prefix": [
-      "series",
-      "\\sumamtionlarge"
-    ],
-    "body": [
-      "\\displaystyle\\sum_{${1:n}=${2:0}}^{${3:\\infty}}$0"
-    ],
+    "prefix": ["series", "\\sumamtionlarge"],
+    "body": ["\\displaystyle\\sum_{${1:n}=${2:0}}^{${3:\\infty}}$0"],
     "description": "Insert a large summation notation."
   },
   "Inline Summation": {
-    "prefix": [
-      "suminline",
-      "\\suminline"
-    ],
-    "body": [
-      "\\sum_{$1}^{$2}$3"
-    ],
+    "prefix": ["suminline", "\\suminline"],
+    "body": ["\\sum_{$1}^{$2}$3"],
     "description": "Insert an inline summation notation, (only in the cases when the environment is inline math environment)."
   },
   "Large Summation": {
-    "prefix": [
-      "sumlarge",
-      "\\sumlarge"
-    ],
-    "body": [
-      "\\displaystyle\\sum_{$1}^{$2}$3"
-    ],
+    "prefix": ["sumlarge", "\\sumlarge"],
+    "body": ["\\displaystyle\\sum_{$1}^{$2}$3"],
     "description": "Insert a large summation notation."
   }
 }
