@@ -29,6 +29,11 @@ keymapp(n, "<C-q>", "<C-w>q", opts)
 keymapp(n, "<C-d>", "<C-d>zz", opts)
 keymapp(n, "<C-u>", "<C-u>zz", opts)
 
+-- Diagnostic mappings
+keymapp(n, "<leader>df", vim.diagnostic.open_float, { desc = "diagnostics float" })
+keymapp(n, "[d", vim.diagnostic.goto_prev, { desc = "diagnostics prev" }, opts)
+keymapp(n, "]d", vim.diagnostic.goto_next, { desc = "diagnostics next" }, opts)
+
 -- Save mappings
 keymapp("i", "<C-s>", "<cmd> w <CR>", opts)
 keymapp(n, "ZZ", "<cmd> wqa <CR>", opts)
@@ -68,35 +73,3 @@ end
 
 -- NvimTree
 keymapp(n, "<C-b>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" }, opts)
-
--- keymapp(n, "<leader>ff", "<cmd> Telescope find_files <CR>")
--- keymapp(n, "<leader>f;", "<cmd> Telescope commands <CR>", { desc = "find commands" }, opts)
--- keymapp(n, "<leader>lg", "<cmd> Telescope live_grep <CR>", { desc = "live grep" }, opts)
--- keymapp(n, "<leader>fs", "<cmd> Telescope grep_string <CR>", { desc = "" }, opts)
--- keymapp(n, "<leader>fb", "<cmd> Telescope buffers <CR>", { desc = "find buffers" }, opts)
--- keymapp(n, "<leader>fh", "<cmd> Telescope help_tags <CR>", { desc = "find help tags" }, opts)
--- keymapp(n, "<leader>fm", "<cmd> Telescope marks <CR>", { desc = "find marks" }, opts)
--- keymapp(n, "<leader>fr", "<cmd> Telescope oldfiles <CR>", { desc = "find old files" }, opts)
--- keymapp(n, "<leader>fk", "<cmd> Telescope keymaps <CR>", { desc = "find keymaps" }, opts)
--- keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
--- keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
--- keymapp(n, "<leader>fd", "<cmd> Telescope diagnostics <CR>", { desc = "find diagnostics" }, opts)
--- keymapp(n, "<leader>fm", "<cmd> Telescope marks <CR>", { desc = "find marks" }, opts)
--- keymapp(n, "<leader>ch", "<cmd> Telescope command_history <CR>", { desc = "find command history" }, opts)
--- keymapp(n, "<leader>ld", "<cmd> Telescope lsp_definitions <CR>", { desc = "find lsp definitions" }, opts)
--- keymapp(n, "<leader>sp", "<cmd> Telescope spell_suggest <CR>", { desc = "find spell suggestions" }, opts)
--- keymapp(n, "<leader>fz", "<cmd> Telescope current_buffer_fuzzy_find <CR>", { desc = "find current buffer fuzzy" }, opts)
--- keymapp(
---   n,
---   "<leader>ts",
---   "<cmd> Telescope treesitter default_text=function initial_mode=normal <CR>",
---   { desc = "find treesitter" },
---   opts
--- )
--- keymapp(
---   n,
---   "<leader>fa",
---   "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>",
---   { desc = "find all" },
---   opts
--- )
