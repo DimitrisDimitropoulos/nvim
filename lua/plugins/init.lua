@@ -232,6 +232,17 @@ local plugins = {
     end,
   },
   {
+    "folke/which-key.nvim",
+    keys = { "<leader>", '"', "'", "`", "c", "v" },
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = function()
+      return require("plugins.configs.whichkey")
+    end,
+  },
+  {
     "NvChad/nvim-colorizer.lua",
   },
   {
