@@ -38,14 +38,7 @@ local plugins = {
     end,
   },
 
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   lazy = false,
-  --   config = function()
-  --     require("plugins.configs.lualine")
-  --   end,
-  -- },
-
+  -- Statusline
   {
     "freddiehaddad/feline.nvim",
     lazy = false,
@@ -54,7 +47,13 @@ local plugins = {
     end,
   },
 
-  -- -- statusline
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("plugins.configs.lualine")
+  --   end,
+  -- },
   -- {
   --   "rebelot/heirline.nvim",
   --   lazy = false,

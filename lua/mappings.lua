@@ -1,5 +1,8 @@
 local keymapp = vim.keymap.set
-local opts = { noremap = true, silent = false }
+local opts = {
+  noremap = true,
+  silent = false,
+}
 local lsp = vim.lsp.buf
 local n = "n"
 
@@ -85,7 +88,7 @@ keymapp(n, "<leader>lg", "<cmd> Telescope live_grep <CR>", { desc = "live grep" 
 keymapp(n, "<leader>fs", "<cmd> Telescope grep_string <CR>", { desc = "" }, opts)
 keymapp(n, "<leader>fb", "<cmd> Telescope buffers <CR>", { desc = "find buffers" }, opts)
 keymapp(n, "<leader>fh", "<cmd> Telescope help_tags <CR>", { desc = "find help tags" }, opts)
--- keymapp(n, "<leader>fm",  "<cmd> Telescope marks <CR>", { desc = "find marks" }, opts)
+keymapp(n, "<leader>fm", "<cmd> Telescope marks <CR>", { desc = "find marks" }, opts)
 keymapp(n, "<leader>fr", "<cmd> Telescope oldfiles <CR>", { desc = "find old files" }, opts)
 keymapp(n, "<leader>fk", "<cmd> Telescope keymaps <CR>", { desc = "find keymaps" }, opts)
 keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
@@ -93,6 +96,9 @@ keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find regist
 keymapp(n, "<leader>fd", "<cmd> Telescope diagnostics <CR>", { desc = "find diagnostics" }, opts)
 keymapp(n, "<leader>fm", "<cmd> Telescope marks <CR>", { desc = "find marks" }, opts)
 keymapp(n, "<leader>ch", "<cmd> Telescope command_history <CR>", { desc = "find command history" }, opts)
+keymapp(n, "<leader>ld", "<cmd> Telescope lsp_definitions <CR>", { desc = "find lsp definitions" }, opts)
+keymapp(n, "<leader>sp", "<cmd> Telescope spell_suggest <CR>", { desc = "find spell suggestions" }, opts)
+keymapp(n, "<leader>fz", "<cmd> Telescope current_buffer_fuzzy_find <CR>", { desc = "find current buffer fuzzy" }, opts)
 keymapp(
   n,
   "<leader>ts",
@@ -100,9 +106,6 @@ keymapp(
   { desc = "find treesitter" },
   opts
 )
-keymapp(n, "<leader>ld", "<cmd> Telescope lsp_definitions <CR>", { desc = "find lsp definitions" }, opts)
-keymapp(n, "<leader>sp", "<cmd> Telescope spell_suggest <CR>", { desc = "find spell suggestions" }, opts)
-keymapp(n, "<leader>fz", "<cmd> Telescope current_buffer_fuzzy_find <CR>", { desc = "find current buffer fuzzy" }, opts)
 
 -- NvimTree
 keymapp(n, "<C-b>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" }, opts)

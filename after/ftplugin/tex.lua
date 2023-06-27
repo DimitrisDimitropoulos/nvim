@@ -1,10 +1,13 @@
+-- LaTex Options
+vim.opt.cursorline = false
+
 -- Disable TreeSitter highlighting for large files
 function Disable_tree_sitter_highlight()
   local line_limit = 900
   local bufnr = vim.api.nvim_get_current_buf()
   local line_count = vim.api.nvim_buf_line_count(bufnr)
   if line_count > line_limit then
-    vim.cmd "TSBufDisable highlight"
+    vim.cmd("TSBufDisable highlight")
   end
 end
 
@@ -23,7 +26,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.tex",
   group = "AutoFormatting",
   callback = function()
-    vim.lsp.buf.format { async = true }
+    vim.lsp.buf.format({ async = true })
   end,
   desc = "format on save",
 })

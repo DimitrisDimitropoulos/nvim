@@ -1,10 +1,24 @@
 local opt = vim.opt
 
+vim.diagnostic.config({
+  underline = true,
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+  float = {
+    source = "always",
+    border = "rounded",
+    show_header = true,
+  },
+})
+
 vim.g.mapleader = " "
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
 opt.cursorline = true
+vim.opt.cursorcolumn = false
+vim.opt_local.cursorcolumn = false
 opt.clipboard = "unnamedplus"
 
 -- Indenting

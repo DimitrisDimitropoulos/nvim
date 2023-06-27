@@ -1,5 +1,9 @@
 require("telescope").setup({
   defaults = {
+    file_previewer = require("telescope.previewers").cat_new,
+    grep_previewer = require("telescope.previewers").vimgrep_new,
+    qflist_previewer = require("telescope.previewers").qflist.new,
+
     sorting_strategy = "ascending",
     layout_config = {
       horizontal = {
