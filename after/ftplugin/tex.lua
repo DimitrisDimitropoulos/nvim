@@ -21,17 +21,6 @@ vim.api.nvim_create_autocmd("Filetype", {
   desc = "disable tree sitter",
 })
 
--- Autoformatting on save
-vim.api.nvim_create_augroup("AutoFormatting", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.tex",
-  group = "AutoFormatting",
-  callback = function()
-    vim.lsp.buf.format({ async = true })
-  end,
-  desc = "format on save",
-})
-
 -- vim.keymap.set
 local keymapp = vim.keymap.set
 keymapp("n", "<leader>ll", "<cmd> VimtexCompile <CR>", { desc = "compile" })

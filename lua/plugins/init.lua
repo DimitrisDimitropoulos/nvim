@@ -54,14 +54,6 @@ local plugins = {
   --     require("plugins.configs.lualine")
   --   end,
   -- },
-  -- {
-  --   "rebelot/heirline.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require("plugins.configs.heirline")
-  --   end,
-  -- },
 
   -- CMP config and dependencies
   {
