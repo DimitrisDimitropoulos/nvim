@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- close some filetypes with <q> From LazyVim
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
+  group = augroup("TroubleOpen"),
   pattern = {
     "lua",
     "cpp",

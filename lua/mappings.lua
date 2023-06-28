@@ -21,10 +21,6 @@ keymapp(n, "<S-Tab>", "<cmd> bprevious<CR>", { desc = "previous buffer" }, opts)
 keymapp(n, "<leader>bd", "<cmd> bd<CR>", { desc = "delete buffer" }, opts)
 keymapp(n, "<leader>bn", "<cmd> enew <CR>", { desc = "buffer new" }, opts)
 
--- Window management
-keymapp(n, "<A-w>", "<C-w>w", opts)
-keymapp(n, "<C-q>", "<C-w>q", opts)
-
 --map c-d-u to autocenter with zz command
 keymapp(n, "<C-d>", "<C-d>zz", opts)
 keymapp(n, "<C-u>", "<C-u>zz", opts)
@@ -39,8 +35,20 @@ keymapp("i", "<C-s>", "<cmd> w <CR>", opts)
 keymapp(n, "ZZ", "<cmd> wqa <CR>", opts)
 keymapp(n, "ZQ", "<cmd> qa! <CR>", opts)
 
--- Telescope
+-- Window management
+local windows = {
+  { key = "<A-w>", cmd = "w" },
+  { key = "<C-q>", cmd = "q" },
+  { key = "<C-h>", cmd = "h" },
+  { key = "<C-j>", cmd = "j" },
+  { key = "<C-k>", cmd = "k" },
+  { key = "<C-l>", cmd = "l" },
+}
+for _, window in ipairs(windows) do
+  keymapp(n, window.key, "<C-w>" .. window.cmd, { desc = "window " .. window.cmd }, opts)
+end
 
+-- Telescope
 local telescope_mappings = {
   { key = "ff", cmd = "find_files",                                            desc = "files" },
   { key = "f;", cmd = "commands",                                              desc = "commands" },
@@ -60,7 +68,6 @@ local telescope_mappings = {
   { key = "ts", cmd = "treesitter default_text=function initial_mode=normal ", desc = "treesitter" },
   { key = "fa", cmd = "find_files follow=true no_ignore=true hidden=true ",    desc = "hidden" },
 }
-
 for _, mapping in ipairs(telescope_mappings) do
   keymapp(
     n,
