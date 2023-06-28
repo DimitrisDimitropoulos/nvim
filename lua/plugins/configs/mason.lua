@@ -23,8 +23,6 @@ local options = {
     "lua-language-server",
     "selene",
     "stylua",
-    "clangd",
-    "pyright",
   },
   PATH = "skip",
   max_concurrent_installers = 10,

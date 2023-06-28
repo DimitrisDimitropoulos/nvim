@@ -12,6 +12,7 @@ vim.diagnostic.config({
   },
 })
 
+opt.spelllang = "el,en"
 vim.g.mapleader = " "
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
@@ -52,6 +53,7 @@ opt.undofile = true
 opt.timeoutlen = 400
 opt.updatetime = 250
 
+vim.g.vimtex_quickfix_mode = 0
 vim.g.vscode_snippets_path = "~/.config/nvim/snippets/"
 
 -- disable some default providers

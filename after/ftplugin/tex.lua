@@ -1,5 +1,6 @@
 -- LaTex Options
 vim.opt.cursorline = false
+vim.cmd("let g:cursorline = 0")
 
 -- Disable TreeSitter highlighting for large files
 function Disable_tree_sitter_highlight()
