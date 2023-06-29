@@ -6,7 +6,6 @@ local opts = {
 local n = "n"
 
 -- general mappings
-keymapp(n, "<C-s>", "<cmd> w <CR>")
 keymapp(n, "<ESC>", "<cmd> nohl <CR>", { desc = "clear search" }, opts)
 
 -- comment.nvim
@@ -31,7 +30,7 @@ keymapp(n, "[d", vim.diagnostic.goto_prev, { desc = "diagnostics prev" }, opts)
 keymapp(n, "]d", vim.diagnostic.goto_next, { desc = "diagnostics next" }, opts)
 
 -- Save mappings
-keymapp("i", "<C-s>", "<cmd> w <CR>", opts)
+keymapp({ "i", "n" }, "<C-s>", "<cmd> w <CR>", opts)
 keymapp(n, "ZZ", "<cmd> wqa <CR>", opts)
 keymapp(n, "ZQ", "<cmd> qa! <CR>", opts)
 
@@ -43,7 +42,7 @@ end
 
 -- Telescope
 local telescope_mappings = {
-  { key = "ff", cmd = "find_files",                                            desc = "files" },
+  { key = "ff", cmd = "fd",                                                    desc = "files" },
   { key = "f;", cmd = "commands",                                              desc = "commands" },
   { key = "lg", cmd = "live_grep",                                             desc = "live grep" },
   { key = "fs", cmd = "grep_string",                                           desc = "string mark" },
