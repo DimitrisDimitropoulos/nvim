@@ -1,4 +1,5 @@
 local line_ok, feline = pcall(require, "feline")
+
 if not line_ok then
   return
 end
@@ -36,6 +37,7 @@ local vi_mode_colors = {
 
 local c = {
   vim_mode = {
+    icon = "",
     provider = {
       name = "vi_mode",
       opts = {
@@ -60,7 +62,6 @@ local c = {
     hl = {
       fg = "peanut",
       bg = "darkblue",
-      style = "bold",
     },
     left_sep = "block",
     right_sep = "block",
@@ -107,7 +108,7 @@ local c = {
       },
     },
     hl = {
-      style = "bold",
+      style = "italic",
     },
     left_sep = " ",
     right_sep = " ",
@@ -116,6 +117,7 @@ local c = {
     provider = "diagnostic_errors",
     hl = {
       fg = "red",
+      style = "bold",
     },
   },
   diagnostic_warnings = {
@@ -140,7 +142,6 @@ local c = {
     hl = {
       fg = "violet",
       bg = "darkblue",
-      style = "bold",
     },
     left_sep = "left_filled",
     right_sep = "block",
@@ -157,7 +158,6 @@ local c = {
     hl = {
       fg = "peanut",
       bg = "darkblue",
-      style = "bold",
     },
     left_sep = "block",
     right_sep = "block",
@@ -168,7 +168,6 @@ local c = {
     hl = {
       fg = "orange",
       bg = "darkblue",
-      style = "italic",
     },
     left_sep = "block",
     right_sep = "block",
