@@ -35,6 +35,23 @@ local vi_mode_colors = {
   COMMAND = "green",
 }
 
+local lsp_progress = function()
+  local lsp = vim.lsp.util.get_progress_messages()[1]
+  if lsp then
+    local name = lsp.name or ""
+    local msg = lsp.message or ""
+    local title = lsp.title or ""
+    return string.format(" %%<%s: %s %s ", name, title, msg)
+  end
+  return ""
+end
+
+local cproviders = {
+  lsp_progress = function()
+    return #vim.lsp.buf_get_clients() > 0 and lsp_progress() or ""
+  end,
+}
+
 local c = {
   vim_mode = {
     icon = "",
@@ -168,6 +185,7 @@ local c = {
     hl = {
       fg = "orange",
       bg = "darkblue",
+      style = "italic",
     },
     left_sep = "block",
     right_sep = "block",
@@ -187,7 +205,7 @@ local c = {
   line_percentage = {
     provider = "line_percentage",
     hl = {
-      fg = "aqua",
+      fg = "violet",
       bg = "darkblue",
       style = "bold",
     },
@@ -202,9 +220,21 @@ local c = {
       style = "bold",
     },
   },
+  lsp_progress = {
+    provider = "lsp_progress",
+    hl = {
+      fg = "green",
+      style = "italic",
+    },
+    left_sep = "block",
+    right_sep = "block",
+    truncate_hide = true,
+  },
 }
 
-local middle = {}
+local middle = {
+  c.lsp_progress,
+}
 
 local right = {
   c.lsp_client_names,
@@ -246,4 +276,5 @@ feline.setup({
   components = components,
   theme = gruvbox,
   vi_mode_colors = vi_mode_colors,
+  custom_providers = cproviders,
 })
