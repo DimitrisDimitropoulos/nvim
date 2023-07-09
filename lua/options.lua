@@ -54,6 +54,7 @@ opt.timeoutlen = 400
 opt.updatetime = 250
 
 vim.g.vimtex_quickfix_mode = 0
+vim.g.Tex_BibtexFlavor = "biber"
 vim.g.vscode_snippets_path = "~/.config/nvim/snippets/"
 
 -- disable some default providers
@@ -64,3 +65,4 @@ end
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 vim.env.PATH = vim.env.PATH .. (is_windows and ";" or ":") .. vim.fn.stdpath("data") .. "/mason/bin"
+
