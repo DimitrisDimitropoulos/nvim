@@ -34,7 +34,7 @@ local vi_mode_colors = {
   REPLACE = "red",
   COMMAND = "green",
 }
-
+-- code from: https://github.com/ttys3/nvim-config/blob/b8a55ba2656722a21420b5bebfdaf162d4d4f677/lua/config/feline.lua#L8
 local lsp_progress = function()
   local lsp = vim.lsp.util.get_progress_messages()[1]
   if lsp then
@@ -45,7 +45,7 @@ local lsp_progress = function()
   end
   return ""
 end
-
+-- code from: https://github.com/ttys3/nvim-config/blob/b8a55ba2656722a21420b5bebfdaf162d4d4f677/lua/lsp/init.lua#L43
 local cproviders = {
   lsp_progress = function()
     return #vim.lsp.buf_get_clients() > 0 and lsp_progress() or ""
