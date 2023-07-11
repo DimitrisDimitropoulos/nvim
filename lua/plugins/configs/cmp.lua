@@ -120,3 +120,13 @@ cmp.setup({
     },
   },
 })
+
+-- -- Copilot cmp source
+-- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+-- -- lspkind.lua
+-- local Lspkind = require("lspkind")
+-- Lspkind.init({
+--   symbol_map = {
+--     Copilot = "",
+--   },
+-- })

@@ -186,10 +186,27 @@ local plugins = {
       require("Comment").setup()
     end,
   },
+
   {
     "github/copilot.vim",
     event = "InsertEnter",
   },
+
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("plugins.configs.copilot")
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end,
+  -- },
+
   {
     "beauwilliams/focus.nvim",
     event = "BufLeave",
