@@ -14,5 +14,3 @@ Some extra features include
 6. Powerful system with powerful autocommands and a working ftplugin
 
 ## TODO
-
-[] Make sure the line doesn't cover important information when resizing
