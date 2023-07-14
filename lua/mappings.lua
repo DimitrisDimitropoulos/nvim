@@ -6,12 +6,12 @@ local opts = {
 local n = "n"
 
 -- Save mappings
-keymapp({ "i", "n" }, "<C-s>", "<cmd> w <CR>", opts)
+keymapp({ "i", "n" }, "<C-s>", "<cmd> wa <CR>", opts)
 -- There is a interfierence, best way is to first unmap and then map
 keymapp("n", "ZZ", "")
-keymapp("n", "ZZ", "<cmd> wqa <CR>", opts)
+keymapp("n", "XX", "<cmd> wqa <CR>", opts)
 keymapp("n", "ZQ", "")
-keymapp("n", "ZQ", "<cmd> qa! <CR>", opts)
+keymapp("n", "XQ", "<cmd> qa! <CR>", opts)
 
 -- Command mappings
 local commands = {
