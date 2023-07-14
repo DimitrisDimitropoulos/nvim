@@ -34,7 +34,7 @@ local plugins = {
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("plugins.configs.treesitter")
+      require "plugins.configs.treesitter"
     end,
   },
 
@@ -43,7 +43,7 @@ local plugins = {
     "freddiehaddad/feline.nvim",
     lazy = false,
     config = function()
-      require("plugins.configs.feline")
+      require "plugins.configs.feline"
     end,
   },
 
@@ -89,14 +89,14 @@ local plugins = {
           require("nvim-autopairs").setup()
 
           --  cmp integration
-          local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-          local cmp = require("cmp")
+          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+          local cmp = require "cmp"
           cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
       },
     },
     config = function()
-      require("plugins.configs.cmp")
+      require "plugins.configs.cmp"
     end,
   },
 
@@ -112,8 +112,8 @@ local plugins = {
       "MasonLog",
     },
     config = function()
-      local apps = require("plugins.configs.mason")
-      require("plugins.configs.mason")
+      local apps = require "plugins.configs.mason"
+      require "plugins.configs.mason"
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         vim.cmd("MasonInstall " .. table.concat(apps.ensure_installed, " "))
       end, {})
@@ -129,14 +129,14 @@ local plugins = {
       "BufNewFile",
     },
     config = function()
-      require("plugins.configs.lspconfig")
+      require "plugins.configs.lspconfig"
     end,
     dependencies = {
       -- formatting , linting
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require("plugins.configs.null")
+          require "plugins.configs.null"
         end,
       },
     },
@@ -156,7 +156,7 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     config = function()
-      require("plugins.configs.telescope")
+      require "plugins.configs.telescope"
     end,
   },
   {
@@ -210,8 +210,6 @@ local plugins = {
   {
     "beauwilliams/focus.nvim",
     event = "BufLeave",
-    -- keys = { "<C-h>", "<C-j>", "<C-k>", "<C-l>", "<C-w>" },
-    -- keys = {"<leader>qf"},
     config = function()
       require("focus").setup()
     end,
@@ -221,7 +219,7 @@ local plugins = {
     enabled = true,
     lazy = false,
     config = function()
-      require("plugins.configs.alpha")
+      require "plugins.configs.alpha"
     end,
   },
   {
@@ -229,7 +227,7 @@ local plugins = {
     version = false,
     event = "InsertEnter",
     config = function()
-      require("plugins.configs.other")
+      require "plugins.configs.other"
     end,
   },
   {
@@ -248,7 +246,7 @@ local plugins = {
       vim.o.timeoutlen = 300
     end,
     opts = function()
-      return require("plugins.configs.whichkey")
+      return require "plugins.configs.whichkey"
     end,
   },
   {
@@ -260,4 +258,4 @@ local plugins = {
   },
 }
 
-require("lazy").setup(plugins, require("plugins.configs.lazy"))
+require("lazy").setup(plugins, require "plugins.configs.lazy")
