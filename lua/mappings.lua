@@ -7,11 +7,6 @@ local n = "n"
 
 -- Save mappings
 keymapp({ "i", "n" }, "<C-s>", "<cmd> wa <CR>", opts)
--- There is a interfierence, best way is to first unmap and then map
-keymapp("n", "ZZ", "")
-keymapp("n", "XX", "<cmd> wqa <CR>", opts)
-keymapp("n", "ZQ", "")
-keymapp("n", "XQ", "<cmd> qa! <CR>", opts)
 
 -- Command mappings
 local commands = {
