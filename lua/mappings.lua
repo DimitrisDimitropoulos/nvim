@@ -6,9 +6,9 @@ local opts = {
 local n = "n"
 
 -- Save mappings there are some problems
-vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd> wa <CR>")
-vim.keymap.set("n", "ZZ", ": wqa <CR>")
-vim.keymap.set("n", "ZQ", ": wq! <CR>")
+vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
+vim.keymap.set("n", "<leader>zz", ": wqa <CR>")
+vim.keymap.set("n", "<leader>zq", ": wq! <CR>")
 
 -- Command mappings
 local commands = {
@@ -38,9 +38,9 @@ for _, win in ipairs(window) do
   keymapp(n, "<C-" .. win .. ">", "<C-w>" .. win, { desc = "window " .. win }, opts)
 end
 
---   ----------------
+--  -----------------
 -- | Plugin mappings |
--- ----------------
+--  -----------------
 
 -- Telescope
 local telescope_mappings = {
@@ -75,7 +75,7 @@ end
 -- NvimTree
 keymapp(n, "<C-b>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" }, opts)
 
--- comment.nvim
+-- Comment
 keymapp(n, "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
 end)
