@@ -1,5 +1,3 @@
--- LaTex Options
-
 -- Disable TreeSitter highlighting for large files
 function Disable_tree_sitter_highlight()
   local line_limit = 900
@@ -31,8 +29,4 @@ for _, command in ipairs(vimtex_keymap) do
   keymapp("n", command.key, "<cmd> Vimtex" .. command.cmd .. " <CR>", { desc = command.descr })
 end
 
--- keymapp("n", "<leader>ll", "<cmd> VimtexCompile <CR>", { desc = "compile" })
--- keymapp("n", "<leader>to", "<cmd> VimtexTocToggle <CR>", { desc = "toggle table of contents" })
--- keymapp("n", "<leader>lv", "<cmd> VimtexView <CR>", { desc = "synctex" })
--- keymapp("n", "<leader>lr", "<cmd> VimtexErrors <CR>", { desc = "errors" })
 keymapp("n", "<leader>tx", Disable_tree_sitter_highlight, { desc = "disable treesitter" })
