@@ -5,6 +5,7 @@
   },
   "snip2": {
     "prefix": "lua",
-    "body": ["$1 test"]
+    "body": ["$1 test $CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR} "],
+    "description": "A test snippet"
   }
 }
