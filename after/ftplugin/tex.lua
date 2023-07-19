@@ -1,3 +1,7 @@
+-- LaTeX options
+
+vim.opt.cursorlineopt = "number"
+
 -- Disable TreeSitter highlighting for large files
 function Disable_tree_sitter_highlight()
   local line_limit = 900

@@ -18,6 +18,8 @@ require("indent_blankline").setup {
   show_current_context_start = true,
   indent_blankline_use_treesitter = true,
 }
+-- Set the hightlight group
+vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", { bg = "#3D3834", bold = true })
 
 -- Mini textobjects
 require("mini.ai").setup {

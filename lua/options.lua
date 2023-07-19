@@ -18,6 +18,7 @@ vig.mapleader = " "
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
+opt.cursorlineopt = "number"
 opt.cursorcolumn = false
 vim.opt_local.cursorcolumn = false
 opt.clipboard = "unnamedplus"
