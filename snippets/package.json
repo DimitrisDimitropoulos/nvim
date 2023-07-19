@@ -1,5 +1,6 @@
 {
-  "name": "example-snippets",
+  "name": "Snippets",
+  "license": "GPL-3.0-or-later",
   "contributes": {
     "snippets": [
       {
