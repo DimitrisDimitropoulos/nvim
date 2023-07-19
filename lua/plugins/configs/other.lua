@@ -46,6 +46,7 @@ require("mini.ai").setup {
     end,
   },
 }
+
 -- Mini splitjoins arguments no TS required
 require("mini.splitjoin").setup {}
 -- Mini bracketed textobjects

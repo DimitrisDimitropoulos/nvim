@@ -5,9 +5,11 @@ local opts = {
 }
 local n = "n"
 
--- Save mappings there are some problems
+-- Save mappings there are problems
 vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
 vim.keymap.set("n", "<leader>zz", ": wqa <CR>")
+vim.keymap.set("n", "ZZ", ": wqa <CR>")
+vim.keymap.set("n", "ZQ", ": wq! <CR>")
 vim.keymap.set("n", "<leader>zq", ": wq! <CR>")
 
 -- Command mappings

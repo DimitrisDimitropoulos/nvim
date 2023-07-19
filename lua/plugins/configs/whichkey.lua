@@ -1,22 +1,27 @@
 local options = {
 
   icons = {
-    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "  ", -- symbol used between a key and it's label
-    group = "+",     -- symbol prepended to a group
+    -- symbol used in the command line area that shows your active key combo
+    breadcrumb = "»",
+    -- symbol used between a key and it's label
+    separator = "  ",
+    -- symbol prepended to a group
+    group = "+",
   },
 
   popup_mappings = {
-    scroll_down = "<c-d>", -- binding to scroll down inside the popup
-    scroll_up = "<c-u>", -- binding to scroll up inside the popup
+    scroll_down = "<c-d>",     -- binding to scroll down inside the popup
+    scroll_up = "<c-u>",       -- binding to scroll up inside the popup
   },
 
   window = {
-    border = "none", -- none/single/double/shadow
+    -- none/single/double/shadow
+    border = "none",
   },
 
   layout = {
-    spacing = 4, -- spacing between columns
+    -- spacing between columns
+    spacing = 8,
   },
 
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },

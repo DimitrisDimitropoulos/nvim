@@ -16,7 +16,7 @@ local bins = {
 
 	-- Cpp
 	diagnostics.cppcheck,
-	diagnostics.gccdiag,
+	-- diagnostics.gccdiag,
 
 	-- WebDev
 	format.prettierd,
