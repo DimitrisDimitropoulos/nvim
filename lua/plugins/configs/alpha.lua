@@ -40,15 +40,15 @@ dashboard.section.buttons.opts.hl = "Comment"
 
 dashboard.section.buttons.val = {
   -- { type = "text", val = "~ brain.exist() == NULL; ~", opts = { hl = "String", position = "center" } },
-  dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
-  dashboard.button("f", "  > Find file", ":Telescope find_files<CR>"),
-  dashboard.button("l", "  > Live grep", ":Telescope live_grep<CR>"),
-  dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>"),
+  dashboard.button("e", "󰈔  > New file", ":ene <BAR> startinsert <CR>"),
+  dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<CR>"),
+  dashboard.button("l", "󱉶  > Live grep", ":Telescope live_grep<CR>"),
+  dashboard.button("r", "󰙰  > Recent", ":Telescope oldfiles<CR>"),
   dashboard.button("m", "  > Marks  ", ":Telescope marks<CR>"),
   dashboard.button("L", "󰒲  > Lazy ", ":Lazy<CR>"),
   dashboard.button("M", "󱌢  > Mason ", ":Mason<CR>"),
   dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h | wincmd k | pwd | Telescope find_files<CR>"),
-  dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
+  dashboard.button("q", "󰩈  > Quit NVIM", ":qa<CR>"),
 }
 
 dashboard.section.footer.opts = {
