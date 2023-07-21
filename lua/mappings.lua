@@ -40,45 +40,51 @@ for _, win in ipairs(window) do
   keymapp(n, "<C-" .. win .. ">", "<C-w>" .. win, { desc = "window " .. win }, opts)
 end
 
---  -----------------
--- | Plugin mappings |
---  -----------------
+-- -------------------
+-- - Plugin mappings -
+-- -------------------
+-- note: prefer using the plugin's api
+-- instead of the cmd route
 
 -- Telescope
 local telescope_mappings = {
-  { key = "ff", cmd = "fd",                                                   desc = "files" },
-  { key = "f;", cmd = "commands",                                             desc = "commands" },
-  { key = "lg", cmd = "live_grep",                                            desc = "live grep" },
-  { key = "fs", cmd = "grep_string",                                          desc = "string mark" },
-  { key = "fb", cmd = "buffers",                                              desc = "buffers" },
-  { key = "fh", cmd = "help_tags",                                            desc = "help tags" },
-  { key = "fm", cmd = "marks",                                                desc = "marks" },
-  { key = "fr", cmd = "oldfiles",                                             desc = "old files" },
-  { key = "fk", cmd = "keymaps",                                              desc = "keymaps" },
-  { key = "re", cmd = "registers",                                            desc = "registers" },
-  { key = "fd", cmd = "diagnostics",                                          desc = "diagnostics" },
-  { key = "ch", cmd = "command_history",                                      desc = "command history" },
-  { key = "ld", cmd = "lsp_definitions",                                      desc = "lsp definitions" },
-  { key = "sp", cmd = "spell_suggest",                                        desc = "spell suggestions" },
-  { key = "fz", cmd = "current_buffer_fuzzy_find",                            desc = "current buffer fuzzy" },
-  { key = "ts", cmd = "treesitter default_text=function initial_mode=normal", desc = "treesitter" },
-  { key = "fa", cmd = "find_files follow=true no_ignore=true hidden=true",    desc = "hidden" },
+  { key = "ff", cmd = "find_files",                desc = "files" },
+  { key = "f;", cmd = "commands",                  desc = "commands" },
+  { key = "lg", cmd = "live_grep",                 desc = "live grep" },
+  { key = "fs", cmd = "grep_string",               desc = "string mark" },
+  { key = "fb", cmd = "buffers",                   desc = "buffers" },
+  { key = "fh", cmd = "help_tags",                 desc = "help tags" },
+  { key = "fm", cmd = "marks",                     desc = "marks" },
+  { key = "fr", cmd = "oldfiles",                  desc = "old files" },
+  { key = "fk", cmd = "keymaps",                   desc = "keymaps" },
+  { key = "re", cmd = "registers",                 desc = "registers" },
+  { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
+  { key = "ch", cmd = "command_history",           desc = "command history" },
+  { key = "ld", cmd = "lsp_definitions",           desc = "lsp definitions" },
+  { key = "sp", cmd = "spell_suggest",             desc = "spell suggestions" },
+  { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "current buffer fuzzy" },
 }
 for _, mapping in ipairs(telescope_mappings) do
-  keymapp(
-    n,
-    "<leader>" .. mapping.key,
-    "<cmd> Telescope " .. mapping.cmd .. " <CR>",
-    { desc = "find " .. mapping.desc },
-    opts
-  )
+  keymapp(n, "<leader>" .. mapping.key, function()
+    require("telescope.builtin")[mapping.cmd]()
+  end, { desc = "find " .. mapping.desc }, opts)
 end
+keymapp(n, "<leader>ts", "<cmd> Telescope treesitter <CR>", { desc = "find treesitter" }, opts)
+local telescope_hidden = "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>"
+keymapp("n", "<leader>fa", telescope_hidden, { desc = "find hidden" }, opts)
 
 -- NvimTree
-keymapp(n, "<C-b>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" }, opts)
+keymapp(n, "<C-b>", function()
+  require("nvim-tree.api").tree.toggle()
+end, { desc = "toggle nvimtree" }, opts)
 
 -- Comment
 keymapp(n, "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
 end)
 keymapp("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
+
+-- Trouble
+keymapp(n, "<leader>tr", function()
+  require("trouble").toggle()
+end, { desc = "trouble" }, opts)

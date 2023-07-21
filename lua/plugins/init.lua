@@ -4,9 +4,6 @@ local plugins = {
   -- colorscheme
   {
     "savq/melange-nvim",
-    -- "ellisonleao/gruvbox.nvim",
-    -- "catppuccin/nvim",
-    -- name = "catppuccin",
     name = "melange",
     priority = 1000,
   },
