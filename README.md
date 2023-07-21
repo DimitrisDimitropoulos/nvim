@@ -10,6 +10,7 @@ It follows the structure of NvChad
 4. Custom keybinds neatly organized
 5. Telescope extensions for improved performance
 6. Powerful system with powerful autocommands and a working ftplugin
+7. Scripts to backup and restore your Lazy lock-files
 
 ## Keybinds
 

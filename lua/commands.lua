@@ -106,7 +106,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Make scripts executable
-vim.api.nvim_create_autocmd("BufWritePost", {
+vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup "MakeExecutable",
   pattern = {
     "*.sh",
