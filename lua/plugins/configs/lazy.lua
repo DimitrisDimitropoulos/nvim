@@ -1,6 +1,17 @@
 return {
-  defaults = { lazy = true },
-  install = { colorscheme = { "catppuccin" } },
+
+  defaults = {
+    lazy = true,
+  },
+
+  ui = {
+    icons = {
+      ft = "",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
+
   performance = {
     rtp = {
       disabled_plugins = {
