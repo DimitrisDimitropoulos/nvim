@@ -1,8 +1,8 @@
-require("telescope").setup({
+require("telescope").setup {
   defaults = {
-    file_previewer = require("telescope.previewers").cat_new,
-    grep_previewer = require("telescope.previewers").vimgrep_new,
-    qflist_previewer = require("telescope.previewers").qflist.new,
+    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
     file_ignore_patterns = { ".git" },
     sorting_strategy = "ascending",
     layout_config = {
@@ -67,6 +67,11 @@ require("telescope").setup({
       },
     },
   },
-})
+}
 
-require("telescope").load_extension("zf-native")
+local tel_plugs = {
+  "zf-native",
+}
+for _, plug in ipairs(tel_plugs) do
+  require("telescope").load_extension(plug)
+end

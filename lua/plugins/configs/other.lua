@@ -49,12 +49,14 @@ require("mini.ai").setup {
   },
 }
 
--- Mini splitjoins arguments no TS required
-require("mini.splitjoin").setup {}
--- Mini bracketed textobjects
-require("mini.bracketed").setup {}
--- Mini jump extension to FfTt
-require("mini.jump").setup {}
+local mini_plugs = {
+  "splitjoin",
+  "bracketed",
+  "jump",
+}
+for _, plug in ipairs(mini_plugs) do
+  require("mini." .. plug).setup {}
+end
 
 require("colorizer").setup {
   filetypes = {
