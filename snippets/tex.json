@@ -1,493 +1,314 @@
 {
+  "BibLaTex-Setup": {
+    "prefix": "biblatex-setup",
+    "body": [
+      "\\usepackage[backend=biber,language=auto,autolang=other]{biblatex}",
+      "\\addbibresource{${2:file}}"
+    ],
+    "description": "BibLaTeX setup"
+  },
+  "Code": {
+    "prefix": "code",
+    "body": [
+      "\\usepackage{listings}",
+      "\\usepackage{verbatim}",
+      "\\usepackage{algpseudocode}",
+      "\\lstset{",
+      "\tlanguage= ${1|Matlab,C++,C,Python,Julia|}",
+      "\tbasicstyle=\\ttfamily,",
+      "\tkeywordstyle=\\color{blue},",
+      "\tcommentstyle=\\color{green!50!black},",
+      "\tstringstyle=\\color{red},",
+      "\tshowstringspaces=false,",
+      "\tbreaklines=true,",
+      "}"
+    ],
+    "description": "LaTeX code"
+  },
+  "Inkscape": {
+    "prefix": "inkscape",
+    "body": [
+      "\\usepackage{import}",
+      "\\usepackage{xifthen}",
+      "\\usepackage{pdfpages}",
+      "\\usepackage{transparent}",
+      "\\usepackage{svg}",
+      "\\newcommand{\\incfig}[1]{%",
+      "\t\\def\\svgwidth{0.5\\textwidth}",
+      "\t\\import{./figures/}{#1.pdf_tex}",
+      "}",
+      "\\newcommand{\\incFig}[1]{%",
+      "\t\\def\\svgwidth{0.5\\textwidth}",
+      "\t\\import{./figures/}{#1}",
+      "}"
+    ],
+    "description": "LaTeX Inkscape"
+  },
+  "hyperref": {
+    "prefix": "hyperref",
+    "body": [
+      "\\usepackage{hyperref}",
+      "\\hypersetup{",
+      "\t colorlinks=true,",
+      "\t linktoc=all,",
+      "\t citecolor=black,",
+      "\t filecolor=black,",
+      "\t linkcolor=black,",
+      "\t urlcolor=black",
+      "}",
+      "\\hypersetup{linktocpage}"
+    ],
+    "description": "LaTeX hyperref-setup"
+  },
+  "environment": {
+    "prefix": ["environment", "begin"],
+    "body": ["\\begin{${1:environment}}", "\t$2", "\\end{${1:environment}}"],
+    "description": "LaTeX environment"
+  },
   "Latex-Table": {
     "prefix": ["table", "tabu"],
     "body": [
       "",
-      "\\begin{table}[h]",
-      "    \\center",
-      "    \\begin{tabular}[H]{||c|c|c||}",
-      "        \\toprule",
-      "         $1 & $2 & $3",
-      "        \\\\\\\\  \\midrule \\midrule",
-      "         $4 & $5 & $6",
-      "        \\\\\\\\ \\midrule",
-      "         $7 & $8 & $9",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\midrule",
-      "         & &",
-      "        \\\\\\\\ \\bottomrule",
-      "    \\end{tabular}",
-      "    \\caption{${11:λεζάντα}}\\label{${10:label}}",
+      "\\begin{table}[ht]",
+      "\t\\centering",
+      "\t\\caption{${2:λεζάντα}}\\label{tab:${1:label}}",
+      "\t\\begin{tabular}[H]{ccc}",
+      "\t\t\\\\toprule",
+      "\t\t$3 & &",
+      "\t\t\\\\\\\\  \\midrule \\midrule",
+      "\t\t&  & ",
+      "\t\t\\\\\\\\ \\midrule",
+      "\t\t&  & ",
+      "\t\t\\\\\\\\ \\bottomrule",
+      "\t\t\\end{tabular}",
       "\\end{table}",
       ""
     ],
-    "description": "A table snippet"
+    "description": "LaTeX table"
   },
   "Latex-Figure": {
-    "prefix": ["figure", "Figure", "diagram"],
+    "prefix": ["figu", "diagram"],
     "body": [
       "\\begin{figure}[h]",
-      "    \\center",
-      "    \\includegraphics[width = \\textwidth]{${1:file name of the figure}}",
-      "    \\caption{${3:λεζάντα της εικόνας}}\\label{${2:label of the figure}}",
-      "\\end{figure}",
-      ""
+      "\t\\centering",
+      "\t\\caption{${3:λεζάντα της εικόνας}}\\label{fig:${1:label of the figure}}",
+      "\t\\includegraphics[width = \\textwidth]{${2:file name of the figure}}",
+      "\\end{figure}\n"
     ],
-    "description": "A figure snippet"
+    "description": "LaTeX figure"
   },
-  "Latex-beginning": {
-    "prefix": ["begin", "start", "beginning"],
-    "body": [
-      "\\documentclass[a4paper, 12pt, ]{article}",
-      "\\usepackage[LGR]{fontenc}",
-      "\\usepackage[greek]{babel}",
-      "\\usepackage{wrapfig}",
-      "\\usepackage{graphicx}",
-      "\\usepackage{array}",
-      "\\usepackage{amsmath}",
-      "\\usepackage{bm}",
-      "\\usepackage{xfrac}",
-      "\\usepackage{tikz}",
-      "\\usepackage{booktabs}",
-      "\\usepackage[margin=1.05in]{geometry}",
-      "\\usepackage{pgfplots}",
-      "\\usepackage{siunitx}",
-      "\\usepackage{caption}",
-      "\\usepackage{caption}",
-      "\\usepackage{cancel}",
-      "\\usepackage[fixlanguage]{babelbib}",
-      "\\usepackage{physunits}",
-      "\\usepackage[utf8x]{inputenc}",
-      "\\usepackage{amssymb}",
-      "\\usepackage{hyperref}",
-      "",
-      "\\graphicspath{ {C:/Users/dimit/Pictures/} }",
-      "%setup for hyperlinks inside the document",
-      "\\hypersetup{",
-      "colorlinks=true,",
-      "linktoc=all,",
-      "citecolor=black,",
-      "filecolor=black,",
-      "linkcolor=black,",
-      "urlcolor=black",
-      "}",
-      "\\hypersetup{linktocpage}",
-      "",
-      "%\\captionsetup[table]{labelformat=empty}",
-      "",
-      "\\title{${1:title}}",
-      "\\author{${2:author}}",
-      "",
-      "\\date{$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
-      "%in order to number every equation figure and table based on section or subsection, use the according snippet for specialized control",
-      "\\numberwithin{equation}{${3|subsection,section,subsubsection|}}",
-      "\\numberwithin{figure}{${3|subsection,section,subsubsection|}}",
-      "\\numberwithin{table}{${3|subsection,section,subsubsection|}}",
-      "\\begin{document}",
-      "\\maketitle",
-      "\\renewcommand{\\tablename}{Πίνακας}",
-      "\\renewcommand{\\figurename}{Εικόνα}",
-      "%the upper commands are not in use because of the package fixlanguage",
-      "$4",
-      "\\end{document}",
-      " "
-    ],
-    "description": "A beginning for latex articles snippet"
-  },
-  "Latex-itemize": {
-    "prefix": ["itemize", "item", "Item"],
-    "body": [
-      "\\begin{itemize}",
-      "    \\item",
-      "${1:text}",
-      "    \\item",
-      "${2:text}",
-      "    \\item",
-      "${3:text}",
-      "\\end{itemize}"
-    ],
-    "description": "An item snippet latex"
-  },
-  "Latex-equation": {
-    "prefix": ["equation", "$$", "$", "Equation", "eq"],
-    "body": ["\\begin{equation}\\label{eq:$1}", "$2", "\\end{equation}", "$0"],
-    "description": "An equation snippet"
-  },
-  "Bibliography-BOOK-style": {
-    "prefix": ["book", "Book", "βιβλίο", "Βιβλίο", "BOOK"],
-    "body": [
-      "@book{ref_here,",
-      "  title     = \"\",",
-      "  author    = \", .\",",
-      "  year      = ,",
-      "  publisher = \"\",",
-      "  address   = \"\"",
-      "}"
-    ],
-    "description": "A book reference snippet"
-  },
-  "Bibliography-ARTICLE-style": {
-    "prefix": ["article", "ARTICLE", "Article", "άρθρο"],
-    "body": [
-      "@article{,",
-      "  author  = \", .\",",
-      "  title   = \"\",",
-      "  journal = \"\",",
-      "  year    = ,",
-      "  volume  = \"\",",
-      "  number  = \"\",",
-      "  pages   = \"--\"",
-      "}"
-    ],
-    "description": "An article Bibliography snippet"
-  },
-  "latin": {
-    "prefix": ["\te", "latin"],
-    "body": "\\textlatin{${1:text}}",
-    "description": "textlatin"
-  },
-  "frame": {
-    "prefix": ["frame", "φραμε", "\frame"],
-    "body": [
-      "\\begin{frame}",
-      "\\frametitle{${1:title}}",
-      "${2:text}",
-      "\\end{frame}"
-    ],
-    "description": "frame"
-  },
-  "environment": {
-    "prefix": ["environment", "\begin"],
-    "body": [
-      "\\begin{${1:environment}}",
-      "${2:text}",
-      "\\end{${1:environment}}"
-    ],
-    "description": "latex-environment"
-  },
-  "one over": {
-    "prefix": "1over",
-    "body": "\\frac{1}{${1:fraction}}",
-    "description": "special fraction"
-  },
-  "fraction": {
-    "prefix": "\\",
-    "body": "frac{${1:top}}{${2:bottom}}",
-    "description": "fraction-snippet"
-  },
-  "theta": {
-    "prefix": [".θ", "th"],
-    "body": "\\theta",
-    "description": "math conceal"
-  },
-  "omega": {
-    "prefix": [".ω", "omega"],
-    "body": "\\omega",
-    "description": "math conceal"
-  },
-  "epsilon": {
-    "prefix": [".ε", "eps"],
-    "body": "\\varepsilon",
-    "description": "math conceal"
-  },
-  "ksi": {
-    "prefix": [".ξ", "ks"],
-    "body": "\\xi",
-    "description": "math conceal"
-  },
-  "psi": {
-    "prefix": [".ψ", "ps"],
-    "body": "\\psi",
-    "description": "math conceal"
-  },
-  "pi": {
-    "prefix": [".π", "pi"],
-    "body": "\\pi",
-    "description": "math conceal"
-  },
-  "lambda": {
-    "prefix": [".λ", "lam"],
-    "body": "\\lambda",
-    "description": "math conceal"
-  },
-  "delta": {
-    "prefix": [".δ", "del"],
-    "body": "\\delta",
-    "description": "math conceal"
-  },
-  "rho": {
-    "prefix": [".ρ", "rho"],
-    "body": "\\rho",
-    "description": "math conceal"
-  },
-  "sigma": {
-    "prefix": [".σ", "sigma"],
-    "body": "\\sigma",
-    "description": "math conceal"
-  },
-  "gamma": {
-    "prefix": [".γ", "gamma"],
-    "body": "\\gamma",
-    "description": "math conceal"
-  },
-  "mu": {
-    "prefix": [".μ", "mu"],
-    "body": "\\mu",
-    "description": "math conceal"
-  },
-  "zeta": {
-    "prefix": [".ζ", "zeta"],
-    "body": "\\zeta",
-    "description": "math conceal"
-  },
-  "tau": {
-    "prefix": [".τ", "tau"],
-    "body": "\\tau",
-    "description": "math conceal"
-  },
-  "iota": {
-    "prefix": [".ι", "iota"],
-    "body": "\\iota",
-    "description": "math conceal"
-  },
-  "cdot": {
-    "prefix": ["dot", "cdot"],
-    "body": "\\cdot",
-    "description": "math dot product"
-  },
-  "squareroot": {
-    "prefix": ["sqrt", "suareroot"],
-    "body": "\\sqrt{${1:math}}",
-    "description": "sqrt conceal"
-  },
-  "integral": {
-    "prefix": ["int", "integral"],
-    "body": "\\int",
-    "description": "integral conceal"
-  },
-  "cos": {
-    "prefix": ["cos", "cosine"],
-    "body": "\\cos (${1:math})",
-    "description": "math conceal"
-  },
-  "sin": {
-    "prefix": ["sin", "sine"],
-    "body": "\\sin (${1:math})",
-    "description": "math conceal"
-  },
-  "tan": {
-    "prefix": ["tan", "tangent"],
-    "body": "\\tan (${1:math})",
-    "description": "math conceal"
-  },
-  "log": {
-    "prefix": ["log", "logarith"],
-    "body": "\\log (${1:math})",
-    "description": "math conceal"
-  },
-  "ln": {
-    "prefix": ["ln", "lnlog"],
-    "body": "\\ln (${1:math})",
-    "description": "math conceal"
-  },
-  "infinity": {
-    "prefix": ["infinity", "apeiro"],
-    "body": "\\infty",
-    "description": "math conceal"
-  },
-  "vector": {
-    "prefix": ["vec", "overvec"],
-    "body": "\\vec{${1:math}}",
-    "description": "math conceal"
-  },
-  "over_dot": {
-    "prefix": ["odot", "overdot"],
-    "body": "\\dot{${1:math}}",
-    "description": "math conceal"
-  },
-  "over_ddot": {
-    "prefix": ["oddot", "overddot"],
-    "body": "\\ddot{${1:math}}",
-    "description": "math conceal"
-  },
-  "parentheses": {
-    "prefix": ["parentheses", "parenth"],
-    "body": "\\left(${1:math}\\right)",
-    "description": "math conceal"
-  },
-  "square_bracket": {
-    "prefix": ["bracket", "square_bracket"],
-    "body": "\\left[${1:math}\\right]",
-    "description": "math conceal"
-  },
-  "sign": {
-    "prefix": ["sign", "name", "dimitris", "δημήτρης"],
-    "body": "Δημήτριος Δημητρό$\\varpi$ουλος",
-    "description": "Signature"
-  },
-  "proportional": {
-    "prefix": ["analog", "proportional"],
-    "body": "\\propto",
-    "description": "math conceal"
-  },
-  "Bibliography": {
-    "prefix": "bibliography",
+  "BibTeX": {
+    "prefix": "bib-biblio",
     "body": [
       "\\newpage",
       "\\section{Βιβλιογρφία}",
       "\\bibliography{${1:file}}",
       "\\bibliographystyle{${2:style_eg_acm}}"
     ],
-    "description": "bibliography"
+    "description": "BibTeX bibliography"
   },
-  "Signature": {
-    "prefix": ["Sign", "Name", "Dimitris", "Δημήτρης"],
-    "body": "Δημητρό\\char982\\char547λος",
-    "description": "Signature-unicode version"
-  },
-  "hyperref": {
-    "prefix": "hyperref",
+  "BibLaTeX": {
+    "prefix": "bib-biblatex",
     "body": [
-      "\\hypersetup{",
-      "colorlinks=true,",
-      "linktoc=all,",
-      "citecolor=black,",
-      "filecolor=black,",
-      "linkcolor=black,",
-      "urlcolor=black",
-      "}",
-      "\\hypersetup{linktocpage}"
+      "\\newpage",
+      "\\section{Βιβλιογρφία}",
+      "\\nocite{*}",
+      "\\printbibliography[heading=none]"
     ],
-    "description": "hyperref"
+    "description": "BibLaTeX bibliography"
+  },
+  "code-listing": {
+    "prefix": "listing",
+    "body": [
+      "\\newpage",
+      "\\par\\noindent\\rule{\\textwidth}{0.4pt}",
+      "\\lstinputlisting[language=${1|Matlab,C++,C,Python,Julia|}, caption=${2:Λεζάντα}]{${3:file}}",
+      "\\par\\noindent\\rule{\\textwidth}{0.4pt}"
+    ],
+    "description": "LaTeX code listing"
   },
   "contents": {
     "prefix": "contents",
     "body": ["\\newpage", "\\section{Περιεχόμενα}", "\\tableofcontents"],
-    "description": "contents"
+    "description": "LaTeX contents"
   },
-  "align -LaTeX": {
-    "scope": "",
-    "prefix": "align",
+  "Latex-itemize": {
+    "prefix": ["itemize", "itemu"],
+    "body": ["\\begin{itemize}", "\t\\item ${1:text}", "\\end{itemize}"],
+    "description": "LaTeX itemize"
+  },
+  "Enumerate": {
+    "prefix": ["enum", "enumerate"],
+    "body": ["\\\\begin{enumerate}", "\t\\item $0", "\\\\end{enumerate}"],
+    "description": "LaTeX enumerate"
+  },
+  "Description": {
+    "prefix": ["description"],
     "body": [
-      "\\begin{${1|align,align*,aligned|}}",
-      "\t$2\\\\\\\\",
-      "\t$3\\\\\\\\$4",
-      "\\end{$1} $0"
-    ]
+      "\\\\begin{description}",
+      "\t\\item[$1] $0",
+      "\\\\end{description}"
+    ],
+    "description": "LaTeX description"
   },
-  "derivative-LaTeX": {
-    "scope": "",
-    "prefix": "deriv",
-    "body": ["\\frac{d${1:f}}{d${2:x}} $0"]
+  "Latex-equation": {
+    "prefix": ["equation", "$$", "$", "Equation", "eq"],
+    "body": [
+      "\\begin{equation}\\label{eq:$1}",
+      "\t$2",
+      "\\end{equation}\n",
+      "$0"
+    ],
+    "description": "LaTeX equation"
   },
-  "cases-LaTeX": {
-    "scope": "",
+  "cases": {
     "prefix": "cases",
     "body": [
       "\\begin{cases}",
-      "\t$1 &\\text{$2}\\\\\\\\",
-      "\t$3 &\\text{$4}\\\\\\\\$5",
+      "\t$1 & $2 \\\\\\\\",
+      "\t$3 & $4 \\\\\\\\",
       "\\end{cases} $0"
-    ]
+    ],
+    "description": "LaTeX cases"
   },
-  "matrix-LaTeX": {
-    "scope": "",
+  "matrix": {
     "prefix": "matrix",
     "body": [
       "\\begin{${1|matrix,pmatrix,bmatrix,Bmatrix,Vmatrix,vmatrix|}}",
       "\t$2 & $3\\\\\\\\",
-      "\t$4 & $5\\\\\\\\$6",
+      "\t$4 & $5\\\\\\\\",
       "\\end{$1} $0"
-    ]
+    ],
+    "description": "LaTeX matrix"
   },
   "array-LaTeX": {
-    "scope": "",
     "prefix": "array",
     "body": [
       "\\begin{array}{${1:c}}",
       "\t$2\\\\\\\\",
       "\t$3\\\\\\\\$4",
       "\\end{array} $0"
-    ]
-  },
-  "Simple-table-LaTeX": {
-    "prefix": ["stable", "stabu"],
-    "body": [
-      "",
-      "\\begin{table}[h]",
-      "    \\center",
-      "    \\begin{tabular}[H]{||c|c|c||}",
-      "        \\toprule",
-      "         $3 & $4 & $5",
-      "        \\\\\\\\  \\midrule \\midrule",
-      "         $6 ",
-      "        \\\\\\\\ \\bottomrule",
-      "    \\end{tabular}",
-      "    \\caption{${1:λεζάντα}}\\label{${2:label}}",
-      "\\end{table}",
-      ""
     ],
-    "description": "A table snippet"
+    "description": "LaTeX array"
   },
-  "Description": {
-    "prefix": ["description", "περιγραφή"],
-    "body": [
-      "\\\\begin{description}",
-      "\t\\item[$1] $0",
-      "\\\\end{description}"
-    ],
-    "description": "Description"
+  "one over": {
+    "prefix": "over",
+    "body": "\\frac{1}{${1:fraction}}",
+    "description": "special fraction"
   },
-  "Enumerate": {
-    "prefix": ["enum", "απαρίθμηση", "enumerate"],
-    "body": ["\\\\begin{enumerate}", "\t\\item $0", "\\\\end{enumerate}"],
-    "description": "Enumerate"
+  "fraction": {
+    "prefix": ["frac", "\\"],
+    "body": "frac{${1:top}}{${2:bottom}}",
+    "description": "fraction-snippet"
+  },
+  "integral": {
+    "prefix": ["int"],
+    "body": "\\int_{${1:lower}}^{${2:upper}} ${4:math} d${3:variable}",
+    "description": "LaTeX integral"
+  },
+  "derivative": {
+    "prefix": "deriv",
+    "body": ["\\frac{d${1:f}}{d${2:x}} $0"],
+    "description": "LaTeX derivative"
+  },
+  "Summation-Series": {
+    "prefix": ["series"],
+    "body": ["\\sum_{${1:n}=${2:0}}^{${3:\\infty}}$0"],
+    "description": "LaTeX summation-series"
+  },
+  "Inline Summation": {
+    "prefix": ["suminline"],
+    "body": ["\\sum_{$1}^{$2}$3"],
+    "description": "LaTeX inline summation notation."
+  },
+  "parentheses": {
+    "prefix": ["parentheses", "parenth"],
+    "body": "\\left($1\\right)",
+    "description": "LaTeX parentheses"
+  },
+  "square_bracket": {
+    "prefix": ["bracket", "square_bracket"],
+    "body": "\\left[$1\\right]",
+    "description": "LaTeX square bracket"
+  },
+  "squareroot": {
+    "prefix": ["sqrt"],
+    "body": "\\sqrt{${1:math}}",
+    "description": "LaTeX square root"
+  },
+  "cos": {
+    "prefix": ["cos"],
+    "body": "\\cos($1)",
+    "description": "LaTeX cosine"
+  },
+  "sin": {
+    "prefix": ["sin"],
+    "body": "\\sin($1)",
+    "description": "LaTeX sine"
+  },
+  "tan": {
+    "prefix": ["tan"],
+    "body": "\\tan($1)",
+    "description": "LaTeX tangent"
+  },
+  "log": {
+    "prefix": ["log"],
+    "body": "\\log($1)",
+    "description": "LaTeX logarithm"
+  },
+  "ln": {
+    "prefix": ["ln"],
+    "body": "\\ln ($1)",
+    "description": "LaTeX natural logarithm"
+  },
+  "vector": {
+    "prefix": ["vec"],
+    "body": "\\vec{$1}",
+    "description": "LaTeX vector"
+  },
+  "over_dot": {
+    "prefix": ["dot"],
+    "body": "\\dot{${1:math}}",
+    "description": "LaTeX dot"
+  },
+  "over_ddot": {
+    "prefix": ["ddot"],
+    "body": "\\ddot{${1:math}}",
+    "description": "LaTeX ddot"
   },
   "underline": {
-    "prefix": ["underline", "υπογράμμιση"],
-    "body": ["\\underline{${1:underline}}$0"],
-    "description": "underline"
+    "prefix": ["underline"],
+    "body": ["\\underline{$1}$0"],
+    "description": "LaTeX underline"
   },
   "after-underline": {
-    "prefix": ["aunderline", "αυπογράμμιση"],
+    "prefix": ["aunderline"],
     "body": ["\\underline{${CLIPBOARD: $1}}$0"],
     "description": "underline"
   },
-  "curent-date": {
-    "prefix": ["date", "ημερομηνία"],
-    "body": ["\\date{$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}"],
-    "description": "curent date"
+  "cdot": {
+    "prefix": ["cdot"],
+    "body": "\\cdot",
+    "description": "LaTeX cdot"
   },
-  "echo": {
-    "prefix": "echo",
-    "body": ["echo ${TM_SELECTED_TEXT}"]
+  "proportional": {
+    "prefix": ["analog", "proportional"],
+    "body": "\\propto",
+    "description": "LaTeX proportional"
   },
-  "Summation-Series": {
-    "prefix": ["series", "\\sumamtionlarge"],
-    "body": ["\\displaystyle\\sum_{${1:n}=${2:0}}^{${3:\\infty}}$0"],
-    "description": "Insert a large summation notation."
+  "infinity": {
+    "prefix": ["infinity", "apeiro"],
+    "body": "\\infty",
+    "description": "LaTeX infinity"
   },
-  "Inline Summation": {
-    "prefix": ["suminline", "\\suminline"],
-    "body": ["\\sum_{$1}^{$2}$3"],
-    "description": "Insert an inline summation notation, (only in the cases when the environment is inline math environment)."
+  "Signature": {
+    "prefix": ["Sign", "Name", "Dimitris", "Δημήτρης"],
+    "body": "Δημητρό\\char982\\char547λος",
+    "description": "Signature-unicode version"
   },
-  "Large Summation": {
-    "prefix": ["sumlarge", "\\sumlarge"],
-    "body": ["\\displaystyle\\sum_{$1}^{$2}$3"],
-    "description": "Insert a large summation notation."
+  "latin": {
+    "prefix": "latin",
+    "body": "\\textlatin{${1:text}}",
+    "description": "textlatin"
   }
 }

@@ -49,13 +49,13 @@ end
 -- Telescope
 local telescope_mappings = {
   { key = "ff", cmd = "find_files",                desc = "files" },
+  { key = "fr", cmd = "oldfiles",                  desc = "old files" },
   { key = "f;", cmd = "commands",                  desc = "commands" },
   { key = "lg", cmd = "live_grep",                 desc = "live grep" },
   { key = "fs", cmd = "grep_string",               desc = "string mark" },
   { key = "fb", cmd = "buffers",                   desc = "buffers" },
   { key = "fh", cmd = "help_tags",                 desc = "help tags" },
   { key = "fm", cmd = "marks",                     desc = "marks" },
-  { key = "fr", cmd = "oldfiles",                  desc = "old files" },
   { key = "fk", cmd = "keymaps",                   desc = "keymaps" },
   { key = "re", cmd = "registers",                 desc = "registers" },
   { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
@@ -70,8 +70,8 @@ for _, mapping in ipairs(telescope_mappings) do
   end, { desc = "find " .. mapping.desc }, opts)
 end
 keymapp(n, "<leader>ts", "<cmd> Telescope treesitter <CR>", { desc = "find treesitter" }, opts)
-local telescope_hidden = "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>"
-keymapp("n", "<leader>fa", telescope_hidden, { desc = "find hidden" }, opts)
+local tel_hid = "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>"
+keymapp("n", "<leader>fa", tel_hid, { desc = "find hidden" }, opts)
 
 -- NvimTree
 keymapp(n, "<C-b>", function()
