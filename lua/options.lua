@@ -58,6 +58,7 @@ opt.updatetime = 250
 vig.vimtex_quickfix_mode = 0
 vig.Tex_BibtexFlavor = "biber"
 vig.vimtex_view_method = "zathura"
+vig.vimtex_syntax_enabled = 0
 
 -- LuaSnip options
 vig.vscode_snippets_path = "~/.config/nvim/snippets/"
