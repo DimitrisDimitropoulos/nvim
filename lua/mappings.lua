@@ -48,7 +48,7 @@ end
 
 -- Telescope
 local telescope_mappings = {
-  { key = "ff", cmd = "find_files",                desc = "files" },
+  { key = "ff", cmd = "fd",                        desc = "files" },
   { key = "fr", cmd = "oldfiles",                  desc = "old files" },
   { key = "f;", cmd = "commands",                  desc = "commands" },
   { key = "lg", cmd = "live_grep",                 desc = "live grep" },
@@ -69,9 +69,12 @@ for _, mapping in ipairs(telescope_mappings) do
     require("telescope.builtin")[mapping.cmd]()
   end, { desc = "find " .. mapping.desc }, opts)
 end
-keymapp(n, "<leader>ts", "<cmd> Telescope treesitter <CR>", { desc = "find treesitter" }, opts)
-local tel_hid = "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>"
-keymapp("n", "<leader>fa", tel_hid, { desc = "find hidden" }, opts)
+keymapp(n, "<leader>ts", function()
+  require("telescope.builtin").treesitter { default_text = "function" }
+end, { desc = "find treesitter" }, opts)
+keymapp(n, "<leader>fa", function()
+  require("telescope.builtin").find_files { hidden = true, follow = true, no_ignore = true }
+end, { desc = "find files" }, opts)
 
 -- NvimTree
 keymapp(n, "<C-b>", function()

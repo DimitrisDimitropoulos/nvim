@@ -8,7 +8,7 @@ require("indent_blankline").setup {
     "TelescopePrompt",
     "TelescopeResults",
     "mason",
-    "Alpha",
+    "alpha",
     "",
   },
   buftype_exclude = { "terminal" },
