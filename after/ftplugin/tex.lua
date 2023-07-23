@@ -1,5 +1,6 @@
 -- LaTeX options
 
+vim.keymap.set("n", "<leader>tr", "")
 vim.opt.cursorlineopt = "number"
 
 -- Disable TreeSitter highlighting for large files
@@ -8,7 +9,7 @@ function Disable_tree_sitter_highlight()
   local bufnr = vim.api.nvim_get_current_buf()
   local line_count = vim.api.nvim_buf_line_count(bufnr)
   if line_count > line_limit then
-    vim.cmd "TSBufDisable highlight"
+    vim.treesitter.stop()
   end
 end
 
@@ -22,16 +23,17 @@ vim.api.nvim_create_autocmd("Filetype", {
 })
 
 -- vim.keymap.set
-local keymapp = vim.keymap.set
+
 local vimtex_keymap = {
-  { key = "ll", cmd = "Compile",   desc = "compile" },
-  { key = "to", cmd = "TocToggle", desc = "toggle table of contents" },
-  { key = "lv", cmd = "View",      desc = "synctex" },
-  { key = "lr", cmd = "Errors",    desc = "errors" },
+  { key = "ll", cmd = "Compile",   decr = "compile" },
+  { key = "to", cmd = "TocToggle", decr = "toggle table of contents" },
+  { key = "lv", cmd = "View",      decr = "synctex" },
+  { key = "lr", cmd = "Errors",    decr = "errors" },
 }
-for _, command in ipairs(vimtex_keymap) do
-  keymapp("n", command.key, "<cmd> Vimtex" .. command.cmd .. " <CR>", { desc = command.descr })
+for _, vitex in ipairs(vimtex_keymap) do
+  vim.keymap.set("n", "<leader>" .. vitex.key, function()
+    vim.cmd("Vimtex" .. vitex.cmd)
+  end, { desc = vitex.decr })
 end
 
-keymapp("n", "<leader>tx", Disable_tree_sitter_highlight, { desc = "disable treesitter" })
-keymapp("n", "<leader>tr", "")
+vim.keymap.set("n", "<leader>tx", Disable_tree_sitter_highlight, { desc = "disable treesitter" })

@@ -69,11 +69,17 @@ for _, mapping in ipairs(telescope_mappings) do
     require("telescope.builtin")[mapping.cmd]()
   end, { desc = "find " .. mapping.desc }, opts)
 end
+
 keymapp(n, "<leader>ts", function()
   require("telescope.builtin").treesitter { default_text = "function" }
 end, { desc = "find treesitter" }, opts)
 keymapp(n, "<leader>fa", function()
-  require("telescope.builtin").find_files { hidden = true, follow = true, no_ignore = true }
+  require("telescope.builtin").find_files {
+    hidden = true,
+    follow = true,
+    no_ignore = true,
+    file_ignore_patterns = { ".git" },
+  }
 end, { desc = "find files" }, opts)
 
 -- NvimTree
@@ -85,7 +91,14 @@ end, { desc = "toggle nvimtree" }, opts)
 keymapp(n, "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
 end)
-keymapp("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
+
+-- keymapp("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
+
+keymapp("v", "<leader>/", function()
+  local esc = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
+  vim.api.nvim_feedkeys(esc, "x", false)
+  require("Comment.api").toggle.linewise(vim.fn.visualmode())
+end, { desc = "comment in visual mode" })
 
 -- Trouble
 keymapp(n, "<leader>tr", function()
