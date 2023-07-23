@@ -66,8 +66,8 @@ local servers = {
   "julials",
   "pyright",
   "bashls",
+  "neocmake",
 }
-
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,

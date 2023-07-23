@@ -57,8 +57,11 @@ opt.updatetime = 250
 -- VimTeX options
 vig.vimtex_quickfix_mode = 0
 vig.Tex_BibtexFlavor = "biber"
-vig.vscode_snippets_path = "~/.config/nvim/snippets/"
 vig.vimtex_view_method = "zathura"
+
+-- LuaSnip options
+vig.vscode_snippets_path = "~/.config/nvim/snippets/"
+vig.lua_snippets_path = "~/.config/nvim/lua_snippets/"
 
 -- disable some default providers
 local providers = { "node", "perl", "python3", "ruby" }
