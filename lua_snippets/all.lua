@@ -18,11 +18,29 @@ local function get_comment_string()
   return commentstring:gsub("%%s", "")
 end
 
+-- now i want to append 80 times this character
+local function separate_with_commentstring()
+  local commentstring = get_comment_string()
+  -- remove trailing whitespace
+  commentstring = commentstring:gsub("%s+$", "")
+  -- check the number of characters in order to
+  -- append the correct amount
+  if #commentstring == 1 then
+    return commentstring .. string.rep(commentstring, 79)
+  end
+  return commentstring .. string.rep(commentstring, 39)
+  -- ATTENTION: Lua numbering starts at 1, @2023-07-23 19:34:46
+end
+
 return {
 
   s(
-    "comm",
-    fmt("{1} {2}, @{3}", {
+    {
+      trig = "comm",
+      name = "Comment-Commons",
+      dscr = "Common comment formats",
+    },
+    fmt("{1}{2}, @{3}", {
       f(get_comment_string),
       c(1, {
         sn(nil, { t "TODO: ", i(1) }),
@@ -40,6 +58,12 @@ return {
     }),
     { description = "Comment" }
   ),
+
+  s({
+    trig = "separate",
+    name = "Comment-Separate",
+    dscr = "Separate with commentstring",
+  }, f(separate_with_commentstring)),
 
   s("time", p(vim.fn.strftime, "%H:%M:%S")),
   s("shrug", { t "¯\\_(ツ)_/¯" }),
