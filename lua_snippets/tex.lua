@@ -8,7 +8,11 @@ local c = ls.choice_node
 
 return {
   s(
-    "lr",
+    {
+      trig = "lr",
+      name = "Left-Right",
+      dscr = "LaTeX \\left([ \\right)] environment",
+    },
     c(1, {
       sn(nil, { t "\\left(", i(1), t "\\right)" }),
       sn(nil, { t "\\left[", i(1), t "\\right]" }),
