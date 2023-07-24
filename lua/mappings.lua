@@ -1,4 +1,4 @@
-local keymapp = vim.keymap.set
+local map = vim.keymap.set
 local opts = {
   noremap = true,
   silent = false,
@@ -21,7 +21,7 @@ local commands = {
   { key = "<leader>bn", cmd = "enew",      descr = "buffer new" },
 }
 for _, command in ipairs(commands) do
-  keymapp(n, command.key, "<cmd> " .. command.cmd .. " <CR>", { desc = command.descr }, opts)
+  map(n, command.key, "<cmd> " .. command.cmd .. " <CR>", { desc = command.descr }, opts)
 end
 
 -- Diagnostic mappings
@@ -31,13 +31,13 @@ local diagno = {
   { key = "]d",         cmd = "goto_next",  descr = "diagnostics next" },
 }
 for _, diag in ipairs(diagno) do
-  keymapp(n, diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr }, opts)
+  map(n, diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr }, opts)
 end
 
 -- Window management
 local window = { "w", "q", "h", "j", "k", "l" }
 for _, win in ipairs(window) do
-  keymapp(n, "<C-" .. win .. ">", "<C-w>" .. win, { desc = "window " .. win }, opts)
+  map(n, "<C-" .. win .. ">", "<C-w>" .. win, { desc = "window " .. win }, opts)
 end
 
 -- -------------------
@@ -65,15 +65,15 @@ local telescope_mappings = {
   { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "current buffer fuzzy" },
 }
 for _, mapping in ipairs(telescope_mappings) do
-  keymapp(n, "<leader>" .. mapping.key, function()
+  map(n, "<leader>" .. mapping.key, function()
     require("telescope.builtin")[mapping.cmd]()
   end, { desc = "find " .. mapping.desc }, opts)
 end
 
-keymapp(n, "<leader>ts", function()
+map(n, "<leader>ts", function()
   require("telescope.builtin").treesitter { default_text = "function" }
 end, { desc = "find treesitter" }, opts)
-keymapp(n, "<leader>fa", function()
+map(n, "<leader>fa", function()
   require("telescope.builtin").find_files {
     hidden = true,
     follow = true,
@@ -83,24 +83,24 @@ keymapp(n, "<leader>fa", function()
 end, { desc = "find files" }, opts)
 
 -- NvimTree
-keymapp(n, "<C-b>", function()
+map(n, "<C-b>", function()
   require("nvim-tree.api").tree.toggle()
 end, { desc = "toggle nvimtree" }, opts)
 
 -- Comment
-keymapp(n, "<leader>/", function()
+map(n, "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
 end)
 
 -- keymapp("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
-keymapp("v", "<leader>/", function()
+map("v", "<leader>/", function()
   local esc = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
   vim.api.nvim_feedkeys(esc, "x", false)
   require("Comment.api").toggle.linewise(vim.fn.visualmode())
 end, { desc = "comment in visual mode" })
 
 -- Trouble
-keymapp(n, "<leader>tr", function()
+map(n, "<leader>tr", function()
   require("trouble").toggle()
 end, { desc = "trouble" }, opts)
