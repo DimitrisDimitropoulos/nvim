@@ -21,6 +21,15 @@ require("indent_blankline").setup {
 -- Set the hightlight group
 vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", { bg = "#3D3834", bold = true })
 
+vim.api.nvim_set_hl(0, "@lsp.type.parameter", { italic = true })
+
+-- hl groups for the comments
+-- NOTE: Treesitter is prone to breaking changes, @2023-07-24 17:05:41
+local comms_hl = { "@text.todo", "@text.danger", "@text.warning", "@text.note" }
+for _, hl in ipairs(comms_hl) do
+  vim.api.nvim_set_hl(0, hl, { bold = true, underline = true })
+end
+
 -- Mini textobjects
 require("mini.ai").setup {
   custom_textobjects = {

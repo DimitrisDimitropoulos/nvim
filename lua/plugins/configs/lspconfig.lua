@@ -67,6 +67,7 @@ local servers = {
   "pyright",
   "bashls",
   "neocmake",
+  "clangd",
 }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -78,16 +79,13 @@ lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
       diagnostics = {
         globals = { "vim" },
       },
     },
   },
-}
-
-lspconfig.clangd.setup {
-  capabilities = capabilities,
-  cmd = { "clangd", "--background-index", "--clang-tidy" },
 }
 
 lspconfig.rust_analyzer.setup {
