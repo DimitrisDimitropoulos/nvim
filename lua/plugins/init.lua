@@ -109,12 +109,7 @@ local plugins = {
       "MasonLog",
     },
     config = function()
-      local apps = require "plugins.configs.mason"
       require "plugins.configs.mason"
-      vim.api.nvim_create_user_command("MasonInstallAll", function()
-        vim.cmd("MasonInstall " .. table.concat(apps.ensure_installed, " "))
-      end, {})
-      vim.g.mason_binaries_list = apps.ensure_installed
     end,
   },
 

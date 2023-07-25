@@ -1,3 +1,16 @@
+local ensure_installed = {
+  "lua-language-server",
+  "bash-language-server",
+  "shellcheck",
+  "beautysh",
+  "latexindent",
+  "pyright",
+  "black",
+  "flake8",
+  "fourmolu",
+  "jsonlint",
+}
+
 require("mason").setup {
   ui = {
     icons = {
@@ -16,25 +29,10 @@ require("mason").setup {
       cancel_installation = "<C-c>",
     },
   },
-}
-
-local options = {
-  ensure_installed = {
-    "lua-language-server",
-    "selene",
-    "stylua",
-    -- "bash-language-server",
-    -- "shellcheck",
-    -- "rust-analyzer",
-    -- "pyright",
-    -- "latexindent",
-    -- "beautysh",
-    -- "black",
-    -- "flake8",
-    -- "fourmolu",
-    -- "jsonlint",
-  },
+  vim.api.nvim_create_user_command("MasonInstallAll", function()
+    vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
+  end, {}),
   PATH = "skip",
-  max_concurrent_installers = 10,
+  max_concurrent_installers = 20,
+  -- vim.g.mason_binaries_list = apps.ensure_installed
 }
-return options
