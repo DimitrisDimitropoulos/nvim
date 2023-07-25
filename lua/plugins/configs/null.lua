@@ -10,10 +10,6 @@ local diagnostics = null_ls.builtins.diagnostics
 
 local bins = {
 
-  -- Lua
-  format.stylua,
-  diagnostics.selene,
-
   -- Cpp
   diagnostics.cppcheck,
   format.gersemi,

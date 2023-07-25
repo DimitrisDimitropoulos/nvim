@@ -1,5 +1,5 @@
 -- keymap wrapper
-local keymapp = vim.keymap.set
+local map = vim.keymap.set
 local opts = {
   noremap = true,
   silent = false,
@@ -105,7 +105,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- toggle diagnostics
 local diagnostics_active = true
-keymapp(n, "<leader>hd", function()
+map(n, "<leader>hd", function()
   diagnostics_active = not diagnostics_active
   if diagnostics_active then
     vim.diagnostic.show()
@@ -120,4 +120,4 @@ end, {
 local function toggle_spell_check()
   vim.opt.spell = not (vim.opt.spell:get())
 end
-keymapp(n, "<A-z>", toggle_spell_check, { desc = "toggle spell check" }, opts)
+map(n, "<A-z>", toggle_spell_check, { desc = "toggle spell check" }, opts)
