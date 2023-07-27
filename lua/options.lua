@@ -23,7 +23,9 @@ vim.diagnostic.config {
   },
 }
 
+-- performance
 g.do_filetype_lua = 1
+opt.syntax = "off"
 
 opt.spelllang = "el,en"
 g.mapleader = " "
@@ -32,7 +34,7 @@ opt.showmode = false
 
 vim.opt.numberwidth = 3
 vim.opt.statuscolumn =
-  "%=%{ &nu? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
+"%=%{ &nu? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
 opt.cursorlineopt = "number"
 opt.cursorcolumn = false
 vim.opt_local.cursorcolumn = false
@@ -88,6 +90,6 @@ end
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 vim.env.PATH = vim.env.PATH
-  .. (is_windows and ";" or ":")
-  .. vim.fn.stdpath "data"
-  .. "/mason/bin"
+    .. (is_windows and ";" or ":")
+    .. vim.fn.stdpath "data"
+    .. "/mason/bin"

@@ -104,6 +104,27 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "make executable",
 })
 
+-- -- check for windows and make maps
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   group = augroup "MakeMaps",
+--   pattern = "*",
+--   callback = function()
+--     if #vim.api.nvim_tabpage_list_wins(0) > 1 then
+--       local window = { "w", "q", "h", "j", "k", "l" }
+--       for _, win in ipairs(window) do
+--         map(
+--           n,
+--           "<C-" .. win .. ">",
+--           "<C-w>" .. win,
+--           { desc = "window " .. win },
+--           opts
+--         )
+--       end
+--     end
+--   end,
+--   desc = "make maps",
+-- })
+
 -- toggle diagnostics
 local diagnostics_active = true
 map(n, "<leader>hd", function()

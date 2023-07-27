@@ -79,6 +79,9 @@ for _, plug in ipairs(tel_plugs) do
   require("telescope").load_extension(plug)
 end
 
+--------------------------------------------------------------------------------
+-- Maps
+--------------------------------------------------------------------------------
 local map = vim.keymap.set
 local opts = {
   noremap = true,
