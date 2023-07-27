@@ -1,8 +1,9 @@
 local alpha = require "alpha"
 local dashboard = require "alpha.themes.dashboard"
 
-vim.api.nvim_set_hl(0, "YellowHLGroup", { fg = "#ffd899" })
+vim.api.nvim_set_hl(0, "PeanutHLGroup", { fg = "#ffd899" })
 vim.api.nvim_set_hl(0, "VioletHLGroup", { fg = "#d4bfff" })
+-- vim.cmd "highlight PeanutHLGroup guifg=#ffd899"
 
 dashboard.section.header.opts = {
   hl = "Comment",

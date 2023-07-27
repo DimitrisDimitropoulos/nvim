@@ -85,7 +85,7 @@ local plugins = {
         dependencies = "rafamadriz/friendly-snippets",
         options = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, options)
-          require("plugins.configs.luasnip").luasnip(opts)
+          require("plugins.configs.luasnip").luasnip(options)
         end,
       },
 
@@ -143,11 +143,13 @@ local plugins = {
       "BufReadPre",
       "BufNewFile",
     },
+    config = function() require "plugins.configs.indent" end,
   },
 
   -- files finder etc
   {
     "nvim-telescope/telescope.nvim",
+    keys = "<leader>f",
     cmd = "Telescope",
     config = function() require "plugins.configs.telescope" end,
     dependencies = {
@@ -211,7 +213,7 @@ local plugins = {
     "echasnovski/mini.nvim",
     version = false,
     event = "InsertEnter",
-    config = function() require "plugins.configs.other" end,
+    config = function() require "plugins.configs.mini" end,
   },
   {
     "folke/trouble.nvim",
@@ -241,6 +243,7 @@ local plugins = {
 
   {
     "NvChad/nvim-colorizer.lua",
+    config = function() require "plugins.configs.colorizer" end,
   },
 
   {
