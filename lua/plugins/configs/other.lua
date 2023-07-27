@@ -30,6 +30,10 @@ for _, hl in ipairs(comms_hl) do
   vim.api.nvim_set_hl(0, hl, { bold = true, underline = true })
 end
 
+vim.fn.sign_define("DiagnosticSignError", { text = "■", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "△", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "○", texthl = "DiagnosticSignInfo" })
+
 -- Mini textobjects
 require("mini.ai").setup {
   custom_textobjects = {

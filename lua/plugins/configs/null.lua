@@ -10,6 +10,9 @@ local diagnostics = null_ls.builtins.diagnostics
 
 local bins = {
 
+  -- Lua
+  format.stylua,
+
   -- Cpp
   diagnostics.cppcheck,
   format.gersemi,
@@ -42,7 +45,7 @@ local bins = {
 --   multiple_files = true,
 -- })
 
-null_ls.setup {
+null_ls.setup({
   debug = true,
   sources = bins,
-}
+})
