@@ -51,9 +51,7 @@ return {
         sn(nil, { t "OK: ", i(1) }),
         sn(nil, { t "", i(1) }),
       }),
-      f(function( --[[ args ]])
-        return os.date "%Y-%m-%d %H:%M:%S"
-      end),
+      f(function( --[[ args ]]) return os.date "%Y-%m-%d %H:%M:%S" end),
     }),
     { description = "Comment" }
   ),

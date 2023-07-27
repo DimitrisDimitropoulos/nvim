@@ -1,8 +1,6 @@
 local line_ok, feline = pcall(require, "feline")
 
-if not line_ok then
-  return
-end
+if not line_ok then return end
 
 local gruvbox = {
   fg = "#ebdbb2",
@@ -272,9 +270,9 @@ local components = {
   },
 }
 
-feline.setup({
+feline.setup {
   components = components,
   theme = gruvbox,
   vi_mode_colors = vi_mode_colors,
   custom_providers = cproviders,
-})
+}
