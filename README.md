@@ -33,7 +33,7 @@ It follows the structure of NvChad
 | ld  | lsp definitions      |
 | sp  | spell suggestions    |
 | fz  | current buffer fuzzy |
-| ts  | treesitter           |
+| ts  | treesitter function  |
 | fa  | hidden               |
 
 ### Other keybinds

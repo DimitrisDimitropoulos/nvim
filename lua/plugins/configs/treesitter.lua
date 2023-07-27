@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "lua",
     "vim",
@@ -43,4 +43,4 @@ require("nvim-treesitter.configs").setup({
       },
     },
   },
-})
+}

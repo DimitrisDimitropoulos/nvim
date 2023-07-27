@@ -78,3 +78,68 @@ local tel_plugs = {
 for _, plug in ipairs(tel_plugs) do
   require("telescope").load_extension(plug)
 end
+
+local map = vim.keymap.set
+local opts = {
+  noremap = true,
+  silent = false,
+}
+local n = "n"
+
+local telescope_mappings = {
+  { key = "ff", cmd = "fd",              desc = "files" },
+  { key = "fr", cmd = "oldfiles",        desc = "old files" },
+  { key = "f;", cmd = "commands",        desc = "commands" },
+  { key = "lg", cmd = "live_grep",       desc = "live grep" },
+  { key = "fs", cmd = "grep_string",     desc = "string mark" },
+  { key = "fb", cmd = "buffers",         desc = "buffers" },
+  { key = "fh", cmd = "help_tags",       desc = "help tags" },
+  { key = "fm", cmd = "marks",           desc = "marks" },
+  { key = "fk", cmd = "keymaps",         desc = "keymaps" },
+  { key = "re", cmd = "registers",       desc = "registers" },
+  { key = "fd", cmd = "diagnostics",     desc = "diagnostics" },
+  { key = "ch", cmd = "command_history", desc = "command history" },
+  { key = "ld", cmd = "lsp_definitions", desc = "lsp definitions" },
+  { key = "sp", cmd = "spell_suggest",   desc = "spell suggestions" },
+  {
+    key = "fz",
+    cmd = "current_buffer_fuzzy_find",
+    desc = "current buffer fuzzy",
+  },
+}
+for _, mapping in ipairs(telescope_mappings) do
+  map(
+    n,
+    "<leader>" .. mapping.key,
+    function() require("telescope.builtin")[mapping.cmd]() end,
+    { desc = "find " .. mapping.desc },
+    opts
+  )
+end
+
+map(
+  n,
+  "<leader>ts",
+  function()
+    require("telescope.builtin").treesitter {
+      default_text = "function",
+      initial_mode = "normal",
+    }
+  end,
+  { desc = "find treesitter" },
+  opts
+)
+map(
+  n,
+  "<leader>fa",
+  function()
+    require("telescope.builtin").fd {
+      hidden = true,
+      follow = true,
+      no_ignore = true,
+      file_ignore_patterns = { ".git" },
+    }
+  end,
+  { desc = "find files" },
+  opts
+)

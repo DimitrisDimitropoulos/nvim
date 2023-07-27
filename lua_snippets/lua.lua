@@ -24,10 +24,13 @@ return {
       name = "pcall require module",
       dscr = "pcall require module auto variable name",
     },
-    fmt('local {1}_ok, {1} = pcall(require, "{}")\nif not {1}_ok then return end', {
-      l(l._1:match("[^.]*$"):gsub("[^%a]+", "_"), 1),
-      i(1, "module"),
-    }),
+    fmt(
+      'local {1}_ok, {1} = pcall(require, "{}")\nif not {1}_ok then return end',
+      {
+        l(l._1:match("[^.]*$"):gsub("[^%a]+", "_"), 1),
+        i(1, "module"),
+      }
+    ),
     { descrition = "pcall module" }
   ),
 }

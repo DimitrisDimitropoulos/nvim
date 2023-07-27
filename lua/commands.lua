@@ -88,9 +88,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     "*json",
     "*yaml",
   },
-  callback = function()
-    vim.lsp.buf.format { async = true }
-  end,
+  callback = function() vim.lsp.buf.format { async = true } end,
   desc = "format on save",
 })
 
@@ -102,9 +100,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     "*.bash",
     "*.zsh",
   },
-  callback = function()
-    vim.fn.system("chmod +x " .. vim.fn.expand "%")
-  end,
+  callback = function() vim.fn.system("chmod +x " .. vim.fn.expand "%") end,
   desc = "make executable",
 })
 
@@ -121,6 +117,7 @@ end, {
   desc = "toggle diagnostics",
 }, opts)
 
+-- stylua: ignore
 -- Toggle spell check
 local function toggle_spell_check()
   vim.opt.spell = not (vim.opt.spell:get())

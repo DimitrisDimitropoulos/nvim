@@ -4,35 +4,84 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-    local keymapp = vim.keymap.set
+    local map = vim.keymap.set
     local lsp = vim.lsp.buf
     local opts = { buffer = ev.buf, silent = false }
     local n = "n"
 
-    keymapp(n, "<A-f>", lsp.format, { desc = "format code" }, opts)
-    keymapp(n, "<S-k>", lsp.hover, { desc = "hover" }, opts)
-    keymapp(n, "<leader>qf", lsp.code_action, { desc = "code actions" }, { silent = true })
-    keymapp(n, "<space>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, { desc = "list workspace folders" }, opts)
-    keymapp(n, "<A-f>", function()
-      vim.lsp.buf.format { async = true }
-    end, { desc = "format code" }, opts)
+    map(n, "<A-f>", lsp.format, { desc = "format code" }, opts)
+    map(n, "<S-k>", lsp.hover, { desc = "hover" }, opts)
+    map(
+      n,
+      "<leader>qf",
+      lsp.code_action,
+      { desc = "code actions" },
+      { silent = true }
+    )
+    map(
+      n,
+      "<space>wl",
+      function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+      { desc = "list workspace folders" },
+      opts
+    )
+    map(
+      n,
+      "<A-f>",
+      function() vim.lsp.buf.format { async = true } end,
+      { desc = "format code" },
+      opts
+    )
 
     local lsp_mappings = {
-      { key = "gd", cmd = "definition",              desc = "go to definition" },
-      { key = "gD", cmd = "declaration",             desc = "go to declaration" },
-      { key = "gi", cmd = "implementation",          desc = "go to implementation" },
-      { key = "ln", cmd = "rename",                  desc = "rename" },
-      { key = "kk", cmd = "signature_help",          desc = "signature" },
-      { key = "gr", cmd = "references",              desc = "references" },
-      { key = "gh", cmd = "type_definition",         desc = "type definition" },
-      { key = "wa", cmd = "add_workspace_folder",    desc = "add workspace folder" },
-      { key = "wr", cmd = "remove_workspace_folder", desc = "remove workspace folder" },
+      {
+        key = "gd",
+        cmd = "definition",
+        desc = "go to definition",
+      },
+      {
+        key = "gD",
+        cmd = "declaration",
+        desc = "go to declaration",
+      },
+      {
+        key = "gi",
+        cmd = "implementation",
+        desc = "go to implementation",
+      },
+      { key = "ln", cmd = "rename",          desc = "rename" },
+      { key = "kk", cmd = "signature_help",  desc = "signature" },
+      { key = "gr", cmd = "references",      desc = "references" },
+      { key = "gh", cmd = "type_definition", desc = "type definition" },
+      {
+        key = "wa",
+        cmd = "add_workspace_folder",
+        desc = "add workspace folder",
+      },
+      {
+        key = "wr",
+        cmd = "remove_workspace_folder",
+        desc = "remove workspace folder",
+      },
     }
 
     for _, mapping in ipairs(lsp_mappings) do
-      keymapp(n, "<leader>" .. mapping.key, lsp[mapping.cmd], { desc = mapping.desc }, opts)
+      map(
+        n,
+        "<leader>" .. mapping.key,
+        lsp[mapping.cmd],
+        { desc = mapping.desc },
+        opts
+      )
+    end
+
+    local diagno = {
+      { key = "<leader>df", cmd = "open_float", descr = "diagnostics float" },
+      { key = "[d",         cmd = "goto_prev",  descr = "diagnostics prev" },
+      { key = "]d",         cmd = "goto_next",  descr = "diagnostics next" },
+    }
+    for _, diag in ipairs(diagno) do
+      map(n, diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr }, opts)
     end
   end,
 })
