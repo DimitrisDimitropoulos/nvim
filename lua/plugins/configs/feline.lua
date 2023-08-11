@@ -1,25 +1,25 @@
-local line_ok, feline = pcall(require, "feline")
+local feline = require "feline"
+-- local ui_utils = require "utils.ui_utils"
 
-if not line_ok then return end
-
-local gruvbox = {
-  fg = "#ebdbb2",
+local feline_theme = {
+  -- fg = "#ebdbb2",
   bg = "#3c3836",
-  black = "#3c3836",
-  -- skyblue = "#83a598",
-  cyan = "#3c3836",
-  green = "#b8bb26",
-  oceanblue = "#3c3836",
-  blue = "#3c3836",
-  darkblue = "#3c3836",
-  magenta = "#d3869b",
-  orange = "#d65d0e",
-  red = "#fb4934",
-  violet = "#b16286",
-  white = "#ebdbb2",
-  yellow = "#fabd2f",
-  purple = "#c678dd",
+  -- bg = tostring(ui_utils.get_hl("Visual").background),
   peanut = "#f6d5a4",
+  yellow = "#fabd2f",
+  red = "#fb4934",
+  -- black = "#3c3836",
+  -- -- skyblue = "#83a598",
+  -- cyan = "#3c3836",
+  -- green = "#b8bb26",
+  -- oceanblue = "#3c3836",
+  -- blue = "#3c3836",
+  -- -- darkblue = "#3c3836",
+  -- magenta = "#d3869b",
+  -- orange = "#d65d0e",
+  -- violet = "#b16286",
+  -- white = "#ebdbb2",
+  -- purple = "#c678dd",
 }
 
 local vi_mode_colors = {
@@ -28,18 +28,38 @@ local vi_mode_colors = {
   INSERT = "yellow",
   VISUAL = "purple",
   LINES = "orange",
-  BLOCK = "dark_red",
+  BLOCK = "magenta",
   REPLACE = "red",
   COMMAND = "green",
 }
 -- code from: https://github.com/ttys3/nvim-config/blob/b8a55ba2656722a21420b5bebfdaf162d4d4f677/lua/config/feline.lua#L8
 local lsp_progress = function()
-  local lsp = vim.lsp.util.get_progress_messages()[1]
-  if lsp then
-    local name = lsp.name or ""
-    local msg = lsp.message or ""
-    local title = lsp.title or ""
-    return string.format(" %%<%s: %s %s ", name, title, msg)
+  local lsp
+  local version = vim.version()
+  if version.minor == 9 then
+    lsp = vim.lsp.util.get_progress_messages()[1]
+    if lsp then
+      local name = lsp.name or ""
+      local msg = lsp.message or ""
+      local title = lsp.title or ""
+      return string.format(" %%<%s %s %s ", name, title, msg)
+    end
+  end
+  -- NOTE: nightly support, @2023-07-28 18:12:44
+  if version.minor == 10 then
+    -- return (vim.inspect(vim.lsp.status())):gsub("[^%w%s]+", "")
+    -- NOTE: the following justs ensures that the string is
+    -- short by getting rid of multiple words, @2023-07-28 18:11:06
+    local str = (vim.inspect(vim.lsp.status())):gsub("[^%w%s]+", "")
+    local words = {}
+    for word in str:gmatch "%S+" do
+      words[word] = true
+    end
+    local unique_words = {}
+    for word, _ in pairs(words) do
+      table.insert(unique_words, word)
+    end
+    return table.concat(unique_words, " ")
   end
   return ""
 end
@@ -63,8 +83,8 @@ local c = {
     priority = 10, -- Necessary to appear while truncated
     hl = function()
       return {
-        fg = require("feline.providers.vi_mode").get_mode_color(),
-        bg = "darkblue",
+        bg = require("feline.providers.vi_mode").get_mode_color(),
+        fg = "bg",
         style = "bold",
         name = "NeovimModeHLColor",
       }
@@ -76,7 +96,7 @@ local c = {
     provider = "git_branch",
     hl = {
       fg = "peanut",
-      bg = "darkblue",
+      bg = "bg",
     },
     left_sep = "block",
     right_sep = "block",
@@ -85,7 +105,7 @@ local c = {
     provider = "git_diff_added",
     hl = {
       fg = "green",
-      bg = "darkblue",
+      bg = "bg",
       truncate_hide = true,
     },
     left_sep = "block",
@@ -96,7 +116,7 @@ local c = {
     provider = "git_diff_removed",
     hl = {
       fg = "red",
-      bg = "darkblue",
+      bg = "bg",
     },
     left_sep = "block",
     right_sep = "block",
@@ -106,10 +126,10 @@ local c = {
     provider = "git_diff_changed",
     hl = {
       fg = "fg",
-      bg = "darkblue",
+      bg = "bg",
     },
     left_sep = "block",
-    right_sep = "right_filled",
+    right_sep = "block",
     truncate_hide = true,
   },
   separator = {
@@ -123,6 +143,7 @@ local c = {
       },
     },
     hl = {
+      bg = "bg",
       style = "italic",
     },
     left_sep = " ",
@@ -156,9 +177,9 @@ local c = {
     provider = "lsp_client_names",
     hl = {
       fg = "violet",
-      bg = "darkblue",
+      bg = "bg",
     },
-    left_sep = "left_filled",
+    left_sep = "block",
     right_sep = "block",
     truncate_hide = true,
   },
@@ -172,7 +193,7 @@ local c = {
     },
     hl = {
       fg = "peanut",
-      bg = "darkblue",
+      bg = "bg",
     },
     left_sep = "block",
     right_sep = "block",
@@ -182,7 +203,7 @@ local c = {
     provider = "file_encoding",
     hl = {
       fg = "orange",
-      bg = "darkblue",
+      bg = "bg",
       style = "italic",
     },
     left_sep = "block",
@@ -193,7 +214,7 @@ local c = {
     provider = "position",
     hl = {
       fg = "green",
-      bg = "darkblue",
+      bg = "bg",
       style = "bold",
     },
     left_sep = "block",
@@ -204,7 +225,7 @@ local c = {
     provider = "line_percentage",
     hl = {
       fg = "violet",
-      bg = "darkblue",
+      bg = "bg",
       style = "bold",
     },
     left_sep = "block",
@@ -272,7 +293,7 @@ local components = {
 
 feline.setup {
   components = components,
-  theme = gruvbox,
+  theme = feline_theme,
   vi_mode_colors = vi_mode_colors,
   custom_providers = cproviders,
 }

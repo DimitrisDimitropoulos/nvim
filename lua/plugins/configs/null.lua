@@ -21,8 +21,8 @@ local bins = {
   diagnostics.jsonlint,
 
   -- LaTex
-  diagnostics.chktex,
-  format.latexindent,
+  -- diagnostics.chktex,
+  -- format.latexindent,
 
   --Shell
   diagnostics.shellcheck,

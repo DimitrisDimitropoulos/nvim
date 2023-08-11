@@ -87,6 +87,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     "*jl",
     "*json",
     "*yaml",
+    "*rs",
   },
   callback = function() vim.lsp.buf.format { async = true } end,
   desc = "format on save",
