@@ -54,13 +54,13 @@ vim.keymap.set(
 
 -- map up and down to gj and gk
 vim.keymap.set(
-  "n",
+  { "n", "x" },
   "<Up>",
   function() return (vim.v.count == 0) and "gk" or "k" end,
   { expr = true, desc = "up", silent = true }
 )
 vim.keymap.set(
-  "n",
+  { "n", "x" },
   "<Down>",
   function() return (vim.v.count == 0) and "gj" or "j" end,
   { expr = true, desc = "down", silent = true }

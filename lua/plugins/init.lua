@@ -6,8 +6,43 @@ local plugins = {
   -- colorscheme
   {
     "savq/melange-nvim",
+    lazy = false,
     name = "melange",
     priority = 1000,
+    -- config = function() vim.cmd.colorscheme "melange" end,
+  },
+
+  {
+    "rebelot/kanagawa.nvim",
+    enabled = false,
+    lazy = false,
+    name = "kanagawa",
+    priority = 1000,
+    -- config = function() vim.cmd.colorscheme "kanagawa-wave" end,
+  },
+
+  {
+    "catppuccin/nvim",
+    lazy = false,
+    name = "catppuccin",
+    priority = 1000,
+    config = function() vim.cmd.colorscheme "catppuccin" end,
+  },
+
+  {
+    "nyoom-engineering/oxocarbon.nvim",
+    enabled = false,
+    lazy = false,
+    name = "oxocarbon",
+    priority = 1000,
+    -- config = function() vim.cmd.colorscheme "oxocarbon" end,
+  },
+
+  -- Statusline
+  {
+    "freddiehaddad/feline.nvim",
+    event = "VeryLazy",
+    config = function() require "plugins.configs.feline" end,
   },
 
   -- file tree
@@ -39,21 +74,6 @@ local plugins = {
     event = { "BufReadPre", "BufNewFile" },
     config = function() require "plugins.configs.treesitter" end,
   },
-
-  -- Statusline
-  {
-    "freddiehaddad/feline.nvim",
-    lazy = false,
-    config = function() require "plugins.configs.feline" end,
-  },
-
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   lazy = false,
-  --   config = function()
-  --     require("plugins.configs.lualine")
-  --   end,
-  -- },
 
   -- CMP config and dependencies
   {
@@ -226,7 +246,7 @@ local plugins = {
   },
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", '"', "'", "`", "c", "v" },
+    keys = { "<leader>", '"', "'", "`", "c", "v", "Z" },
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -237,7 +257,19 @@ local plugins = {
   {
     "NvChad/nvim-colorizer.lua",
     ft = { "lua", "css", "scss" },
-    config = function() require "plugins.configs.colorizer" end,
+    config = function()
+      require("colorizer").setup {
+        filetypes = {
+          "css",
+          "javascript",
+          "lua",
+          "ini",
+          html = {
+            mode = "foreground",
+          },
+        },
+      }
+    end,
   },
 
   {

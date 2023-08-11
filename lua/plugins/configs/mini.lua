@@ -1,5 +1,6 @@
 -- Mini textobjects
-require("mini.ai").setup {
+local ai = require "mini.ai"
+ai.setup {
   custom_textobjects = {
     -- Whole buffer textobject
     M = function(ai_type)
