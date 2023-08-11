@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { buffer = ev.buf, silent = false }
     local n = "n"
 
-    map(n, "<A-f>", lsp.format, { desc = "format code" }, opts)
     map(n, "<S-k>", lsp.hover, { desc = "hover" }, opts)
     map(
       n,
@@ -75,6 +74,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
       )
     end
 
+    -- NOTE: here follows the diagnostics config, @2023-08-11 14:35:14
+    local signs = {
+      { hl = "DiagnosticSignError", txt = "■" },
+      { hl = "DiagnosticSignWarn", txt = "△" },
+      { hl = "DiagnosticSignInfo", txt = "○" },
+      { hl = "DiagnosticSignHint", txt = "󰨔" },
+    }
+    for _, sign in ipairs(signs) do
+      vim.fn.sign_define(sign.hl, { text = sign.txt, texthl = sign.hl })
+    end
+    vim.diagnostic.config {
+      underline = true,
+      virtual_text = true,
+      signs = true,
+      update_in_insert = false,
+      float = {
+        source = "always",
+        border = "rounded",
+        show_header = true,
+      },
+    }
+
     local diagno = {
       { key = "<leader>df", cmd = "open_float", descr = "diagnostics float" },
       { key = "[d",         cmd = "goto_prev",  descr = "diagnostics prev" },
@@ -84,6 +105,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
       map(n, diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr }, opts)
     end
   end,
+
+  -- NOTE: pseudo semantic highlight for the melange colorscheme, @2023-08-11 14:38:33
+  vim.api.nvim_set_hl(
+    0,
+    "@lsp.type.parameter",
+    { italic = true, fg = "#d4bfff" }
+  ),
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -110,7 +138,6 @@ local lspconfig = require "lspconfig"
 
 -- setup multiple servers with same default options
 local servers = {
-  "texlab",
   -- "ltex",
   "julials",
   "pyright",
@@ -124,14 +151,52 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- NOTE: with the following config it can replace null-ls and vimtex, @2023-08-11 15:29:27
+lspconfig.texlab.setup {
+  capabilities = capabilities,
+  settings = {
+    texlab = {
+      build = {
+        -- onSave = true,
+        args = {
+          "-pdf",
+          -- comment the following if want to use pdfLaTeX
+          "-lualatex",
+          "-interaction=nonstopmode",
+          "-synctex=1",
+          "%f",
+        },
+      },
+      forwardSearch = {
+        executable = "zathura",
+        args = { "--synctex-forward", "%l:1:%f", "%p" },
+      },
+      chktex = {
+        onOpenAndSave = true,
+        onEdit = true,
+      },
+      diagnosticsDelay = 200,
+      latexFormatter = "latexindent",
+      latexindent = {
+        ["local"] = nil, -- local is a reserved keyword
+        modifyLineBreaks = false,
+      },
+      bibtexFormatter = "latexindent",
+      formatterLineLength = 80,
+    },
+  },
+}
+
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      hint = { enable = true }, -- only for nvim 10.0
       diagnostics = {
         globals = { "vim" },
+        disable = { "different-requires" },
       },
     },
   },

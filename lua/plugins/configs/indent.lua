@@ -18,6 +18,16 @@ require("indent_blankline").setup {
   show_current_context_start = true,
   indent_blankline_use_treesitter = true,
 }
+
+local ui_utils = require "utils.ui_utils"
+-- Set the hightlight group
+vim.api.nvim_set_hl(
+  0,
+  "IndentBlanklineContextStart",
+  -- { bg = "#3D3834", bold = true }
+  { bg = tostring(ui_utils.get_hl("Visual").background), bold = true }
+)
+
 --
 -- local function get_hl(name)
 --   local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
