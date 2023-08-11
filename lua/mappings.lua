@@ -1,9 +1,4 @@
 local map = vim.keymap.set
-local opts = {
-  noremap = true,
-  silent = false,
-}
-local n = "n"
 
 -- Save mappings there are problems
 vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
@@ -30,16 +25,20 @@ local commands = {
 }
 for _, command in ipairs(commands) do
   map(
-    n,
+    "n",
     command.key,
     "<cmd> " .. command.cmd .. " <CR>",
-    { desc = command.descr },
-    opts
+    { desc = command.descr, silent = false, noremap = true }
   )
 end
 
 -- Window management
 local window = { "w", "q", "h", "j", "k", "l" }
 for _, win in ipairs(window) do
-  map(n, "<C-" .. win .. ">", "<C-w>" .. win, { desc = "window " .. win }, opts)
+  map(
+    "n",
+    "<C-" .. win .. ">",
+    "<C-w>" .. win,
+    { desc = "window " .. win, silent = false, noremap = true }
+  )
 end

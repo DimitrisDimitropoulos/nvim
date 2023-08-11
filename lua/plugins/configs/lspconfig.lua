@@ -160,7 +160,6 @@ lspconfig.texlab.setup {
         -- onSave = true,
         args = {
           "-pdf",
-          -- comment the following if want to use pdfLaTeX
           "-lualatex",
           "-interaction=nonstopmode",
           "-synctex=1",

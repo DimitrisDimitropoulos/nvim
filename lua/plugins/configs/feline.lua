@@ -1,25 +1,12 @@
 local feline = require "feline"
--- local ui_utils = require "utils.ui_utils"
+local ui_utils = require "utils.ui_utils"
 
 local feline_theme = {
-  -- fg = "#ebdbb2",
-  bg = "#3c3836",
-  -- bg = tostring(ui_utils.get_hl("Visual").background),
+  bg = tostring(ui_utils.get_hl("Visual").background),
   peanut = "#f6d5a4",
   yellow = "#fabd2f",
   red = "#fb4934",
-  -- black = "#3c3836",
-  -- -- skyblue = "#83a598",
-  -- cyan = "#3c3836",
-  -- green = "#b8bb26",
-  -- oceanblue = "#3c3836",
-  -- blue = "#3c3836",
-  -- -- darkblue = "#3c3836",
-  -- magenta = "#d3869b",
-  -- orange = "#d65d0e",
-  -- violet = "#b16286",
-  -- white = "#ebdbb2",
-  -- purple = "#c678dd",
+  pink = "#d3869b",
 }
 
 local vi_mode_colors = {
@@ -27,11 +14,12 @@ local vi_mode_colors = {
   OP = "green",
   INSERT = "yellow",
   VISUAL = "purple",
-  LINES = "orange",
+  LINES = "pink",
   BLOCK = "magenta",
   REPLACE = "red",
   COMMAND = "green",
 }
+
 -- code from: https://github.com/ttys3/nvim-config/blob/b8a55ba2656722a21420b5bebfdaf162d4d4f677/lua/config/feline.lua#L8
 local lsp_progress = function()
   local lsp
@@ -50,7 +38,7 @@ local lsp_progress = function()
     -- return (vim.inspect(vim.lsp.status())):gsub("[^%w%s]+", "")
     -- NOTE: the following justs ensures that the string is
     -- short by getting rid of multiple words, @2023-07-28 18:11:06
-    local str = (vim.inspect(vim.lsp.status())):gsub("[^%w%s]+", "")
+    local str = (vim.inspect(vim.lsp.status())):gsub("[^%w%s%/%.]+", "")
     local words = {}
     for word in str:gmatch "%S+" do
       words[word] = true
@@ -77,7 +65,6 @@ local c = {
       name = "vi_mode",
       opts = {
         show_mode_name = true,
-        -- padding = "center", -- Uncomment for extra padding.
       },
     },
     priority = 10, -- Necessary to appear while truncated
@@ -96,7 +83,7 @@ local c = {
     provider = "git_branch",
     hl = {
       fg = "peanut",
-      bg = "bg",
+      -- bg = "black",
     },
     left_sep = "block",
     right_sep = "block",
@@ -146,8 +133,8 @@ local c = {
       bg = "bg",
       style = "italic",
     },
-    left_sep = " ",
-    right_sep = " ",
+    left_sep = "block",
+    right_sep = "block",
   },
   diagnostic_errors = {
     provider = "diagnostic_errors",
@@ -188,7 +175,7 @@ local c = {
       name = "file_type",
       opts = {
         filetype_icon = true,
-        case = "titlecase",
+        case = "lowercase",
       },
     },
     hl = {
@@ -213,8 +200,9 @@ local c = {
   position = {
     provider = "position",
     hl = {
-      fg = "green",
-      bg = "bg",
+      bg = "peanut",
+      fg = "black",
+      -- fg = "green",
       style = "bold",
     },
     left_sep = "block",
@@ -237,8 +225,20 @@ local c = {
     hl = {
       fg = "yellow",
       style = "bold",
+      truncate_hide = true,
     },
   },
+  search_count = {
+    provider = "search_count",
+    hl = {
+      fg = "green",
+      style = "bold",
+    },
+    left_sep = "block",
+    right_sep = "block",
+    truncate_hide = true,
+  },
+
   lsp_progress = {
     provider = "lsp_progress",
     hl = {

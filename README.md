@@ -51,4 +51,4 @@ It follows the structure of NvChad
 
 ## TODO
 
-[] Wait for a solution to null-ls archiving
+[] Wait for a solution to null-ls archiving, replacing format with guard-nvim and linting with nvim-lint
