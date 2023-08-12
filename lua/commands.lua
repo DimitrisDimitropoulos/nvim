@@ -6,7 +6,12 @@ local function augroup(name) return vim.api.nvim_create_augroup(name, { clear = 
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup "YankHighlight",
-  command = "lua vim.highlight.on_yank()",
+  callback = function()
+    vim.highlight.on_yank {
+      timeout = 250,
+      higroup = "Visual",
+    }
+  end,
   desc = "highlight on yank",
 })
 
@@ -45,7 +50,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup "wrap_spell",
+  group = augroup "spell",
   pattern = {
     "gitcommit",
     "markdown",
@@ -53,7 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "text",
   },
   callback = function() vim.opt_local.spell = true end,
-  desc = "wrap and spell",
+  desc = "spell on specific filetypes",
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
