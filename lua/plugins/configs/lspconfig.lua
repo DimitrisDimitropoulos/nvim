@@ -7,71 +7,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local map = vim.keymap.set
     local lsp = vim.lsp.buf
     local opts = { buffer = ev.buf, silent = false }
-    local n = "n"
 
-    map(n, "<S-k>", lsp.hover, { desc = "hover" }, opts)
+    map("n", "<S-k>", lsp.hover, { desc = "hover" }, opts)
+    map("n", "<leader>qf", lsp.code_action, { desc = "code actions", silent = true })
+    map("n", "<A-f>", function() lsp.format { async = true } end, { desc = "format code" }, opts)
     map(
-      n,
-      "<leader>qf",
-      lsp.code_action,
-      { desc = "code actions" },
-      { silent = true }
-    )
-    map(
-      n,
+      "n",
       "<space>wl",
-      function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+      function() print(vim.inspect(lsp.list_workspace_folders())) end,
       { desc = "list workspace folders" },
-      opts
-    )
-    map(
-      n,
-      "<A-f>",
-      function() vim.lsp.buf.format { async = true } end,
-      { desc = "format code" },
       opts
     )
 
     local lsp_mappings = {
-      {
-        key = "gd",
-        cmd = "definition",
-        desc = "go to definition",
-      },
-      {
-        key = "gD",
-        cmd = "declaration",
-        desc = "go to declaration",
-      },
-      {
-        key = "gi",
-        cmd = "implementation",
-        desc = "go to implementation",
-      },
-      { key = "ln", cmd = "rename",          desc = "rename" },
-      { key = "kk", cmd = "signature_help",  desc = "signature" },
-      { key = "gr", cmd = "references",      desc = "references" },
-      { key = "gh", cmd = "type_definition", desc = "type definition" },
-      {
-        key = "wa",
-        cmd = "add_workspace_folder",
-        desc = "add workspace folder",
-      },
-      {
-        key = "wr",
-        cmd = "remove_workspace_folder",
-        desc = "remove workspace folder",
-      },
+      { key = "gd", cmd = "definition",              desc = "goto def" },
+      { key = "gD", cmd = "declaration",             desc = "goto dec" },
+      { key = "gi", cmd = "implementation",          desc = "goto impl" },
+      { key = "ln", cmd = "rename",                  desc = "rename" },
+      { key = "kk", cmd = "signature_help",          desc = "signature" },
+      { key = "gr", cmd = "references",              desc = "references" },
+      { key = "gh", cmd = "type_definition",         desc = "type definition" },
+      { key = "wa", cmd = "add_workspace_folder",    desc = "add work folder" },
+      { key = "wr", cmd = "remove_workspace_folder", desc = "rm work folder" },
     }
-
     for _, mapping in ipairs(lsp_mappings) do
-      map(
-        n,
-        "<leader>" .. mapping.key,
-        lsp[mapping.cmd],
-        { desc = mapping.desc },
-        opts
-      )
+      map("n", "<leader>" .. mapping.key, lsp[mapping.cmd], { desc = mapping.desc }, opts)
     end
 
     -- NOTE: here follows the diagnostics config, @2023-08-11 14:35:14
@@ -84,9 +44,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     for _, sign in ipairs(signs) do
       vim.fn.sign_define(sign.hl, { text = sign.txt, texthl = sign.hl })
     end
+
     vim.diagnostic.config {
       underline = true,
-      virtual_text = true,
+      virtual_text = {
+        prefix = "󰋙",
+        -- prefix = "󰄛",
+      },
       signs = true,
       update_in_insert = false,
       float = {
@@ -102,16 +66,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { key = "]d",         cmd = "goto_next",  descr = "diagnostics next" },
     }
     for _, diag in ipairs(diagno) do
-      map(n, diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr }, opts)
+      map("n", diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr }, opts)
     end
   end,
-
-  -- NOTE: pseudo semantic highlight for the melange colorscheme, @2023-08-11 14:38:33
-  vim.api.nvim_set_hl(
-    0,
-    "@lsp.type.parameter",
-    { italic = true, fg = "#d4bfff" }
-  ),
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -144,6 +101,8 @@ local servers = {
   "bashls",
   "neocmake",
   "clangd",
+  "ruff_lsp",
+  "jsonls",
 }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -186,27 +145,66 @@ lspconfig.texlab.setup {
   },
 }
 
-lspconfig.lua_ls.setup {
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      hint = { enable = true }, -- only for nvim 10.0
-      diagnostics = {
-        globals = { "vim" },
-        disable = { "different-requires" },
-      },
-    },
-  },
-}
-
 lspconfig.rust_analyzer.setup {
   capabilities = capabilities,
   settings = {
     ["rust-analyzer"] = {
       checkOnSave = {
         command = "clippy",
+      },
+    },
+  },
+}
+
+local function on_attach(client) print("Attached to " .. client.name) end
+local efmls = require "efmls-configs"
+efmls.init {
+  on_attach = on_attach,
+  init_options = {
+    documentFormatting = true,
+  },
+}
+local black = require "efmls-configs.formatters.black"
+local cppcheck = require "efmls-configs.linters.cppcheck"
+local prettier = require "efmls-configs.formatters.prettier"
+local rustfmt = require "efmls-configs.formatters.rustfmt"
+local shellcheck = require "efmls-configs.linters.shellcheck"
+local stylua = require "efmls-configs.formatters.stylua"
+local gersemi = { formatCommand = "gersemi -", formatStdin = true }
+local fourmolu = { formatCommand = "fourmolu --stdin-input-file -", formatStdin = true }
+local beautysh = { formatCommand = "beautysh -", formatStdin = true }
+efmls.setup {
+  markdown = { formatter = prettier },
+  json = { formatter = prettier },
+  css = { formatter = prettier },
+  yaml = { formatter = prettier },
+  lua = { formatter = stylua },
+  sh = { linter = shellcheck, formatter = beautysh },
+  bash = { linter = shellcheck, formatter = beautysh },
+  zsh = { formatter = beautysh },
+  rust = { formatter = rustfmt },
+  python = { formatter = black },
+  cpp = { linter = cppcheck },
+  cmake = { formatter = gersemi },
+  haskell = { formatter = fourmolu },
+}
+
+lspconfig.lua_ls.setup {
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+      hint = { enable = true }, -- only for nvim 10.0
+      diagnostics = {
+        globals = { "vim" },
+        -- disable = { "different-requires" },
+      },
+      format = {
+        enable = true,
       },
     },
   },

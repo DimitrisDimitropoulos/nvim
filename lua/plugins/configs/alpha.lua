@@ -45,11 +45,7 @@ dashboard.section.buttons.val = {
   dashboard.button("m", "  > Marks  ", ":Telescope marks<CR>"),
   dashboard.button("L", "󰒲  > Lazy ", ":Lazy<CR>"),
   dashboard.button("M", "󱌢  > Mason ", ":Mason<CR>"),
-  dashboard.button(
-    "s",
-    "  > Settings",
-    ":e $MYVIMRC | :cd %:p:h | wincmd k | pwd | Telescope find_files<CR>"
-  ),
+  dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h | wincmd k | pwd | Telescope find_files<CR>"),
   dashboard.button("q", "󰩈  > Quit NVIM", ":qa<CR>"),
 }
 
@@ -62,12 +58,7 @@ local function footer()
   local stats = require("lazy").stats()
   local datetime = os.date "  %m-%d-%Y   %H:%M:%S"
   local version = vim.version()
-  local nvim_version_info = "   v"
-      .. version.major
-      .. "."
-      .. version.minor
-      .. "."
-      .. version.patch
+  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
   return datetime .. "  ⚡Plugins " .. stats.count .. nvim_version_info
 end
 

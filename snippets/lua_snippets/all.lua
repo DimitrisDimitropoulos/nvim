@@ -43,8 +43,10 @@ return {
 
   s("time", p(vim.fn.strftime, "%H:%M:%S")),
   s("shrug", { t "¯\\_(ツ)_/¯" }),
-  s("angry", { t "(╯°□°）╯" }),
+  s("lenny", { t "( ͡° ͜ʖ ͡°)" }),
+  s("tableflip", { t "(╯°□°）╯︵ ┻━┻" }),
+  s("tableback", { t "┬─┬ ノ( ゜-゜ノ)" }),
   s("happy", { t "ヽ(´▽`)/" }),
-  s("sad", { t "(－‸ლ)" }),
+  s("sad", { t "(╥_╥)" }),
   s("confused", { t "(｡･ω･｡)" }),
 }

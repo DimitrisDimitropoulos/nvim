@@ -1,37 +1,25 @@
 -- keymap wrapper
 local map = vim.keymap.set
-local opts = {
-  noremap = true,
-  silent = false,
-}
-local n = "n"
 
 -- augroup wrapper
-local function augroup(name)
-  return vim.api.nvim_create_augroup(name, { clear = true })
-end
+local function augroup(name) return vim.api.nvim_create_augroup(name, { clear = true }) end
 
--- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup "YankHighlight",
   command = "lua vim.highlight.on_yank()",
   desc = "highlight on yank",
 })
 
--- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup "last_loc",
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
     local lcount = vim.api.nvim_buf_line_count(0)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
+    if mark[1] > 0 and mark[1] <= lcount then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
   end,
   desc = "last loc",
 })
 
--- close some filetypes with <q> From LazyVim
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup "close_with_q",
   pattern = {
@@ -51,17 +39,11 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set(
-      "n",
-      "q",
-      "<cmd>close<cr>",
-      { buffer = event.buf, silent = true }
-    )
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
   desc = "close with q",
 })
 
--- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup "wrap_spell",
   pattern = {
@@ -70,14 +52,10 @@ vim.api.nvim_create_autocmd("FileType", {
     "tex",
     "text",
   },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
+  callback = function() vim.opt_local.spell = true end,
   desc = "wrap and spell",
 })
 
--- Autoformatting on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup "AutoFormat",
   pattern = {
@@ -88,12 +66,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     "*json",
     "*yaml",
     "*rs",
+    "*sh",
   },
-  callback = function() vim.lsp.buf.format { async = true } end,
+  -- callback = function() vim.lsp.buf.format { async = true } end,
+  callback = function() vim.lsp.buf.format() end,
   desc = "format on save",
 })
 
--- Make scripts executable
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup "MakeExecutable",
   pattern = {
@@ -126,9 +105,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 --   desc = "make maps",
 -- })
 
--- toggle diagnostics
 local diagnostics_active = true
-map(n, "<leader>hd", function()
+map("n", "<leader>hd", function()
   diagnostics_active = not diagnostics_active
   if diagnostics_active then
     vim.diagnostic.show()
@@ -137,11 +115,9 @@ map(n, "<leader>hd", function()
   end
 end, {
   desc = "toggle diagnostics",
-}, opts)
+  silent = false,
+  noremap = true,
+})
 
--- stylua: ignore
--- Toggle spell check
-local function toggle_spell_check()
-  vim.opt.spell = not (vim.opt.spell:get())
-end
-map(n, "<A-z>", toggle_spell_check, { desc = "toggle spell check" }, opts)
+local function toggle_spell_check() vim.opt.spell = not (vim.opt.spell:get()) end
+map("n", "<A-z>", toggle_spell_check, { desc = "toggle spell check", silent = false, noremap = true })
