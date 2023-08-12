@@ -1,4 +1,7 @@
-require("telescope").setup {
+local telescope_ok, telescope = pcall(require, "telescope")
+if not telescope_ok then return end
+
+telescope.setup {
   defaults = {
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
@@ -17,8 +20,8 @@ require("telescope").setup {
       vertical = {
         mirror = false,
       },
-      width = 0.87,
-      height = 0.80,
+      width = 0.97,
+      height = 0.90,
       preview_cutoff = 120,
     },
     preview = {
@@ -90,25 +93,21 @@ local opts = {
 local n = "n"
 
 local telescope_mappings = {
-  { key = "ff", cmd = "fd",              desc = "files" },
-  { key = "fr", cmd = "oldfiles",        desc = "old files" },
-  { key = "f;", cmd = "commands",        desc = "commands" },
-  { key = "lg", cmd = "live_grep",       desc = "live grep" },
-  { key = "fs", cmd = "grep_string",     desc = "string mark" },
-  { key = "fb", cmd = "buffers",         desc = "buffers" },
-  { key = "fh", cmd = "help_tags",       desc = "help tags" },
-  { key = "fm", cmd = "marks",           desc = "marks" },
-  { key = "fk", cmd = "keymaps",         desc = "keymaps" },
-  { key = "re", cmd = "registers",       desc = "registers" },
-  { key = "fd", cmd = "diagnostics",     desc = "diagnostics" },
-  { key = "ch", cmd = "command_history", desc = "command history" },
-  { key = "ld", cmd = "lsp_definitions", desc = "lsp definitions" },
-  { key = "sp", cmd = "spell_suggest",   desc = "spell suggestions" },
-  {
-    key = "fz",
-    cmd = "current_buffer_fuzzy_find",
-    desc = "current buffer fuzzy",
-  },
+  { key = "ff", cmd = "fd",                        desc = "files" },
+  { key = "fr", cmd = "oldfiles",                  desc = "old files" },
+  { key = "f;", cmd = "commands",                  desc = "commands" },
+  { key = "lg", cmd = "live_grep",                 desc = "live grep" },
+  { key = "fs", cmd = "grep_string",               desc = "string mark" },
+  { key = "fb", cmd = "buffers",                   desc = "buffers" },
+  { key = "fh", cmd = "help_tags",                 desc = "help tags" },
+  { key = "fm", cmd = "marks",                     desc = "marks" },
+  { key = "fk", cmd = "keymaps",                   desc = "keymaps" },
+  { key = "re", cmd = "registers",                 desc = "registers" },
+  { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
+  { key = "ch", cmd = "command_history",           desc = "command history" },
+  { key = "ld", cmd = "lsp_definitions",           desc = "lsp definitions" },
+  { key = "sp", cmd = "spell_suggest",             desc = "spell suggest" },
+  { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "buf fuzzy" },
 }
 for _, mapping in ipairs(telescope_mappings) do
   map(

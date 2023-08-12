@@ -2,9 +2,7 @@ local M = {}
 
 function M.get_comment_string()
   local commentstring = vim.bo.commentstring
-  if commentstring == nil or commentstring == "" then
-    return "There is no commentstring set"
-  end
+  if commentstring == nil or commentstring == "" then return "There is no commentstring set" end
   return commentstring:gsub("%%s", "")
 end
 
@@ -15,9 +13,7 @@ function M.separate_with_commentstring()
   commentstring = commentstring:gsub("%s+$", "")
   -- check the number of characters in order to
   -- append the correct amount
-  if #commentstring == 1 then
-    return commentstring .. string.rep(commentstring, 79)
-  end
+  if #commentstring == 1 then return commentstring .. string.rep(commentstring, 79) end
   return commentstring .. string.rep(commentstring, 39)
   -- NOTE: lua numbering begins @1, @2023-07-24 17:13:23
 end

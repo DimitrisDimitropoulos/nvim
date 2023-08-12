@@ -10,7 +10,7 @@ local feline_theme = {
 }
 
 local vi_mode_colors = {
-  NORMAL = "peanut",
+  NORMAL = "violet",
   OP = "green",
   INSERT = "yellow",
   VISUAL = "purple",
@@ -51,11 +51,10 @@ local lsp_progress = function()
   end
   return ""
 end
+
 -- code from: https://github.com/ttys3/nvim-config/blob/b8a55ba2656722a21420b5bebfdaf162d4d4f677/lua/lsp/init.lua#L43
 local cproviders = {
-  lsp_progress = function()
-    return #vim.lsp.buf_get_clients() > 0 and lsp_progress() or ""
-  end,
+  lsp_progress = function() return #vim.lsp.buf_get_clients() > 0 and lsp_progress() or "" end,
 }
 
 local c = {
@@ -71,7 +70,7 @@ local c = {
     hl = function()
       return {
         bg = require("feline.providers.vi_mode").get_mode_color(),
-        fg = "bg",
+        fg = "black",
         style = "bold",
         name = "NeovimModeHLColor",
       }
@@ -86,7 +85,8 @@ local c = {
       -- bg = "black",
     },
     left_sep = "block",
-    right_sep = "block",
+    -- right_sep = "block",
+    -- icon = "",
   },
   gitDiffAdded = {
     provider = "git_diff_added",
@@ -96,8 +96,9 @@ local c = {
       truncate_hide = true,
     },
     left_sep = "block",
-    right_sep = "block",
+    -- right_sep = "block",
     truncate_hide = true,
+    icon = "+",
   },
   gitDiffRemoved = {
     provider = "git_diff_removed",
@@ -106,8 +107,9 @@ local c = {
       bg = "bg",
     },
     left_sep = "block",
-    right_sep = "block",
+    -- right_sep = "block",
     truncate_hide = true,
+    icon = "-",
   },
   gitDiffChanged = {
     provider = "git_diff_changed",
@@ -116,8 +118,9 @@ local c = {
       bg = "bg",
     },
     left_sep = "block",
-    right_sep = "block",
+    -- right_sep = "block",
     truncate_hide = true,
+    icon = "~",
   },
   separator = {
     provider = "",
@@ -127,6 +130,8 @@ local c = {
       name = "file_info",
       opts = {
         type = "relative-short",
+        file_modified_icon = "[+]",
+        file_readonly_icon = "[RO]",
       },
     },
     hl = {
@@ -134,7 +139,7 @@ local c = {
       style = "italic",
     },
     left_sep = "block",
-    right_sep = "block",
+    -- right_sep = "block",
   },
   diagnostic_errors = {
     provider = "diagnostic_errors",
@@ -163,12 +168,12 @@ local c = {
   lsp_client_names = {
     provider = "lsp_client_names",
     hl = {
-      fg = "violet",
-      bg = "bg",
+      fg = "pink",
     },
     left_sep = "block",
-    right_sep = "block",
+    -- right_sep = "block",
     truncate_hide = true,
+    icon = " ",
   },
   file_type = {
     provider = {
@@ -193,26 +198,26 @@ local c = {
       bg = "bg",
       style = "italic",
     },
-    left_sep = "block",
+    -- left_sep = "block",
     right_sep = "block",
     truncate_hide = true,
   },
   position = {
     provider = "position",
     hl = {
-      bg = "peanut",
-      fg = "black",
-      -- fg = "green",
+      -- bg = "peanut",
+      -- fg = "black",
+      fg = "green",
       style = "bold",
     },
-    left_sep = "block",
-    right_sep = "block",
+    -- left_sep = "block",
+    -- right_sep = "block",
     truncate_hide = true,
   },
   line_percentage = {
     provider = "line_percentage",
     hl = {
-      fg = "violet",
+      fg = "yellow",
       bg = "bg",
       style = "bold",
     },
@@ -260,7 +265,7 @@ local right = {
   c.file_type,
   c.file_encoding,
   c.position,
-  -- c.line_percentage,
+  c.line_percentage,
   -- c.scroll_bar,
 }
 

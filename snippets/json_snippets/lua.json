@@ -7,5 +7,10 @@
     "prefix": "lua",
     "body": ["$1 test $CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR} "],
     "description": "A test snippet"
+  },
+  "require": {
+    "prefix": "Require",
+    "body": ["require(\"$1\")$0"],
+    "description": "Require"
   }
 }
