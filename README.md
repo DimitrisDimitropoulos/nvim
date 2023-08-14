@@ -52,3 +52,4 @@ It follows the structure of NvChad
 ## TODO
 
 [] Wait for a solution to null-ls archiving, replacing format with guard-nvim and linting with nvim-lint
+[] Replaced null-ls with efm language-server, only asynchronous format does not work, it generates a swap file. You can always use the -n flag when launching in order to ignore it and use it if needed, something with an alias. I prefer the basic way.

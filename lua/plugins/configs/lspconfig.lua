@@ -34,6 +34,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
       map("n", "<leader>" .. mapping.key, lsp[mapping.cmd], { desc = mapping.desc }, opts)
     end
 
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("AutoFormat", { clear = true }),
+      pattern = { "*tex", "*lua", "*py", "*jl", "*json", "*yaml", "*rs", "*sh" },
+      -- callback = function() vim.lsp.buf.format { async = true } end,
+      -- NOTE: using sync formating in order to avoid unexpected behavior, @2023-08-13 14:09:41
+      callback = function() vim.lsp.buf.format() end,
+      desc = "format on save",
+    })
+
     -- NOTE: here follows the diagnostics config, @2023-08-11 14:35:14
     local signs = {
       { hl = "DiagnosticSignError", txt = "■" },
@@ -68,6 +77,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     for _, diag in ipairs(diagno) do
       map("n", diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr }, opts)
     end
+
+    local diagnostics_active = true
+    map("n", "<leader>hd", function()
+      diagnostics_active = not diagnostics_active
+      if diagnostics_active then
+        vim.diagnostic.show()
+      else
+        vim.diagnostic.hide()
+      end
+    end, {
+      desc = "toggle diagnostics",
+      silent = false,
+      noremap = true,
+    })
   end,
 })
 
@@ -165,7 +188,13 @@ efmls.init {
   },
 }
 local black = require "efmls-configs.formatters.black"
-local cppcheck = require "efmls-configs.linters.cppcheck"
+local cppcheck = {
+  prefix = "cppcheck",
+  lintCommand = string.format "cppcheck --quiet --force --enable=warning,style,performance,portability --error-exitcode=1 ${INPUT}",
+  lintStdin = false,
+  lintFormats = { "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m", "%f:%l:%c: %tote: %m" },
+  rootMarkers = { "CmakeLists.txt", "compile_commands.json", ".git" },
+}
 local prettier = require "efmls-configs.formatters.prettier"
 local rustfmt = require "efmls-configs.formatters.rustfmt"
 local shellcheck = require "efmls-configs.linters.shellcheck"
@@ -185,6 +214,7 @@ efmls.setup {
   rust = { formatter = rustfmt },
   python = { formatter = black },
   cpp = { linter = cppcheck },
+  c = { linter = cppcheck },
   cmake = { formatter = gersemi },
   haskell = { formatter = fourmolu },
 }

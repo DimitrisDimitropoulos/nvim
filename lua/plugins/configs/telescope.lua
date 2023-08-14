@@ -90,7 +90,6 @@ local opts = {
   noremap = true,
   silent = false,
 }
-local n = "n"
 
 local telescope_mappings = {
   { key = "ff", cmd = "fd",                        desc = "files" },
@@ -111,7 +110,7 @@ local telescope_mappings = {
 }
 for _, mapping in ipairs(telescope_mappings) do
   map(
-    n,
+    "n",
     "<leader>" .. mapping.key,
     function() require("telescope.builtin")[mapping.cmd]() end,
     { desc = "find " .. mapping.desc },
@@ -120,7 +119,7 @@ for _, mapping in ipairs(telescope_mappings) do
 end
 
 map(
-  n,
+  "n",
   "<leader>ts",
   function()
     require("telescope.builtin").treesitter {
@@ -132,7 +131,7 @@ map(
   opts
 )
 map(
-  n,
+  "n",
   "<leader>fa",
   function()
     require("telescope.builtin").fd {
