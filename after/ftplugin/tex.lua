@@ -11,6 +11,7 @@ g.vimtex_compiler_progname = "nvr"
 g.tex_flavor = "latex"
 
 vim.opt.cursorlineopt = "number"
+vim.opt_local.spell = true
 
 -- Disable TreeSitter highlighting for large files
 -- function Disable_tree_sitter_highlight()
@@ -26,8 +27,7 @@ vim.opt.cursorlineopt = "number"
 --   callback = function() Disable_tree_sitter_highlight() end,
 --   desc = "disable tree sitter",
 -- })
-
--- vim.keymap.set
+-- vim.keymap.set("n", "<leader>tx", Disable_tree_sitter_highlight, { desc = "disable treesitter" })
 
 local vimtex_keymap = {
   { key = "ll", cmd = "Compile",   decr = "compile" },
@@ -39,18 +39,8 @@ for _, vitex in ipairs(vimtex_keymap) do
   vim.keymap.set("n", "<leader>" .. vitex.key, function() vim.cmd("Vimtex" .. vitex.cmd) end, { desc = vitex.decr })
 end
 
--- vim.keymap.set("n", "<leader>tx", Disable_tree_sitter_highlight, { desc = "disable treesitter" })
-
 -- map up and down to gj and gk
-vim.keymap.set(
-  { "n", "x" },
-  "<Up>",
-  function() return (vim.v.count == 0) and "gk" or "k" end,
-  { expr = true, desc = "up", silent = true }
-)
-vim.keymap.set(
-  { "n", "x" },
-  "<Down>",
-  function() return (vim.v.count == 0) and "gj" or "j" end,
-  { expr = true, desc = "down", silent = true }
-)
+local function moving_wrap(direction) return (vim.v.count == 0) and "g" .. direction or direction end
+vim.keymap.set({ "n", "x" }, "<Up>", function() return moving_wrap "k" end, { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Down>", function() return moving_wrap "j" end, { expr = true, silent = true })
+-- function() return (vim.v.count == 0) and "gj" or "j" end,

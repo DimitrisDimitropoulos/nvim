@@ -1,12 +1,16 @@
 local map = vim.keymap.set
 
 local plugins = {
-  "nvim-lua/plenary.nvim",
+
+  {
+    "nvim-lua/plenary.nvim",
+  },
 
   -- colorscheme
   {
     "savq/melange-nvim",
     lazy = false,
+    enabled = false,
     name = "melange",
     priority = 1000,
     config = function() vim.cmd.colorscheme "melange" end,
@@ -14,7 +18,6 @@ local plugins = {
 
   {
     "catppuccin/nvim",
-    enabled = false,
     lazy = false,
     name = "catppuccin",
     priority = 1000,
@@ -97,41 +100,30 @@ local plugins = {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonInstallAll",
-      "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
-    },
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     config = function() require "plugins.configs.mason" end,
   },
 
   -- lsp
   {
     "neovim/nvim-lspconfig",
-    event = {
-      "BufReadPre",
-      "BufNewFile",
-    },
+    event = { "BufReadPre", "BufNewFile" },
     config = function() require "plugins.configs.lspconfig" end,
     dependencies = {
-      -- formatting , linting
       {
-        'creativenull/efmls-configs-nvim',
-        version = 'v0.2.x', -- tag is optional
+        "creativenull/efmls-configs-nvim",
+        version = "v0.2.x", -- tag is optional
       },
-      {
-        "nvimdev/guard.nvim",
-        enabled = false,
-        config = function() require "plugins.configs.guard" end,
-      },
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        enabled = false,
-        config = function() require "plugins.configs.null" end,
-      },
+      -- {
+      --   "nvimdev/guard.nvim",
+      --   enabled = false,
+      --   config = function() require "plugins.configs.guard" end,
+      -- },
+      -- {
+      --   "jose-elias-alvarez/null-ls.nvim",
+      --   enabled = false,
+      --   config = function() require "plugins.configs.null" end,
+      -- },
     },
   },
 
@@ -168,12 +160,7 @@ local plugins = {
 
   {
     "numToStr/Comment.nvim",
-    keys = {
-      "gc",
-      "gb",
-      "<leader>/",
-      "V", -- enable visual mode
-    },
+    keys = { "gc", "gb", "<leader>/", "V" },
     config = function() require "plugins.configs.comment" end,
   },
 
@@ -205,12 +192,12 @@ local plugins = {
   },
   {
     "goolord/alpha-nvim",
-    enabled = true,
     lazy = false,
     config = function() require "plugins.configs.alpha" end,
   },
   {
     "echasnovski/mini.nvim",
+    lazy = true,
     version = false,
     event = "InsertEnter",
     config = function() require "plugins.configs.mini" end,
@@ -237,15 +224,7 @@ local plugins = {
     ft = { "lua", "css", "scss" },
     config = function()
       require("colorizer").setup {
-        filetypes = {
-          "css",
-          "javascript",
-          "lua",
-          "ini",
-          html = {
-            mode = "foreground",
-          },
-        },
+        filetypes = { "css", "javascript", "lua", "ini", html = { mode = "foreground" } },
       }
     end,
   },
