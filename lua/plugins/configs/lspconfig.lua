@@ -179,14 +179,8 @@ lspconfig.rust_analyzer.setup {
   },
 }
 
-local function on_attach(client) print("Attached to " .. client.name) end
 local efmls = require "efmls-configs"
-efmls.init {
-  on_attach = on_attach,
-  init_options = {
-    documentFormatting = true,
-  },
-}
+efmls.init { init_options = { documentFormatting = true, codeAction = true } }
 local black = require "efmls-configs.formatters.black"
 local cppcheck = {
   prefix = "cppcheck",
