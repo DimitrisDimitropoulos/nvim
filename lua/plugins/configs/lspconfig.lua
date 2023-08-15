@@ -206,7 +206,7 @@ local fourmolu = { formatCommand = "fourmolu --stdin-input-file -", formatStdin 
 local beautysh = { formatCommand = "beautysh -", formatStdin = true }
 efmls.setup {
   markdown = { formatter = prettier },
-  json = { formatter = prettier },
+  -- json = { formatter = prettier },
   css = { formatter = prettier },
   yaml = { formatter = prettier },
   lua = { formatter = stylua },

@@ -13,6 +13,8 @@ g.tex_flavor = "latex"
 
 vim.opt.cursorlineopt = "number"
 vim.opt_local.spell = true
+-- local version = vim.version()
+-- if version.minor == 10 then opt.smoothscroll = true end
 
 -- Disable TreeSitter highlighting for large files
 -- function Disable_tree_sitter_highlight()
