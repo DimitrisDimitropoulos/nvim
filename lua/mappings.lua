@@ -19,11 +19,13 @@ map("t", "<C-space>", "<C-\\><C-n>", { silent = true })
 
 -- Command mappings
 local commands = {
+  -- stylua: ignore start
   { key = "<ESC>",      cmd = "nohl",      descr = "clear search" },
   { key = "<TAB>",      cmd = "bnext",     descr = "next buffer" },
   { key = "<S-Tab>",    cmd = "bprevious", descr = "previous buffer" },
   { key = "<leader>bd", cmd = "bd",        descr = "delete buffer" },
   { key = "<leader>bn", cmd = "enew",      descr = "buffer new" },
+  -- stylua: ignore stop
 }
 for _, command in ipairs(commands) do
   map("n", command.key, "<cmd> " .. command.cmd .. " <CR>", { desc = command.descr, silent = false, noremap = true })

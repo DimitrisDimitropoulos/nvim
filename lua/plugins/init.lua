@@ -106,6 +106,7 @@ local plugins = {
       {
         "creativenull/efmls-configs-nvim",
         version = "v0.2.x",
+        enabled = false,
       },
       -- {
       --   "jose-elias-alvarez/null-ls.nvim",
