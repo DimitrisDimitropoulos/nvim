@@ -1,4 +1,5 @@
-local cmp = require "cmp"
+local cmp_ok, cmp = pcall(require, "cmp")
+if not cmp_ok then return end
 local ls = require "luasnip"
 local lspkind = require "lspkind"
 
@@ -16,6 +17,8 @@ local function border(hl_name)
 end
 
 cmp.setup {
+
+  experimental = { ghost_text = true },
 
   window = {
     completion = {
@@ -50,30 +53,14 @@ cmp.setup {
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
+    end, { "i", "s" }),
     ["<A-k>"] = cmp.mapping(function(fallback)
       if ls.jumpable(-1) then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
-  },
-
-  sources = cmp.config.sources {
-    { name = "luasnip" },
-    { name = "nvim_lsp" },
-    { name = "buffer",  max_item_count = 3 },
-    { name = "nvim_lua" },
-    { name = "path" },
-    -- { name = "copilot" },
-    -- { name = "spell" },
+    end, { "i", "s" }),
   },
 
   formatting = {
@@ -82,25 +69,23 @@ cmp.setup {
       with_text = true,
       maxwidth = 50,
       ellipsis_char = "...",
-      -- menu = {
-      --   buffer = "[buf]",
-      --   nvim_lsp = "[LSP]",
-      --   nvim_lua = "[api]",
-      --   path = "[path]",
-      --   luasnip = "[snip]",
-      --   gh_issues = "[issues]",
-      --   tn = "[TabNine]",
-      --   eruby = "[erb]",
-      -- },
     },
   },
 
+  sources = cmp.config.sources {
+    { name = "luasnip",  priority = 9 },
+    { name = "nvim_lsp", priority = 9 },
+    { name = "nvim_lua", priority = 9 },
+    { name = "path",     priority = 5 },
+    { name = "buffer",   max_item_count = 3, priority = 1 },
+  },
+
   sorting = {
-    -- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
     comparators = {
-      cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
+      cmp.config.compare.kind,
+      cmp.config.compare.recently_used,
       function(entry1, entry2)
         local _, entry1_under = entry1.completion_item.label:find "^_+"
         local _, entry2_under = entry2.completion_item.label:find "^_+"
@@ -112,20 +97,8 @@ cmp.setup {
           return true
         end
       end,
-      cmp.config.compare.kind,
       cmp.config.compare.sort_text,
-      cmp.config.compare.length,
       cmp.config.compare.order,
     },
   },
 }
-
--- -- Copilot cmp source
--- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
--- -- lspkind.lua
--- local Lspkind = require("lspkind")
--- Lspkind.init({
---   symbol_map = {
---     Copilot = "",
---   },
--- })

@@ -1,21 +1,7 @@
 return {
-
-  install = {
-    colorscheme = { "melange" },
-  },
-
-  defaults = {
-    lazy = true,
-  },
-
-  ui = {
-    icons = {
-      ft = "",
-      loaded = "",
-      not_loaded = "",
-    },
-  },
-
+  install = { colorscheme = { "catppuccin" } },
+  defaults = { lazy = true },
+  ui = { icons = { ft = "", loaded = "", not_loaded = "" } },
   performance = {
     rtp = {
       disabled_plugins = {

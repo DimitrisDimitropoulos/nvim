@@ -5,10 +5,6 @@ local gitsigns = require "gitsigns"
 local feedkeys = vim.api.nvim_feedkeys
 local map = vim.keymap.set
 local schedule = vim.schedule
-local opts = {
-  noremap = true,
-  silent = false,
-}
 local n = "n"
 
 gitsigns.setup {
@@ -31,7 +27,7 @@ gitsigns.setup {
         schedule(function() gs[nav.cmd]() end)
         schedule(function() feedkeys("zz", "n", false) end)
         return "<Ignore>"
-      end, { desc = "git " .. nav.cmd }, opts)
+      end, { desc = "git " .. nav.cmd })
     end
 
     map(n, "<leader>gf", function()
@@ -46,9 +42,9 @@ gitsigns.setup {
         end
       end
       if not is_git_buf then require("gitsigns").diffthis() end
-    end, { desc = "toggle git diff" }, opts)
+    end, { desc = "toggle git diff" })
   end,
 
   max_file_length = 1000,
-  sign_priority = 6,
+  sign_priority = 1,
 }

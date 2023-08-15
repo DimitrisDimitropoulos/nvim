@@ -2,11 +2,8 @@ local map = vim.keymap.set
 
 local plugins = {
 
-  {
-    "nvim-lua/plenary.nvim",
-  },
+  { "nvim-lua/plenary.nvim" },
 
-  -- colorscheme
   {
     "savq/melange-nvim",
     lazy = false,
@@ -24,14 +21,12 @@ local plugins = {
     config = function() vim.cmd.colorscheme "catppuccin" end,
   },
 
-  -- Statusline
   {
     "freddiehaddad/feline.nvim",
     event = "VeryLazy",
     config = function() require "plugins.configs.feline" end,
   },
 
-  -- file tree
   {
     "nvim-tree/nvim-tree.lua",
     keys = "<C-b>",
@@ -42,13 +37,11 @@ local plugins = {
     end,
   },
 
-  -- icons, for UI related plugins
   {
     "nvim-tree/nvim-web-devicons",
     config = function() require("nvim-web-devicons").setup() end,
   },
 
-  -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -56,7 +49,6 @@ local plugins = {
     config = function() require "plugins.configs.treesitter" end,
   },
 
-  -- CMP config and dependencies
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -69,19 +61,20 @@ local plugins = {
       "hrsh7th/cmp-nvim-lua",
       "onsails/lspkind-nvim",
 
-      -- snippets
-      --list of default snippets
       "rafamadriz/friendly-snippets",
 
-      -- snippets engine
       {
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        opts = {
+          history = true,
+          updateevents = "TextChanged,TextChangedI",
+          delete_check_events = "TextChanged",
+          enable_autosnippets = true,
+        },
         config = function(_, opts) require("plugins.configs.luasnip").luasnip(opts) end,
       },
 
-      -- autopairs , autocompletes ()[] etc
       {
         "windwp/nvim-autopairs",
         config = function()
@@ -104,7 +97,6 @@ local plugins = {
     config = function() require "plugins.configs.mason" end,
   },
 
-  -- lsp
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -115,11 +107,6 @@ local plugins = {
         version = "v0.2.x", -- tag is optional
       },
       -- {
-      --   "nvimdev/guard.nvim",
-      --   enabled = false,
-      --   config = function() require "plugins.configs.guard" end,
-      -- },
-      -- {
       --   "jose-elias-alvarez/null-ls.nvim",
       --   enabled = false,
       --   config = function() require "plugins.configs.null" end,
@@ -127,7 +114,6 @@ local plugins = {
     },
   },
 
-  -- indent lines
   {
     "lukas-reineke/indent-blankline.nvim",
     event = {
@@ -137,7 +123,6 @@ local plugins = {
     config = function() require "plugins.configs.indent" end,
   },
 
-  -- files finder etc
   {
     "nvim-telescope/telescope.nvim",
     keys = "<leader>f",
@@ -148,13 +133,9 @@ local plugins = {
     },
   },
 
-  -- git status on signcolumn etc
   {
     "lewis6991/gitsigns.nvim",
-    event = {
-      "BufReadPre",
-      "BufNewFile",
-    },
+    event = { "BufReadPre", "BufNewFile" },
     config = function() require "plugins.configs.signs" end,
   },
 
@@ -176,38 +157,33 @@ local plugins = {
     config = function() require "plugins.configs.copilot" end,
   },
 
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   event = "InsertEnter",
-  --   config = function() require("copilot_cmp").setup() end,
-  -- },
-
   {
     "beauwilliams/focus.nvim",
-    lazy = true,
     event = "BufLeave",
     config = function() require("focus").setup() end,
   },
+
   {
     "goolord/alpha-nvim",
     lazy = false,
     config = function() require "plugins.configs.alpha" end,
   },
+
   {
     "echasnovski/mini.nvim",
-    lazy = true,
     version = false,
     event = "InsertEnter",
     config = function() require "plugins.configs.mini" end,
   },
+
   {
     "folke/trouble.nvim",
     keys = "<leader>tr",
-    lazy = true,
     config = function()
       require("trouble").setup(map("n", "<leader>tr", function() require("trouble").toggle() end, { desc = "trouble" }))
     end,
   },
+
   {
     "folke/which-key.nvim",
     keys = { "<leader>", '"', "'", "`", "c", "v" },
@@ -217,6 +193,7 @@ local plugins = {
     end,
     opts = function() return require "plugins.configs.whichkey" end,
   },
+
   {
     "NvChad/nvim-colorizer.lua",
     ft = { "lua", "css", "scss" },
