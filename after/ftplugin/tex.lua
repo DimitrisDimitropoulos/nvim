@@ -3,6 +3,7 @@ local g = vim.g
 -- VimTeX options
 g.vimtex_quickfix_mode = 0
 g.vimtex_syntax_enabled = 0
+-- vim.cmd "let g:vimtex_syntax_enabled = v:false"
 g.vimtex_complete_enabled = 0
 g.Tex_BibtexFlavor = "biber"
 g.vimtex_view_method = "zathura"

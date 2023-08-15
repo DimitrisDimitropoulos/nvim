@@ -14,25 +14,19 @@ require("nvim-treesitter.configs").setup {
     "latex",
     "bibtex",
     "comment",
+    "query",
   },
   highlight = {
     enable = true,
     use_languagetree = true,
     additional_vim_regex_highlighting = false,
   },
-  indent = {
-    enable = true,
-  },
+  indent = { enable = true },
   refactor = {
     highlight_definitions = { enable = true },
     highlight_current_scope = { enable = true },
-    smart_rename = {
-      enarle = true,
-      keymaps = {
-        smart_rename = "grr",
-      },
-    },
   },
+  autopairs = { enable = true },
 }
 
 -- hl groups for the comments
