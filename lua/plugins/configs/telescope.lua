@@ -86,35 +86,32 @@ end
 -- Maps
 --------------------------------------------------------------------------------
 local map = vim.keymap.set
-local opts = {
-  noremap = true,
-  silent = false,
-}
 
 local telescope_mappings = {
+  -- stylua: ignore start
   { key = "ff", cmd = "fd",                        desc = "files" },
   { key = "fr", cmd = "oldfiles",                  desc = "old files" },
   { key = "f;", cmd = "commands",                  desc = "commands" },
-  { key = "lg", cmd = "live_grep",                 desc = "live grep" },
-  { key = "fs", cmd = "grep_string",               desc = "string mark" },
+  { key = "fg", cmd = "live_grep",                 desc = "live grep" },
+  { key = "fs", cmd = "grep_string",               desc = "cursor string" },
   { key = "fb", cmd = "buffers",                   desc = "buffers" },
   { key = "fh", cmd = "help_tags",                 desc = "help tags" },
   { key = "fm", cmd = "marks",                     desc = "marks" },
   { key = "fk", cmd = "keymaps",                   desc = "keymaps" },
-  { key = "re", cmd = "registers",                 desc = "registers" },
+  { key = "fe", cmd = "registers",                 desc = "registers" },
   { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
-  { key = "ch", cmd = "command_history",           desc = "command history" },
+  { key = "fc", cmd = "command_history",           desc = "command history" },
   { key = "ld", cmd = "lsp_definitions",           desc = "lsp definitions" },
   { key = "sp", cmd = "spell_suggest",             desc = "spell suggest" },
   { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "buf fuzzy" },
+  -- stylua: ignore stop
 }
 for _, mapping in ipairs(telescope_mappings) do
   map(
     "n",
     "<leader>" .. mapping.key,
     function() require("telescope.builtin")[mapping.cmd]() end,
-    { desc = "find " .. mapping.desc },
-    opts
+    { desc = "find " .. mapping.desc }
   )
 end
 
@@ -127,8 +124,7 @@ map(
       initial_mode = "normal",
     }
   end,
-  { desc = "find treesitter" },
-  opts
+  { desc = "find treesitter" }
 )
 map(
   "n",
@@ -141,6 +137,5 @@ map(
       file_ignore_patterns = { ".git" },
     }
   end,
-  { desc = "find files" },
-  opts
+  { desc = "find files" }
 )
