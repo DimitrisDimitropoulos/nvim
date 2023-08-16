@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
--- Save mappings there are problems
 vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
+map("t", "<C-space>", "<C-\\><C-n>", { desc = "exit tesrminal mode", silent = true })
 
 vim.keymap.set("n", "ZZ", function()
   vim.o.timeout = true
@@ -14,17 +14,12 @@ vim.keymap.set("n", "ZQ", function()
   vim.cmd "qa!"
 end, { desc = "quit with no save", silent = false })
 
--- exit terminal mode
-map("t", "<C-space>", "<C-\\><C-n>", { silent = true })
-
--- Command mappings
 local commands = {
   -- stylua: ignore start
   { key = "<ESC>",      cmd = "nohl",      descr = "clear search" },
   { key = "<TAB>",      cmd = "bnext",     descr = "next buffer" },
   { key = "<S-Tab>",    cmd = "bprevious", descr = "previous buffer" },
   { key = "<leader>bd", cmd = "bd",        descr = "delete buffer" },
-  { key = "<leader>bn", cmd = "enew",      descr = "buffer new" },
   -- stylua: ignore stop
 }
 for _, command in ipairs(commands) do

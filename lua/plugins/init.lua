@@ -1,113 +1,124 @@
+--- @diagnostic disable: different-requires
 local map = vim.keymap.set
 
 local plugins = {
 
-  { "nvim-lua/plenary.nvim" },
+  { 'nvim-lua/plenary.nvim' },
 
   {
-    "savq/melange-nvim",
+    'savq/melange-nvim',
+    lazy = false,
+    -- enabled = false,
+    name = 'melange',
+    priority = 1000,
+    config = function() vim.cmd.colorscheme 'melange' end,
+  },
+
+  {
+    'catppuccin/nvim',
     lazy = false,
     enabled = false,
-    name = "melange",
+    name = 'catppuccin',
     priority = 1000,
-    config = function() vim.cmd.colorscheme "melange" end,
+    config = function() vim.cmd.colorscheme 'catppuccin-frappe' end,
   },
 
   {
-    "catppuccin/nvim",
-    lazy = false,
-    name = "catppuccin",
-    priority = 1000,
-    config = function() vim.cmd.colorscheme "catppuccin" end,
+    'freddiehaddad/feline.nvim',
+    enabled = false,
+    event = 'VeryLazy',
+    config = function() require 'plugins.configs.feline' end,
   },
 
   {
-    "freddiehaddad/feline.nvim",
-    event = "VeryLazy",
-    config = function() require "plugins.configs.feline" end,
+    'rebelot/heirline.nvim',
+    -- enabled = false,
+    event = 'VeryLazy',
+    config = function() require 'plugins.configs.heirline' end,
+  },
+
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   enabled = false,
+  --   keys = "<C-b>",
+  --   config = function()
+  --     require("nvim-tree").setup(
+  --       { view = { adaptive_size = false, width = 30, side = "right", preserve_window_proportions = true } },
+  --       map("n", "<C-b>", function() require("nvim-tree.api").tree.toggle() end, { desc = "toggle nvimtree" })
+  --     )
+  --   end,
+  -- },
+
+  {
+    'nvim-tree/nvim-web-devicons',
+    config = function() require('nvim-web-devicons').setup() end,
   },
 
   {
-    "nvim-tree/nvim-tree.lua",
-    keys = "<C-b>",
-    config = function()
-      require("nvim-tree").setup(
-        { view = { adaptive_size = false, width = 30, side = "right", preserve_window_proportions = true } },
-        map("n", "<C-b>", function() require("nvim-tree.api").tree.toggle() end, { desc = "toggle nvimtree" })
-      )
-    end,
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function() require 'plugins.configs.treesitter' end,
   },
 
   {
-    "nvim-tree/nvim-web-devicons",
-    config = function() require("nvim-web-devicons").setup() end,
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function() require "plugins.configs.treesitter" end,
-  },
-
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
       -- cmp sources
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lua",
-      "onsails/lspkind-nvim",
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp',
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-nvim-lua',
+      'onsails/lspkind-nvim',
 
-      "rafamadriz/friendly-snippets",
+      'rafamadriz/friendly-snippets',
 
       {
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
+        'L3MON4D3/LuaSnip',
+        dependencies = 'rafamadriz/friendly-snippets',
         opts = {
           history = true,
-          updateevents = "TextChanged,TextChangedI",
-          delete_check_events = "TextChanged",
+          updateevents = 'TextChanged,TextChangedI',
+          delete_check_events = 'TextChanged',
           enable_autosnippets = true,
         },
-        config = function(_, opts) require("plugins.configs.luasnip").luasnip(opts) end,
+        config = function(_, opts) require('plugins.configs.luasnip').luasnip(opts) end,
       },
 
       {
-        "windwp/nvim-autopairs",
+        'windwp/nvim-autopairs',
         config = function()
-          require("nvim-autopairs").setup()
+          require('nvim-autopairs').setup()
 
           --  cmp integration
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          local cmp = require "cmp"
-          cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+          local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+          local cmp = require 'cmp'
+          cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
         end,
       },
     },
-    config = function() require "plugins.configs.cmp" end,
+    config = function() require 'plugins.configs.cmp' end,
   },
 
   {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate",
-    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-    config = function() require "plugins.configs.mason" end,
+    'williamboman/mason.nvim',
+    build = ':MasonUpdate',
+    cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
+    config = function() require 'plugins.configs.mason' end,
   },
 
   {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function() require "plugins.configs.lsp" end,
+    'neovim/nvim-lspconfig',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function() require 'plugins.configs.lsp' end,
     dependencies = {
-      {
-        "creativenull/efmls-configs-nvim",
-        version = "v0.2.x",
-        enabled = false,
-      },
+      -- {
+      --   'creativenull/efmls-configs-nvim',
+      --   version = 'v0.2.x',
+      --   enabled = false,
+      -- },
       -- {
       --   "jose-elias-alvarez/null-ls.nvim",
       --   enabled = false,
@@ -117,34 +128,32 @@ local plugins = {
   },
 
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = {
-      "BufReadPre",
-      "BufNewFile",
-    },
-    config = function() require "plugins.configs.indent" end,
+    'lukas-reineke/indent-blankline.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function() require 'plugins.configs.indent' end,
   },
 
   {
-    "nvim-telescope/telescope.nvim",
-    keys = "<leader>f",
-    cmd = "Telescope",
-    config = function() require "plugins.configs.telescope" end,
+    'nvim-telescope/telescope.nvim',
+    keys = { '<leader>f' },
+    cmd = 'Telescope',
+    config = function() require 'plugins.configs.telescope' end,
     dependencies = {
-      { "natecraddock/telescope-zf-native.nvim" },
+      { 'natecraddock/telescope-zf-native.nvim' },
+      { 'nvim-telescope/telescope-file-browser.nvim' },
     },
   },
 
   {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function() require "plugins.configs.signs" end,
+    'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function() require 'plugins.configs.signs' end,
   },
 
   {
-    "numToStr/Comment.nvim",
-    keys = { "gc", "gb", "<leader>/", "V" },
-    config = function() require "plugins.configs.comment" end,
+    'numToStr/Comment.nvim',
+    keys = { 'gc', 'gb', '<leader>/', 'V' },
+    config = function() require 'plugins.configs.comment' end,
   },
 
   -- {
@@ -153,63 +162,64 @@ local plugins = {
   -- },
 
   {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    cmd = "Copilot",
-    config = function() require "plugins.configs.copilot" end,
+    'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
+    cmd = 'Copilot',
+    config = function() require 'plugins.configs.copilot' end,
   },
 
-  {
-    "beauwilliams/focus.nvim",
-    event = "BufLeave",
-    config = function() require("focus").setup() end,
-  },
+  -- {
+  --   "beauwilliams/focus.nvim",
+  --   enabled = false,
+  --   event = "BufLeave",
+  --   config = function() require("focus").setup() end,
+  -- },
 
   {
-    "goolord/alpha-nvim",
+    'goolord/alpha-nvim',
     lazy = false,
-    config = function() require "plugins.configs.alpha" end,
+    config = function() require 'plugins.configs.alpha' end,
   },
 
   {
-    "echasnovski/mini.nvim",
+    'echasnovski/mini.nvim',
     version = false,
-    event = "InsertEnter",
-    config = function() require "plugins.configs.mini" end,
+    event = 'InsertEnter',
+    config = function() require 'plugins.configs.mini' end,
   },
 
   {
-    "folke/trouble.nvim",
-    keys = "<leader>tr",
+    'folke/trouble.nvim',
+    keys = '<leader>tr',
     config = function()
-      require("trouble").setup(map("n", "<leader>tr", function() require("trouble").toggle() end, { desc = "trouble" }))
+      require('trouble').setup(map('n', '<leader>tr', function() require('trouble').toggle() end, { desc = 'trouble' }))
     end,
   },
 
   {
-    "folke/which-key.nvim",
-    keys = { "<leader>", '"', "'", "`", "c", "v" },
+    'folke/which-key.nvim',
+    keys = { '<leader>', '"', "'", '`', 'c', 'v' },
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = function() return require "plugins.configs.whichkey" end,
+    opts = function() return require 'plugins.configs.whichkey' end,
   },
 
   {
-    "NvChad/nvim-colorizer.lua",
-    ft = { "lua", "css", "scss" },
+    'NvChad/nvim-colorizer.lua',
+    ft = { 'lua', 'css', 'scss' },
     config = function()
-      require("colorizer").setup {
-        filetypes = { "css", "javascript", "lua", "ini", html = { mode = "foreground" } },
+      require('colorizer').setup {
+        filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } },
       }
     end,
   },
 
   {
-    "lervag/vimtex",
-    ft = "tex",
+    'lervag/vimtex',
+    ft = 'tex',
   },
 }
 
-require("lazy").setup(plugins, require "plugins.configs.lazy")
+require('lazy').setup(plugins, require 'plugins.configs.lazy')
