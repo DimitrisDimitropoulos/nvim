@@ -67,7 +67,10 @@ telescope.setup {
         match_filename = false,
       },
     },
-    file_browser = { theme = 'ivy' },
+    file_browser = {
+      theme = 'ivy',
+      layout_config = { height = 0.85 },
+    },
   },
 }
 
@@ -95,9 +98,10 @@ local telescope_mappings = {
   { key = "fe", cmd = "registers",                 desc = "registers" },
   { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
   { key = "fc", cmd = "command_history",           desc = "command history" },
-  { key = "ld", cmd = "lsp_definitions",           desc = "lsp definitions" },
+  { key = "ld", cmd = "lsp_document_symbols",      desc = "lsp definitions" },
   { key = "sp", cmd = "spell_suggest",             desc = "spell suggest" },
   { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "buf fuzzy" },
+  { key = "gs", cmd = "git_status",                desc = "git status" },
   -- stylua: ignore stop
 }
 for _, mapping in ipairs(telescope_mappings) do

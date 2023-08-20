@@ -1,7 +1,34 @@
 local cmp_ok, cmp = pcall(require, 'cmp')
 if not cmp_ok then return end
 local ls = require 'luasnip'
-local lspkind = require 'lspkind'
+
+local kind_icons = {
+  Text = '',
+  Method = '󰆧',
+  Function = '󰊕',
+  Constructor = '',
+  Field = '󰇽',
+  Variable = '󰀫',
+  Class = '󰠱',
+  Interface = '',
+  Module = '',
+  Property = '󰜢',
+  Unit = '',
+  Value = '󰎠',
+  Enum = '',
+  Keyword = '󰌋',
+  Snippet = '',
+  Color = '󰏘',
+  File = '󰈙',
+  Reference = '',
+  Folder = '󰉋',
+  EnumMember = '',
+  Constant = '󰏿',
+  Struct = '󰙅',
+  Event = '',
+  Operator = '󰆕',
+  TypeParameter = '󰅲',
+}
 
 local function border(hl_name)
   return {
@@ -64,12 +91,10 @@ cmp.setup {
   },
 
   formatting = {
-    format = lspkind.cmp_format {
-      mode = 'symbol_text',
-      with_text = true,
-      maxwidth = 50,
-      ellipsis_char = '...',
-    },
+    format = function(_, vim_item)
+      vim_item.kind = (kind_icons[vim_item.kind] or '') .. ' ' .. vim_item.kind
+      return vim_item
+    end,
   },
 
   sources = cmp.config.sources {
@@ -77,7 +102,7 @@ cmp.setup {
     { name = 'nvim_lsp', priority = 9 },
     { name = 'nvim_lua', priority = 9 },
     { name = 'path', priority = 5 },
-    { name = 'buffer', max_item_count = 3, priority = 1 },
+    { name = 'buffer', keyword_length = 2, max_item_count = 3, priority = 1 },
   },
 
   sorting = {
