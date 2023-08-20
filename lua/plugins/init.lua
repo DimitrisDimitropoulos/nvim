@@ -3,37 +3,53 @@ local map = vim.keymap.set
 
 local plugins = {
 
-  { 'nvim-lua/plenary.nvim' },
-
   {
     'savq/melange-nvim',
     lazy = false,
-    -- enabled = false,
+    enabled = false,
     name = 'melange',
     priority = 1000,
     config = function() vim.cmd.colorscheme 'melange' end,
   },
 
   {
-    'catppuccin/nvim',
+    'folke/tokyonight.nvim',
     lazy = false,
-    enabled = false,
-    name = 'catppuccin',
     priority = 1000,
-    config = function() vim.cmd.colorscheme 'catppuccin-frappe' end,
+    config = function() vim.cmd.colorscheme 'tokyonight-storm' end,
   },
 
-  {
-    'freddiehaddad/feline.nvim',
-    enabled = false,
-    event = 'VeryLazy',
-    config = function() require 'plugins.configs.feline' end,
-  },
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   lazy = false,
+  --   name = 'kanagawa',
+  --   enabled = false,
+  --   priority = 1000,
+  --   config = function() vim.cmd.colorscheme 'kanagawa-wave' end,
+  -- },
+
+  -- {
+  --   'catppuccin/nvim',
+  --   lazy = false,
+  --   enabled = false,
+  --   name = 'catppuccin',
+  --   priority = 1000,
+  --   config = function() vim.cmd.colorscheme 'catppuccin-frappe' end,
+  -- },
+
+  -- {
+  --   'freddiehaddad/feline.nvim',
+  --   enabled = false,
+  --   event = 'VeryLazy',
+  --   config = function() require 'plugins.configs.feline' end,
+  -- },
 
   {
     'rebelot/heirline.nvim',
     -- enabled = false,
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
+    priority = 900,
+    lazy = false,
     config = function() require 'plugins.configs.heirline' end,
   },
 
@@ -71,9 +87,7 @@ local plugins = {
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
-      'onsails/lspkind-nvim',
-
-      'rafamadriz/friendly-snippets',
+      -- 'onsails/lspkind-nvim',
 
       {
         'L3MON4D3/LuaSnip',
@@ -114,16 +128,24 @@ local plugins = {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function() require 'plugins.configs.lsp' end,
     dependencies = {
+
       -- {
-      --   'creativenull/efmls-configs-nvim',
-      --   version = 'v0.2.x',
-      --   enabled = false,
+      --   'mfussenegger/nvim-lint',
+      --   config = function()
+      --     require('lint').linters_by_ft = {
+      --       python = { 'mypy', 'ruff' },
+      --     }
+      --     vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost' }, {
+      --       callback = function()
+      --         local lint_status, lint = pcall(require, 'lint')
+      --         if lint_status then lint.try_lint() end
+      --       end,
+      --     })
+      --   end,
       -- },
-      -- {
-      --   "jose-elias-alvarez/null-ls.nvim",
-      --   enabled = false,
-      --   config = function() require "plugins.configs.null" end,
-      -- },
+      --
+
+      --
     },
   },
 
@@ -139,6 +161,7 @@ local plugins = {
     cmd = 'Telescope',
     config = function() require 'plugins.configs.telescope' end,
     dependencies = {
+      { 'nvim-lua/plenary.nvim' },
       { 'natecraddock/telescope-zf-native.nvim' },
       { 'nvim-telescope/telescope-file-browser.nvim' },
     },
@@ -156,25 +179,6 @@ local plugins = {
     config = function() require 'plugins.configs.comment' end,
   },
 
-  -- {
-  --   "github/copilot.vim",
-  --   event = "InsertEnter",
-  -- },
-
-  {
-    'zbirenbaum/copilot.lua',
-    event = 'InsertEnter',
-    cmd = 'Copilot',
-    config = function() require 'plugins.configs.copilot' end,
-  },
-
-  -- {
-  --   "beauwilliams/focus.nvim",
-  --   enabled = false,
-  --   event = "BufLeave",
-  --   config = function() require("focus").setup() end,
-  -- },
-
   {
     'goolord/alpha-nvim',
     lazy = false,
@@ -191,6 +195,7 @@ local plugins = {
   {
     'folke/trouble.nvim',
     keys = '<leader>tr',
+    cmd = 'Trouble',
     config = function()
       require('trouble').setup(map('n', '<leader>tr', function() require('trouble').toggle() end, { desc = 'trouble' }))
     end,
@@ -219,6 +224,11 @@ local plugins = {
   {
     'lervag/vimtex',
     ft = 'tex',
+    config = function() require 'plugins.configs.vimtex' end,
+  },
+  {
+    'github/copilot.vim',
+    event = 'InsertEnter',
   },
 }
 

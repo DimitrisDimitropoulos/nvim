@@ -1,5 +1,6 @@
 --- @diagnostic disable: unused-local
 local prettier = {
+  prefix = 'prettier',
   formatCanRange = true,
   formatCommand = string.format(
     'prettier --stdin --stdin-filepath ${INPUT} ${--range-start:charStart} '
@@ -18,22 +19,10 @@ local prettier = {
     '.prettierrc.toml',
   },
 }
-local gersemi = { formatCommand = 'gersemi -', formatStdin = true }
-local fourmolu = {
-  formatCommand = 'fourmolu --stdin-input-file ${INPUT} -',
-  formatStdin = true,
-}
-local beautysh = { formatCommand = 'beautysh -', formatStdin = true }
-local black = {
-  formatCommand = 'black --fast -',
-  formatStdin = true,
-}
-local mypy = {
-  lintCommand = 'mypy --show-column-numbers ${INPUT} -',
-  lintStdin = true,
-  lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
-  rootMarkers = {},
-}
+local gersemi = { prefix = 'gersemi', formatCommand = 'gersemi -', formatStdin = true }
+local fourmolu = { prefix = 'fourmolu', formatCommand = 'fourmolu --stdin-input-file ${INPUT} -', formatStdin = true }
+local beautysh = { prefix = 'beautysh', formatCommand = 'beautysh -', formatStdin = true }
+local black = { prefix = 'black', formatCommand = 'black --fast -', formatStdin = true }
 local pylint = {
   prefix = 'pylint',
   lintCommand = 'pylint --score=no ${INPUT}',
@@ -42,6 +31,7 @@ local pylint = {
   rootMarkers = {},
 }
 local stylua = {
+  prefix = 'stylua',
   formatCommand = 'stylua --search-parent-directories --stdin-filepath ${INPUT} -',
   formatStdin = true,
   rootMarkers = { 'stylua.toml', '.stylua.toml' },
@@ -68,21 +58,18 @@ local shellcheck = {
   rootMarkers = {},
 }
 require('lspconfig').efm.setup {
-  init_options = { documentFormatting = true, codeAction = true },
+  init_options = { documentFormatting = true },
   filetypes = { 'python', 'markdown', 'css', 'yaml', 'sh', 'bash', 'zsh', 'haskell', 'cmake', 'cpp', 'c', 'lua' },
   settings = {
+    lintDebounce = 100,
+    -- logLevel = 5,
     languages = {
-      python = {
-        black,
-        flake8,
-        -- pylint,
-        -- mypy,
-      },
+      python = { black, flake8 },
       markdown = { prettier },
       css = { prettier },
       yaml = { prettier },
-      sh = { beautysh, shellcheck },
-      bash = { beautysh, shellcheck },
+      sh = { beautysh },
+      bash = { beautysh },
       zsh = { beautysh },
       haskell = { fourmolu },
       cmake = { gersemi },

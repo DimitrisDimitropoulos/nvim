@@ -25,34 +25,34 @@ local ViMode = {
     self.mode = vim.fn.mode(1) -- :h mode()
   end,
   static = {
-    mode_names = { -- change the strings if you like it vvvvverbose!
+    mode_names = {
       n = 'NORMAL',
       no = 'NORMAL?',
       nov = 'NORMAL?',
       noV = 'NORMAL?',
       ['no\22'] = 'NORMAL?',
-      niI = 'Ni',
-      niR = 'Nr',
-      niV = 'Nv',
-      nt = 'Nt',
+      niI = 'NORMALi',
+      niR = 'NORMALR',
+      niV = 'NORMALV',
+      nt = 'NORMALt',
       v = 'VISUAL',
-      vs = 'Vs',
+      vs = 'VISUALs',
       V = 'LINES',
-      Vs = 'Vs',
+      Vs = 'LINESs',
       ['\22'] = 'BLOCK',
       ['\22s'] = 'BLOCK',
       s = 'SUBSTITUTE',
       S = 'S_',
       ['\19'] = '^S',
       i = 'INSERT',
-      ic = 'Ic',
-      ix = 'Ix',
+      ic = 'INSERTc',
+      ix = 'INSERTx',
       R = 'REPLACE',
-      Rc = 'Rc',
-      Rx = 'Rx',
-      Rv = 'Rv',
-      Rvc = 'Rv',
-      Rvx = 'Rv',
+      Rc = 'REPLACEc',
+      Rx = 'REPLACEx',
+      Rv = 'REPLACEv',
+      Rvc = 'REPLACEvc',
+      Rvx = 'REPLACEx',
       c = 'COMMAND',
       cv = 'Ex',
       r = '...',
@@ -75,7 +75,7 @@ local ViMode = {
       R = 'orange',
       r = 'orange',
       ['!'] = 'red',
-      t = 'light_green',
+      t = '#f6d5a4',
     },
   },
   provider = function(self) return ' %2(' .. self.mode_names[self.mode] .. '%) ' end,
@@ -118,12 +118,12 @@ local FileFlags = {
   {
     condition = function() return vim.bo.modified end,
     provider = '[+]',
-    hl = { fg = 'fg', bg = 'bg' },
+    hl = { fg = 'fg', bg = 'bg', italic = true },
   },
   {
     condition = function() return not vim.bo.modifiable or vim.bo.readonly end,
     provider = '[RO]',
-    hl = { fg = 'fg', bg = 'bg' },
+    hl = { fg = 'fg', bg = 'bg', italic = true },
   },
 }
 
@@ -144,10 +144,10 @@ FileNameBlock = utils.insert(
   { provider = '%<' } -- this means that the statusline is cut here when there's not enough space
 )
 
--- local FileType = {
---   provider = function() return string.lower(vim.bo.filetype) end,
---   hl = { fg = 'peanut', italic = true, bg = 'bg' },
--- }
+local FileType = {
+  provider = function() return '[' .. vim.bo.filetype .. ']' end,
+  hl = { fg = utils.get_highlight('String').fg, bold = true, bg = 'bg' },
+}
 
 local Ruler = {
   -- %l = current line number
@@ -155,7 +155,7 @@ local Ruler = {
   -- %c = column number
   -- %P = percentage through file of displayed window
   -- provider = '%7(%l/%3L%):%2c %P',
-  provider = ' %l:%c %P',
+  provider = '%l:%c',
   hl = { fg = 'yellow', bg = 'bg', bold = true },
 }
 
@@ -268,13 +268,13 @@ local Git = {
   end,
   hl = { fg = 'orange' },
   { -- git branch name
-    provider = function(self) return ' ' .. self.status_dict.head end,
+    provider = function(self) return ' ' .. self.status_dict.head .. ' ' end,
     hl = { fg = 'peanut', bg = 'bg' },
   },
   -- You could handle delimiters, icons and counts similar to Diagnostics
   {
     condition = function(self) return self.has_changes end,
-    provider = '(',
+    provider = '[',
     hl = { fg = 'peanut', bg = 'bg' },
   },
   {
@@ -300,15 +300,24 @@ local Git = {
   },
   {
     condition = function(self) return self.has_changes end,
-    provider = ')',
+    provider = ']',
     hl = { fg = 'peanut', bg = 'bg' },
   },
 }
 
 local Spell = {
   condition = function() return vim.wo.spell end,
-  provider = ' SPELL',
+  provider = ' [SPELL]',
   hl = { bold = true, fg = 'orange', bg = 'bg' },
+}
+
+local FileEncoding = {
+  condition = function() return vim.bo.fenc ~= 'utf-8' and vim.bo.fenc ~= '' end,
+  provider = function() return ' [' .. vim.bo.fenc:upper() .. ']' end,
+  hl = {
+    fg = require('heirline.utils').get_highlight('String').fg,
+    bg = 'bg',
+  },
 }
 
 local Space = { provider = ' ', hl = { bg = 'bg' } }
@@ -318,17 +327,20 @@ local Statusline = {
   { ViMode },
   { FileNameBlock },
   { Space },
-  { FileSize },
-  { Space },
+  -- { FileSize },
+  -- { Space },
   { Git },
   { Space },
   { Diagnostics },
   { Align },
   { LSPMessages },
   { Align },
-  -- { FileType },
   { LSPActive },
+  { Space },
+  { FileType },
+  -- { FileEncoding },
   { Spell },
+  { Space },
   { Ruler },
   { Space },
 }
