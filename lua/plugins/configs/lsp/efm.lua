@@ -57,25 +57,34 @@ local shellcheck = {
   lintFormats = { '-:%l:%c: %trror: %m', '-:%l:%c: %tarning: %m', '-:%l:%c: %tote: %m' },
   rootMarkers = {},
 }
+local mypy = {
+  prefix = 'mypy',
+  lintCommand = 'mypy --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
+  lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
+  lintSource = 'mypy',
+}
+
+local langs = {
+  python = { black, flake8 },
+  markdown = { prettier },
+  css = { prettier },
+  yaml = { prettier },
+  sh = { beautysh, shellcheck },
+  bash = { beautysh, shellcheck },
+  zsh = { beautysh, shellcheck },
+  haskell = { fourmolu },
+  cmake = { gersemi },
+  cpp = { cppcheck },
+  c = { cppcheck },
+  lua = { stylua },
+}
+
 require('lspconfig').efm.setup {
   init_options = { documentFormatting = true },
-  filetypes = { 'python', 'markdown', 'css', 'yaml', 'sh', 'bash', 'zsh', 'haskell', 'cmake', 'cpp', 'c', 'lua' },
+  filetypes = vim.tbl_keys(langs),
   settings = {
     lintDebounce = 100,
+    languages = langs,
     -- logLevel = 5,
-    languages = {
-      python = { black, flake8 },
-      markdown = { prettier },
-      css = { prettier },
-      yaml = { prettier },
-      sh = { beautysh },
-      bash = { beautysh },
-      zsh = { beautysh },
-      haskell = { fourmolu },
-      cmake = { gersemi },
-      cpp = { cppcheck },
-      c = { cppcheck },
-      lua = { stylua },
-    },
   },
 }
