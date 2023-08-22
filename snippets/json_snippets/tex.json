@@ -62,8 +62,7 @@
   },
   "environment": {
     "prefix": [
-      "environment",
-      "begin"
+      "envu"
     ],
     "body": [
       "\\begin{${1:environment}}",
@@ -74,7 +73,6 @@
   },
   "Latex-Table": {
     "prefix": [
-      "table",
       "tabu"
     ],
     "body": [
@@ -151,7 +149,6 @@
   },
   "Latex-itemize": {
     "prefix": [
-      "itemize",
       "itemu"
     ],
     "body": [
@@ -163,8 +160,7 @@
   },
   "Enumerate": {
     "prefix": [
-      "enum",
-      "enumerate"
+      "enum"
     ],
     "body": [
       "\\\\begin{enumerate}",
@@ -186,10 +182,6 @@
   },
   "Latex-equation": {
     "prefix": [
-      "equation",
-      "$$",
-      "$",
-      "Equation",
       "eq"
     ],
     "body": [
@@ -237,8 +229,7 @@
   },
   "fraction": {
     "prefix": [
-      "frac",
-      "\\"
+      "frac"
     ],
     "body": "frac{${1:top}}{${2:bottom}}",
     "description": "fraction-snippet"
@@ -408,6 +399,6 @@
   "latin": {
     "prefix": "latin",
     "body": "\\textlatin{${1:text}}",
-    "description": "textlatin"
+    "description": "LaTeX latin"
   }
 }

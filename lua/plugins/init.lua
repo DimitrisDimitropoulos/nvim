@@ -19,51 +19,14 @@ local plugins = {
     config = function() vim.cmd.colorscheme 'tokyonight-storm' end,
   },
 
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   lazy = false,
-  --   name = 'kanagawa',
-  --   enabled = false,
-  --   priority = 1000,
-  --   config = function() vim.cmd.colorscheme 'kanagawa-wave' end,
-  -- },
-
-  -- {
-  --   'catppuccin/nvim',
-  --   lazy = false,
-  --   enabled = false,
-  --   name = 'catppuccin',
-  --   priority = 1000,
-  --   config = function() vim.cmd.colorscheme 'catppuccin-frappe' end,
-  -- },
-
-  -- {
-  --   'freddiehaddad/feline.nvim',
-  --   enabled = false,
-  --   event = 'VeryLazy',
-  --   config = function() require 'plugins.configs.feline' end,
-  -- },
-
   {
     'rebelot/heirline.nvim',
     -- enabled = false,
-    -- event = 'VeryLazy',
-    priority = 900,
-    lazy = false,
+    event = 'BufReadPre',
+    -- priority = 900,
+    -- lazy = false,
     config = function() require 'plugins.configs.heirline' end,
   },
-
-  -- {
-  --   "nvim-tree/nvim-tree.lua",
-  --   enabled = false,
-  --   keys = "<C-b>",
-  --   config = function()
-  --     require("nvim-tree").setup(
-  --       { view = { adaptive_size = false, width = 30, side = "right", preserve_window_proportions = true } },
-  --       map("n", "<C-b>", function() require("nvim-tree.api").tree.toggle() end, { desc = "toggle nvimtree" })
-  --     )
-  --   end,
-  -- },
 
   {
     'nvim-tree/nvim-web-devicons',
@@ -119,7 +82,7 @@ local plugins = {
   {
     'williamboman/mason.nvim',
     build = ':MasonUpdate',
-    cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
+    cmd = { 'Mason' },
     config = function() require 'plugins.configs.mason' end,
   },
 
@@ -128,6 +91,8 @@ local plugins = {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function() require 'plugins.configs.lsp' end,
     dependencies = {
+
+      -- { 'DimitrisDimitropoulos/efmls-configs-nvim', branch = 'add-formatters-fix-cppcheck' },
 
       -- {
       --   'mfussenegger/nvim-lint',
@@ -181,7 +146,8 @@ local plugins = {
 
   {
     'goolord/alpha-nvim',
-    lazy = false,
+    enabled = false,
+    lazy = true,
     config = function() require 'plugins.configs.alpha' end,
   },
 
@@ -213,7 +179,7 @@ local plugins = {
 
   {
     'NvChad/nvim-colorizer.lua',
-    ft = { 'lua', 'css', 'scss' },
+    enabled = false,
     config = function()
       require('colorizer').setup {
         filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } },
@@ -223,6 +189,7 @@ local plugins = {
 
   {
     'lervag/vimtex',
+    enabled = false,
     ft = 'tex',
     config = function() require 'plugins.configs.vimtex' end,
   },

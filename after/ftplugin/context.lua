@@ -53,4 +53,3 @@ end
 map('n', '<leader>ll', fompile, { silent = true, desc = 'Fompile' })
 map('n', '<C-m>', scompile, { silent = true, desc = 'Scompile' })
 map('n', '<leader>lc', count_processes, { desc = 'Count processes' })
-
