@@ -282,6 +282,20 @@
     "body": "\\left[$1\\right]",
     "description": "LaTeX square bracket"
   },
+  "inline_math": {
+    "prefix": [
+      "\\()"
+    ],
+    "body": "\\($1\\",
+    "description": "LaTeX inline math"
+  },
+  "display_math": {
+    "prefix": [
+      "\\[]"
+    ],
+    "body": "\\[\n$1\n\\",
+    "description": "LaTeX display math"
+  },
   "squareroot": {
     "prefix": [
       "sqrt"
@@ -385,16 +399,6 @@
     ],
     "body": "\\infty",
     "description": "LaTeX infinity"
-  },
-  "Signature": {
-    "prefix": [
-      "Sign",
-      "Name",
-      "Dimitris",
-      "Δημήτρης"
-    ],
-    "body": "Δημητρό\\char982\\char547λος",
-    "description": "Signature-unicode version"
   },
   "latin": {
     "prefix": "latin",
