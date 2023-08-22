@@ -8,7 +8,7 @@ return {
     settings = {
       texlab = {
         build = {
-          -- onSave = true,
+          onSave = true,
           args = {
             '-pdf',
             '-lualatex',
@@ -23,7 +23,7 @@ return {
         },
         chktex = {
           onOpenAndSave = true,
-          onEdit = true,
+          onEdit = false,
         },
         diagnosticsDelay = 200,
         latexFormatter = 'latexindent',
