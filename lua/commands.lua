@@ -42,4 +42,4 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 local function toggle_spell_check() vim.opt.spell = not (vim.opt.spell:get()) end
-map('n', '<A-z>', toggle_spell_check, { desc = 'toggle spell check', silent = false, noremap = true })
+map('n', '<A-z>', toggle_spell_check, { silent = false, noremap = true })

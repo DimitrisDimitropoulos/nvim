@@ -6,7 +6,7 @@ telescope.setup {
     file_previewer = require('telescope.previewers').vim_buffer_cat.new,
     grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
-    file_ignore_patterns = { '.git', 'build' },
+    file_ignore_patterns = { '.git', 'build', 'LICENSE' },
     sorting_strategy = 'ascending',
     layout_config = {
       horizontal = {
@@ -43,17 +43,8 @@ telescope.setup {
       '--smart-case',
     },
   },
-  mappings = {
-    n = { ['q'] = require('telescope.actions').close },
-  },
-  pickers = {
-    diagnostics = {
-      path_display = 'hidden',
-    },
-  },
-  path_display = { 'truncate' },
-  color_devicons = true,
-  set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+  pickers = { diagnostics = { path_display = 'hidden' } },
+  set_env = { ['COLORTERM'] = 'truecolor' },
   extensions = {
     ['zf-native'] = {
       file = {
@@ -67,10 +58,7 @@ telescope.setup {
         match_filename = false,
       },
     },
-    file_browser = {
-      theme = 'ivy',
-      layout_config = { height = 0.85 },
-    },
+    file_browser = { theme = 'ivy', layout_config = { height = 0.85 } },
   },
 }
 
@@ -86,22 +74,23 @@ local map = vim.keymap.set
 
 local telescope_mappings = {
   -- stylua: ignore start
-  { key = "ff", cmd = "fd",                        desc = "files" },
-  { key = "fr", cmd = "oldfiles",                  desc = "old files" },
-  { key = "f;", cmd = "commands",                  desc = "commands" },
-  { key = "fg", cmd = "live_grep",                 desc = "live grep" },
-  { key = "fs", cmd = "grep_string",               desc = "cursor string" },
-  { key = "bb", cmd = "buffers",                   desc = "buffers" },
-  { key = "fh", cmd = "help_tags",                 desc = "help tags" },
-  { key = "fm", cmd = "marks",                     desc = "marks" },
-  { key = "fk", cmd = "keymaps",                   desc = "keymaps" },
-  { key = "fe", cmd = "registers",                 desc = "registers" },
-  { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
-  { key = "fc", cmd = "command_history",           desc = "command history" },
-  { key = "ld", cmd = "lsp_document_symbols",      desc = "lsp document symbols" },
-  { key = "sp", cmd = "spell_suggest",             desc = "spell suggest" },
-  { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "buf fuzzy" },
-  { key = "gs", cmd = "git_status",                desc = "git status" },
+  { key = 'ff', cmd = 'fd',                        desc = 'files' },
+  { key = 'fr', cmd = 'oldfiles',                  desc = 'old files' },
+  { key = 'f;', cmd = 'commands',                  desc = 'commands' },
+  { key = 'fg', cmd = 'live_grep',                 desc = 'live grep' },
+  { key = 'fs', cmd = 'grep_string',               desc = 'cursor string' },
+  { key = 'bb', cmd = 'buffers',                   desc = 'buffers' },
+  { key = 'fh', cmd = 'help_tags',                 desc = 'help tags' },
+  { key = 'f/', cmd = 'search_history',            desc = 'history' },
+  { key = 'fm', cmd = 'marks',                     desc = 'marks' },
+  { key = 'fk', cmd = 'keymaps',                   desc = 'keymaps' },
+  { key = 'fe', cmd = 'registers',                 desc = 'registers' },
+  { key = 'fd', cmd = 'diagnostics',               desc = 'diagnostics' },
+  { key = 'fc', cmd = 'command_history',           desc = 'command history' },
+  { key = 'fl', cmd = 'lsp_document_symbols',      desc = 'lsp document symbols' },
+  { key = 'sp', cmd = 'spell_suggest',             desc = 'spell suggest' },
+  { key = 'fz', cmd = 'current_buffer_fuzzy_find', desc = 'buf fuzzy' },
+  { key = 'f.', cmd = 'resume',                    desc = 'last' },
   -- stylua: ignore stop
 }
 for _, mapping in ipairs(telescope_mappings) do
@@ -115,17 +104,6 @@ end
 
 map(
   'n',
-  '<leader>ts',
-  function()
-    require('telescope.builtin').treesitter {
-      default_text = 'function',
-      initial_mode = 'normal',
-    }
-  end,
-  { desc = 'find treesitter' }
-)
-map(
-  'n',
   '<leader>fa',
   function()
     require('telescope.builtin').fd {
@@ -135,12 +113,12 @@ map(
       file_ignore_patterns = { '.git' },
     }
   end,
-  { desc = 'find files' }
+  { desc = 'find all files' }
 )
 
 map(
   'n',
   '<leader>fb',
-  function() require('telescope').extensions.file_browser.file_browser { initial_mode = 'normal' } end,
+  function() require('telescope').extensions.file_browser.file_browser() end,
   { desc = 'file browser', noremap = true }
 )

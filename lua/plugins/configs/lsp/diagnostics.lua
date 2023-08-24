@@ -12,7 +12,8 @@ end
 
 vim.diagnostic.config {
   underline = true,
-  virtual_text = { prefix = ' ' },
+  undercurl = true,
+  virtual_text = { prefix = '➤ ' },
   signs = true,
   update_in_insert = false,
   float = { source = 'always', border = 'rounded', show_header = true },
