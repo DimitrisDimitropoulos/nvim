@@ -9,6 +9,7 @@ local ensure_installed = {
   'fourmolu',
   'prettier',
   'gersemi',
+  'texlab',
 }
 
 require('mason').setup {

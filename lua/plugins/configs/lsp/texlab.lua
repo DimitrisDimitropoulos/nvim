@@ -8,7 +8,7 @@ return {
     settings = {
       texlab = {
         build = {
-          onSave = true,
+          -- onSave = true,
           args = {
             '-pdf',
             '-lualatex',
@@ -31,7 +31,7 @@ return {
           ['local'] = nil, -- local is a reserved keyword
           modifyLineBreaks = false,
         },
-        bibtexFormatter = 'latexindent',
+        bibtexFormatter = 'texlab',
         formatterLineLength = 80,
       },
     },

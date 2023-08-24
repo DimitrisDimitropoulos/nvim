@@ -333,11 +333,6 @@
     "body": "\\left[${1:math}\\right]",
     "description": "math conceal"
   },
-  "sign": {
-    "prefix": ["sign", "name", "dimitris", "δημήτρης"],
-    "body": "Δημήτριος Δημητρό$\\varpi$ουλος",
-    "description": "Signature"
-  },
   "proportional": {
     "prefix": ["analog", "proportional"],
     "body": "\\propto",
@@ -352,11 +347,6 @@
       "\\bibliographystyle{${2:style_eg_acm}}"
     ],
     "description": "bibliography"
-  },
-  "Signature": {
-    "prefix": ["Sign", "Name", "Dimitris", "Δημήτρης"],
-    "body": "Δημητρό\\char982\\char547λος",
-    "description": "Signature-unicode version"
   },
   "hyperref": {
     "prefix": "hyperref",

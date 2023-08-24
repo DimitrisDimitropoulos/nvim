@@ -330,7 +330,7 @@ local Statusline = {
   -- { FileSize },
   -- { Space },
   { Git },
-  { Space },
+  -- { Space },
   { Diagnostics },
   { Align },
   { LSPMessages },

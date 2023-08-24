@@ -2,3 +2,4 @@
 *.dic
 *.spl
 ./lockfiles/tex.json.bak
+./spell/el.utf-8.add

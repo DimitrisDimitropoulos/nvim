@@ -17,10 +17,10 @@ end, { desc = 'quit with no save', silent = false })
 
 local commands = {
   -- stylua: ignore start
-  { key = "<ESC>",      cmd = "nohl"      },
-  { key = "<leader>bd", cmd = "bd"        },
-  { key = "<TAB>",      cmd = "bnext"     },
-  { key = "<S-Tab>",    cmd = "bprevious" },
+  { key = '<ESC>',      cmd = 'nohl' },
+  { key = '<leader>bd', cmd = 'bd' },
+  { key = '<TAB>',      cmd = 'bnext' },
+  { key = '<S-Tab>',    cmd = 'bprevious' },
   -- stylua: ignore stop
 }
 for _, command in ipairs(commands) do

@@ -15,7 +15,7 @@ M.luasnip = function(opts)
   -- require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets" } }
   require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load {
-    paths = vim.g.vscode_snippets_path,
+    paths = '~/.config/nvim/snippets/json_snippets/' or '',
   }
 
   -- -- snipmate format
@@ -25,7 +25,7 @@ M.luasnip = function(opts)
   -- lua format
   require('luasnip.loaders.from_lua').load()
   require('luasnip.loaders.from_lua').lazy_load {
-    paths = vim.g.lua_snippets_path or '',
+    paths = '~/.config/nvim/snippets/lua_snippets/' or '',
   }
 
   vim.api.nvim_create_autocmd('InsertLeave', {

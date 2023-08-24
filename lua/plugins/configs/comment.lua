@@ -4,7 +4,6 @@ if not Comment_ok then return end
 local map = vim.keymap.set
 
 Comment.setup {
-
   map(
     'n',
     '<leader>/',

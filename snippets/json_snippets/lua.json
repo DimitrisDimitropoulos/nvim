@@ -1,9 +1,7 @@
 {
   "require": {
     "prefix": "rr",
-    "body": [
-      "require '$1'$0"
-    ],
+    "body": "require '$1'$0",
     "description": "Require in style"
   }
 }
