@@ -46,23 +46,12 @@ telescope.setup {
   pickers = { diagnostics = { path_display = 'hidden' } },
   set_env = { ['COLORTERM'] = 'truecolor' },
   extensions = {
-    ['zf-native'] = {
-      file = {
-        enable = true,
-        highlight_results = true,
-        match_filename = true,
-      },
-      generic = {
-        enable = true,
-        highlight_results = true,
-        match_filename = false,
-      },
-    },
-    file_browser = { theme = 'ivy', layout_config = { height = 0.85 } },
+    fzf = { case_mode = 'smart_case' },
+    file_browser = { theme = 'ivy', layout_config = { height = 0.95 } },
   },
 }
 
-local tel_plugs = { 'zf-native', 'file_browser' }
+local tel_plugs = { 'fzf', 'file_browser' }
 for _, plug in ipairs(tel_plugs) do
   require('telescope').load_extension(plug)
 end
@@ -74,23 +63,23 @@ local map = vim.keymap.set
 
 local telescope_mappings = {
   -- stylua: ignore start
-  { key = 'ff', cmd = 'fd',                        desc = 'files' },
-  { key = 'fr', cmd = 'oldfiles',                  desc = 'old files' },
-  { key = 'f;', cmd = 'commands',                  desc = 'commands' },
-  { key = 'fg', cmd = 'live_grep',                 desc = 'live grep' },
-  { key = 'fs', cmd = 'grep_string',               desc = 'cursor string' },
-  { key = 'bb', cmd = 'buffers',                   desc = 'buffers' },
-  { key = 'fh', cmd = 'help_tags',                 desc = 'help tags' },
-  { key = 'f/', cmd = 'search_history',            desc = 'history' },
-  { key = 'fm', cmd = 'marks',                     desc = 'marks' },
-  { key = 'fk', cmd = 'keymaps',                   desc = 'keymaps' },
-  { key = 'fe', cmd = 'registers',                 desc = 'registers' },
-  { key = 'fd', cmd = 'diagnostics',               desc = 'diagnostics' },
-  { key = 'fc', cmd = 'command_history',           desc = 'command history' },
+  { key = 'ff', cmd = 'fd',                        desc = 'files'                },
+  { key = 'fr', cmd = 'oldfiles',                  desc = 'old files'            },
+  { key = 'f;', cmd = 'commands',                  desc = 'commands'             },
+  { key = 'fg', cmd = 'live_grep',                 desc = 'live grep'            },
+  { key = 'fs', cmd = 'grep_string',               desc = 'cursor string'        },
+  { key = 'bb', cmd = 'buffers',                   desc = 'buffers'              },
+  { key = 'fh', cmd = 'help_tags',                 desc = 'help tags'            },
+  { key = 'f/', cmd = 'search_history',            desc = 'history'              },
+  { key = 'fm', cmd = 'marks',                     desc = 'marks'                },
+  { key = 'fk', cmd = 'keymaps',                   desc = 'keymaps'              },
+  { key = 'fe', cmd = 'registers',                 desc = 'registers'            },
+  { key = 'fd', cmd = 'diagnostics',               desc = 'diagnostics'          },
+  { key = 'fc', cmd = 'command_history',           desc = 'command history'      },
   { key = 'fl', cmd = 'lsp_document_symbols',      desc = 'lsp document symbols' },
-  { key = 'sp', cmd = 'spell_suggest',             desc = 'spell suggest' },
-  { key = 'fz', cmd = 'current_buffer_fuzzy_find', desc = 'buf fuzzy' },
-  { key = 'f.', cmd = 'resume',                    desc = 'last' },
+  { key = 'sp', cmd = 'spell_suggest',             desc = 'spell suggest'        },
+  { key = 'fz', cmd = 'current_buffer_fuzzy_find', desc = 'buf fuzzy'            },
+  { key = 'f.', cmd = 'resume',                    desc = 'last'                 },
   -- stylua: ignore stop
 }
 for _, mapping in ipairs(telescope_mappings) do
@@ -116,9 +105,4 @@ map(
   { desc = 'find all files' }
 )
 
-map(
-  'n',
-  '<leader>fb',
-  function() require('telescope').extensions.file_browser.file_browser() end,
-  { desc = 'file browser', noremap = true }
-)
+map('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { desc = 'file browser' })
