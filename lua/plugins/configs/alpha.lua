@@ -3,7 +3,7 @@ if not alpha_ok then return end
 local dashboard = require 'alpha.themes.dashboard'
 
 dashboard.section.header.opts = {
-  hl = 'VioletHLGroup',
+  hl = 'String',
   position = 'center',
 }
 

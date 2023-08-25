@@ -2,20 +2,12 @@
 
 local plugins = {
 
-  -- {
-  --   'savq/melange-nvim',
-  --   lazy = false,
-  --   enabled = false,
-  --   name = 'melange',
-  --   priority = 1000,
-  --   config = function() vim.cmd.colorscheme 'melange' end,
-  -- },
-
   {
-    'folke/tokyonight.nvim',
+    'savq/melange-nvim',
     lazy = false,
+    name = 'melange',
     priority = 1000,
-    config = function() vim.cmd.colorscheme 'tokyonight-storm' end,
+    config = function() vim.cmd.colorscheme 'melange' end,
   },
 
   {
@@ -117,8 +109,9 @@ local plugins = {
     config = function() require 'plugins.configs.telescope' end,
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
-      { 'natecraddock/telescope-zf-native.nvim' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       { 'nvim-telescope/telescope-file-browser.nvim' },
+      { 'debugloop/telescope-undo.nvim' },
     },
   },
 

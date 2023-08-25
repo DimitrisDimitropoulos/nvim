@@ -4,7 +4,6 @@ require('nvim-treesitter.configs').setup {
     'json',
     'yaml',
     'toml',
-    'css',
     'cpp',
     'c',
     'rust',
@@ -36,4 +35,4 @@ for _, hl in ipairs(comms_hl) do
   vim.api.nvim_set_hl(0, hl, { bold = true, underline = true })
 end
 
--- vim.api.nvim_set_hl(0, '@lsp.typemod.keyword.documentation', { link = 'VioletHLGroup' })
+vim.api.nvim_set_hl(0, '@lsp.typemod.keyword', { link = 'VioletHLGroup' })
