@@ -73,3 +73,7 @@ This Bash script restores the `lazy-lock.json` file to the last backup file in t
 5. If the user confirms, removes the current `lazy-lock.json` file, copies the backup file to the current directory, and renames the backup file to `lazy-lock.json`.
 6. Outputs a message indicating that the restore is complete.
 7. If there are no backup files found, outputs a message indicating that no backup files were found and suggests using `git reset`.
+
+## TODO
+
+[] Add more windows support, with powershell port of the scripts, and a script to install dependencies
