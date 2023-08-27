@@ -2,21 +2,15 @@
 
 local plugins = {
 
-  -- {
-  --   'savq/melange-nvim',
-  --   lazy = false,
-  --   name = 'melange',
-  --   priority = 1000,
-  --   config = function() vim.cmd.colorscheme 'melange' end,
-  -- },
-
   {
-    'rose-pine/neovim',
-    name = 'rose-pine',
+    'savq/melange-nvim',
     lazy = false,
+    name = 'melange',
     priority = 1000,
-    config = function() vim.cmd.colorscheme 'rose-pine-moon' end,
+    config = function() vim.cmd.colorscheme 'melange' end,
   },
+
+  { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
 
   {
     'rebelot/heirline.nvim',
@@ -26,6 +20,18 @@ local plugins = {
   },
 
   { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
+
+  {
+    'nvim-telescope/telescope.nvim',
+    keys = { '<leader>f' },
+    cmd = 'Telescope',
+    config = function() require 'plugins.configs.telescope' end,
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      { 'nvim-telescope/telescope-file-browser.nvim' },
+    },
+  },
 
   {
     'nvim-treesitter/nvim-treesitter',
@@ -72,13 +78,6 @@ local plugins = {
   },
 
   {
-    'williamboman/mason.nvim',
-    build = ':MasonUpdate',
-    cmd = 'Mason',
-    config = function() require 'plugins.configs.mason' end,
-  },
-
-  {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function() require 'plugins.configs.lsp' end,
@@ -105,21 +104,16 @@ local plugins = {
   },
 
   {
-    'lukas-reineke/indent-blankline.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function() require 'plugins.configs.indent' end,
+    'williamboman/mason.nvim',
+    build = ':MasonUpdate',
+    cmd = 'Mason',
+    config = function() require 'plugins.configs.mason' end,
   },
 
   {
-    'nvim-telescope/telescope.nvim',
-    keys = { '<leader>f' },
-    cmd = 'Telescope',
-    config = function() require 'plugins.configs.telescope' end,
-    dependencies = {
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      { 'nvim-telescope/telescope-file-browser.nvim' },
-    },
+    'lukas-reineke/indent-blankline.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function() require 'plugins.configs.indent' end,
   },
 
   {
@@ -134,13 +128,21 @@ local plugins = {
     config = function() require 'plugins.configs.comment' end,
   },
 
-  { 'goolord/alpha-nvim', lazy = false, config = function() require 'plugins.configs.alpha' end },
-
   {
     'echasnovski/mini.nvim',
     version = false,
     event = 'InsertEnter',
     config = function() require 'plugins.configs.mini' end,
+  },
+
+  {
+    'folke/which-key.nvim',
+    keys = { '<leader>', '"', "'", '`', ',', 'c', 'v' },
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = function() return require 'plugins.configs.whichkey' end,
   },
 
   {
@@ -152,16 +154,6 @@ local plugins = {
       local map = vim.keymap.set
       require('trouble').setup(map('n', '<leader>tr', function() require('trouble').toggle() end, { desc = 'trouble' }))
     end,
-  },
-
-  {
-    'folke/which-key.nvim',
-    keys = { '<leader>', '"', "'", '`', ',', 'c', 'v' },
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = function() return require 'plugins.configs.whichkey' end,
   },
 
   {
