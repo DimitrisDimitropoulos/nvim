@@ -2,12 +2,20 @@
 
 local plugins = {
 
+  -- {
+  --   'savq/melange-nvim',
+  --   lazy = false,
+  --   name = 'melange',
+  --   priority = 1000,
+  --   config = function() vim.cmd.colorscheme 'melange' end,
+  -- },
+
   {
-    'savq/melange-nvim',
+    'rose-pine/neovim',
+    name = 'rose-pine',
     lazy = false,
-    name = 'melange',
     priority = 1000,
-    config = function() vim.cmd.colorscheme 'melange' end,
+    config = function() vim.cmd.colorscheme 'rose-pine-moon' end,
   },
 
   {
