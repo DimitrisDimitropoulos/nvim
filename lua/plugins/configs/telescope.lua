@@ -6,11 +6,13 @@ local extras = {
   file_browser = { theme = 'ivy', layout_config = { height = 0.95 } },
 }
 
+local previewers = require 'telescope.previewers'
+
 telescope.setup {
   defaults = {
-    file_previewer = require('telescope.previewers').vim_buffer_cat.new,
-    grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
-    qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+    file_previewer = previewers.vim_buffer_cat.new,
+    grep_previewer = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer = previewers.vim_buffer_qflist.new,
     file_ignore_patterns = { '.git', 'build', 'LICENSE' },
     sorting_strategy = 'ascending',
     layout_config = {

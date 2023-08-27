@@ -45,23 +45,16 @@ end
 
 cmp.setup {
 
-  experimental = { ghost_text = true },
-
   window = {
     completion = {
       winhighlight = 'Normal:CmpPmenu,Search:PmenuSel',
       scrollbar = false,
       border = border 'CmpDocBorder',
     },
-    documentation = {
-      border = border 'CmpDocBorder',
-      winhighlight = 'Normal:CmpDoc',
-    },
+    documentation = { border = border 'CmpDocBorder', winhighlight = 'Normal:CmpDoc' },
   },
 
-  snippet = {
-    expand = function(args) ls.lsp_expand(args.body) end,
-  },
+  snippet = { expand = function(args) ls.lsp_expand(args.body) end },
 
   mapping = cmp.mapping.preset.insert {
     ['<Up>'] = cmp.mapping.select_prev_item(),

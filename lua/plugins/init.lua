@@ -83,21 +83,20 @@ local plugins = {
     config = function() require 'plugins.configs.lsp' end,
     dependencies = {
 
-      -- {
-      --   'mfussenegger/nvim-lint',
-      --   config = function()
-      --     require('lint').linters_by_ft = {
-      --       python = { 'ruff' },
-      --     }
-      --     vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost' }, {
-      --       callback = function()
-      --         local lint_status, lint = pcall(require, 'lint')
-      --         if lint_status then lint.try_lint() end
-      --       end,
-      --     })
-      --   end,
-      -- },
-      --
+      --[[ {
+        'mfussenegger/nvim-lint',
+        config = function()
+          require('lint').linters_by_ft = {
+            python = { 'ruff' },
+          }
+          vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost' }, {
+            callback = function()
+              local lint_status, lint = pcall(require, 'lint')
+              if lint_status then lint.try_lint() end
+            end,
+          })
+        end,
+      }, ]]
 
       --
     },
@@ -160,9 +159,7 @@ local plugins = {
     'NvChad/nvim-colorizer.lua',
     enabled = false,
     config = function()
-      require('colorizer').setup {
-        filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } },
-      }
+      require('colorizer').setup { filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } } }
     end,
   },
 

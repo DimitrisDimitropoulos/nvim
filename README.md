@@ -77,4 +77,3 @@ This Bash script restores the `lazy-lock.json` file to the last backup file in t
 ## TODO
 
 -   [ ] Add more windows support, with powershell port of the scripts, and a script to install dependencies
-

@@ -13,8 +13,8 @@ opt.scrolloff = 3
 opt.sidescrolloff = 3
 
 vim.opt.numberwidth = 3
--- opt.cursorlineopt = 'number'
-opt.cursorline = true
+opt.cursorlineopt = 'number'
+-- opt.cursorline = true
 opt.cursorcolumn = false
 opt.clipboard = 'unnamedplus'
 
@@ -24,7 +24,6 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
--- vim.opt.fillchars = { eob = ' ' }
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = 'c'
