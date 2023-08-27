@@ -83,16 +83,10 @@ local ViMode = {
     local mode = self.mode:sub(1, 1) -- get only the first mode character
     return { fg = 'black', bg = self.mode_colors[mode], bold = true }
   end,
-  update = {
-    'ModeChanged',
-    pattern = '*:*',
-    callback = vim.schedule_wrap(function() vim.cmd 'redrawstatus' end),
-  },
+  update = { 'ModeChanged', pattern = '*:*', callback = vim.schedule_wrap(function() vim.cmd 'redrawstatus' end) },
 }
 
-local FileNameBlock = {
-  init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
-}
+local FileNameBlock = { init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end }
 
 local FileIcon = {
   init = function(self)
@@ -149,15 +143,7 @@ local FileType = {
   hl = { fg = utils.get_highlight('String').fg, bold = true, bg = 'bg' },
 }
 
-local Ruler = {
-  -- %l = current line number
-  -- %L = number of lines in the buffer
-  -- %c = column number
-  -- %P = percentage through file of displayed window
-  -- provider = '%7(%l/%3L%):%2c %P',
-  provider = '%l:%c',
-  hl = { fg = 'yellow', bg = 'bg', bold = true },
-}
+local Ruler = { provider = '%l:%c', hl = { fg = 'yellow', bg = 'bg', bold = true } }
 
 local LSPActive = {
   condition = conditions.lsp_attached,
@@ -195,22 +181,14 @@ local lsp_progress = function()
 end
 
 local LSPMessages = {
-  provider = function() return #vim.lsp.buf_get_clients() > 0 and lsp_progress() or '' end,
+  condition = function() return #vim.lsp.buf_get_clients() > 0 end,
+  provider = function() return lsp_progress() or '' end,
   hl = { fg = 'peanut', bg = 'bg' },
 }
 
 local Diagnostics = {
   condition = conditions.has_diagnostics,
-  static = {
-    -- error_icon = 'Χ',
-    -- warn_icon = 'Δ',
-    -- info_icon = 'i',
-    -- hint_icon = '?',
-    error_icon = ' ',
-    warn_icon = ' ',
-    info_icon = ' ',
-    hint_icon = ' ',
-  },
+  static = { error_icon = ' ', warn_icon = ' ', info_icon = ' ', hint_icon = ' ' },
   init = function(self)
     self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -218,10 +196,7 @@ local Diagnostics = {
     self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
   end,
   update = { 'DiagnosticChanged', 'BufEnter' },
-  {
-    provider = '![',
-    hl = { fg = 'peanut', bg = 'bg' },
-  },
+  { provider = '![', hl = { fg = 'peanut', bg = 'bg' } },
   {
     provider = function(self)
       -- 0 is just another output, we can decide to print it or not!
@@ -241,10 +216,7 @@ local Diagnostics = {
     provider = function(self) return self.hints > 0 and (self.hint_icon .. self.hints) end,
     hl = { fg = 'diag_hint', bg = 'bg' },
   },
-  {
-    provider = ']',
-    hl = { fg = 'peanut', bg = 'bg' },
-  },
+  { provider = ']', hl = { fg = 'peanut', bg = 'bg' } },
 }
 
 local FileSize = {
