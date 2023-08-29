@@ -1,4 +1,4 @@
---- @diagnostic disable: unused-local
+---@diagnostic disable: unused-local
 local prettier = {
   prefix = 'prettier',
   formatCanRange = true,
@@ -64,7 +64,7 @@ local shellcheck = {
 local mypy = {
   prefix = 'mypy',
   lintSource = 'mypy',
-  lintCommand = 'mypy --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
+  lintCommand = 'mypy --strict --strict-equality --ignore-missing-imports --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
   lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
   rootMarkers = { 'mypy.ini', 'pyproject.toml', 'setup.cfg' },
 }
@@ -95,6 +95,17 @@ local selene = {
   lintCommand = 'selene --display-style quiet -',
   lintFormats = { '%f:%l:%c: %trror%m', '%f:%l:%c: %tarning%m', '%f:%l:%c: %tote%m' },
 }
+
+-- -- FIXME: ruff, @2023-08-29 17:16:40
+-- local ruff = {
+--   prefix = 'ruff',
+--   lintSource = 'ruff',
+--   lintStdin = true,
+--   lintCommand = 'ruff --stdin-filename ${INPUT} --no-fix -',
+--   lintIgnoreExitCode = true,
+--   -- path/to/file:line:col: code message
+--   lintFormats = '%f:%l:%c: %m',
+-- }
 
 local langs = {
   json = { jq_lint, jq_format },

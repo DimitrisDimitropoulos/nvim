@@ -1,23 +1,14 @@
 --- @diagnostic disable: different-requires
 
+local evs = { 'BufReadPre', 'BufNewFile' }
+
 local plugins = {
 
-  {
-    'savq/melange-nvim',
-    lazy = false,
-    name = 'melange',
-    priority = 1000,
-    config = function() vim.cmd.colorscheme 'melange' end,
-  },
+  { 'savq/melange-nvim', lazy = false, config = function() vim.cmd.colorscheme 'melange' end },
 
   { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
 
-  {
-    'rebelot/heirline.nvim',
-    priority = 900,
-    lazy = false,
-    config = function() require 'plugins.configs.heirline' end,
-  },
+  { 'rebelot/heirline.nvim', event = 'VeryLazy', config = function() require 'plugins.configs.heirline' end },
 
   { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
 
@@ -36,7 +27,7 @@ local plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = evs,
     config = function() require 'plugins.configs.treesitter' end,
   },
 
@@ -79,26 +70,24 @@ local plugins = {
 
   {
     'neovim/nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = evs,
     config = function() require 'plugins.configs.lsp' end,
     dependencies = {
-
-      --[[ {
+      {
         'mfussenegger/nvim-lint',
+        -- enabled = false,
         config = function()
-          require('lint').linters_by_ft = {
-            python = { 'ruff' },
-          }
-          vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost' }, {
+          require('lint').linters_by_ft = { python = { 'ruff' } }
+          vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost', 'BufReadPre', 'InsertEnter' }, {
+            group = vim.api.nvim_create_augroup('Lint', { clear = true }),
             callback = function()
               local lint_status, lint = pcall(require, 'lint')
               if lint_status then lint.try_lint() end
             end,
+            desc = 'lint setup',
           })
         end,
-      }, ]]
-
-      --
+      },
     },
   },
 
@@ -109,17 +98,9 @@ local plugins = {
     config = function() require 'plugins.configs.mason' end,
   },
 
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function() require 'plugins.configs.indent' end,
-  },
+  { 'lukas-reineke/indent-blankline.nvim', event = evs, config = function() require 'plugins.configs.indent' end },
 
-  {
-    'lewis6991/gitsigns.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function() require 'plugins.configs.signs' end,
-  },
+  { 'lewis6991/gitsigns.nvim', event = evs, config = function() require 'plugins.configs.signs' end },
 
   {
     'numToStr/Comment.nvim',

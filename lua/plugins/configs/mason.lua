@@ -14,11 +14,7 @@ local ensure_installed = {
 
 require('mason').setup {
   ui = {
-    icons = {
-      package_installed = '✓',
-      package_pending = '➜',
-      package_uninstalled = '✗',
-    },
+    icons = { package_installed = '✓', package_pending = '➜', package_uninstalled = '✗' },
     keymaps = {
       toggle_server_expand = '<CR>',
       install_server = 'i',
