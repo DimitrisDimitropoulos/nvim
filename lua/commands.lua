@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'help', 'lspinfo', 'man', 'qf', 'query', 'checkhealth' },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    map('n', 'q', function() vim.cmd 'close' end, { buffer = event.buf, silent = true })
+    map('n', 'q', function() vim.cmd.close {} end, { buffer = event.buf, silent = true })
   end,
   desc = 'close with q',
 })

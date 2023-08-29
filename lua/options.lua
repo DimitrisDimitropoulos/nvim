@@ -1,9 +1,7 @@
 vim.g.mapleader = ' '
-vim.g.do_filetype_lua = 1
 
 local opt = vim.opt
 
-opt.syntax = 'off'
 opt.incsearch = true
 
 opt.spelllang = 'el,en'
@@ -12,9 +10,9 @@ opt.showmode = false
 opt.scrolloff = 3
 opt.sidescrolloff = 3
 
-vim.opt.numberwidth = 3
+opt.numberwidth = 3
 opt.cursorlineopt = 'number'
--- opt.cursorline = true
+opt.cursorline = false
 opt.cursorcolumn = false
 opt.clipboard = 'unnamedplus'
 
@@ -24,18 +22,19 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
+opt.pumheight = 10
+
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = 'c'
 
--- Numbers
 opt.number = true
-opt.numberwidth = 2
 opt.relativenumber = true
+opt.numberwidth = 2
 opt.ruler = false
 
--- disable nvim intro
 opt.shortmess:append 'sI'
+-- opt.fillchars = { eob = ' ' }
 
 opt.signcolumn = 'yes'
 opt.splitbelow = true
@@ -45,7 +44,6 @@ opt.timeoutlen = 400
 opt.undofile = true
 opt.updatetime = 250
 
--- disable some default providers
 local providers = { 'node', 'perl', 'python3', 'ruby' }
 for _, provider in ipairs(providers) do
   vim.g['loaded_' .. provider .. '_provider'] = 0
