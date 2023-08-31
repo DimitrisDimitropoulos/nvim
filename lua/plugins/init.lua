@@ -75,7 +75,7 @@ local plugins = {
     dependencies = {
       {
         'mfussenegger/nvim-lint',
-        -- enabled = false,
+        enabled = false,
         config = function()
           require('lint').linters_by_ft = { python = { 'ruff' } }
           vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost', 'BufReadPre', 'InsertEnter' }, {
@@ -110,9 +110,17 @@ local plugins = {
 
   {
     'echasnovski/mini.nvim',
+    enabled = false,
     version = false,
     event = 'InsertEnter',
     config = function() require 'plugins.configs.mini' end,
+  },
+
+  {
+    'echasnovski/mini.splitjoin',
+    version = false,
+    keys = { 'gS' },
+    config = function() require('mini.splitjoin').setup() end,
   },
 
   {

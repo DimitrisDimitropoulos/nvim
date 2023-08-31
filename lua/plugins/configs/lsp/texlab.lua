@@ -23,7 +23,7 @@ return {
         },
         chktex = {
           onOpenAndSave = true,
-          onEdit = false,
+          onEdit = true,
         },
         diagnosticsDelay = 200,
         latexFormatter = 'latexindent',
