@@ -7,11 +7,11 @@ lspconfig.lua_ls.setup {
       runtime = { version = 'LuaJIT' },
       workspace = {
         checkThirdParty = false,
-        -- library = {
-        --   [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-        --   [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-        --   [vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy'] = true,
-        -- },
+        library = {
+          [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+          [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+          [vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy'] = true,
+        },
         maxPreload = 1000,
         preloadFileSize = 1000,
       },
