@@ -24,6 +24,8 @@ vim.g.clipboard = {
   paste = { ['+'] = 'xclip -selection clipboard -o', ['*'] = 'xclip -selection clipboard -o' },
 }
 
+vim.opt.foldenable = false
+
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.smartindent = true
