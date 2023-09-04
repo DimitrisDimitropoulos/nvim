@@ -32,4 +32,5 @@ for _, hl in ipairs(comms_hl) do
   vim.api.nvim_set_hl(0, hl, { bold = true, underline = true })
 end
 
+vim.api.nvim_set_hl(0, 'VioletHLGroup', { fg = '#d4bfff' })
 vim.api.nvim_set_hl(0, '@lsp.typemod.keyword', { link = 'VioletHLGroup' })
