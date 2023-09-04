@@ -10,10 +10,10 @@ M.luasnip = function(opts)
   vim.keymap.set({ 'i', 's' }, '<A-l>', function() cicle(1) end)
   vim.keymap.set({ 'i', 's' }, '<A-h>', function() cicle(-1) end)
 
-  require('luasnip.loaders.from_vscode').lazy_load()
+  -- require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load { paths = '~/.config/nvim/snippets/json_snippets/' or '' }
 
-  require('luasnip.loaders.from_lua').lazy_load()
+  -- require('luasnip.loaders.from_lua').lazy_load()
   require('luasnip.loaders.from_lua').lazy_load { paths = '~/.config/nvim/snippets/lua_snippets/' or '' }
 
   vim.api.nvim_create_autocmd('InsertLeave', {
