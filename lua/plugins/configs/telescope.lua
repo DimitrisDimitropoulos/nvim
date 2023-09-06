@@ -24,7 +24,7 @@ telescope.setup {
       },
       vertical = { mirror = false },
       width = 0.97,
-      height = 0.90,
+      height = 0.95,
       preview_cutoff = 120,
     },
     preview = {
@@ -108,6 +108,6 @@ map(
 map(
   'n',
   '<leader>fb',
-  function() require('telescope').extensions.file_browser.file_browser() end,
+  function() require('telescope').extensions.file_browser.file_browser { initial_mode = 'normal' } end,
   { desc = 'file browser' }
 )
