@@ -20,7 +20,7 @@ local plugins = {
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      { 'nvim-telescope/telescope-file-browser.nvim' },
+      -- { 'nvim-telescope/telescope-file-browser.nvim' },
     },
   },
 
@@ -44,13 +44,7 @@ local plugins = {
       {
         'L3MON4D3/LuaSnip',
         dependencies = 'rafamadriz/friendly-snippets',
-        opts = {
-          history = true,
-          updateevents = 'TextChanged,TextChangedI',
-          delete_check_events = 'TextChanged',
-          enable_autosnippets = true,
-        },
-        config = function(_, opts) require('plugins.configs.luasnip').luasnip(opts) end,
+        config = function() require 'plugins.configs.luasnip' end,
       },
 
       {
@@ -109,7 +103,7 @@ local plugins = {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = function() return require 'plugins.configs.whichkey' end,
+    opts = require 'plugins.configs.whichkey',
   },
 
   {
