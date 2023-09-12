@@ -1,10 +1,8 @@
 local signs = {
-  -- stylua: ignore start
   { hl = 'DiagnosticSignError', txt = '■' },
-  { hl = 'DiagnosticSignWarn',  txt = '△' },
-  { hl = 'DiagnosticSignInfo',  txt = '○' },
-  { hl = 'DiagnosticSignHint',  txt = '󰨔' },
-  -- stylua: ignore stop
+  { hl = 'DiagnosticSignWarn', txt = '△' },
+  { hl = 'DiagnosticSignInfo', txt = '○' },
+  { hl = 'DiagnosticSignHint', txt = '󰨔' },
 }
 for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.hl, { text = sign.txt, texthl = sign.hl })
