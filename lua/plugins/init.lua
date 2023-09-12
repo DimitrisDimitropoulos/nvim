@@ -17,11 +17,7 @@ local plugins = {
     keys = { '<leader>f' },
     cmd = 'Telescope',
     config = function() require 'plugins.configs.telescope' end,
-    dependencies = {
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      -- { 'nvim-telescope/telescope-file-browser.nvim' },
-    },
+    dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' } },
   },
 
   {
@@ -92,13 +88,13 @@ local plugins = {
   {
     'echasnovski/mini.splitjoin',
     version = false,
-    keys = { 'gS' },
+    keys = 'gS',
     config = function() require('mini.splitjoin').setup() end,
   },
 
   {
     'folke/which-key.nvim',
-    keys = { '<leader>', '"', "'", '`', ',', 'c', 'v' },
+    keys = { '<leader>', '"', "'", '`', ',', 'c', 'v', '[', ']', 'g' },
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -119,7 +115,7 @@ local plugins = {
 
   {
     'NvChad/nvim-colorizer.lua',
-    enabled = false,
+    -- enabled = false,
     config = function()
       require('colorizer').setup { filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } } }
     end,
@@ -130,7 +126,7 @@ local plugins = {
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     config = true,
     cmd = 'Neogit',
-    opts = { status = { recent_commit_count = 30 } },
+    opts = { status = { recent_commit_count = 90 } },
   },
 
   { 'lervag/vimtex', enabled = false, ft = 'tex', config = function() require 'plugins.configs.vimtex' end },
