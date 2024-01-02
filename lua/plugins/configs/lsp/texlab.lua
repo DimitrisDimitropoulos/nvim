@@ -8,11 +8,12 @@ return {
     settings = {
       texlab = {
         build = {
-          -- onSave = true,
+          onSave = true,
           args = {
             '-pdf',
             '-lualatex',
             '-interaction=nonstopmode',
+            '-aux-directory=build',
             '-synctex=1',
             '%f',
           },

@@ -17,3 +17,5 @@ local arrows = { '<Up>', '<Down>', '<Left>', '<Right>' }
 for _, arrow in ipairs(arrows) do
   map({ 'n', 'x', 'c' }, arrow, '')
 end
+
+map('n', '<leader>mm', function() vim.cmd 'make' end, { noremap = true, desc = 'make' })
