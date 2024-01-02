@@ -4,17 +4,21 @@ local evs = { 'BufReadPre', 'BufNewFile' }
 
 local plugins = {
 
-  { 'savq/melange-nvim', lazy = false, config = function() vim.cmd.colorscheme 'melange' end },
+  -- { 'savq/melange-nvim', lazy = false, config = function() vim.cmd.colorscheme 'melange' end },
+
+  { 'folke/tokyonight.nvim', lazy = false, config = function() vim.cmd.colorscheme 'tokyonight-storm' end },
+
+  -- { 'catppuccin/nvim', lazy = false, config = function() vim.cmd.colorscheme 'catppuccin-macchiato' end },
 
   -- { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
-  --
-  -- { 'rebelot/heirline.nvim', event = 'VeryLazy', config = function() require 'plugins.configs.heirline' end },
-  --
-  -- { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
+
+  { 'rebelot/heirline.nvim', event = 'VeryLazy', config = function() require 'plugins.configs.heirline' end },
+
+  { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
 
   {
     'nvim-telescope/telescope.nvim',
-    keys = { '<leader>f' },
+    keys = { '<leader>f', '<leader>s' },
     cmd = 'Telescope',
     config = function() require 'plugins.configs.telescope' end,
     dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' } },
@@ -67,7 +71,12 @@ local plugins = {
     config = function() require 'plugins.configs.mason' end,
   },
 
-  { 'lukas-reineke/indent-blankline.nvim', event = evs, config = function() require 'plugins.configs.indent' end },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    version = '2.20.7',
+    event = evs,
+    config = function() require 'plugins.configs.indent' end,
+  },
 
   { 'lewis6991/gitsigns.nvim', event = evs, config = function() require 'plugins.configs.signs' end },
 
@@ -115,7 +124,7 @@ local plugins = {
 
   {
     'NvChad/nvim-colorizer.lua',
-    -- enabled = false,
+    enabled = false,
     config = function()
       require('colorizer').setup { filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } } }
     end,
@@ -123,6 +132,7 @@ local plugins = {
 
   {
     'NeogitOrg/neogit',
+    enabled = false,
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     config = true,
     cmd = 'Neogit',

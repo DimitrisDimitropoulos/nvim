@@ -36,7 +36,7 @@ dashboard.section.buttons.val = {
   dashboard.button('r', '󰙰  > Oldfiles', ':Telescope oldfiles<CR>'),
   dashboard.button('f', '󰈞  > Find File', ':Telescope fd<CR>'),
   dashboard.button('l', '󱉶  > Live Grep', ':Telescope live_grep<CR>'),
-  dashboard.button('b', '  > Browse', ':Telescope file_browser initial_mode=normal <CR>'),
+  -- dashboard.button('b', '  > Browse', ':Telescope file_browser initial_mode=normal <CR>'),
   dashboard.button('m', '  > Marks', ':Telescope marks<CR>'),
   dashboard.button('L', '󰒲  > Lazy ', ':Lazy<CR>'),
   dashboard.button('M', '󱌢  > Mason ', ':Mason<CR>'),

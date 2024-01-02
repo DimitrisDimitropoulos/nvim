@@ -9,8 +9,8 @@ local opt = vim.opt
 opt.incsearch = true
 
 opt.spelllang = 'el,en'
-opt.laststatus = 0
--- opt.showmode = false
+opt.laststatus = 3
+opt.showmode = false
 opt.scrolloff = 3
 opt.sidescrolloff = 3
 
