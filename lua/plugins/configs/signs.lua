@@ -11,15 +11,15 @@ gitsigns.setup {
   on_attach = function()
     local gs = package.loaded.gitsigns
 
-    map('n', ',+', gs.stage_hunk, { desc = 'stage hunk' })
-    map('n', ',-', gs.reset_hunk, { desc = 'reset hunk' })
+    map('n', ',+', gs.stage_hunk, { desc = 'git stage hunk' })
+    map('n', ',-', gs.reset_hunk, { desc = 'git reset hunk' })
     map('n', ',g', gs.preview_hunk, { desc = 'preview hunk' })
-    map('n', ',b', function() gs.blame_line { full = true } end, { desc = 'blame line' })
-    map('n', ',r', gs.refresh, { desc = 'refresh' })
+    map('n', ',b', function() gs.blame_line { full = true } end, { desc = 'git blame line' })
+    map('n', ',r', gs.refresh, { desc = 'git refresh' })
 
     local git_nav = {
-      { key = '[g', cmd = 'prev_hunk' },
-      { key = ']g', cmd = 'next_hunk' },
+      { key = '[g', cmd = 'git prev_hunk' },
+      { key = ']g', cmd = 'git next_hunk' },
     }
     for _, nav in ipairs(git_nav) do
       map('n', nav.key, function()
@@ -48,3 +48,12 @@ gitsigns.setup {
   max_file_length = 1000,
   sign_priority = 1,
 }
+
+local get_hl = require('utils.ui_utils').get_hl
+vim.api.nvim_set_hl(0, 'GitSignsAdd', { bg = tostring(get_hl('Normal').background), fg = 'green' })
+vim.api.nvim_set_hl(
+  0,
+  'GitSignsChange',
+  { bg = tostring(get_hl('Normal').background), fg = tostring(get_hl('Comment').foreground) }
+)
+vim.api.nvim_set_hl(0, 'GitSignsDelete', { bg = tostring(get_hl('Normal').background), fg = 'red' })

@@ -6,9 +6,9 @@ local plugins = {
 
   -- { 'savq/melange-nvim', lazy = false, config = function() vim.cmd.colorscheme 'melange' end },
 
-  { 'folke/tokyonight.nvim', lazy = false, config = function() vim.cmd.colorscheme 'tokyonight-storm' end },
+  -- { 'rose-pine/neovim', name = 'rose-pine', lazy = false, config = function() vim.cmd.colorscheme 'rose-pine' end },
 
-  -- { 'catppuccin/nvim', lazy = false, config = function() vim.cmd.colorscheme 'catppuccin-macchiato' end },
+  { 'folke/tokyonight.nvim', lazy = false, config = function() vim.cmd.colorscheme 'tokyonight-storm' end },
 
   -- { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
 
@@ -39,11 +39,11 @@ local plugins = {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lua',
+      -- 'hrsh7th/cmp-nvim-lua',
 
       {
         'L3MON4D3/LuaSnip',
-        dependencies = 'rafamadriz/friendly-snippets',
+        dependencies = { 'rafamadriz/friendly-snippets' },
         config = function() require 'plugins.configs.luasnip' end,
       },
 
@@ -87,11 +87,11 @@ local plugins = {
   },
 
   {
-    'echasnovski/mini.nvim',
-    enabled = false,
-    version = false,
+    'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
-    config = function() require 'plugins.configs.mini' end,
+    config = function()
+      require('copilot').setup { suggestion = { auto_trigger = true, debounce = 5, keymap = { accept = '<S-Tab>' } } }
+    end,
   },
 
   {
@@ -102,7 +102,16 @@ local plugins = {
   },
 
   {
+    'echasnovski/mini.nvim',
+    enabled = false,
+    version = false,
+    event = 'InsertEnter',
+    config = function() require 'plugins.configs.mini' end,
+  },
+
+  {
     'folke/which-key.nvim',
+    -- enabled = false,
     keys = { '<leader>', '"', "'", '`', ',', 'c', 'v', '[', ']', 'g' },
     init = function()
       vim.o.timeout = true
@@ -140,8 +149,6 @@ local plugins = {
   },
 
   { 'lervag/vimtex', enabled = false, ft = 'tex', config = function() require 'plugins.configs.vimtex' end },
-
-  { 'github/copilot.vim', event = 'InsertEnter' },
 }
 
 require('lazy').setup(plugins, require 'plugins.configs.lazy')

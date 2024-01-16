@@ -3,5 +3,12 @@
     "prefix": "rr",
     "body": "require '$1'$0",
     "description": "Require in style"
+  },
+  "fraction": {
+    "prefix": [
+      "frac"
+    ],
+    "body": "\\frac{${1:top}}{${2:bottom}}",
+    "description": "fraction-snippet"
   }
 }
