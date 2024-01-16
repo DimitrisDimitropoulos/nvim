@@ -19,3 +19,5 @@ for _, arrow in ipairs(arrows) do
 end
 
 map('n', '<leader>mm', function() vim.cmd 'make' end, { noremap = true, desc = 'make' })
+map('n', '<leader>mr', function() vim.cmd 'make run' end, { noremap = true, desc = 'make run' })
+map('n', '<leader>mc', function() vim.cmd 'make clean' end, { noremap = true, desc = 'make clean' })

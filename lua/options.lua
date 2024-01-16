@@ -44,7 +44,7 @@ opt.relativenumber = true
 opt.numberwidth = 2
 opt.ruler = true
 
--- opt.shortmess:append 'sI'
+opt.shortmess:append 'sI'
 -- opt.fillchars = { eob = ' ' }
 
 opt.signcolumn = 'yes'

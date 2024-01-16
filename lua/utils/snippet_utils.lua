@@ -1,3 +1,4 @@
+-- test hello world
 local M = {}
 
 function M.get_comment_string()
@@ -35,6 +36,13 @@ function M.get_indentation()
   local indentation = line:sub(1, col):match '^%s+'
   if indentation == nil then return 0 end
   return #indentation
+end
+
+function M.parse_first_line()
+  local f_line = vim.api.nvim_buf_get_lines(0, 0, 1, true)
+  local last_word = f_line[1]:match '%S+$'
+  last_word = tostring(last_word)
+  if last_word == 'lualatex' or last_word == 'xelatex' or last_word == 'pdflatex' then return last_word end
 end
 
 -- local function split(str) return str:gsub(',', ',\n'):gsub('{', '{\n'):gsub('}', '\n}') end

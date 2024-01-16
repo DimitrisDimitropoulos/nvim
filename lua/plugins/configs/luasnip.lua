@@ -1,11 +1,27 @@
 local luasnip_ok, ls = pcall(require, 'luasnip')
 if not luasnip_ok then return end
 
+local types = require 'luasnip.util.types'
+
 ls.config.set_config {
   history = true,
   updateevents = 'TextChanged,TextChangedI',
   delete_check_events = 'TextChanged',
   enable_autosnippets = true,
+  ext_opts = {
+    [types.choiceNode] = {
+      active = {
+        virt_text = { { '●', 'PortalOrange' } },
+        hl_mode = 'combine',
+      },
+    },
+    [types.insertNode] = {
+      active = {
+        virt_text = { { '<...>', 'PortalBlue' } },
+        hl_mode = 'combine',
+      },
+    },
+  },
 }
 
 local function cicle(dir)

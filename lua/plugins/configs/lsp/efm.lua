@@ -95,21 +95,25 @@ local chktex = {
   lintSeverity = 2,
 }
 local latexindent = { formatCommand = 'latexindent -', formatStdin = true }
-
--- -- FIXME: ruff, @2023-08-29 17:16:40
--- local ruff = {
---   prefix = 'ruff',
---   lintSource = 'ruff',
---   lintStdin = true,
---   lintCommand = 'ruff --force-exclude --quiet --stdin-filename ${INPUT} --no-fix -',
---   lintIgnoreExitCode = true,
---   lintFormats = { '%f:%l:%c: %n %m' },
--- }
+local ruff_lint = {
+  prefix = 'ruff',
+  lintSource = 'ruff',
+  lintStdin = true,
+  lintCommand = 'ruff check  --stdin-filename ${INPUT} ',
+  lintFormats = { '%.%#:%l:%c: %t%n %m' },
+  lintSeverity = 4,
+  rootMarkers = { 'ruff.toml', 'pyproject.toml', 'setup.cfg' },
+}
+local ruff_format = {
+  formatCommand = 'ruff format --no-cache --stdin-filename ${INPUT} ',
+  formatStdin = true,
+  rootMarkers = { 'ruff.toml', 'pyproject.toml', 'setup.cfg' },
+}
 
 local langs = {
   -- tex = { chktex, latexindent },
   json = { jq_lint, jq_format },
-  python = { black, mypy, flake8 },
+  python = { ruff_format, ruff_lint },
   markdown = { prettier },
   css = { prettier },
   yaml = { prettier },
