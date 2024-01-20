@@ -13,6 +13,37 @@ local function buf_cancel_build()
 end
 vim.api.nvim_create_user_command('TexlabCancel', function() buf_cancel_build() end, { nargs = 0 })
 
+local function dependency_graph()
+  local texlab_client = util.get_active_client_by_name(0, 'texlab')
+  if texlab_client then
+    texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
+      if err then error(tostring(err)) end
+      vim.notify('The dependency graph has been generated:\n' .. result)
+    end, 0)
+  end
+end
+vim.api.nvim_create_user_command('TexlabDependencyGraph', function() dependency_graph() end, { nargs = 0 })
+
+-- BUG: It appears that the LSP is not capable, while it is, I think it has to do with the bufnr, @2024-01-21 00:38:05
+-- local function cleanAux(bufnr)
+--   bufnr = util.validate_bufnr(bufnr)
+--   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
+--   local params = {
+--     command = 'texlab.cleanAuxiliary',
+--     arguments = {
+--       CleanAuxiliaryParams = { uri = vim.uri_from_bufnr(bufnr) },
+--     },
+--   }
+--   if texlab_client then
+--     texlab_client.request('workspace/executeCommand', params, function(err)
+--       if err then error(tostring(err)) end
+--       vim.notify 'Aux files cleaned'
+--     end, 0)
+--   end
+--   vim.notify 'The capability is not supported by the server'
+-- end
+-- vim.api.nvim_create_user_command('TexlabCleanAux', function() cleanAux(0) end, { nargs = 0 })
+
 return {
   -- NOTE: with the following config it can replace null-ls and vimtex, @2023-08-11 15:29:27
   lspconfig.texlab.setup {
