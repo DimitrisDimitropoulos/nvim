@@ -1,16 +1,17 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig = require 'lspconfig'
 
--- local util = require 'lspconfig.util'
--- local function buf_cancel_build()
---   local texlab_client = util.get_active_client_by_name(0, 'texlab')
---   if texlab_client then
---     texlab_client.request('workspace/executeCommand', { command = 'texlab.cancelBuild' }, function(err)
---       if err then error(tostring(err)) end
---       print 'Build cancelled'
---     end, 0)
---   end
--- end
+local util = require 'lspconfig.util'
+local function buf_cancel_build()
+  local texlab_client = util.get_active_client_by_name(0, 'texlab')
+  if texlab_client then
+    texlab_client.request('workspace/executeCommand', { command = 'texlab.cancelBuild' }, function(err)
+      if err then error(tostring(err)) end
+      print 'Build cancelled'
+    end, 0)
+  end
+end
+vim.api.nvim_create_user_command('TexlabCancel', function() buf_cancel_build() end, { nargs = 0 })
 
 return {
   -- NOTE: with the following config it can replace null-ls and vimtex, @2023-08-11 15:29:27
