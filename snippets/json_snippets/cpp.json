@@ -46,5 +46,19 @@
       "auto ${1:/*Name*/}(${2:/*Args*/}) -> ${3:/*Return Type*/};"
     ],
     "description": "trail function 语句的代码片段"
+  },
+  "Print Matrix": {
+    "prefix": "mtrx",
+    "body": [
+      "for (const auto &row : ${1:matrix}) {",
+      "\tfor (const auto &elem : row) {",
+      "\t\tstd::cout << std::format(\"{:0${2:width}.${3:precission}f}\\t\", elem);",
+      "\t}",
+      "\tstd::cout << \"\\n\";",
+      "}",
+      "std::cout << \"\\n\";",
+      "$0"
+    ],
+    "description": "Print a matrix with formatted output"
   }
 }
