@@ -18,8 +18,8 @@ gitsigns.setup {
     map('n', ',r', gs.refresh, { desc = 'git refresh' })
 
     local git_nav = {
-      { key = '[g', cmd = 'git prev_hunk' },
-      { key = ']g', cmd = 'git next_hunk' },
+      { key = '[g', cmd = 'prev_hunk' },
+      { key = ']g', cmd = 'next_hunk' },
     }
     for _, nav in ipairs(git_nav) do
       map('n', nav.key, function()
