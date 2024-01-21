@@ -240,8 +240,9 @@ local Git = {
   end,
   hl = { fg = 'orange' },
   { -- git branch name
-    provider = function(self) return ' ' .. self.status_dict.head .. ' ' end,
-    hl = { fg = 'peanut', bg = 'bg' },
+    provider = function(self) return ' ' .. self.status_dict.head .. ' ' end,
+    -- provider = function(self) return ' ' .. self.status_dict.head .. ' ' end,
+    hl = { fg = 'peanut', bg = 'bg', bold = true, italic = true },
   },
   -- You could handle delimiters, icons and counts similar to Diagnostics
   {
@@ -284,11 +285,14 @@ local Spell = {
 }
 
 local FileEncoding = {
-  condition = function() return vim.bo.fenc ~= 'utf-8' and vim.bo.fenc ~= '' end,
+  -- condition = function() return vim.bo.fenc ~= 'utf-8' and vim.bo.fenc ~= '' end,
+  condition = function() return vim.bo.fenc end,
   provider = function() return ' [' .. vim.bo.fenc:upper() .. ']' end,
   hl = {
     fg = require('heirline.utils').get_highlight('String').fg,
     bg = 'bg',
+    italic = true,
+    bold = true,
   },
 }
 
@@ -299,8 +303,8 @@ local Statusline = {
   { ViMode },
   { FileNameBlock },
   { Space },
-  -- { FileSize },
-  -- { Space },
+  { FileSize },
+  { Space },
   { Git },
   -- { Space },
   { Diagnostics },
@@ -310,7 +314,7 @@ local Statusline = {
   { LSPActive },
   { Space },
   { FileType },
-  -- { FileEncoding },
+  { FileEncoding },
   { Spell },
   { Space },
   { Ruler },

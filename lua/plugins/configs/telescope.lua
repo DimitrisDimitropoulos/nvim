@@ -9,11 +9,12 @@ local previewers = require 'telescope.previewers'
 
 telescope.setup {
   defaults = {
-    prompt_prefix = '   ',
+    prompt_prefix = '>',
+    -- prompt_prefix = '   ',
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
     qflist_previewer = previewers.vim_buffer_qflist.new,
-    file_ignore_patterns = { '.git', 'build', 'LICENSE' },
+    file_ignore_patterns = { '.git', 'build', 'LICENSE', 'lockfiles', 'spell' },
     sorting_strategy = 'ascending',
     layout_config = {
       horizontal = {
