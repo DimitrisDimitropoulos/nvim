@@ -1,5 +1,7 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local lspconfig = require 'lspconfig'
+local lspconfig_ok, lspconfig = pcall(require, 'lspconfig')
+if not lspconfig_ok then return end
+
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
