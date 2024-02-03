@@ -139,8 +139,6 @@ local plugins = {
     cmd = 'Neogit',
     opts = { status = { recent_commit_count = 90 } },
   },
-
-  { 'lervag/vimtex', enabled = false, ft = 'tex', config = function() require 'plugins.configs.vimtex' end },
 }
 
 require('lazy').setup(plugins, require 'plugins.configs.lazy')
