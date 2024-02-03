@@ -113,17 +113,6 @@ local plugins = {
   },
 
   {
-    'folke/trouble.nvim',
-    enabled = false,
-    keys = '<leader>tr',
-    cmd = 'Trouble',
-    config = function()
-      local map = vim.keymap.set
-      require('trouble').setup(map('n', '<leader>tr', function() require('trouble').toggle() end, { desc = 'trouble' }))
-    end,
-  },
-
-  {
     'NvChad/nvim-colorizer.lua',
     enabled = false,
     config = function()
