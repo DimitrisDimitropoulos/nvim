@@ -102,14 +102,6 @@ local plugins = {
   },
 
   {
-    'echasnovski/mini.nvim',
-    enabled = false,
-    version = false,
-    event = 'InsertEnter',
-    config = function() require 'plugins.configs.mini' end,
-  },
-
-  {
     'folke/which-key.nvim',
     -- enabled = false,
     keys = { '<leader>', '"', "'", '`', ',', 'c', 'v', '[', ']', 'g' },
