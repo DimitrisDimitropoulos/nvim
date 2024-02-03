@@ -58,12 +58,7 @@ local plugins = {
 
   { 'neovim/nvim-lspconfig', event = evs, config = function() require 'plugins.configs.lsp' end },
 
-  {
-    'williamboman/mason.nvim',
-    build = ':MasonUpdate',
-    cmd = 'Mason',
-    config = function() require 'plugins.configs.mason' end,
-  },
+  { 'williamboman/mason.nvim', cmd = 'Mason', config = function() require 'plugins.configs.mason' end },
 
   {
     'lukas-reineke/indent-blankline.nvim',
