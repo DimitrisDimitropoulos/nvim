@@ -6,8 +6,6 @@ local plugins = {
 
   -- { 'savq/melange-nvim', lazy = false, config = function() vim.cmd.colorscheme 'melange' end },
 
-  -- { 'rose-pine/neovim', name = 'rose-pine', lazy = false, config = function() vim.cmd.colorscheme 'rose-pine' end },
-
   { 'folke/tokyonight.nvim', lazy = false, config = function() vim.cmd.colorscheme 'tokyonight-storm' end },
 
   { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
