@@ -119,15 +119,6 @@ local plugins = {
       require('colorizer').setup { filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } } }
     end,
   },
-
-  {
-    'NeogitOrg/neogit',
-    enabled = false,
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
-    config = true,
-    cmd = 'Neogit',
-    opts = { status = { recent_commit_count = 90 } },
-  },
 }
 
 require('lazy').setup(plugins, require 'plugins.configs.lazy')
