@@ -1,28 +1,13 @@
 require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    'lua',
-    'json',
-    'yaml',
-    'toml',
-    'cpp',
-    'c',
-    'rust',
-    'python',
-    'bash',
-    'julia',
-    'bibtex',
-    'comment',
-    'query',
-  },
+  ensure_installed = { 'lua', 'cpp', 'c', 'bash' },
   highlight = {
     enable = true,
     use_languagetree = true,
     additional_vim_regex_highlighting = false,
-    disable = { 'latex' },
   },
-  indent = { enable = true },
-  refactor = { highlight_definitions = { enable = true }, highlight_current_scope = { enable = true } },
-  autopairs = { enable = true },
+  indent = { enable = false },
+  refactor = { highlight_definitions = { enable = false }, highlight_current_scope = { enable = false } },
+  autopairs = { enable = false },
 }
 
 -- hl groups for the comments
