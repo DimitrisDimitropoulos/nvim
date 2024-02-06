@@ -1,52 +1,50 @@
 # Custom Neovim config
 
-This config follows the structure of [NvChad](https://github.com/NvChad/NvChad) minimal [config](https://github.com/NvChad/basic-config). This configuration of neovim does not try to replace vscode, but to simply add modern usefull features into vim-neovim, like LSP, IDE completion, statusline, dashboard and other ui. I believe that i have maintained the original spirit of vim and neovim, while adding these features.
+This config begun from the [NvChad](https://github.com/NvChad/NvChad) minimal [config](https://github.com/NvChad/basic-config), at this point the config is very different and follows a distinct structure only a few items remain the same. This configuration of neovim does not try to replace vscode, but to simply add modern useful features into vim-neovim, like LSP, IDE completion, statusline, dashboard and other moderate ui features. I believe that i have maintained the original spirit of vim and neovim, while adding these features.
 
 ## Features of this configuration
 
-1. Based on the [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager for performance, stability, ease of use and features
-2. Snippets utilizing both json and lua formats, enabling support for other editors like v.. s.. c..
-3. Spell suggest from multiple languages with easy toggle
-4. Multiple lsps configured for the best features and performance
-5. Custom keybinds neatly organized
-6. Telescope extensions for improved performance and features
-7. Powerful system with powerful autocommands and a working ftplugin system
-8. Scripts to backup and restore your Lazy lock-files
-9. Custom efm language server with custom formatters and linters, no plugin dependencies
-10. Heavy use of lua
-11. Some features for the [ConTeXt](https://wiki.contextgarden.net/Comparison_between_ConTeXt_and_other_typesetting_programs) typesetting system, mainly compilation and preview with [zathura](https://pwmt.org/projects/zathura/)
+1. Based on the [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
+2. Snippets utilizing both json and lua formats, enabling support for other editors like vscode
+3. Default spell for greek and english
+4. Langmap for greek input
+5. Language Servers for multiple languages
+6. Support for [texlab](https://github.com/latex-lsp/texlab) non standard [features](https://github.com/latex-lsp/texlab/wiki/Workspace-commands) like [DOT](https://graphviz.org/doc/info/lang.html) generation and [latexmk](https://mg.readthedocs.io/latexmk.html) clean aux and artifacts
+7. Custom keybinds neatly organized per use-case
+8. Telescope extensions for improved performance
+9. Powerful system with autocommands and a working ftplugin system
+10. Scripts to backup and restore your Lazy lock-files, in `bash` and `pwsh`
+11. Custom efm language server with formatters and linters, no plugin dependencies
+12. Heavy use of lua wherever feasible
+13. Some features for the [ConTeXt](https://wiki.contextgarden.net/Comparison_between_ConTeXt_and_other_typesetting_programs) typesetting system, mainly compilation and preview with [zathura](https://pwmt.org/projects/zathura/)
 
 ## Plugins
 
--   [melange-nvim](https://github.com/savq/melange-nvim)
--   [heirline.nvim](https://github.com/rebelot/heirline.nvim)
--   [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
--   [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
--   [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-    -   [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
-    -   [cmp-path](https://github.com/hrsh7th/cmp-path)
-    -   [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
-    -   [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
-    -   [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)
-    -   [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
-        -   [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-    -   [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
--   [mason.nvim](https://github.com/williamboman/mason.nvim)
--   [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
--   [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
--   [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-    -   [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
-    -   [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
-    -   [telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim)
--   [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
--   [Comment.nvim](https://github.com/numToStr/Comment.nvim)
--   [alpha-nvim](https://github.com/goolord/alpha-nvim)
--   [mini.nvim](https://github.com/echasnovski/mini.nvim)
--   [trouble.nvim](https://github.com/folke/trouble.nvim)
--   [which-key.nvim](https://github.com/folke/which-key.nvim)
--   [nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)
--   [vimtex](https://github.com/lervag/vimtex)
--   [copilot.vim](https://github.com/github/copilot.vim)
+-   [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
+-   [goolord/alpha-nvim](https://github.com/goolord/alpha-nvim)
+-   [rebelot/heirline.nvim](https://github.com/rebelot/heirline.nvim)
+-   [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+-   [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+    -   [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+    -   [nvim-telescope/telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+-   [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+-   [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+    -   [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
+    -   [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)
+    -   [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
+    -   [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
+    -   [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+        -   [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+    -   [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
+-   [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+-   [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
+-   [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
+-   [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+-   [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
+-   [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
+-   [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
+-   [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
+-   [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)
 
 ## Scripts
 
@@ -74,6 +72,61 @@ This Bash script restores the `lazy-lock.json` file to the last backup file in t
 6. Outputs a message indicating that the restore is complete.
 7. If there are no backup files found, outputs a message indicating that no backup files were found and suggests using `git reset`.
 
+### backup.ps1
+
+This script achieves the same task with the `sh` one in `PowerShell`. However, the name of the backup file is intentionally different. I recommend to install the `pwsh.exe` if you are using windows. The script does the following:
+
+1. The script sets the `nvim_dir` variable to the path of the `nvim` directory in the user's AppData\Local directory.
+
+2. It checks if the `nvim` directory exists. If it doesn't, the script throws an error.
+
+3. The script sets the `lockfiles_dir` variable to the path of the `lockfiles` directory inside the `nvim` directory.
+
+4. It checks if the `lockfiles` directory exists. If it doesn't, the script throws an error.
+
+5. The script sets the `initial_file` variable to the path of the `lazy-lock.json` file inside the `nvim` directory.
+
+6. It checks if the `lazy-lock.json` file exists. If it doesn't, the script throws an error.
+
+7. The script checks if `lazy-lock.json` is a file and not a directory. If it's not a file, the script throws an error.
+
+8. If `lazy-lock.json` is a file, the script copies it to the `lockfiles` directory.
+
+9. The script renames the copied `lazy-lock.json` file in the `lockfiles` directory to `lazy-lock-<current-date-and-time>.json`. The date and time format is `yyyy-MM-dd-HH-mm-ss`.
+
+10. Finally, the script prints a message to the console indicating the new name of the copied and renamed file, and specifies the date format used in the new file name.
+
+### resore.ps1
+
+This `PowerShell` script is designed to restore the `lazy-lock.json` file from the most recent backup in the `lockfiles` directory. It prompts the user for confirmation before performing the restore operation. It proceeds as follows:
+
+1. The script sets the `backup_dir` variable to the path of the `lockfiles` directory in the user's AppData\Local\nvim directory.
+
+2. It checks if the `lockfiles` directory exists. If it doesn't, the script throws an error.
+
+3. The script sets the `nvim_dir` variable to the path of the `nvim` directory in the user's AppData\Local directory.
+
+4. It checks if the `nvim` directory exists. If it doesn't, the script throws an error.
+
+5. The script gets the last modified file in the `lockfiles` directory and prints its name.
+
+6. It checks if the last modified file exists and is not a directory. If it's not a file, the script throws an error.
+
+7. The script prompts the user to confirm if they want to restore the last modified file to the `lazy-lock.json` file.
+
+8. If the user confirms, the script sets the `lazy_lock_file` variable to the path of the `lazy-lock.json` file in the `nvim` directory.
+
+9. It checks if the `lazy-lock.json` file exists. If it doesn't, the script throws an error.
+
+10. The script copies the last modified file to the `nvim` directory.
+
+11. It deletes the `lazy-lock.json` file.
+
+12. The script renames the copied file to `lazy-lock.json`.
+
+13. Finally, the script prints a "Done" message to the console. If the user didn't confirm the restore, the script prints an "Aborted" message.
+
 ## TODO
 
--   [ ] Add more windows support, with powershell port of the scripts, and a script to install dependencies
+-   [ ] Add more windows support, with [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for `LaTeX` previewing in Windows
+-   [ ] Add gui support for [Neovide](https://neovide.dev/) 
