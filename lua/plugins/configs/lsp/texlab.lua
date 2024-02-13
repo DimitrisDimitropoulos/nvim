@@ -111,8 +111,8 @@ return {
             '%f',
           },
         },
-       forwardSearch = {
-          executable = '~\\AppData\\Local\\sioyek-release-windows\\sioyek.exe',
+        forwardSearch = {
+          executable = vim.env.HOME .. '\\AppData\\Local\\sioyek-release-windows\\sioyek.exe',
           args = {
             '--reuse-window',
             '--execute-command',
@@ -125,6 +125,7 @@ return {
             '%l',
             '%p',
           },
+        },
         chktex = {
           onOpenAndSave = true,
           onEdit = true,
@@ -141,3 +142,4 @@ return {
     },
   },
 }
+
