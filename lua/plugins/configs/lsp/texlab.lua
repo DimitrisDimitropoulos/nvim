@@ -111,10 +111,20 @@ return {
             '%f',
           },
         },
-        forwardSearch = {
-          executable = 'zathura',
-          args = { '--synctex-forward', '%l:1:%f', '%p' },
-        },
+       forwardSearch = {
+          executable = '~\\AppData\\Local\\sioyek-release-windows\\sioyek.exe',
+          args = {
+            '--reuse-window',
+            '--execute-command',
+            'toggle_synctex', -- Open Sioyek in synctex mode.
+            '--inverse-search',
+            [[nvim-texlabconfig -file %%%1 -line %%%2 -server ]] .. vim.v.servername,
+            '--forward-search-file',
+            '%f',
+            '--forward-search-line',
+            '%l',
+            '%p',
+          },
         chktex = {
           onOpenAndSave = true,
           onEdit = true,
