@@ -41,3 +41,4 @@ end
 for _, diag in ipairs(diagno) do
   map('n', diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr })
 end
+

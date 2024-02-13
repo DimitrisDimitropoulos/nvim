@@ -131,3 +131,4 @@ require('lspconfig').efm.setup {
   filetypes = vim.tbl_keys(langs),
   settings = { lintDebounce = 100, languages = langs, logLevel = 1 },
 }
+

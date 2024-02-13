@@ -57,3 +57,4 @@ vim.api.nvim_set_hl(
   { bg = tostring(get_hl('Normal').background), fg = tostring(get_hl('Comment').foreground) }
 )
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { bg = tostring(get_hl('Normal').background), fg = 'red' })
+

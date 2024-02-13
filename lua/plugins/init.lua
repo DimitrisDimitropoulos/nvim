@@ -111,3 +111,4 @@ local plugins = {
 }
 
 require('lazy').setup(plugins, require 'plugins.configs.lazy')
+

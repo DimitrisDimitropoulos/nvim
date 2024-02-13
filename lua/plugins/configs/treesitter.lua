@@ -9,3 +9,4 @@ require('nvim-treesitter.configs').setup {
   refactor = { highlight_definitions = { enable = false }, highlight_current_scope = { enable = false } },
   autopairs = { enable = false },
 }
+

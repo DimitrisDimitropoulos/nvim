@@ -10,3 +10,4 @@ function M.get_hl(name)
 end
 
 return M
+

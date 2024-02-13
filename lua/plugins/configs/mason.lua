@@ -33,3 +33,4 @@ require('mason').setup {
   PATH = 'skip',
   max_concurrent_installers = 20,
 }
+

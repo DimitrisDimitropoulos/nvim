@@ -8,3 +8,4 @@ vim.keymap.set({ 'n', 'x' }, 'j', function() return moving_wrap 'j' end, { expr 
 
 -- BUG: For some reason this does not work, @2024-01-25 01:51:09
 vim.cmd.syntax 'spell toplevel'
+

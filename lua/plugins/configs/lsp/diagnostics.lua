@@ -15,3 +15,4 @@ vim.diagnostic.config {
   update_in_insert = false,
   float = { source = 'always', border = 'rounded', show_header = true },
 }
+

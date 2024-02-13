@@ -18,3 +18,4 @@ local custom_servers = { 'texlab', 'rust_analyzer', 'efm', 'lua_ls' }
 for _, lsp in ipairs(custom_servers) do
   require('plugins.configs.lsp.' .. lsp)
 end
+

@@ -16,3 +16,4 @@ Comment.setup {
     require('Comment.api').toggle.linewise(vim.fn.visualmode())
   end, { desc = 'comment in visual mode' }),
 }
+

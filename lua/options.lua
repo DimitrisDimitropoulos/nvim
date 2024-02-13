@@ -109,3 +109,4 @@ if vim.g.neovide then
   vim.keymap.set('n', '<C-->', function() resize_guifont(-1) end, opts)
   vim.keymap.set('n', '<C-0>', function() reset_guifont() end, opts)
 end
+

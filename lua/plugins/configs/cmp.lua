@@ -135,3 +135,4 @@ hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindText' })
 hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindText' })
 hl(0, 'CmpItemKindKeyword', { link = 'VioletHLGroup' })
 hl(0, 'CmpItemKindSnippet', { link = 'VioletHLGroup' })
+

@@ -11,3 +11,4 @@ require('indent_blankline').setup {
 
 local get_hl = require('utils.ui_utils').get_hl
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { bg = tostring(get_hl('Visual').background), bold = true })
+

@@ -104,3 +104,4 @@ map(
   end,
   { desc = 'telescope all files' }
 )
+
