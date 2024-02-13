@@ -112,18 +112,13 @@ return {
           },
         },
         forwardSearch = {
-          executable = vim.env.HOME .. '\\AppData\\Local\\sioyek-release-windows\\sioyek.exe',
+          executable = vim.env.HOME .. '\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe',
           args = {
-            '--reuse-window',
-            '--execute-command',
-            'toggle_synctex', -- Open Sioyek in synctex mode.
-            '--inverse-search',
-            [[nvim-texlabconfig -file %%%1 -line %%%2 -server ]] .. vim.v.servername,
-            '--forward-search-file',
-            '%f',
-            '--forward-search-line',
-            '%l',
+            '-reuse-instance',
             '%p',
+            '-forward-search',
+            '%f',
+            '%l',
           },
         },
         chktex = {
