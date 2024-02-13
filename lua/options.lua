@@ -22,15 +22,6 @@ opt.cursorline = true
 opt.cursorcolumn = false
 opt.clipboard = 'unnamedplus'
 
-if vim.fn.has 'unix' == 1 then
-  if vim.fn.executable 'xclip' == 1 then
-    vim.g.clipboard = {
-      copy = { ['+'] = 'xclip -selection clipboard', ['*'] = 'xclip -selection clipboard' },
-      paste = { ['+'] = 'xclip -selection clipboard -o', ['*'] = 'xclip -selection clipboard -o' },
-    }
-  end
-end
-
 if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
   vim.g.clipboard = {
     copy = { ['+'] = 'win32yank.exe -i --crlf', ['*'] = 'win32yank.exe -i --crlf' },
