@@ -34,10 +34,21 @@ local plugins = {
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
       -- 'hrsh7th/cmp-nvim-lua',
+
       {
         'L3MON4D3/LuaSnip',
         dependencies = { 'rafamadriz/friendly-snippets' },
         config = function() require 'plugins.configs.luasnip' end,
+      },
+
+      {
+        'windwp/nvim-autopairs',
+        config = function()
+          require('nvim-autopairs').setup()
+          local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+          local cmp = require 'cmp'
+          cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+        end,
       },
     },
     config = function() require 'plugins.configs.cmp' end,
@@ -75,13 +86,6 @@ local plugins = {
     version = false,
     keys = 'gS',
     config = function() require('mini.splitjoin').setup() end,
-  },
-
-  {
-    'echasnovski/mini.pairs',
-    version = false,
-    event = 'InsertEnter',
-    config = function() require('mini.pairs').setup {} end,
   },
 
   {
