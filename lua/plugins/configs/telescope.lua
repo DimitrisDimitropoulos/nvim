@@ -14,7 +14,7 @@ telescope.setup {
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
     qflist_previewer = previewers.vim_buffer_qflist.new,
-    file_ignore_patterns = { '.git', 'build', 'LICENSE', 'lockfiles', 'spell' },
+    file_ignore_patterns = { '.git', 'build', 'LICENSE', 'lockfiles', 'spell', 'png', 'jpg', 'jpeg', 'gif', 'webp' },
     sorting_strategy = 'ascending',
     layout_config = {
       horizontal = {
