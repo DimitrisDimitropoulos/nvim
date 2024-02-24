@@ -18,6 +18,48 @@ This config begun from the [NvChad](https://github.com/NvChad/NvChad) minimal [c
 12. Heavy use of lua wherever feasible
 13. Some features for the [ConTeXt](https://wiki.contextgarden.net/Comparison_between_ConTeXt_and_other_typesetting_programs) typesetting system, mainly compilation and preview with [zathura](https://pwmt.org/projects/zathura/)
 
+## Installation
+
+Before installing make sure to backup your config, plugins, data and cache. Then remove it, or better rename it to something like <folder>.bak, for more context see [here](http://www.lazyvim.org/installation). Then just clone this repo to the appropriate folder and just open it. The plugins and treesitter parsers will be installed automatically and then you can open `Mason` and install manual or with the `MasonInstallAll` command.
+
+For more detailed instructions based on the LazyVim:
+
+On Linux
+
+```
+# required
+mv ~/.config/nvim{,.bak}
+
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+```
+Then
+```
+git clone https://github.com/DimitrisDimitropoulos/nvim.git ~/.config/nvim
+nvim
+```
+
+On Windows with PowerShell
+
+```
+# required
+Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
+
+# optional but recommended
+Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
+```
+
+Then
+
+```
+git clone https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nvim
+nvim
+```
+
+After launching all plugins make sure to run a `:checkhealth` command and install all the dependencies you may lack like `xclip, pwsh.exe`
+
 ## Plugins
 
 -   [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
