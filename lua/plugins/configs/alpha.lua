@@ -5,8 +5,6 @@ local dashboard = require 'alpha.themes.dashboard'
 dashboard.section.header.opts = { hl = 'Comment', position = 'center' }
 
 dashboard.section.header.val = {
-  -- "                                                     ",
-
   ' ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
   ' ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
   ' ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
@@ -14,34 +12,15 @@ dashboard.section.header.val = {
   ' ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
   ' ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
   -- '             ~ brain.exist() == null; ~             ',
-
-  -- '⡏⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿',
-  -- '⣿⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠁⠀⣿',
-  -- '⣿⣧⡀⠀⠀⠀⠀⠙⠿⠿⠿⠻⠿⠿⠟⠿⠛⠉⠀⠀⠀⠀⠀⣸⣿',
-  -- '⣿⣿⣷⣄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿',
-  -- '⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣴⣿⣿⣿⣿',
-  -- '⣿⣿⣿⡟⠀⠀⢰⣹⡆⠀⠀⠀⠀⠀⠀⣭⣷⠀⠀⠀⠸⣿⣿⣿⣿',
-  -- '⣿⣿⣿⠃⠀⠀⠈⠉⠀⠀⠤⠄⠀⠀⠀⠉⠁⠀⠀⠀⠀⢿⣿⣿⣿',
-  -- '⣿⣿⣿⢾⣿⣷⠀⠀⠀⠀⡠⠤⢄⠀⠀⠀⠠⣿⣿⣷⠀⢸⣿⣿⣿',
-  -- '⣿⣿⣿⡀⠉⠀⠀⠀⠀⠀⢄⠀⢀⠀⠀⠀⠀⠉⠉⠁⠀⠀⣿⣿⣿',
-  -- '⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿',
-  -- '⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿',
-  -- -- '~ brain.exist() == null ~',
-
-  --
 }
 
 dashboard.section.buttons.val = {
-  -- { type = "text", val = "~ brain.exist() == NULL; ~", opts = { hl = "Comment", position = "center" } },
   dashboard.button('r', '󰙰  > Oldfiles', ':Telescope oldfiles<CR>'),
   dashboard.button('f', '󰈞  > Find File', ':Telescope fd<CR>'),
   dashboard.button('l', '󱉶  > Live Grep', ':Telescope live_grep<CR>'),
-  -- dashboard.button('b', '  > Browse', ':Telescope file_browser initial_mode=normal <CR>'),
   dashboard.button('m', '  > Marks', ':Telescope marks<CR>'),
   dashboard.button('L', '󰒲  > Lazy ', ':Lazy<CR>'),
   dashboard.button('M', '󱌢  > Mason ', ':Mason<CR>'),
-  -- dashboard.button('s', '  > Settings', ':e $MYVIMRC | :cd %:p:h | Telescope file_browser initial_mode=normal <CR>'),
-  -- dashboard.button('s', '  > Settings', ':cd ~/.config/nvim | Telescope file_browser initial_mode=normal <CR>'),
   dashboard.button('q', '󰩈  > Quit NVIM', ':qa<CR>'),
 }
 
