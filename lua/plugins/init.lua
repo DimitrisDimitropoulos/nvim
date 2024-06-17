@@ -60,6 +60,7 @@ local plugins = {
 
   {
     'lukas-reineke/indent-blankline.nvim',
+    enabled = false,
     version = '2.20.7',
     event = evs,
     config = function() require 'plugins.configs.indent' end,
@@ -91,7 +92,7 @@ local plugins = {
 
   {
     'folke/which-key.nvim',
-    -- enabled = false,
+    enabled = false,
     keys = { '<leader>', '"', "'", '`', ',', 'c', 'v', '[', ']', 'g' },
     init = function()
       vim.o.timeout = true
