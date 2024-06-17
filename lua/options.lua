@@ -39,6 +39,8 @@ if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
     paste = { ['+'] = 'win32yank.exe -o --lf', ['*'] = 'win32yank.exe -o --lf' },
   }
 end
+if vim.fn.has 'win32' == 1 and vim.fn.executable 'pwsh.exe' == 1 then opt.shell = 'pwsh.exe' end
+
 opt.foldenable = false
 
 opt.expandtab = true
