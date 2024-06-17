@@ -84,6 +84,15 @@ vim.api.nvim_create_user_command(
   { nargs = 0, desc = 'Clean auxiliary, latexmk -c' }
 )
 
+local exe, rgs
+if vim.fn.has 'win32' == 1 then
+  exe = vim.env.HOME .. '\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe'
+  rgs = { '-reuse-instance', '%p', '-forward-search', '%f', '%l' }
+end
+if vim.fn.has 'unix' == 1 then
+  exe = 'zathura'
+  rgs = { '--synctex-forward', '%l:1:%f', '%p' }
+end
 return {
   -- NOTE: with the following config it can replace null-ls and vimtex, @2023-08-11 15:29:27
   lspconfig.texlab.setup {
@@ -112,8 +121,10 @@ return {
           },
         },
         forwardSearch = {
-          executable = 'zathura',
-          args = { '--synctex-forward', '%l:1:%f', '%p' },
+          -- executable = 'zathura',
+          -- args = { '--synctex-forward', '%l:1:%f', '%p' },
+          executable = exe,
+          args = rgs,
         },
         chktex = {
           onOpenAndSave = true,
