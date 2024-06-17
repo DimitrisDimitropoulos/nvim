@@ -96,10 +96,10 @@
       "diagu"
     ],
     "body": [
-      "\\begin{figure}[h]",
+      "\\begin{figure}[ht]",
       "\t\\centering",
-      "\t\\caption{${3:λεζάντα της εικόνας}}\\label{fig:${1:label of the figure}}",
       "\t\\includegraphics[width = \\textwidth]{${2:file name of the figure}}",
+      "\t\\caption{${3:λεζάντα της εικόνας}}\\label{fig:${1:label of the figure}}",
       "\\end{figure}\n"
     ],
     "description": "LaTeX figure"
@@ -332,9 +332,14 @@
     ],
     "description": "LaTeX underline"
   },
+  "newpage": {
+    "prefix": "np",
+    "body": "\\newpage\n",
+    "description": "LaTeX newpage"
+  },
   "after-underline": {
     "prefix": [
-      "aunderline"
+      "aund"
     ],
     "body": [
       "\\underline{${CLIPBOARD: $1}}$0"
