@@ -25,6 +25,13 @@ local diagno = {
   -- stylua: ignore stop
 }
 
+map('n', '<leader>lh', function()
+  if vim.lsp.inlay_hint.is_enabled() then
+    vim.lsp.inlay_hint.enable(false)
+  else
+    vim.lsp.inlay_hint.enable(true)
+  end
+end, { desc = 'toggle inlay hints' })
 map('n', '<S-k>', lsp.hover, { desc = 'hover' })
 map('n', '<leader>qa', lsp.code_action, { desc = 'code actions', silent = true })
 map('n', '<A-f>', function() lsp.format { async = true } end, { desc = 'format code' })
