@@ -2,12 +2,9 @@ local ensure_installed = {
   'lua-language-server',
   'bash-language-server',
   'shellcheck',
-  'beautysh',
   'efm',
   'ruff',
-  'fourmolu',
   'prettier',
-  'gersemi',
   'texlab',
 }
 
