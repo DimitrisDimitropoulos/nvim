@@ -1,6 +1,7 @@
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function()
+    -- vim.lsp.inlay_hint.enable()
     local lsp_utils = { 'diagnostics', 'maps', 'format' }
     for _, lsp in ipairs(lsp_utils) do
       require('plugins.configs.lsp.' .. lsp)
@@ -10,7 +11,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig = require 'lspconfig'
-local servers = { 'julials', 'bashls', 'neocmake', 'clangd', 'pylyzer' }
+local servers = { 'julials', 'bashls', 'neocmake', 'clangd' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup { capabilities = capabilities }
 end
