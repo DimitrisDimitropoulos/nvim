@@ -16,7 +16,8 @@ This config begun from the [NvChad](https://github.com/NvChad/NvChad) minimal [c
 10. Scripts to backup and restore your Lazy lock-files, in `bash` and `pwsh`
 11. Custom efm language server with formatters and linters, no plugin dependencies
 12. Heavy use of lua wherever feasible
-13. Some features for the [ConTeXt](https://wiki.contextgarden.net/Comparison_between_ConTeXt_and_other_typesetting_programs) typesetting system, mainly compilation and preview with [zathura](https://pwmt.org/projects/zathura/)
+13. LaTeX preview based on `texlab` with `zathura` on linux and `SumatraPDF` on windows
+14. Some features for the [ConTeXt](https://wiki.contextgarden.net/Comparison_between_ConTeXt_and_other_typesetting_programs) typesetting system, mainly compilation and preview with [zathura](https://pwmt.org/projects/zathura/)
 
 ## Installation
 
@@ -35,7 +36,9 @@ mv ~/.local/share/nvim{,.bak}
 mv ~/.local/state/nvim{,.bak}
 mv ~/.cache/nvim{,.bak}
 ```
+
 Then
+
 ```
 git clone https://github.com/DimitrisDimitropoulos/nvim.git ~/.config/nvim
 nvim
@@ -54,7 +57,7 @@ Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
 Then
 
 ```
-git clone -b windows https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nvim
+git clone https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nvim
 nvim
 ```
 
