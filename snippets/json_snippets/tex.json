@@ -14,7 +14,7 @@
       "\\usepackage{verbatim}",
       "\\usepackage{algpseudocode}",
       "\\lstset{",
-      "\tlanguage= ${1|Matlab,C++,C,Python,Julia|}",
+      "\tlanguage= ${1|Matlab,C++,C,Python,Julia|},",
       "\tbasicstyle=\\ttfamily,",
       "\tkeywordstyle=\\color{blue},",
       "\tcommentstyle=\\color{green!50!black},",
