@@ -181,7 +181,7 @@ local lsp_progress = function()
 end
 
 local LSPMessages = {
-  condition = function() return #vim.lsp.buf_get_clients() > 0 end,
+  condition = function() return #vim.lsp.get_clients() > 0 end,
   provider = function() return lsp_progress() or '' end,
   hl = { fg = 'peanut', bg = 'bg' },
 }
