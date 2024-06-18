@@ -6,7 +6,7 @@ local plugins = {
 
   -- { 'savq/melange-nvim', lazy = false, config = function() vim.cmd.colorscheme 'melange' end },
   { 'folke/tokyonight.nvim', lazy = false, config = function() vim.cmd.colorscheme 'tokyonight-storm' end },
-  { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
+  -- { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
   { 'rebelot/heirline.nvim', event = 'VeryLazy', config = function() require 'plugins.configs.heirline' end },
   { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
 
