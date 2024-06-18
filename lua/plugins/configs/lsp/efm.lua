@@ -111,7 +111,6 @@ local ruff_format = {
 }
 
 local langs = {
-  -- tex = { chktex, latexindent },
   json = { jq_lint, jq_format },
   python = { ruff_format, ruff_lint },
   markdown = { prettier },
@@ -123,7 +122,6 @@ local langs = {
   haskell = { fourmolu },
   cpp = { cppcheck },
   c = { cppcheck },
-  lua = { stylua },
 }
 
 require('lspconfig').efm.setup {

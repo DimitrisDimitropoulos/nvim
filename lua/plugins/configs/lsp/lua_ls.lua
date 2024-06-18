@@ -11,7 +11,7 @@ lspconfig.lua_ls.setup {
       telemetry = { enable = false },
       hint = { enable = true },
       diagnostics = { globals = { 'vim' } },
-      format = { enable = false },
+      format = { enable = true },
     },
   },
 }
