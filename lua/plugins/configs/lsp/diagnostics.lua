@@ -1,6 +1,6 @@
 vim.diagnostic.config {
   underline = true,
-  virtual_text = { prefix = '\u{274C}' },
+  virtual_text = { prefix = '\u{1F5D9}' },
   signs = { text = {
     [vim.diagnostic.severity.HINT]  = '\u{25A1}',
     [vim.diagnostic.severity.ERROR] = '\u{25A0}',
