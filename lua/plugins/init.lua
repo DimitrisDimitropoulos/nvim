@@ -4,10 +4,38 @@ local evs = { 'BufReadPre', 'BufNewFile' }
 
 local plugins = {
 
-  -- { 'savq/melange-nvim', lazy = false, config = function() vim.cmd.colorscheme 'melange' end },
-  { 'folke/tokyonight.nvim', lazy = false, config = function() vim.cmd.colorscheme 'tokyonight-storm' end },
-  -- { 'goolord/alpha-nvim', event = 'VimEnter', config = function() require 'plugins.configs.alpha' end },
-  { 'rebelot/heirline.nvim', event = 'VeryLazy', config = function() require 'plugins.configs.heirline' end },
+  {
+    'savq/melange-nvim',
+    enabled = false,
+    lazy = false,
+    config = function()
+      vim
+          .cmd.colorscheme 'melange'
+    end
+  },
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    config = function()
+      vim
+          .cmd.colorscheme 'tokyonight-storm'
+    end
+  },
+  {
+    'goolord/alpha-nvim',
+    enabled = false,
+    event = 'VimEnter',
+    config = function()
+      require 'plugins.configs.alpha'
+    end
+  },
+  {
+    'rebelot/heirline.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require 'plugins.configs.heirline'
+    end
+  },
   { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
 
   {
@@ -54,9 +82,21 @@ local plugins = {
     config = function() require 'plugins.configs.cmp' end,
   },
 
-  { 'neovim/nvim-lspconfig', event = evs, config = function() require 'plugins.configs.lsp' end },
+  {
+    'neovim/nvim-lspconfig',
+    event = evs,
+    config = function()
+      require 'plugins.configs.lsp'
+    end
+  },
 
-  { 'williamboman/mason.nvim', cmd = 'Mason', config = function() require 'plugins.configs.mason' end },
+  {
+    'williamboman/mason.nvim',
+    cmd = 'Mason',
+    config = function()
+      require 'plugins.configs.mason'
+    end
+  },
 
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -66,7 +106,13 @@ local plugins = {
     config = function() require 'plugins.configs.indent' end,
   },
 
-  { 'lewis6991/gitsigns.nvim', event = evs, config = function() require 'plugins.configs.signs' end },
+  {
+    'lewis6991/gitsigns.nvim',
+    event = evs,
+    config = function()
+      require 'plugins.configs.signs'
+    end
+  },
 
   {
     'numToStr/Comment.nvim',

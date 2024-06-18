@@ -18,15 +18,15 @@ local function scompile()
   io.popen('context ' .. file .. ' >/dev/null ; zathura --reparent ' .. pdf_file .. ' 2>/dev/null &')
   print(
     'Written '
-      .. file
-      .. ' @ '
-      .. os.date '%H:%M:%S'
-      .. ' and executed: '
-      .. 'context '
-      .. file
-      .. ' >/dev/null ; zathura -e '
-      .. pdf_file
-      .. ' 2>/dev/null &'
+    .. file
+    .. ' @ '
+    .. os.date '%H:%M:%S'
+    .. ' and executed: '
+    .. 'context '
+    .. file
+    .. ' >/dev/null ; zathura -e '
+    .. pdf_file
+    .. ' 2>/dev/null &'
   )
 end
 
