@@ -67,6 +67,7 @@ end
 local map = vim.keymap.set
 
 local telescope_mappings = {
+  { key = 'ff', cmd = 'fd',                        desc = 'files' },
   { key = 'fr', cmd = 'oldfiles',                  desc = 'old files' },
   { key = 'f;', cmd = 'commands',                  desc = 'commands' },
   { key = 'fg', cmd = 'live_grep',                 desc = 'live grep' },
