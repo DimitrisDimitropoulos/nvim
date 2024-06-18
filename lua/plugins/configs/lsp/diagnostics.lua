@@ -1,11 +1,11 @@
 vim.diagnostic.config {
   underline = true,
-  virtual_text = { prefix = '➤ ' },
+  virtual_text = { prefix = '\u{274C}' },
   signs = { text = {
-    [vim.diagnostic.severity.HINT]  = "󰨔",
-    [vim.diagnostic.severity.ERROR] = "■",
-    [vim.diagnostic.severity.INFO]  = "◉",
-    [vim.diagnostic.severity.WARN]  = "△",
+    [vim.diagnostic.severity.HINT]  = '\u{25A1}',
+    [vim.diagnostic.severity.ERROR] = '\u{25A0}',
+    [vim.diagnostic.severity.INFO]  = '\u{25CF}',
+    [vim.diagnostic.severity.WARN]  = '\u{25B3}',
   } },
   update_in_insert = false,
   float = { source = 'always', border = 'rounded', show_header = true },
