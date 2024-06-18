@@ -2,7 +2,7 @@
   "BibLaTex-Setup": {
     "prefix": "biblatex-setup",
     "body": [
-      "\\usepackage[backend=biber,language=auto,autolang=other]{biblatex}",
+      "\\usepackage[backend=biber,language=auto,autolang=other,style=ieee,sorting=nyt,defernumbers=true,doi=false]{biblatex}",
       "\\addbibresource{${2:file}}"
     ],
     "description": "BibLaTeX setup"
@@ -20,10 +20,13 @@
       "\tcommentstyle=\\color{green!50!black},",
       "\tstringstyle=\\color{red},",
       "\tshowstringspaces=false,",
+      "\tfirstnumber=1,",
+      "\tnumbers=left,",
+      "\tstepnumber=1,",
       "\tbreaklines=true,",
       "}"
     ],
-    "description": "LaTeX code"
+    "description": "LaTeX code setup"
   },
   "Inkscape": {
     "prefix": "inkscape",
@@ -60,6 +63,15 @@
     ],
     "description": "LaTeX hyperref-setup"
   },
+  "LaTeX-tikz-setup": {
+    "prefix": "tikz-setup",
+    "body": [
+      "\\usepackage{tikz}",
+      "\\usepackage{pgfplots}",
+      "\\pgfplotsset{compat=1.18}"
+    ],
+    "description": "LaTeX tikz setup"
+  },
   "environment": {
     "prefix": "envu",
     "body": [
@@ -69,7 +81,20 @@
     ],
     "description": "LaTeX environment"
   },
-  "Latex-Table": {
+  "LaTeX-tikz": {
+    "prefix": "tikzu",
+    "body": [
+      "\\begin{figure}[ht]",
+      "\t\\centering",
+      "\t\\begin{tikzpicture}",
+      "\t\t$1",
+      "\t\\end{tikzpicture}",
+      "\t\\caption{${2:λεζάντα}}\\label{fig:${3:label}}",
+      "\\end{figure}"
+    ],
+    "description": "LaTeX tikz"
+  },
+  "LaTeX-Table": {
     "prefix": "tabu",
     "body": [
       "",
@@ -90,7 +115,26 @@
     ],
     "description": "LaTeX table"
   },
-  "Latex-Figure": {
+  "LaTeX-Tabularx": {
+    "prefix": "tabux",
+    "body": [
+      "\\begin{table}[ht]",
+      "\t\\centering",
+      "\t\\caption{${2:λεζάντα}}\\label{tab:${1:label}}",
+      "\t\\begin{tabularx}{\\textwidth}{XXX}",
+      "\t\t\\toprule",
+      "\t\t$4 & &",
+      "\t\t\\\\\\\\  \\midrule \\midrule",
+      "\t\t&  & ",
+      "\t\t\\\\\\\\ \\midrule",
+      "\t\t&  & ",
+      "\t\t\\\\\\\\ \\bottomrule",
+      "\t\\end{tabularx}",
+      "\\end{table}"
+    ],
+    "description": "LaTeX tabularx"
+  },
+  "LaTeX-Figure": {
     "prefix": [
       "figu",
       "diagu"
@@ -115,7 +159,7 @@
     "description": "BibTeX bibliography"
   },
   "BibLaTeX": {
-    "prefix": "bib-biblatex",
+    "prefix": "bibu",
     "body": [
       "\\newpage",
       "\\section{Βιβλιογρφία}",
@@ -125,7 +169,7 @@
     "description": "BibLaTeX bibliography"
   },
   "code-listing": {
-    "prefix": "listing",
+    "prefix": "listu",
     "body": [
       "\\newpage",
       "\\par\\noindent\\rule{\\textwidth}{0.4pt}",
@@ -143,7 +187,7 @@
     ],
     "description": "LaTeX contents"
   },
-  "Latex-itemize": {
+  "LaTeX-itemize": {
     "prefix": [
       "itemu"
     ],
@@ -172,7 +216,7 @@
     ],
     "description": "LaTeX description"
   },
-  "Latex-equation": {
+  "LaTeX-equation": {
     "prefix": "eq",
     "body": [
       "\\begin{equation}\\label{eq:$1}",
@@ -219,9 +263,9 @@
   },
   "fraction": {
     "prefix": [
-      "frac"
+      "fr"
     ],
-    "body": "frac{${1:top}}{${2:bottom}}",
+    "body": "\\frac{${1:top}}{${2:bottom}}",
     "description": "fraction-snippet"
   },
   "integral": {
@@ -260,7 +304,7 @@
   },
   "square_bracket": {
     "prefix": [
-      "bracket",
+      "bracku",
       "square_bracket"
     ],
     "body": "\\left[$1\\right]",
@@ -279,6 +323,18 @@
     ],
     "body": "\\[\n$1\n\\",
     "description": "LaTeX display math"
+  },
+  "tikz-data": {
+    "prefix": [
+      "tizk_datu"
+    ],
+    "body": "\\addplot table [x =${2:collumn_name}, y =${3:collumn_name}, col sep=comma] {${1:file}};",
+    "description": "tikz plot data from csv"
+  },
+  "siunits-declare": {
+    "prefix": "sideclaru",
+    "body": "\\DeclareSIUnit\\${1:unit_call}{${2:unit_show}}",
+    "description": "siunitx declare unit"
   },
   "squareroot": {
     "prefix": "sqrt",
