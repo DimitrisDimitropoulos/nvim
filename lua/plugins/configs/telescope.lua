@@ -67,8 +67,6 @@ end
 local map = vim.keymap.set
 
 local telescope_mappings = {
-  -- stylua: ignore start
-  { key = 'ff', cmd = 'fd',                        desc = 'files' },
   { key = 'fr', cmd = 'oldfiles',                  desc = 'old files' },
   { key = 'f;', cmd = 'commands',                  desc = 'commands' },
   { key = 'fg', cmd = 'live_grep',                 desc = 'live grep' },
@@ -85,7 +83,6 @@ local telescope_mappings = {
   { key = 'sp', cmd = 'spell_suggest',             desc = 'spell suggest' },
   { key = 'fz', cmd = 'current_buffer_fuzzy_find', desc = 'buf fuzzy' },
   { key = 'f.', cmd = 'resume',                    desc = 'last' },
-  -- stylua: ignore stop
 }
 for _, mapping in ipairs(telescope_mappings) do
   map(

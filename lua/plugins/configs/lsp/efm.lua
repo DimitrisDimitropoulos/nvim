@@ -62,7 +62,8 @@ local shellcheck = {
 local mypy = {
   prefix = 'mypy',
   lintSource = 'mypy',
-  lintCommand = 'mypy --strict --strict-equality --ignore-missing-imports --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
+  lintCommand =
+  'mypy --strict --strict-equality --ignore-missing-imports --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
   lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
   rootMarkers = { 'mypy.ini', 'pyproject.toml', 'setup.cfg' },
 }
