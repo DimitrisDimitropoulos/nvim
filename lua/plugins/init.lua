@@ -9,16 +9,14 @@ local plugins = {
     enabled = false,
     lazy = false,
     config = function()
-      vim
-          .cmd.colorscheme 'melange'
+      vim.cmd.colorscheme 'melange'
     end
   },
   {
     'folke/tokyonight.nvim',
     lazy = false,
     config = function()
-      vim
-          .cmd.colorscheme 'tokyonight-storm'
+      vim.cmd.colorscheme 'tokyonight-storm'
     end
   },
   {
