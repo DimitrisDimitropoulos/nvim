@@ -150,7 +150,7 @@ local LSPActive = {
   update = { 'LspAttach', 'LspDetach' },
   provider = function()
     local names = {}
-    for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+    for _, server in pairs(vim.lsp.get_clients { bufnr = 0 }) do
       table.insert(names, server.name)
     end
     return '  [' .. table.concat(names, ' ') .. ']'
@@ -172,7 +172,7 @@ local lsp_progress = function()
     end
   end
   -- NOTE: nightly support, @2023-07-28 18:12:44
-  if version.minor == 10 then
+  if version.minor >= 10 then
     local lsp_out = tostring(vim.inspect(vim.lsp.status()))
     if lsp_out == '""' then return '' end
     return lsp_out
