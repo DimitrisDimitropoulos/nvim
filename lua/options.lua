@@ -3,14 +3,11 @@ vim.g.tex_flavor = 'latex'
 
 local opt = vim.opt
 
-vim.o.timeoutlen = 300
-vim.o.timeout = true
 opt.langmap =
 'ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,ΡR,ΣS,ΤT,ΘU,ΩV,WW,ΧX,ΥY,ΖZ,αa,βb,ψc,δd,εe,φf,γg,ηh,ιi,ξj,κk,λl,μm,νn,οo,πp,qq,ρr,σs,τt,θu,ωv,ςw,χx,υy,ζz'
-
 opt.list = true
 opt.listchars = {
-  -- lead = '\\U000021b3', eol = '\\U000021b5',
+  eol = '\\U000021b5',
   tab = '  ',
   extends = '\\U00002192',
   precedes = '\\U00002190',
@@ -18,20 +15,9 @@ opt.listchars = {
   nbsp = '~',
 }
 
-opt.incsearch = true
-
 opt.spelllang = 'el,en'
-opt.laststatus = 3
-opt.showmode = false
-opt.scrolloff = 3
-opt.sidescrolloff = 3
 
-opt.numberwidth = 3
-opt.cursorlineopt = 'both'
-opt.cursorline = true
-opt.cursorcolumn = false
 opt.clipboard = 'unnamedplus'
-
 if vim.fn.has 'unix' == 1 then
   if vim.fn.executable 'xclip' == 1 then
     vim.g.clipboard = {
@@ -59,23 +45,30 @@ opt.softtabstop = 2
 opt.linebreak = true
 opt.pumheight = 10
 
-opt.ignorecase = true
+opt.incsearch = true
 opt.smartcase = true
 opt.mouse = 'c'
 
+opt.laststatus = 3
+opt.showmode = false
+opt.scrolloff = 3
+opt.sidescrolloff = 3
+opt.cursorlineopt = 'both'
+opt.cursorline = true
+opt.cursorcolumn = false
 opt.number = false
 opt.relativenumber = true
 opt.numberwidth = 2
 opt.ruler = true
-
-
 opt.signcolumn = 'yes'
+
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
+opt.timeout = true
 opt.timeoutlen = 400
 opt.undofile = true
-opt.updatetime = 250
+opt.updatetime = 2500
 
 local providers = { 'node', 'perl', 'python3', 'ruby' }
 for _, provider in ipairs(providers) do
