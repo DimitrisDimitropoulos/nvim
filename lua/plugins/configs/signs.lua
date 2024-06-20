@@ -48,12 +48,3 @@ gitsigns.setup {
   max_file_length = 1000,
   sign_priority = 1,
 }
-
-local get_hl = require('utils.ui_utils').get_hl
-vim.api.nvim_set_hl(0, 'GitSignsAdd', { bg = tostring(get_hl('Normal').background), fg = 'green' })
-vim.api.nvim_set_hl(
-  0,
-  'GitSignsChange',
-  { bg = tostring(get_hl('Normal').background), fg = tostring(get_hl('Comment').foreground) }
-)
-vim.api.nvim_set_hl(0, 'GitSignsDelete', { bg = tostring(get_hl('Normal').background), fg = 'red' })
