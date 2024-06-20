@@ -1,13 +1,14 @@
 local map = vim.keymap.set
 local function augroup(name) return vim.api.nvim_create_augroup(name, { clear = true }) end
+local autocmd = vim.api.nvim_create_autocmd
 
-vim.api.nvim_create_autocmd('TextYankPost', {
+autocmd('TextYankPost', {
   group = augroup 'YankHighlight',
   callback = function() vim.highlight.on_yank { timeout = 230, higroup = 'Visual' } end,
   desc = 'highlight on yank',
 })
 
-vim.api.nvim_create_autocmd('BufReadPost', {
+autocmd('BufReadPost', {
   group = augroup 'last_loc',
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
@@ -17,7 +18,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'last loc',
 })
 
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
   group = augroup 'close_with_q',
   pattern = { 'help', 'lspinfo', 'man', 'qf', 'query', 'checkhealth' },
   callback = function(event)
@@ -27,14 +28,14 @@ vim.api.nvim_create_autocmd('FileType', {
   desc = 'close with q',
 })
 
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
   group = augroup 'spell',
   pattern = { 'gitcommit', 'markdown' },
   callback = function() vim.opt_local.spell = true end,
   desc = 'spell on specific filetypes',
 })
 
-vim.api.nvim_create_autocmd('BufWritePre', {
+autocmd('BufWritePre', {
   group = augroup 'MakeExecutable',
   pattern = { '*.sh', '*.bash', '*.zsh' },
   callback = function() vim.fn.system('chmod +x ' .. vim.fn.expand '%') end,
@@ -42,4 +43,6 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 local function toggle_spell_check() vim.opt.spell = not (vim.opt.spell:get()) end
-map('n', '<A-z>', toggle_spell_check, { silent = false, noremap = true })
+map('n', '<A-s>', toggle_spell_check, { silent = false, noremap = true })
+local function toggle_wrap() vim.opt.wrap = not (vim.opt.wrap:get()) end
+map('n', '<A-z>', toggle_wrap, { silent = false, noremap = true })
