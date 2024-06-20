@@ -1,8 +1,6 @@
 local map = vim.keymap.set
 local lsp = vim.lsp.buf
 local lsp_mappings = {
-  { key = 'gd', cmd = 'definition',              desc = 'goto def' },
-  { key = 'gD', cmd = 'declaration',             desc = 'goto dec' },
   { key = 'gi', cmd = 'implementation',          desc = 'goto impl' },
   { key = 'ln', cmd = 'rename',                  desc = 'rename' },
   { key = 'kk', cmd = 'signature_help',          desc = 'signature' },
