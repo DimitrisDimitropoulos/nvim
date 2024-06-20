@@ -21,7 +21,7 @@ local plugins = {
   },
   {
     'goolord/alpha-nvim',
-    enabled = false,
+    enabled = true,
     event = 'VimEnter',
     config = function()
       require 'plugins.configs.alpha'
