@@ -13,12 +13,9 @@ local lsp_mappings = {
 }
 
 local diagno = {
-  { key = '<leader>df', cmd = 'open_float', descr = 'diagnostics float' },
-  { key = '<leader>ds', cmd = 'show',       descr = 'diagnostics show' },
-  { key = '<leader>dh', cmd = 'hide',       descr = 'diagnostics hide' },
-  { key = '<leader>dl', cmd = 'setloclist', descr = 'diagnostics to loclist' },
-  { key = '[d',         cmd = 'goto_prev',  descr = 'diagnostics prev' },
-  { key = ']d',         cmd = 'goto_next',  descr = 'diagnostics next' },
+  { key = '<leader>ds', cmd = 'show',      descr = 'diagnostics show' },
+  { key = '<leader>dh', cmd = 'hide',      descr = 'diagnostics hide' },
+  { key = '<leader>dl', cmd = 'setqflist', descr = 'diagnostics to loclist' },
 }
 
 map('n', '<leader>lh', function()
@@ -28,9 +25,8 @@ map('n', '<leader>lh', function()
     vim.lsp.inlay_hint.enable(true)
   end
 end, { desc = 'toggle inlay hints' })
-map('n', '<S-k>', lsp.hover, { desc = 'hover' })
 map('n', '<leader>qa', lsp.code_action, { desc = 'code actions', silent = true })
-map('n', '<A-f>', function() lsp.format { async = true } end, { desc = 'format code' })
+map('n', '<A-f>', function() lsp.format { async = true } end, { desc = 'async format' })
 map(
   'n',
   '<space>wl',
