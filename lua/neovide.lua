@@ -1,5 +1,6 @@
 local G = vim.g
 vim.opt.mouse = 'a'
+vim.opt.smoothscroll = true
 G.neovide_scroll_animation_length = 0
 G.neovide_refresh_rate = 60
 G.neovide_touch_drag_timeout = 0

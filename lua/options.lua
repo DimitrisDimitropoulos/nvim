@@ -53,7 +53,6 @@ opt.laststatus = 3
 opt.showmode = false
 opt.scrolloff = 3
 opt.sidescrolloff = 3
-opt.smoothscroll = true
 opt.cursorlineopt = 'both'
 opt.cursorline = true
 opt.cursorcolumn = false
