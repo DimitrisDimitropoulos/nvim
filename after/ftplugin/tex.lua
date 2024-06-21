@@ -10,82 +10,68 @@ vim.keymap.set({ 'n', 'x' }, 'j', function() return moving_wrap 'j' end, { expr 
 vim.cmd.syntax 'spell toplevel'
 
 local util = require 'lspconfig.util'
-local function buf_cancel_build()
-  local texlab_client = util.get_active_client_by_name(0, 'texlab')
+
+local function buf_cancel_build(bufnr)
+  bufnr = util.validate_bufnr(0) or bufnr
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if texlab_client then
-    texlab_client.request('workspace/executeCommand', { command = 'texlab.cancelBuild' }, function(err)
-      if err then error(tostring(err)) end
-      print 'Build cancelled'
-    end, 0)
+    local pars = { command = 'texlab.cancelBuild', }
+    vim.lsp.buf.execute_command(pars)
+    vim.notify('Build cancelled', vim.log.levels.INFO)
+  else
+    vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
 end
-vim.api.nvim_create_user_command(
-  'TexlabCancel',
-  function() buf_cancel_build() end,
-  { nargs = 0, desc = 'Cancel build, includes the onSave' }
-)
 
-local function dependency_graph()
-  local texlab_client = util.get_active_client_by_name(0, 'texlab')
+local function dependency_graph(bufnr)
+  bufnr = util.validate_bufnr(0) or bufnr
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if texlab_client then
     texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
       if err then error(tostring(err)) end
-      vim.notify('The dependency graph has been generated:\n' .. result)
+      vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
     end, 0)
+  else
+    vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
 end
-vim.api.nvim_create_user_command(
-  'TexlabDependencyGraph',
-  function() dependency_graph() end,
-  { nargs = 0, desc = 'Generate dependency graph in DOT' }
-)
 
 local function cleanArtifacts(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if not texlab_client then
-    vim.notify 'Texlab client not found'
+    vim.notify('Texlab client not found', vim.log.levels.ERROR)
     return
   end
-  local params = {
+  local pars = {
     command = 'texlab.cleanArtifacts',
     arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
   }
-  texlab_client.request('workspace/executeCommand', params, function(err, _, _)
-    if err then
-      error(tostring(err))
-    else
-      vim.notify 'Artifacts cleaned successfully'
-    end
-  end, 0)
+  vim.lsp.buf.execute_command(pars)
+  vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
 end
-vim.api.nvim_create_user_command(
-  'TexlabCleanArtifacts',
-  function() cleanArtifacts(0) end,
-  { nargs = 0, desc = 'Clean artifacts, latexmk -C' }
-)
 
-local function cleanAuxliary(bufnr)
+local function cleanAuxiliary(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if not texlab_client then
-    vim.notify 'Texlab client not found'
+    vim.notify('Texlab client not found', vim.log.levels.ERROR)
     return
   end
-  local params = {
+  local pars = {
     command = 'texlab.cleanAuxiliary',
     arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
   }
-  texlab_client.request('workspace/executeCommand', params, function(err, _, _)
-    if err then
-      error(tostring(err))
-    else
-      vim.notify 'Auxiliary cleaned successfully'
-    end
-  end, 0)
+  vim.lsp.buf.execute_command(pars)
+  vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
 end
-vim.api.nvim_create_user_command(
-  'TexlabCleanAuxiliary',
-  function() cleanAuxliary(0) end,
-  { nargs = 0, desc = 'Clean auxiliary, latexmk -c' }
-)
+
+local coms = {
+  { name = 'TexlabCancel',          func = buf_cancel_build, desc = 'Cancel build, includes the onSave' },
+  { name = 'TexlabDependencyGraph', func = dependency_graph, desc = 'Generate dependency graph in DOT' },
+  { name = 'TexlabCleanArtifacts',  func = cleanArtifacts,   desc = 'Clean artifacts, latexmk -C' },
+  { name = 'TexlabCleanAuxiliary',  func = cleanAuxiliary,   desc = 'Clean auxiliary, latexmk -c' },
+}
+for _, com in ipairs(coms) do
+  vim.api.nvim_create_user_command(com.name, function() com.func(0) end, { nargs = 0, desc = com.desc })
+end
