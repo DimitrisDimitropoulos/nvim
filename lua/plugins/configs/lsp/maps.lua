@@ -2,9 +2,7 @@ local map = vim.keymap.set
 local lsp = vim.lsp.buf
 local lsp_mappings = {
   { key = 'gi', cmd = 'implementation',          desc = 'goto impl' },
-  { key = 'ln', cmd = 'rename',                  desc = 'rename' },
   { key = 'kk', cmd = 'signature_help',          desc = 'signature' },
-  { key = 'gr', cmd = 'references',              desc = 'references' },
   { key = 'gh', cmd = 'type_definition',         desc = 'type definition' },
   { key = 'wa', cmd = 'add_workspace_folder',    desc = 'add work folder' },
   { key = 'wr', cmd = 'remove_workspace_folder', desc = 'rm work folder' },
@@ -23,7 +21,6 @@ map('n', '<leader>lh', function()
     vim.lsp.inlay_hint.enable(true)
   end
 end, { desc = 'toggle inlay hints' })
-map('n', '<leader>qa', lsp.code_action, { desc = 'code actions', silent = true })
 map('n', '<A-f>', function() lsp.format { async = true } end, { desc = 'async format' })
 map(
   'n',
