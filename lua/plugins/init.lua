@@ -148,11 +148,8 @@ local plugins = {
 
   {
     'NvChad/nvim-colorizer.lua',
-    enabled = false,
-    lazy = false,
-    config = function()
-      require('colorizer').setup { filetypes = { 'css', 'javascript', 'lua', 'ini', html = { mode = 'foreground' } } }
-    end,
+    cmd = 'ColorizerAttachToBuffer',
+    config = function() require('colorizer').setup() end,
   },
 }
 
