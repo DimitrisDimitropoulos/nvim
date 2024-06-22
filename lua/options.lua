@@ -14,6 +14,7 @@ opt.listchars = {
   trail = '\\U00002022',
   nbsp = '~',
 }
+vim.opt.showbreak = '\u{21AA} '
 
 opt.spelllang = 'el,en'
 
