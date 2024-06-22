@@ -110,6 +110,15 @@ local ruff_format = {
   formatStdin = true,
   rootMarkers = { 'ruff.toml', 'pyproject.toml', 'setup.cfg' },
 }
+local luacheck = {
+  prefix = 'luacheck',
+  lintSource = 'luacheck',
+  lintStdin = true,
+  lintCommand = 'luacheck --codes --no-color --quiet -',
+  lintIgnoreExitCode = true,
+  lintFormats = { '%.%#:%l:%c: (%t%n) %m' },
+  rootMarkers = { '.luacheckrc' },
+}
 
 local langs = {
   json = { jq_lint, jq_format },
