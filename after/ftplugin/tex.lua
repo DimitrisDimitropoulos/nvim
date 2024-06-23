@@ -28,39 +28,36 @@ local function buf_change_env(bufnr)
       textDocument = { uri = vim.uri_from_bufnr(bufnr), },
       position = { line = pos[1] - 1, character = pos[2] },
       newName = new
-    }
-    }
+    } }
   })
 end
 vim.api.nvim_create_user_command(
   'TexlabChangeEnvironment',
   function() buf_change_env(0) end,
-  { nargs = 0, desc = 'Change the current environment' })
+  { nargs = 0, desc = 'Change the current environment based on position' })
 
--- NOTE: this may not be supported yet, @2024-06-23 01:38:44
 local function buf_find_envs(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
+  if not texlab_client then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
   local pos = vim.api.nvim_win_get_cursor(0)
   local params = {
     command = 'texlab.findEnvironments',
-    arguments = {
+    arguments = { {
       textDocument = { uri = vim.uri_from_bufnr(bufnr), },
       position = { line = pos[1] - 1, character = pos[2] },
-    },
+    } },
   }
-  if texlab_client then
-    texlab_client.request('workspace/executeCommand', params, function(err, result)
-      if err then
-        return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
-      end
-      return vim.notify('The environments are:\n' .. result, vim.log.levels.INFO)
-    end, bufnr)
-  else
-    print 'method textDocument/forwardSearch is not supported by any servers active on the current buffer'
-  end
+  texlab_client.request('workspace/executeCommand', params, function(err, result)
+    if err then
+      return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
+    end
+    return vim.notify('The environments are:\n' .. vim.inspect(result), vim.log.levels.INFO)
+  end, bufnr)
 end
 vim.api.nvim_create_user_command(
   'TexlabFindEnvironments',
   function() buf_find_envs(0) end,
-  { nargs = 0 })
+  { nargs = 0, desc = 'Find the environments at the current cursor position' })
