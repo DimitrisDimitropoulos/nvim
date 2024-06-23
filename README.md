@@ -17,7 +17,6 @@ This config begun from the [NvChad](https://github.com/NvChad/NvChad) minimal [c
 11. Custom efm language server with formatters and linters, no plugin dependencies
 12. Heavy use of lua wherever feasible
 13. LaTeX preview based on `texlab` with `zathura` on linux and [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
-14. Some features for the [ConTeXt](https://wiki.contextgarden.net/Comparison_between_ConTeXt_and_other_typesetting_programs) typesetting system, mainly compilation and preview with [zathura](https://pwmt.org/projects/zathura/)
 
 ## Installation
 
