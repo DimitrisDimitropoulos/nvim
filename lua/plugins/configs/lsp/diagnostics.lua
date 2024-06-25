@@ -8,5 +8,5 @@ vim.diagnostic.config {
     [vim.diagnostic.severity.WARN]  = '\u{25B3}',
   } },
   update_in_insert = false,
-  float = { source = 'always', border = 'rounded', show_header = true },
+  float = { source = 'always', border = 'rounded' },
 }
