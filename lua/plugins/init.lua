@@ -124,7 +124,7 @@ local plugins = {
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
     config = function()
-      require('copilot').setup { suggestion = { auto_trigger = true, debounce = 5, keymap = { accept = '<S-Tab>' } } }
+      require('copilot').setup { suggestion = { auto_trigger = true, debounce = 5, keymap = { accept = '<Tab>' } } }
     end,
   },
 
