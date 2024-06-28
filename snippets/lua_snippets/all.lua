@@ -31,7 +31,9 @@ return {
         sn(nil, { t 'OK: ', i(1) }),
         sn(nil, { t '', i(1) }),
       }),
-      f(function() return os.date '%Y-%m-%d %H:%M:%S' end),
+      f(function()
+        return os.date '%Y-%m-%d %H:%M:%S'
+      end),
     })
   ),
 

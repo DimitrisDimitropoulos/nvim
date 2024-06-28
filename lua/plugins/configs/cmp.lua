@@ -1,5 +1,7 @@
 local cmp_ok, cmp = pcall(require, 'cmp')
-if not cmp_ok then return end
+if not cmp_ok then
+  return
+end
 local ls = require 'luasnip'
 
 local kind_icons = {
@@ -54,7 +56,11 @@ cmp.setup {
     documentation = { border = border 'CmpDocBorder', winhighlight = 'Normal:CmpDoc' },
   },
 
-  snippet = { expand = function(args) ls.lsp_expand(args.body) end },
+  snippet = {
+    expand = function(args)
+      ls.lsp_expand(args.body)
+    end,
+  },
 
   mapping = cmp.mapping.preset.insert {
     ['<Up>'] = cmp.mapping.select_prev_item(),
@@ -91,11 +97,11 @@ cmp.setup {
   },
 
   sources = cmp.config.sources {
-    { name = 'luasnip',  priority = 9 },
+    { name = 'luasnip', priority = 9 },
     { name = 'nvim_lsp', priority = 9 },
     -- { name = 'nvim_lua', priority = 9 },
-    { name = 'path',     priority = 5 },
-    { name = 'buffer',   keyword_length = 2, max_item_count = 3, priority = 1 },
+    { name = 'path', priority = 5 },
+    { name = 'buffer', keyword_length = 2, max_item_count = 3, priority = 1 },
   },
 
   sorting = {

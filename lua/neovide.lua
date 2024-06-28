@@ -18,7 +18,9 @@ G.gui_font_default_size = 19
 G.gui_font_size = vim.g.gui_font_default_size
 G.gui_font_face = 'Comic Code,CaskaydiaCove Nerd Font'
 
-local set_guifont = function() vim.opt.guifont = string.format('%s:h%s', vim.g.gui_font_face, vim.g.gui_font_size) end
+local set_guifont = function()
+  vim.opt.guifont = string.format('%s:h%s', vim.g.gui_font_face, vim.g.gui_font_size)
+end
 
 local resize_guifont = function(delta)
   G.gui_font_size = G.gui_font_size + delta
@@ -34,6 +36,12 @@ end
 reset_guifont()
 
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<C-+>', function() resize_guifont(1) end, opts)
-vim.keymap.set('n', '<C-->', function() resize_guifont(-1) end, opts)
-vim.keymap.set('n', '<C-0>', function() reset_guifont() end, opts)
+vim.keymap.set('n', '<C-+>', function()
+  resize_guifont(1)
+end, opts)
+vim.keymap.set('n', '<C-->', function()
+  resize_guifont(-1)
+end, opts)
+vim.keymap.set('n', '<C-0>', function()
+  reset_guifont()
+end, opts)

@@ -78,15 +78,23 @@ local ViMode = {
       t = '#f6d5a4',
     },
   },
-  provider = function(self) return ' %2(' .. self.mode_names[self.mode] .. '%) ' end,
+  provider = function(self)
+    return ' %2(' .. self.mode_names[self.mode] .. '%) '
+  end,
   hl = function(self)
     local mode = self.mode:sub(1, 1) -- get only the first mode character
     return { fg = 'black', bg = self.mode_colors[mode], bold = true }
   end,
-  update = { 'ModeChanged', pattern = '*:*', callback = vim.schedule_wrap(function() vim.cmd 'redrawstatus' end) },
+  update = { 'ModeChanged', pattern = '*:*', callback = vim.schedule_wrap(function()
+    vim.cmd 'redrawstatus'
+  end) },
 }
 
-local FileNameBlock = { init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end }
+local FileNameBlock = {
+  init = function(self)
+    self.filename = vim.api.nvim_buf_get_name(0)
+  end,
+}
 
 local FileIcon = {
   init = function(self)
@@ -94,15 +102,23 @@ local FileIcon = {
     local extension = vim.fn.fnamemodify(filename, ':e')
     self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
   end,
-  provider = function(self) return ' ' .. self.icon .. ' ' and ' ' .. self.icon .. ' ' end,
-  hl = function(self) return { fg = self.icon_color, bg = 'bg' } end,
+  provider = function(self)
+    return ' ' .. self.icon .. ' ' and ' ' .. self.icon .. ' '
+  end,
+  hl = function(self)
+    return { fg = self.icon_color, bg = 'bg' }
+  end,
 }
 
 local FileName = {
   provider = function(self)
     local filename = vim.fn.fnamemodify(self.filename, ':.')
-    if filename == '' then return '[No Name]' end
-    if not conditions.width_percent_below(#filename, 0.25) then filename = vim.fn.pathshorten(filename) end
+    if filename == '' then
+      return '[No Name]'
+    end
+    if not conditions.width_percent_below(#filename, 0.25) then
+      filename = vim.fn.pathshorten(filename)
+    end
     return filename
   end,
   hl = { bg = 'bg', italic = true },
@@ -110,12 +126,16 @@ local FileName = {
 
 local FileFlags = {
   {
-    condition = function() return vim.bo.modified end,
+    condition = function()
+      return vim.bo.modified
+    end,
     provider = '[+]',
     hl = { fg = 'fg', bg = 'bg', italic = true },
   },
   {
-    condition = function() return not vim.bo.modifiable or vim.bo.readonly end,
+    condition = function()
+      return not vim.bo.modifiable or vim.bo.readonly
+    end,
     provider = '[RO]',
     hl = { fg = 'fg', bg = 'bg', italic = true },
   },
@@ -135,11 +155,13 @@ FileNameBlock = utils.insert(
   FileIcon,
   utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
   FileFlags,
-  { provider = '%<' }                      -- this means that the statusline is cut here when there's not enough space
+  { provider = '%<' } -- this means that the statusline is cut here when there's not enough space
 )
 
 local FileType = {
-  provider = function() return '[' .. vim.bo.filetype .. ']' end,
+  provider = function()
+    return '[' .. vim.bo.filetype .. ']'
+  end,
   hl = { fg = utils.get_highlight('String').fg, bold = true, bg = 'bg' },
 }
 
@@ -174,15 +196,21 @@ local lsp_progress = function()
   -- NOTE: nightly support, @2023-07-28 18:12:44
   if version.minor >= 10 then
     local lsp_out = tostring(vim.inspect(vim.lsp.status()))
-    if lsp_out == '""' then return '' end
+    if lsp_out == '""' then
+      return ''
+    end
     return lsp_out
   end
   return ''
 end
 
 local LSPMessages = {
-  condition = function() return #vim.lsp.get_clients() > 0 end,
-  provider = function() return lsp_progress() or '' end,
+  condition = function()
+    return #vim.lsp.get_clients() > 0
+  end,
+  provider = function()
+    return lsp_progress() or ''
+  end,
   hl = { fg = 'peanut', bg = 'bg' },
 }
 
@@ -205,18 +233,24 @@ local Diagnostics = {
     hl = { fg = 'diag_error', bg = 'bg' },
   },
   {
-    provider = function(self) return self.warnings > 0 and (self.warn_icon .. self.warnings .. '') end,
+    provider = function(self)
+      return self.warnings > 0 and (self.warn_icon .. self.warnings .. '')
+    end,
     hl = { fg = 'diag_warn', bg = 'bg' },
   },
   {
-    provider = function(self) return self.info > 0 and (self.info_icon .. self.info .. '') end,
+    provider = function(self)
+      return self.info > 0 and (self.info_icon .. self.info .. '')
+    end,
     hl = { fg = 'diag_info', bg = 'bg' },
   },
   {
-    provider = function(self) return self.hints > 0 and (self.hint_icon .. self.hints) end,
+    provider = function(self)
+      return self.hints > 0 and (self.hint_icon .. self.hints)
+    end,
     hl = { fg = 'diag_hint', bg = 'bg' },
   },
-  { provider = ']',  hl = { fg = 'peanut', bg = 'bg' } },
+  { provider = ']', hl = { fg = 'peanut', bg = 'bg' } },
 }
 
 local FileSize = {
@@ -225,7 +259,9 @@ local FileSize = {
     local suffix = { 'b', 'k', 'M', 'G', 'T', 'P', 'E' }
     local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
     fsize = (fsize < 0 and 0) or fsize
-    if fsize < 1024 then return fsize .. suffix[1] end
+    if fsize < 1024 then
+      return fsize .. suffix[1]
+    end
     local i = math.floor((math.log(fsize) / math.log(1024)))
     return string.format('%.2g%s', fsize / math.pow(1024, i), suffix[i + 1])
   end,
@@ -240,13 +276,17 @@ local Git = {
   end,
   hl = { fg = 'orange' },
   { -- git branch name
-    provider = function(self) return ' ' .. self.status_dict.head .. ' ' end,
+    provider = function(self)
+      return ' ' .. self.status_dict.head .. ' '
+    end,
     -- provider = function(self) return ' ' .. self.status_dict.head .. ' ' end,
     hl = { fg = 'peanut', bg = 'bg', bold = true, italic = true },
   },
   -- You could handle delimiters, icons and counts similar to Diagnostics
   {
-    condition = function(self) return self.has_changes end,
+    condition = function(self)
+      return self.has_changes
+    end,
     provider = '[',
     hl = { fg = 'peanut', bg = 'bg' },
   },
@@ -272,22 +312,30 @@ local Git = {
     hl = { fg = 'git_change', bg = 'bg' },
   },
   {
-    condition = function(self) return self.has_changes end,
+    condition = function(self)
+      return self.has_changes
+    end,
     provider = ']',
     hl = { fg = 'peanut', bg = 'bg' },
   },
 }
 
 local Spell = {
-  condition = function() return vim.wo.spell and vim.bo.filetype ~= 'markdown' and vim.bo.filetype ~= 'tex' end,
+  condition = function()
+    return vim.wo.spell and vim.bo.filetype ~= 'markdown' and vim.bo.filetype ~= 'tex'
+  end,
   provider = ' [SPELL]',
   hl = { bold = true, fg = 'orange', bg = 'bg' },
 }
 
 local FileEncoding = {
   -- condition = function() return vim.bo.fenc ~= 'utf-8' and vim.bo.fenc ~= '' end,
-  condition = function() return vim.bo.fenc end,
-  provider = function() return ' [' .. vim.bo.fenc:upper() .. ']' end,
+  condition = function()
+    return vim.bo.fenc
+  end,
+  provider = function()
+    return ' [' .. vim.bo.fenc:upper() .. ']'
+  end,
   hl = {
     fg = require('heirline.utils').get_highlight('Function').fg,
     bg = 'bg',

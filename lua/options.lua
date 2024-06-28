@@ -4,7 +4,7 @@ vim.g.tex_flavor = 'latex'
 local opt = vim.opt
 
 opt.langmap =
-'ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,ΡR,ΣS,ΤT,ΘU,ΩV,WW,ΧX,ΥY,ΖZ,αa,βb,ψc,δd,εe,φf,γg,ηh,ιi,ξj,κk,λl,μm,νn,οo,πp,qq,ρr,σs,τt,θu,ωv,ςw,χx,υy,ζz'
+  'ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,ΡR,ΣS,ΤT,ΘU,ΩV,WW,ΧX,ΥY,ΖZ,αa,βb,ψc,δd,εe,φf,γg,ηh,ιi,ξj,κk,λl,μm,νn,οo,πp,qq,ρr,σs,τt,θu,ωv,ςw,χx,υy,ζz'
 opt.list = true
 opt.listchars = {
   eol = '\\U000021b5',
@@ -33,10 +33,12 @@ if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
     paste = { ['+'] = 'win32yank.exe -o --lf', ['*'] = 'win32yank.exe -o --lf' },
   }
 end
-if vim.fn.has 'win32' == 1 and vim.fn.executable 'pwsh.exe' == 1 then opt.shell = 'pwsh.exe' end
+if vim.fn.has 'win32' == 1 and vim.fn.executable 'pwsh.exe' == 1 then
+  opt.shell = 'pwsh.exe'
+end
 if vim.fn.executable 'rg' == 1 then
   opt.grepprg = 'rg --vimgrep --smart-case --hidden --color=never --glob !.git'
-  vim.opt.grepformat = "%f:%l:%m"
+  vim.opt.grepformat = '%f:%l:%m'
 end
 
 opt.foldenable = false
@@ -85,4 +87,6 @@ local is_windows = vim.loop.os_uname().sysname == 'Windows_NT'
 vim.env.PATH = vim.env.PATH .. (is_windows and ';' or ':') .. vim.fn.stdpath 'data' .. '/mason/bin'
 
 -- Neovide config
-if vim.g.neovide then require 'neovide' end
+if vim.g.neovide then
+  require 'neovide'
+end

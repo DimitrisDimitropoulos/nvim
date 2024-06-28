@@ -1,6 +1,8 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig_ok, lspconfig = pcall(require, 'lspconfig')
-if not lspconfig_ok then return end
+if not lspconfig_ok then
+  return
+end
 
 local exe, rgs
 if vim.fn.has 'win32' == 1 then

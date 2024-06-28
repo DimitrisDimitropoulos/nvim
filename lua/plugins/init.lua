@@ -10,7 +10,7 @@ local plugins = {
     lazy = false,
     config = function()
       vim.cmd.colorscheme 'melange'
-    end
+    end,
   },
   {
     'folke/tokyonight.nvim',
@@ -18,7 +18,7 @@ local plugins = {
     lazy = false,
     config = function()
       vim.cmd.colorscheme 'tokyonight-storm'
-    end
+    end,
   },
   {
     'goolord/alpha-nvim',
@@ -26,22 +26,29 @@ local plugins = {
     event = 'VimEnter',
     config = function()
       require 'plugins.configs.alpha'
-    end
+    end,
   },
   {
     'rebelot/heirline.nvim',
     event = 'VeryLazy',
     config = function()
       require 'plugins.configs.heirline'
-    end
+    end,
   },
-  { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
+  {
+    'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup()
+    end,
+  },
 
   {
     'nvim-telescope/telescope.nvim',
     keys = { '<leader>f', '<leader>s' },
     cmd = 'Telescope',
-    config = function() require 'plugins.configs.telescope' end,
+    config = function()
+      require 'plugins.configs.telescope'
+    end,
     dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' } },
   },
 
@@ -49,7 +56,9 @@ local plugins = {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = evs,
-    config = function() require 'plugins.configs.treesitter' end,
+    config = function()
+      require 'plugins.configs.treesitter'
+    end,
   },
 
   {
@@ -65,7 +74,9 @@ local plugins = {
       {
         'L3MON4D3/LuaSnip',
         dependencies = { 'rafamadriz/friendly-snippets' },
-        config = function() require 'plugins.configs.luasnip' end,
+        config = function()
+          require 'plugins.configs.luasnip'
+        end,
       },
 
       {
@@ -78,7 +89,9 @@ local plugins = {
         end,
       },
     },
-    config = function() require 'plugins.configs.cmp' end,
+    config = function()
+      require 'plugins.configs.cmp'
+    end,
   },
 
   {
@@ -86,7 +99,7 @@ local plugins = {
     event = evs,
     config = function()
       require 'plugins.configs.lsp'
-    end
+    end,
   },
 
   {
@@ -94,7 +107,7 @@ local plugins = {
     cmd = 'Mason',
     config = function()
       require 'plugins.configs.mason'
-    end
+    end,
   },
 
   {
@@ -102,7 +115,9 @@ local plugins = {
     enabled = false,
     version = '2.20.7',
     event = evs,
-    config = function() require 'plugins.configs.indent' end,
+    config = function()
+      require 'plugins.configs.indent'
+    end,
   },
 
   {
@@ -110,21 +125,29 @@ local plugins = {
     event = evs,
     config = function()
       require 'plugins.configs.signs'
-    end
+    end,
   },
 
   {
     'numToStr/Comment.nvim',
     enabled = false,
     keys = { 'gc', 'gb', '<leader>/', 'V' },
-    config = function() require 'plugins.configs.comment' end,
+    config = function()
+      require 'plugins.configs.comment'
+    end,
   },
 
   {
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
     config = function()
-      require('copilot').setup { suggestion = { auto_trigger = true, debounce = 5, keymap = { accept = '<Tab>' } } }
+      require('copilot').setup {
+        suggestion = {
+          auto_trigger = true,
+          debounce = 5,
+          keymap = { accept = '<Tab>' },
+        },
+      }
     end,
   },
 
@@ -132,7 +155,9 @@ local plugins = {
     'echasnovski/mini.splitjoin',
     version = false,
     keys = 'gS',
-    config = function() require('mini.splitjoin').setup() end,
+    config = function()
+      require('mini.splitjoin').setup()
+    end,
   },
 
   {
@@ -149,7 +174,9 @@ local plugins = {
   {
     'NvChad/nvim-colorizer.lua',
     cmd = 'ColorizerAttachToBuffer',
-    config = function() require('colorizer').setup() end,
+    config = function()
+      require('colorizer').setup()
+    end,
   },
 }
 
