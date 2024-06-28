@@ -1,17 +1,21 @@
 local map = vim.keymap.set
 local lsp = vim.lsp.buf
 local lsp_mappings = {
+  -- stylua: ignore start
   { key = 'gi', cmd = 'implementation',          desc = 'goto impl' },
   { key = 'kk', cmd = 'signature_help',          desc = 'signature' },
   { key = 'gh', cmd = 'type_definition',         desc = 'type definition' },
   { key = 'wa', cmd = 'add_workspace_folder',    desc = 'add work folder' },
   { key = 'wr', cmd = 'remove_workspace_folder', desc = 'rm work folder' },
+  -- stylua: ignore stop
 }
 
 local diagno = {
+  -- stylua: ignore start
   { key = '<leader>ds', cmd = 'show',      descr = 'diagnostics show' },
   { key = '<leader>dh', cmd = 'hide',      descr = 'diagnostics hide' },
   { key = '<leader>dl', cmd = 'setqflist', descr = 'diagnostics to loclist' },
+  -- stylua: ignore stop
 }
 
 map('n', '<leader>lh', function()
@@ -21,13 +25,12 @@ map('n', '<leader>lh', function()
     vim.lsp.inlay_hint.enable(true)
   end
 end, { desc = 'toggle inlay hints' })
-map('n', '<A-f>', function() lsp.format { async = true } end, { desc = 'async format' })
-map(
-  'n',
-  '<space>wl',
-  function() print(vim.inspect(lsp.list_workspace_folders())) end,
-  { desc = 'list workspace folders' }
-)
+map('n', '<A-f>', function()
+  lsp.format { async = true }
+end, { desc = 'async format' })
+map('n', '<space>wl', function()
+  print(vim.inspect(lsp.list_workspace_folders()))
+end, { desc = 'list workspace folders' })
 for _, mapping in ipairs(lsp_mappings) do
   map('n', '<leader>' .. mapping.key, lsp[mapping.cmd], { desc = mapping.desc })
 end

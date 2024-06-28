@@ -1,5 +1,7 @@
 local telescope_ok, telescope = pcall(require, 'telescope')
-if not telescope_ok then return end
+if not telescope_ok then
+  return
+end
 
 local extras = {
   fzf = { case_mode = 'smart_case' },
@@ -67,6 +69,7 @@ end
 local map = vim.keymap.set
 
 local telescope_mappings = {
+  -- stylua: ignore start
   { key = 'ff', cmd = 'fd',                        desc = 'files' },
   { key = 'fr', cmd = 'oldfiles',                  desc = 'old files' },
   { key = 'f;', cmd = 'commands',                  desc = 'commands' },
@@ -84,21 +87,14 @@ local telescope_mappings = {
   { key = 'sp', cmd = 'spell_suggest',             desc = 'spell suggest' },
   { key = 'fz', cmd = 'current_buffer_fuzzy_find', desc = 'buf fuzzy' },
   { key = 'f.', cmd = 'resume',                    desc = 'last' },
+  -- stylua: ignore stop
 }
 for _, mapping in ipairs(telescope_mappings) do
-  map(
-    'n',
-    '<leader>' .. mapping.key,
-    function() require('telescope.builtin')[mapping.cmd]() end,
-    { desc = 'telescope ' .. mapping.desc }
-  )
+  map('n', '<leader>' .. mapping.key, function()
+    require('telescope.builtin')[mapping.cmd]()
+  end, { desc = 'telescope ' .. mapping.desc })
 end
 
-map(
-  'n',
-  '<leader>fa',
-  function()
-    require('telescope.builtin').fd { hidden = true, follow = true, no_ignore = true, file_ignore_patterns = { '.git' } }
-  end,
-  { desc = 'telescope all files' }
-)
+map('n', '<leader>fa', function()
+  require('telescope.builtin').fd { hidden = true, follow = true, no_ignore = true, file_ignore_patterns = { '.git' } }
+end, { desc = 'telescope all files' })
