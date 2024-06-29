@@ -175,7 +175,8 @@ local LSPActive = {
     for _, server in pairs(vim.lsp.get_clients { bufnr = 0 }) do
       table.insert(names, server.name)
     end
-    return '  [' .. table.concat(names, ' ') .. ']'
+    return '\u{2376}[' .. table.concat(names, ' ') .. ']'
+    -- return '  [' .. table.concat(names, ' ') .. ']'
   end,
   hl = { fg = 'pink', bg = 'bg', bold = true },
 }
@@ -216,7 +217,7 @@ local LSPMessages = {
 
 local Diagnostics = {
   condition = conditions.has_diagnostics,
-  static = { error_icon = ' ', warn_icon = ' ', info_icon = ' ', hint_icon = ' ' },
+  static = { error_icon = '\u{2297} ', warn_icon = '\u{26a0} ', info_icon = '\u{24d8} ', hint_icon = '\u{003f} ' },
   init = function(self)
     self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -275,11 +276,12 @@ local Git = {
     self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
   end,
   hl = { fg = 'orange' },
-  { -- git branch name
+  -- git branch name
+  {
     provider = function(self)
-      return ' ' .. self.status_dict.head .. ' '
+      return '\u{e0a0} ' .. self.status_dict.head .. ' '
+      -- return ' ' .. self.status_dict.head .. ' '
     end,
-    -- provider = function(self) return ' ' .. self.status_dict.head .. ' ' end,
     hl = { fg = 'peanut', bg = 'bg', bold = true, italic = true },
   },
   -- You could handle delimiters, icons and counts similar to Diagnostics
