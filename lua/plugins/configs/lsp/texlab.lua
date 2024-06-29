@@ -54,7 +54,7 @@ return {
         latexFormatter = 'latexindent',
         latexindent = {
           ['local'] = nil, -- local is a reserved keyword
-          modifyLineBreaks = false,
+          modifyLineBreaks = true,
         },
         bibtexFormatter = 'texlab',
         formatterLineLength = 120,
