@@ -37,6 +37,12 @@ end)
 vim.keymap.set({ 'i', 's' }, '<A-h>', function()
   cicle(-1)
 end)
+vim.keymap.set({ 'i', 's' }, '<A-j>', function()
+  ls.jump(1)
+end, { silent = true })
+vim.keymap.set({ 'i', 's' }, '<A-k>', function()
+  ls.jump(-1)
+end, { silent = true })
 
 require('luasnip.loaders.from_vscode').lazy_load()
 -- require('luasnip.loaders.from_vscode').lazy_load { paths = '~/.config/nvim/snippets/json_snippets/' or '' }
