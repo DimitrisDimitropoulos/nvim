@@ -54,11 +54,12 @@ autocmd('BufWritePre', {
   desc = 'make executable',
 })
 
-local function toggle_spell_check()
-  vim.opt.spell = not (vim.opt.spell:get())
+local function toggle_option(opt)
+  vim.opt[opt] = not vim.opt[opt]:get()
 end
-map('n', '<A-s>', toggle_spell_check, { silent = false, noremap = true })
-local function toggle_wrap()
-  vim.opt.wrap = not (vim.opt.wrap:get())
-end
-map('n', '<A-z>', toggle_wrap, { silent = false, noremap = true })
+map('n', '<A-s>', function()
+  toggle_option [[spell]]
+end, { silent = false, noremap = true })
+map('n', '<A-z>', function()
+  toggle_option [[wrap]]
+end, { silent = false, noremap = true })
