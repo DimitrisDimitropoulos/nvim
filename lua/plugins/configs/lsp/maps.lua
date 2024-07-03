@@ -18,6 +18,9 @@ local diagno = {
   -- stylua: ignore stop
 }
 
+map('n', 'grr', lsp.references, { desc = 'references' })
+map('n', 'grn', lsp.rename, { desc = 'rename' })
+map('n', 'gra', lsp.code_action, { desc = 'code actions', silent = true })
 map('n', '<leader>lh', function()
   if vim.lsp.inlay_hint.is_enabled() then
     vim.lsp.inlay_hint.enable(false)
