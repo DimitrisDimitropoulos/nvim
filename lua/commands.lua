@@ -38,7 +38,7 @@ autocmd('FileType', {
 
 autocmd('FileType', {
   group = augroup 'spell',
-  pattern = { 'gitcommit', 'markdown' },
+  pattern = { 'gitcommit', 'markdown', 'tex', 'context' },
   callback = function()
     vim.opt_local.spell = true
   end,
