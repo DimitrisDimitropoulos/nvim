@@ -21,7 +21,9 @@ return {
       dscr = 'Common comment formats',
     },
     fmt('{1}{2}, @{3}', {
-      f(sn_ut.get_comment_string),
+      f(function()
+        return vim.bo.commentstring:gsub('%%s', '')
+      end),
       c(1, {
         sn(nil, { t 'TODO: ', i(1) }),
         sn(nil, { t 'FIXME: ', i(1) }),
