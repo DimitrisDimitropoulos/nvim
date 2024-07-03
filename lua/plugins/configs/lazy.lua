@@ -1,6 +1,7 @@
 return {
   install = { colorscheme = { 'melange' } },
   defaults = { lazy = true },
+  rocks = { enabled = false },
   performance = {
     rtp = {
       disabled_plugins = {
