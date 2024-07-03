@@ -152,7 +152,7 @@ local FileNameModifer = {
 
 FileNameBlock = utils.insert(
   FileNameBlock,
-  FileIcon,
+  -- FileIcon,
   utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
   FileFlags,
   { provider = '%<' } -- this means that the statusline is cut here when there's not enough space
@@ -351,6 +351,7 @@ local Align = { provider = '%=', hl = { bg = 'bg' } }
 
 local Statusline = {
   { ViMode },
+  { Space },
   { FileNameBlock },
   { Space },
   { FileSize },
