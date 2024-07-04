@@ -9,9 +9,9 @@ local lsp_mappings = {
 }
 
 local diagno = {
-  { key = '<leader>ds', cmd = 'show' },
-  { key = '<leader>dh', cmd = 'hide' },
-  { key = '<leader>dl', cmd = 'setqflist' },
+  { key = 'ds', cmd = 'show' },
+  { key = 'dh', cmd = 'hide' },
+  { key = 'dl', cmd = 'setqflist' },
 }
 
 map('n', 'grr', lsp.references, { desc = 'lsp references' })
@@ -35,5 +35,5 @@ for _, mapping in ipairs(lsp_mappings) do
 end
 
 for _, diag in ipairs(diagno) do
-  map('n', diag.key, vim.diagnostic[diag.cmd], { desc = 'diagnostics ' .. diag.cmd:gsub('_', ' ') })
+  map('n', '<leader>' .. diag.key, vim.diagnostic[diag.cmd], { desc = 'diagnostics ' .. diag.cmd:gsub('_', ' ') })
 end
