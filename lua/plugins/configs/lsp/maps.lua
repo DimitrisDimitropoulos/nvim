@@ -24,10 +24,10 @@ map('n', '<leader>lh', function()
     vim.lsp.inlay_hint.enable(true)
   end
 end, { desc = 'lsp toggle inlay hints' })
-map('n', '<A-f>', function()
+map('n', '<leader>lf', function()
   lsp.format { async = true }
 end, { desc = 'lsp async format' })
-map('n', '<space>wl', function()
+map('n', '<leader>wl', function()
   print(vim.inspect(lsp.list_workspace_folders()))
 end, { desc = 'lsp list workspace folders' })
 for _, mapping in ipairs(lsp_mappings) do
