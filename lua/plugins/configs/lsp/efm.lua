@@ -118,6 +118,7 @@ local luacheck = {
   lintFormats = { '%.%#:%l:%c: (%t%n) %m' },
   rootMarkers = { '.luacheckrc' },
 }
+local fish_indent = { formatCommand = 'fish_indent', formatStdin = true }
 
 local langs = {
   json = { jq_lint, jq_format },
@@ -132,6 +133,7 @@ local langs = {
   cpp = { cppcheck },
   c = { cppcheck },
   lua = { stylua },
+  fish = { fish_indent },
 }
 
 require('lspconfig').efm.setup {
