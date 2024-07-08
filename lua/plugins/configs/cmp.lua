@@ -31,28 +31,11 @@ local kind_icons = {
   TypeParameter = '󰅲',
 }
 
-local function border(hl_name)
-  return {
-    { '╭', hl_name },
-    { '─', hl_name },
-    { '╮', hl_name },
-    { '│', hl_name },
-    { '╯', hl_name },
-    { '─', hl_name },
-    { '╰', hl_name },
-    { '│', hl_name },
-  }
-end
-
 cmp.setup {
 
   window = {
-    completion = {
-      winhighlight = 'Normal:CmpPmenu,Search:PmenuSel',
-      scrollbar = false,
-      border = border 'CmpDocBorder',
-    },
-    documentation = { border = border 'CmpDocBorder', winhighlight = 'Normal:CmpDoc' },
+    documentation = { border = 'rounded' },
+    completion = { scrollbar = false, border = 'rounded' },
   },
 
   mapping = cmp.mapping.preset.insert {
