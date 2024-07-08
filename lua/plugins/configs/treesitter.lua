@@ -1,5 +1,5 @@
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { 'lua', 'cpp', 'c', 'bash' },
+  ensure_installed = { 'lua', 'c', 'vimdoc', 'markdown', 'markdown_inline' },
   highlight = {
     enable = true,
     use_languagetree = true,
