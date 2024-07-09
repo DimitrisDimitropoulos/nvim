@@ -38,9 +38,7 @@ local plugins = {
   {
     'nvim-tree/nvim-web-devicons',
     enabled = false,
-    config = function()
-      require('nvim-web-devicons').setup()
-    end,
+    opts = {},
   },
 
   {
@@ -157,9 +155,7 @@ local plugins = {
     'echasnovski/mini.splitjoin',
     version = false,
     keys = 'gS',
-    config = function()
-      require('mini.splitjoin').setup()
-    end,
+    opts = {},
   },
 
   {
@@ -176,9 +172,7 @@ local plugins = {
   {
     'NvChad/nvim-colorizer.lua',
     cmd = 'ColorizerAttachToBuffer',
-    config = function()
-      require('colorizer').setup()
-    end,
+    opts = {},
   },
 }
 
