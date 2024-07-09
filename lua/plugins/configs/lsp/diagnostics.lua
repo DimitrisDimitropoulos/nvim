@@ -11,4 +11,5 @@ vim.diagnostic.config {
   },
   update_in_insert = false,
   float = { source = 'always', border = 'rounded' },
+  jump = { float = true },
 }
