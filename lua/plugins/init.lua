@@ -22,7 +22,7 @@ local plugins = {
   },
   {
     'goolord/alpha-nvim',
-    enabled = true,
+    enabled = false,
     event = 'VimEnter',
     config = function()
       require 'plugins.configs.alpha'
@@ -30,13 +30,14 @@ local plugins = {
   },
   {
     'rebelot/heirline.nvim',
-    event = 'VeryLazy',
+    event = evs,
     config = function()
       require 'plugins.configs.heirline'
     end,
   },
   {
     'nvim-tree/nvim-web-devicons',
+    enabled = false,
     config = function()
       require('nvim-web-devicons').setup()
     end,
