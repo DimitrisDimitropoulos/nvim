@@ -170,6 +170,16 @@ local plugins = {
   },
 
   {
+    'ibhagwan/fzf-lua',
+    enabled = false,
+    cmd = 'FzfLua',
+    keys = { '<leader>f', '<leader>s' },
+    config = function()
+      require 'plugins.configs.fzf'
+    end,
+  },
+
+  {
     'NvChad/nvim-colorizer.lua',
     cmd = 'ColorizerAttachToBuffer',
     opts = {},
