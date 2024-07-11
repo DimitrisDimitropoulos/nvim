@@ -23,7 +23,7 @@ fzf_lua.setup {
     },
     fzf = {
       ['ctrl-q'] = 'select-all+accept',
-      ['alt-h'] = 'toggle-preview', -- BUG: does not work, @2024-07-11 01:06:43
+      ['alt-h'] = 'toggle-preview', -- BUG: works with the bat previewer, @2024-07-11 01:06:43
     },
   },
   defaults = {
@@ -34,7 +34,7 @@ fzf_lua.setup {
     height = 0.97,
     width = 0.95,
     preview = {
-      -- default = 'bat',
+      default = 'bat',
       horizontal = 'right:50%',
       delay = 50,
       scrollbar = false,
