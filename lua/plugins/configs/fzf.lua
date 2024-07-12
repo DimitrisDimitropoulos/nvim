@@ -58,7 +58,7 @@ local fzf_maps = {
   { key = 'fD', cmd = 'diagnostics_workspace' },
   { key = 'fc', cmd = 'command_history' },
   { key = 'fl', cmd = 'lsp_document_symbols' },
-  { key = 'fL', cmd = 'lsp_workspace_symbols' },
+  { key = 'fw', cmd = 'lsp_workspace_symbols' },
   { key = 'sp', cmd = 'spell_suggest' },
   { key = 'f.', cmd = 'resume' },
   { key = 'fg', cmd = 'live_grep' },
@@ -74,3 +74,31 @@ end
 vim.keymap.set('n', '<leader>fa', function()
   require('fzf-lua').files { cmd = 'rg --files --hidden -u' }
 end, { desc = 'fzf-lua all files' })
+
+local document_symbols = function()
+  local symbols = {
+    'All',
+    'Variable',
+    'Function',
+    'Module',
+    'Constant',
+    'Class',
+    'Property',
+    'Method',
+    'Enum',
+    'Interface',
+    'Boolean',
+    'Number',
+    'String',
+    'Array',
+    'Constructor',
+  }
+  vim.ui.select(symbols, { prompt = 'Select which symbol' }, function(item)
+    if item == 'All' then
+      require('fzf-lua').lsp_workspace_symbols()
+    else
+      require('fzf-lua').lsp_workspace_symbols { query = item }
+    end
+  end)
+end
+vim.keymap.set('n', '<leader>fW', document_symbols, { desc = 'fzf-lua select lsp workspace symbols' })
