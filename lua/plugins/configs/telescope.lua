@@ -88,6 +88,7 @@ local telescope_mappings = {
   { key = 'fd', cmd = 'diagnostics' },
   { key = 'fc', cmd = 'command_history' },
   { key = 'fl', cmd = 'lsp_document_symbols' },
+  { key = 'fw', cmd = 'lsp_workspace_symbols' },
   { key = 'sp', cmd = 'spell_suggest' },
   { key = 'fz', cmd = 'current_buffer_fuzzy_find' },
   { key = 'f.', cmd = 'resume' },
@@ -101,3 +102,31 @@ end
 vim.keymap.set('n', '<leader>fa', function()
   require('telescope.builtin').fd { hidden = true, follow = true, no_ignore = true, file_ignore_patterns = { '.git' } }
 end, { desc = 'telescope all files' })
+
+local document_symbols = function()
+  local symbols = {
+    'All',
+    'Variable',
+    'Function',
+    'Module',
+    'Constant',
+    'Class',
+    'Property',
+    'Method',
+    'Enum',
+    'Interface',
+    'Boolean',
+    'Number',
+    'String',
+    'Array',
+    'Constructor',
+  }
+  vim.ui.select(symbols, { prompt = 'Select which symbol' }, function(item)
+    if item == 'All' then
+      require('telescope.builtin').lsp_workspace_symbols()
+    else
+      require('telescope.builtin').lsp_workspace_symbols { symbols = item }
+    end
+  end)
+end
+vim.keymap.set('n', '<leader>fW', document_symbols, { desc = 'telescope select lsp document symbols' })
