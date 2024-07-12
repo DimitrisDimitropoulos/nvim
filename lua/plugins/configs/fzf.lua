@@ -20,10 +20,11 @@ fzf_lua.setup {
       ['<A-d>'] = 'preview-page-down',
       ['<A-u>'] = 'preview-page-up',
       ['<A-w>'] = 'toggle-preview-cw',
+      ['<A-h>'] = 'toggle-preview',
     },
     fzf = {
       ['ctrl-q'] = 'select-all+accept',
-      ['alt-h'] = 'toggle-preview', -- BUG: works with the bat previewer, @2024-07-11 01:06:43
+      ['alt-h'] = 'toggle-preview',
     },
   },
   defaults = {
