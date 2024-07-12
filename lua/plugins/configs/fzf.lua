@@ -44,6 +44,13 @@ fzf_lua.setup {
       winopts = { number = false },
     },
   },
+  previewers = {
+    bat = {
+      cmd = 'bat',
+      args = '--color=always --style=changes --line-range :512',
+      theme = 'gruvbox-dark',
+    },
+  },
 }
 
 local fzf_maps = {
