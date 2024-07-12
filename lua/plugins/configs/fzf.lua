@@ -25,6 +25,8 @@ fzf_lua.setup {
     fzf = {
       ['ctrl-q'] = 'select-all+accept',
       ['alt-h'] = 'toggle-preview',
+      ['alt-u'] = 'preview-page-up',
+      ['alt-d'] = 'preview-page-down',
     },
   },
   defaults = {
