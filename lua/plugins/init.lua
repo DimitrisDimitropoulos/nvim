@@ -163,11 +163,7 @@ local plugins = {
     'folke/which-key.nvim',
     enabled = false,
     keys = { '<leader>', '"', "'", '`', ',', 'c', 'v', '[', ']', 'g' },
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = require 'plugins.configs.whichkey',
+    opts = {},
   },
 
   {
