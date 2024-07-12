@@ -29,7 +29,7 @@ fzf_lua.setup {
   },
   defaults = {
     formatter = 'path.filename_first',
-    multiline = 1,
+    -- multiline = 1,
   },
   winopts = {
     height = 0.97,
