@@ -1,5 +1,6 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'plaintext' }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 local lspconfig_ok, lspconfig = pcall(require, 'lspconfig')
 if not lspconfig_ok then
   return
