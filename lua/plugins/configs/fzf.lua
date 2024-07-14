@@ -86,7 +86,7 @@ for _, mapping in ipairs(fzf_maps) do
 end
 
 vim.keymap.set('n', '<leader>fa', function()
-  require('fzf-lua').files { cmd = 'rg --files --hidden -u' }
+  require('fzf-lua').files { cmd = 'rg --files --hidden -u --glob !.git' }
 end, { desc = 'fzf-lua all files' })
 
 local document_symbols = function()
