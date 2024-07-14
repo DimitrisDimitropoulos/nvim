@@ -21,12 +21,16 @@ fzf_lua.setup {
       ['<A-u>'] = 'preview-page-up',
       ['<A-w>'] = 'toggle-preview-cw',
       ['<A-h>'] = 'toggle-preview',
+      ['<A-k>'] = 'first',
+      ['<A-j>'] = 'last',
     },
     fzf = {
       ['ctrl-q'] = 'select-all+accept',
       ['alt-h'] = 'toggle-preview',
       ['alt-u'] = 'preview-page-up',
       ['alt-d'] = 'preview-page-down',
+      ['alt-k'] = 'first',
+      ['alt-j'] = 'last',
     },
   },
   defaults = {
