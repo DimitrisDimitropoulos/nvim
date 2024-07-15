@@ -30,6 +30,7 @@ end, { desc = 'lsp async format' })
 map('n', '<leader>wl', function()
   print(vim.inspect(lsp.list_workspace_folders()))
 end, { desc = 'lsp list workspace folders' })
+
 for _, mapping in ipairs(lsp_mappings) do
   map('n', '<leader>' .. mapping.key, lsp[mapping.cmd], { desc = 'lsp ' .. mapping.cmd:gsub('_', ' ') })
 end
