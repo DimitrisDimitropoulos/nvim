@@ -99,7 +99,7 @@ local plugins = {
     'neovim/nvim-lspconfig',
     event = evs,
     config = function()
-      require 'plugins.configs.lsp'
+      require 'plugins.configs.lspconfig'
     end,
   },
 
