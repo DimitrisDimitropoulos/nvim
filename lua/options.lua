@@ -50,7 +50,7 @@ opt.tabstop = 2
 opt.softtabstop = 2
 
 opt.linebreak = true
-opt.pumheight = 10
+opt.pumheight = 20
 
 opt.incsearch = true
 opt.smartcase = true
