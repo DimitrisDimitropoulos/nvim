@@ -223,7 +223,7 @@ local LSPMessages = {
 
 local Diagnostics = {
   condition = conditions.has_diagnostics,
-  static = { error_icon = '\u{2297} ', warn_icon = '\u{26a0} ', info_icon = '\u{24d8} ', hint_icon = '\u{003f} ' },
+  static = { error_icon = '\u{23FA} ', warn_icon = '\u{23FA} ', info_icon = '\u{23FA} ', hint_icon = '\u{23FA} ' },
   init = function(self)
     self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
