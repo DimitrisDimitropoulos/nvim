@@ -14,6 +14,9 @@ fzf_lua.setup {
     cwd_prompt = true,
     cwd_prompt_shorten_len = 1,
   },
+  oldfiles = {
+    include_current_session = true,
+  },
   keymap = {
     builtin = {
       ['<A-a>'] = 'toggle-fullscreen',
