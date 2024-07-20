@@ -14,3 +14,7 @@
 ((generic_command) @operator
   (#any-of? @operator "\\hat" "\\cdot" "\\int" "\\div" "\\in" "\\leq" "\\sum" "\\neq" "\\geq" "\\times" "\\pm" "\\mp" "\\partial")
   (#set! "priority" 105))
+
+((command_name) @type
+  (#any-of? @type "\\mathrm" "\\mathcal" "\\mathbb" "\\mathbf" "\\mathit" "\\mathsf" "\\mathtt")
+  (#set! "priority" 105))
