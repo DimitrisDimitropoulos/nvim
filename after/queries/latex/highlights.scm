@@ -21,3 +21,14 @@
 
 (label_definition
   name: (curly_group_text) @label)
+
+;; General environments
+(begin
+  command: _ @function.builtin
+  name: (curly_group_text (text) @keyword.directive)
+  (#not-has-ancestor? @keyword.directive math_environment))
+
+(end
+  command: _ @function.builtin
+  name: (curly_group_text (text) @keyword.directive)
+  (#not-has-ancestor? @keyword.directive math_environment))
