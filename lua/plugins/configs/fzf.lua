@@ -36,10 +36,6 @@ fzf_lua.setup {
       ['alt-j'] = 'last',
     },
   },
-  defaults = {
-    formatter = 'path.filename_first',
-    -- multiline = 1,
-  },
   winopts = {
     height = 0.97,
     width = 0.95,
