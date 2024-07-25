@@ -1,6 +1,6 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig = require 'lspconfig'
-local servers = { 'julials', 'bashls', 'neocmake', 'clangd', 'ruff', 'taplo' }
+local servers = { 'julials', 'bashls', 'neocmake', 'clangd', 'ruff', 'taplo', 'typst_lsp' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup { capabilities = capabilities }
 end
