@@ -6,7 +6,6 @@ end
 local types = require 'luasnip.util.types'
 
 ls.config.set_config {
-  history = true,
   updateevents = 'TextChanged,TextChangedI',
   delete_check_events = 'TextChanged',
   enable_autosnippets = false,
