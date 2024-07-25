@@ -4,7 +4,7 @@ if not fzf_lua_ok then
 end
 
 fzf_lua.setup {
-  fzf_opts = { ['--no-scrollbar'] = true, ['--cycle'] = true },
+  fzf_opts = { ['--no-scrollbar'] = true, ['--cycle'] = true, ['--info'] = 'inline' },
   grep = {
     prompt = 'rg>',
     rg_opts = '--hidden --no-heading --color=always --max-columns=4096 --smart-case --line-number --column --with-filename --glob !.git --glob !build --glob !spell --glob !lockfiles --glob !LICENSE',
