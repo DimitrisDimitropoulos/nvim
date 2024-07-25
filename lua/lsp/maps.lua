@@ -13,7 +13,8 @@ local lsp_mappings = {
 local diagno = {
   { key = 'ds', cmd = 'show' },
   { key = 'dh', cmd = 'hide' },
-  { key = 'dl', cmd = 'setqflist' },
+  { key = 'dq', cmd = 'setqflist' },
+  { key = 'dl', cmd = 'setloclist' },
 }
 
 map('n', 'grr', lsp.references, { desc = 'lsp references' })
