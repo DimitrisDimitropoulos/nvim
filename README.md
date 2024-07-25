@@ -9,6 +9,7 @@ statusline, dashboard and other moderate ui features. I believe that i have
 maintained the original spirit of vim and neovim, while adding these features.
 
 ## Showcase
+
 ![2024-07-25-14:25:58](https://github.com/user-attachments/assets/02033bd9-ac45-428f-b338-61991be638e4)
 ![2024-07-25-18:50:21](https://github.com/user-attachments/assets/79f0f9dd-fc5c-418a-b9ee-c0005215847c)
 
@@ -31,8 +32,7 @@ maintained the original spirit of vim and neovim, while adding these features.
     [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
 13. Custom treesitter queries for highlighting `lua` and `LaTeX`
 
-## Installation![2024-07-25-14:25:58](https://github.com/user-attachments/assets/c6655665-8f30-44d1-afba-1b7ccc85868d)
-
+## Installation
 
 Before installing make sure to backup your config, plugins, data and cache.
 Then remove it, or better rename it to something like <folder>.bak, for more
