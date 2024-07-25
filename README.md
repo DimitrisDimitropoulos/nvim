@@ -8,6 +8,18 @@ simply add modern useful features into vim-neovim, like LSP, IDE completion,
 statusline, dashboard and other moderate ui features. I believe that i have
 maintained the original spirit of vim and neovim, while adding these features.
 
+> [!IMPORTANT]
+> It is suggested to have some dependencies when using this config for the best
+> experience. Most of the functionality will be kept if they are not installed,
+> except for fzf-lua, which requires `fzf` to work. For windows prefer safe
+> installation methods like `winget` or `scoop`. On linux use your distro's
+> package manager like `apt` or `dnf`
+>
+> -   [xclip](https://github.com/astrand/xclip) for clipboard on X11
+> -   [fd](https://github.com/sharkdp/fd) [ripgrep](https://github.com/BurntSushi/ripgrep) [fzf](https://github.com/junegunn/fzf) for the picker either fzf-lua or telescope
+> -   [zathura](https://pwmt.org/projects/zathura/) or [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for pdf functionality when previewing LaTeX documents
+> -   [pwsh.exe](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) if you want to use it as the shell for windows usage
+
 ## Showcase
 
 ![2024-07-25-14:25:58](https://github.com/user-attachments/assets/02033bd9-ac45-428f-b338-61991be638e4)
