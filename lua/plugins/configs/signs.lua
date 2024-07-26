@@ -7,26 +7,25 @@ local gitsigns_ok, gitsigns = pcall(require, 'gitsigns')
 if not gitsigns_ok then
   return
 end
-local map = vim.keymap.set
 
 gitsigns.setup {
   on_attach = function()
     local gs = package.loaded.gitsigns
 
-    map('n', ',+', gs.stage_hunk, { desc = 'git stage hunk' })
-    map('n', ',-', gs.reset_hunk, { desc = 'git reset hunk' })
-    map('n', ',g', gs.preview_hunk, { desc = 'preview hunk' })
-    map('n', ',b', function()
+    vim.keymap.set('n', ',+', gs.stage_hunk, { desc = 'git stage hunk' })
+    vim.keymap.set('n', ',-', gs.reset_hunk, { desc = 'git reset hunk' })
+    vim.keymap.set('n', ',g', gs.preview_hunk, { desc = 'preview hunk' })
+    vim.keymap.set('n', ',b', function()
       gs.blame_line { full = true }
     end, { desc = 'git blame line' })
-    map('n', ',r', gs.refresh, { desc = 'git refresh' })
+    vim.keymap.set('n', ',r', gs.refresh, { desc = 'git refresh' })
 
     local git_nav = {
       { key = '[g', cmd = 'prev_hunk' },
       { key = ']g', cmd = 'next_hunk' },
     }
     for _, nav in ipairs(git_nav) do
-      map('n', nav.key, function()
+      vim.keymap.set('n', nav.key, function()
         if vim.wo.diff then
           return nav.key
         end
@@ -34,7 +33,7 @@ gitsigns.setup {
       end, { desc = 'git ' .. nav.cmd })
     end
 
-    map('n', '<leader>gf', function()
+    vim.keymap.set('n', '<leader>gf', function()
       local buffers = vim.api.nvim_list_bufs()
       local is_git_buf = false
       for _, buf in ipairs(buffers) do

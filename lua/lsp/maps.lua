@@ -1,21 +1,5 @@
 local map = vim.keymap.set
 local lsp = vim.lsp.buf
-local lsp_mappings = {
-  { key = 'gi', cmd = 'implementation' },
-  { key = 'gd', cmd = 'definition' },
-  { key = 'gD', cmd = 'declaration' },
-  { key = 'kk', cmd = 'signature_help' },
-  { key = 'gh', cmd = 'type_definition' },
-  { key = 'wa', cmd = 'add_workspace_folder' },
-  { key = 'wr', cmd = 'remove_workspace_folder' },
-}
-
-local diagno = {
-  { key = 'ds', cmd = 'show' },
-  { key = 'dh', cmd = 'hide' },
-  { key = 'dq', cmd = 'setqflist' },
-  { key = 'dl', cmd = 'setloclist' },
-}
 
 map('n', 'grr', lsp.references, { desc = 'lsp references' })
 map('n', 'grn', lsp.rename, { desc = 'lsp rename' })
@@ -35,10 +19,23 @@ map('n', '<leader>wl', function()
   print(vim.inspect(lsp.list_workspace_folders()))
 end, { desc = 'lsp list workspace folders' })
 
-for _, mapping in ipairs(lsp_mappings) do
+for _, mapping in ipairs {
+  { key = 'gi', cmd = 'implementation' },
+  { key = 'gd', cmd = 'definition' },
+  { key = 'gD', cmd = 'declaration' },
+  { key = 'kk', cmd = 'signature_help' },
+  { key = 'gh', cmd = 'type_definition' },
+  { key = 'wa', cmd = 'add_workspace_folder' },
+  { key = 'wr', cmd = 'remove_workspace_folder' },
+} do
   map('n', '<leader>' .. mapping.key, lsp[mapping.cmd], { desc = 'lsp ' .. mapping.cmd:gsub('_', ' ') })
 end
 
-for _, diag in ipairs(diagno) do
+for _, diag in ipairs {
+  { key = 'ds', cmd = 'show' },
+  { key = 'dh', cmd = 'hide' },
+  { key = 'dq', cmd = 'setqflist' },
+  { key = 'dl', cmd = 'setloclist' },
+} do
   map('n', '<leader>' .. diag.key, vim.diagnostic[diag.cmd], { desc = 'diagnostics ' .. diag.cmd:gsub('_', ' ') })
 end
