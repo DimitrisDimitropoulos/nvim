@@ -174,6 +174,17 @@ local plugins = {
   },
 
   {
+    'nvimdev/indentmini.nvim',
+    -- enabled = false,
+    event = evs,
+    config = function()
+      require('indentmini').setup { minlevel = 2 }
+      vim.api.nvim_set_hl(0, 'IndentLine', { link = 'IblIndent' })
+      vim.api.nvim_set_hl(0, 'IndentLineCurrent', { link = 'Keyword' })
+    end,
+  },
+
+  {
     'NvChad/nvim-colorizer.lua',
     cmd = 'ColorizerAttachToBuffer',
     opts = {},
