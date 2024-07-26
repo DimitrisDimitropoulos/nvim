@@ -116,7 +116,7 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
     -   [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
 -   [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 -   [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
--   [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
+-   [nvimdev/indentmini.nvim](https://github.com/nvimdev/indentmini.nvim)
 -   [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 -   [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
 -   [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
