@@ -73,7 +73,7 @@ end
 --  Mapps for Telescope and it's extensions --
 -- =============================================================================
 
-local telescope_mappings = {
+for _, mapping in ipairs {
   { key = 'ff', cmd = 'fd' },
   { key = 'fr', cmd = 'oldfiles' },
   { key = 'f;', cmd = 'commands' },
@@ -92,8 +92,7 @@ local telescope_mappings = {
   { key = 'sp', cmd = 'spell_suggest' },
   { key = 'fz', cmd = 'current_buffer_fuzzy_find' },
   { key = 'f.', cmd = 'resume' },
-}
-for _, mapping in ipairs(telescope_mappings) do
+} do
   vim.keymap.set('n', '<leader>' .. mapping.key, function()
     require('telescope.builtin')[mapping.cmd]()
   end, { desc = 'telescope ' .. mapping.cmd:gsub('_', ' ') })

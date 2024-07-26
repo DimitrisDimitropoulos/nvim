@@ -1,22 +1,18 @@
-local map = vim.keymap.set
-
-map({ 'i', 'n' }, '<C-s>', function()
+vim.keymap.set({ 'i', 'n' }, '<C-s>', function()
   vim.cmd.write {}
 end)
-map('t', '<C-[><C-[>', '<C-\\><C-n>', { silent = true })
+vim.keymap.set('t', '<C-[><C-[>', '<C-\\><C-n>', { silent = true })
 
-local buf = { 'bd', 'bn', 'bp' }
-for _, b in ipairs(buf) do
-  map('n', '<leader>' .. b, function()
+for _, b in ipairs { 'bd', 'bn', 'bp' } do
+  vim.keymap.set('n', '<leader>' .. b, function()
     vim.cmd(b)
   end, { noremap = true, desc = b })
 end
 
-local arrows = { '<Up>', '<Down>', '<Left>', '<Right>' }
-for _, arrow in ipairs(arrows) do
-  map({ 'n', 'x', 'c' }, arrow, '')
+for _, arrow in ipairs { '<Up>', '<Down>', '<Left>', '<Right>' } do
+  vim.keymap.set({ 'n', 'x', 'c' }, arrow, '')
 end
 
-map('n', '<leader>mm', function()
+vim.keymap.set('n', '<leader>mm', function()
   vim.cmd 'make'
 end, { noremap = true, desc = 'make' })
