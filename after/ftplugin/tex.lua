@@ -44,7 +44,7 @@ local function buf_find_envs(bufnr)
     end
     vim.lsp.util.open_floating_preview(env_names, '', {
       height = #env_names,
-      width = max_length + (#env_names - 1),
+      width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
       focusable = false,
       focus = false,
       border = 'rounded',
