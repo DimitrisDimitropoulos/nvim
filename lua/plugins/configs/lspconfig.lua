@@ -1,3 +1,4 @@
+require('lspconfig.ui.windows').default_options.border = vim.g.border_style
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig = require 'lspconfig'
 local servers = { 'julials', 'bashls', 'neocmake', 'clangd', 'ruff', 'taplo', 'typst_lsp' }
