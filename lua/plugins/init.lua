@@ -8,7 +8,7 @@ local plugins = {
     'savq/melange-nvim',
     enabled = true,
     lazy = false,
-    config = function()
+    init = function()
       vim.cmd.colorscheme 'melange'
     end,
   },
@@ -16,7 +16,7 @@ local plugins = {
     'folke/tokyonight.nvim',
     enabled = false,
     lazy = false,
-    config = function()
+    init = function()
       vim.cmd.colorscheme 'tokyonight-storm'
     end,
   },
