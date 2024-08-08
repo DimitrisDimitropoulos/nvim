@@ -10,6 +10,6 @@ vim.diagnostic.config {
     },
   },
   update_in_insert = false,
-  float = { source = 'always', border = 'rounded' },
+  float = { source = 'always', border = vim.g.border_style },
   jump = { float = true },
 }
