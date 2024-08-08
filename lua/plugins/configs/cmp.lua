@@ -34,8 +34,8 @@ local kind_icons = {
 cmp.setup {
 
   window = {
-    documentation = { border = 'rounded' },
-    completion = { scrollbar = false, border = 'rounded' },
+    documentation = { border = vim.g.border_style },
+    completion = { scrollbar = false, border = vim.g.border_style },
   },
 
   mapping = cmp.mapping.preset.insert {

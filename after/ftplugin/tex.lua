@@ -47,7 +47,7 @@ local function buf_find_envs(bufnr)
       width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
       focusable = false,
       focus = false,
-      border = 'rounded',
+      border = vim.g.border_style,
       title = 'Environments',
     })
   end, bufnr)

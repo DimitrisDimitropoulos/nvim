@@ -21,7 +21,7 @@ local function symbol_info(bufnr)
       width = math.max(string.len(name), string.len(container)),
       focusable = false,
       focus = false,
-      border = 'rounded',
+      border = vim.g.border_style,
       title = 'Symbol Info',
     })
   end)
