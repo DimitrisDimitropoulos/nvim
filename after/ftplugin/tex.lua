@@ -55,3 +55,61 @@ end
 vim.api.nvim_create_user_command('TexlabPrettyEnvs', function()
   buf_find_envs(0)
 end, { nargs = 0, desc = 'Find environments at cursor and display as popup' })
+
+local bufnr = 0
+local ansi_codes = require('fzf-lua.utils').ansi_codes
+local make_entry = require 'fzf-lua.make_entry'
+local config = require 'fzf-lua.config'
+local function get_labels()
+  local parser = vim.treesitter.get_parser(bufnr, 'latex')
+  local root = parser:parse()[1]:root()
+  local query_string = '(label_definition (curly_group_text (text) @label_title))'
+  local query = vim.treesitter.query.parse('latex', query_string)
+  local labels = {}
+  for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
+    for _, node in pairs(match) do
+      local text = vim.treesitter.get_node_text(node, 0)
+      local line, start, _, _ = node:range()
+      line = line + 1
+      local entry = {
+        text = text,
+        line = line,
+        start = start,
+        path = vim.api.nvim_buf_get_name(0),
+      }
+      table.insert(labels, entry)
+    end
+  end
+  return labels
+end
+vim.api.nvim_create_user_command('GetLabels', function()
+  get_labels()
+end, { nargs = 0 })
+local function prepare_labels(labels)
+  local res = {}
+  for _, label in ipairs(labels) do
+    local entry = ('%s:%s:%s:%s'):format(
+      make_entry.file(label.path),
+      tostring(label.line),
+      tostring(label.start),
+      ansi_codes.magenta(label.text)
+    )
+    table.insert(res, entry)
+  end
+  return res
+end
+local function fzf_label()
+  local labels = get_labels()
+  local entries = prepare_labels(labels)
+  local _config = { prompt = 'Labels>' }
+  _config = config.normalize_opts(_config, config.globals.grep)
+  _config.fzf_opts = {
+    ['--with-nth'] = '4..',
+    ['--delimiter'] = ':',
+  }
+  _config.previewer = 'builtin'
+  require('fzf-lua').fzf_exec(entries, _config)
+end
+vim.api.nvim_create_user_command('Fzflatexlabels', function()
+  fzf_label()
+end, { nargs = 0, desc = 'FzfLua get LaTeX labels based on treesitter' })
