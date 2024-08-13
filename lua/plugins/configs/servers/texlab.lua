@@ -7,7 +7,7 @@ if not lspconfig_ok then
 end
 
 local exe, rgs
-if vim.fn.has 'win32' == 1 then
+if vim.g.is_windows == 1 then
   exe = vim.env.HOME .. '\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe'
   rgs = { '-reuse-instance', '%p', '-forward-search', '%f', '%l' }
 end
