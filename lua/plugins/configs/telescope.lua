@@ -92,6 +92,7 @@ for _, mapping in ipairs {
   { key = 'sp', cmd = 'spell_suggest' },
   { key = 'fz', cmd = 'current_buffer_fuzzy_find' },
   { key = 'f.', cmd = 'resume' },
+  { key = 'ft', cmd = 'git_status' },
 } do
   vim.keymap.set('n', '<leader>' .. mapping.key, function()
     require('telescope.builtin')[mapping.cmd]()
