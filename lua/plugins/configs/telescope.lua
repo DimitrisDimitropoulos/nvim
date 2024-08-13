@@ -64,8 +64,7 @@ telescope.setup {
   extensions = extras,
 }
 
-local tel_plugs = { 'fzf' }
-for _, plug in ipairs(tel_plugs) do
+for _, plug in ipairs { 'fzf' } do
   require('telescope').load_extension(plug)
 end
 
