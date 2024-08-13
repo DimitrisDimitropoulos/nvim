@@ -10,9 +10,10 @@ fzf_lua.setup {
     ['--info'] = 'inline',
     ['--separator'] = ' ',
     ['--pointer'] = '>',
-    ['--preview-window'] = 'border-left',
+    ['--preview-window'] = 'right,50%,border-left,<50(down,40%,border-top)',
   },
   fzf_colors = { ['gutter'] = { 'bg', 'Normal' } },
+  diagnostics = { fzf_opts = { ['--pointer'] = '│' } },
   grep = {
     prompt = 'rg>',
     rg_opts = '--hidden --no-heading --color=always --max-columns=4096 --smart-case --line-number --column --with-filename --glob !.git --glob !build --glob !spell --glob !lockfiles --glob !LICENSE',
