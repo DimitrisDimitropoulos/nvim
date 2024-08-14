@@ -187,21 +187,24 @@ local LSPActive = {
   hl = { fg = 'pink', bg = 'bg', bold = true },
 }
 
-local lsp_progress = function()
-  local lsp_out = tostring(vim.inspect(vim.lsp.status()))
-  if lsp_out == '""' then
-    return ''
-  end
-  return lsp_out
-end
-
 local LSPMessages = {
   condition = function()
     return #vim.lsp.get_clients() > 0
   end,
   provider = function()
-    return lsp_progress() or ''
+    local lsp_out = tostring(vim.inspect(vim.lsp.status()))
+    if lsp_out == '""' then
+      return ''
+    end
+    return lsp_out
   end,
+  update = {
+    'LspProgress',
+    'CursorMoved',
+    callback = function()
+      vim.api.nvim_command 'redrawstatus'
+    end,
+  },
   hl = { fg = 'peanut', bg = 'bg' },
 }
 
