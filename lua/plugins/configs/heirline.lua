@@ -188,27 +188,11 @@ local LSPActive = {
 }
 
 local lsp_progress = function()
-  -- if vim.bo.filetype == 'julia' then return '' end
-  local lsp
-  local version = vim.version()
-  if version.minor == 9 then
-    lsp = vim.lsp.util.get_progress_messages()[1]
-    if lsp then
-      local name = lsp.name or ''
-      local msg = lsp.message or ''
-      local title = lsp.title or ''
-      return string.format(' %%<%s %s %s ', name, title, msg)
-    end
+  local lsp_out = tostring(vim.inspect(vim.lsp.status()))
+  if lsp_out == '""' then
+    return ''
   end
-  -- NOTE: nightly support, @2023-07-28 18:12:44
-  if version.minor >= 10 then
-    local lsp_out = tostring(vim.inspect(vim.lsp.status()))
-    if lsp_out == '""' then
-      return ''
-    end
-    return lsp_out
-  end
-  return ''
+  return lsp_out
 end
 
 local LSPMessages = {
