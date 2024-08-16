@@ -16,3 +16,13 @@ end
 vim.keymap.set('n', '<leader>mm', function()
   vim.cmd 'make'
 end, { noremap = true, desc = 'make' })
+
+local function toggle_option(opt)
+  vim.opt[opt] = not vim.opt[opt]:get()
+end
+vim.keymap.set('n', '<A-s>', function()
+  toggle_option [[spell]]
+end, { silent = false, noremap = true })
+vim.keymap.set('n', '<A-z>', function()
+  toggle_option [[wrap]]
+end, { silent = false, noremap = true })
