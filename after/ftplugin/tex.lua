@@ -64,7 +64,7 @@ vim.api.nvim_create_user_command('TexlabPrettyEnvs', function()
   buf_find_envs(0)
 end, { nargs = 0, desc = 'Find environments at cursor and display as popup' })
 
-local bufnr = 0
+local bufnr = vim.api.nvim_get_current_buf() ---@type number
 local ansi_codes = require('fzf-lua.utils').ansi_codes
 local make_entry = require 'fzf-lua.make_entry'
 local config = require 'fzf-lua.config'
