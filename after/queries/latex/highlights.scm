@@ -19,16 +19,13 @@
   (#any-of? @type "\\mathrm" "\\mathcal" "\\mathbb" "\\mathbf" "\\mathit" "\\mathsf" "\\mathtt")
   (#set! "priority" 105))
 
-(label_definition
-  name: (curly_group_text) @label)
-
 ;; General environments
-(begin
-  command: _ @function.builtin
-  name: (curly_group_text (text) @keyword.directive)
-  (#not-has-ancestor? @keyword.directive math_environment))
-
-(end
-  command: _ @function.builtin
-  name: (curly_group_text (text) @keyword.directive)
-  (#not-has-ancestor? @keyword.directive math_environment))
+; (begin
+;   command: _ @module
+;   name: (curly_group_text (text) @label @nospell)
+;   (#not-has-ancestor? @label math_environment))
+;
+; (end
+;   command: _ @module
+;   name: (curly_group_text (text) @label @nospell)
+;   (#not-has-ancestor? @label math_environment))

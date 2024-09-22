@@ -1,4 +1,5 @@
 vim.opt_local.wrap = true
+vim.api.nvim_set_hl(0, '@module', { link = '@function.builtin' })
 
 local function moving_wrap(direction)
   return (vim.v.count == 0) and 'g' .. direction or direction
