@@ -34,6 +34,10 @@ if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
   }
 end
 if vim.fn.has 'win32' == 1 and vim.fn.executable 'pwsh.exe' == 1 then opt.shell = 'pwsh.exe' end
+if vim.fn.executable 'rg' == 1 then
+  opt.grepprg = 'rg --vimgrep --smart-case --hidden --color=never --glob !.git'
+  vim.opt.grepformat = "%f:%l:%m"
+end
 
 opt.foldenable = false
 
