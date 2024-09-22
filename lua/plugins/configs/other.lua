@@ -1,4 +1,4 @@
-require("indent_blankline").setup {
+require("indent_blankline").setup({
   indentLine_enabled = 1,
   filetype_exclude = {
     "help",
@@ -17,9 +17,13 @@ require("indent_blankline").setup {
   show_current_context = true,
   show_current_context_start = true,
   indent_blankline_use_treesitter = true,
-}
+})
 -- Set the hightlight group
-vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", { bg = "#3D3834", bold = true })
+vim.api.nvim_set_hl(
+  0,
+  "IndentBlanklineContextStart",
+  { bg = "#3D3834", bold = true }
+)
 
 vim.api.nvim_set_hl(0, "@lsp.type.parameter", { italic = true })
 
@@ -30,20 +34,17 @@ for _, hl in ipairs(comms_hl) do
   vim.api.nvim_set_hl(0, hl, { bold = true, underline = true })
 end
 
-vim.fn.sign_define("DiagnosticSignError", { text = "■", texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "△", texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "○", texthl = "DiagnosticSignInfo" })
-
 -- Mini textobjects
-require("mini.ai").setup {
+require("mini.ai").setup({
   custom_textobjects = {
     -- Whole buffer textobject
     M = function(ai_type)
-      local n_lines = vim.fn.line "$"
+      local n_lines = vim.fn.line("$")
       local start_line, end_line = 1, n_lines
       if ai_type == "i" then
         -- Skip first and last blank lines for `i` textobject
-        local first_nonblank, last_nonblank = vim.fn.nextnonblank(1), vim.fn.prevnonblank(n_lines)
+        local first_nonblank, last_nonblank =
+            vim.fn.nextnonblank(1), vim.fn.prevnonblank(n_lines)
         start_line = first_nonblank == 0 and 1 or first_nonblank
         end_line = last_nonblank == 0 and n_lines or last_nonblank
       end
@@ -60,7 +61,7 @@ require("mini.ai").setup {
       }
     end,
   },
-}
+})
 
 local mini_plugs = {
   "splitjoin",
@@ -68,10 +69,10 @@ local mini_plugs = {
   "jump",
 }
 for _, plug in ipairs(mini_plugs) do
-  require("mini." .. plug).setup {}
+  require("mini." .. plug).setup({})
 end
 
-require("colorizer").setup {
+require("colorizer").setup({
   filetypes = {
     "css",
     "javascript",
@@ -81,4 +82,4 @@ require("colorizer").setup {
       mode = "foreground",
     },
   },
-}
+})
