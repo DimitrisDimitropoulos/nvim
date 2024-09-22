@@ -3,7 +3,7 @@ if not telescope_ok then return end
 
 local extras = {
   fzf = { case_mode = 'smart_case' },
-  file_browser = { theme = 'ivy', layout_config = { height = 0.95 } },
+  -- file_browser = { theme = 'ivy', layout_config = { height = 0.95 } },
 }
 
 local previewers = require 'telescope.previewers'
@@ -56,7 +56,10 @@ telescope.setup {
   extensions = extras,
 }
 
-local tel_plugs = { 'fzf', 'file_browser' }
+local tel_plugs = {
+  'fzf',
+  -- 'file_browser'
+}
 for _, plug in ipairs(tel_plugs) do
   require('telescope').load_extension(plug)
 end
@@ -105,9 +108,9 @@ map(
   { desc = 'find all files' }
 )
 
-map(
-  'n',
-  '<leader>fb',
-  function() require('telescope').extensions.file_browser.file_browser { initial_mode = 'normal' } end,
-  { desc = 'file browser' }
-)
+-- map(
+--   'n',
+--   '<leader>fb',
+--   function() require('telescope').extensions.file_browser.file_browser { initial_mode = 'normal' } end,
+--   { desc = 'file browser' }
+-- )
