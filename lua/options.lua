@@ -10,6 +10,7 @@ g.mapleader = " "
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 opt.scrolloff = 3
+opt.sidescrolloff = 3
 
 vim.opt.numberwidth = 3
 -- vim.opt.statuscolumn =
