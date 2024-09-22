@@ -159,8 +159,8 @@ require('lazy').setup({
   },
 
   {
-    'NvChad/nvim-colorizer.lua',
-    cmd = 'ColorizerAttachToBuffer',
+    'brenoprata10/nvim-highlight-colors',
+    cmd = 'HighlightColors',
     opts = {},
   },
 }, require 'plugins.configs.lazy')
