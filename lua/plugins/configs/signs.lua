@@ -12,13 +12,13 @@ gitsigns.setup {
   on_attach = function()
     local gs = package.loaded.gitsigns
 
-    vim.keymap.set('n', ',+', gs.stage_hunk, { desc = 'git stage hunk' })
-    vim.keymap.set('n', ',-', gs.reset_hunk, { desc = 'git reset hunk' })
-    vim.keymap.set('n', ',g', gs.preview_hunk, { desc = 'preview hunk' })
-    vim.keymap.set('n', ',b', function()
+    vim.keymap.set('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
+    vim.keymap.set('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
+    vim.keymap.set('n', '<leader>hp', gs.preview_hunk, { desc = 'preview hunk' })
+    vim.keymap.set('n', '<leader>hi', gs.preview_hunk_inline, { desc = 'preview hunk inline' })
+    vim.keymap.set('n', '<leader>hb', function()
       gs.blame_line { full = true }
     end, { desc = 'git blame line' })
-    vim.keymap.set('n', ',r', gs.refresh, { desc = 'git refresh' })
 
     for _, nav in ipairs {
       { key = '[g', cmd = 'prev_hunk' },
