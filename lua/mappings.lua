@@ -3,7 +3,6 @@ local map = vim.keymap.set
 map({ 'i', 'n' }, '<C-s>', function() vim.cmd.write {} end)
 map('t', '<C-[><C-[>', '<C-\\><C-n>', { silent = true })
 map('i', '<C-H>', '<C-W>')
-map('n', 'Q', 'ZZ')
 
 local commands = {
   -- stylua: ignore start
