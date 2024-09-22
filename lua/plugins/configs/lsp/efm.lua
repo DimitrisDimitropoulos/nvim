@@ -2,9 +2,9 @@
 local prettier = {
   prefix = 'prettier',
   formatCanRange = true,
-  formatCommand = string.format(
+  formatCommand = (
     'prettier --stdin --stdin-filepath ${INPUT} ${--range-start:charStart} '
-      .. '${--range-end:charEnd} ${--tab-width:tabSize} ${--use-tabs:!insertSpaces}'
+    .. '${--range-end:charEnd} ${--tab-width:tabSize} ${--use-tabs:!insertSpaces}'
   ),
   formatStdin = true,
   rootMarkers = {
@@ -47,7 +47,7 @@ local flake8 = {
 local cppcheck = {
   prefix = 'cppcheck',
   lintSource = 'cppcheck',
-  lintCommand = string.format 'cppcheck --quiet --force --enable=warning,style,performance,portability --error-exitcode=1 ${INPUT}',
+  lintCommand = 'cppcheck --quiet --force --enable=warning,style,performance,portability --error-exitcode=1 ${INPUT}',
   lintStdin = false,
   lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
   rootMarkers = { 'CmakeLists.txt', 'compile_commands.json', '.git' },
@@ -61,27 +61,35 @@ local shellcheck = {
 local mypy = {
   prefix = 'mypy',
   lintSource = 'mypy',
-  lintCommand = string.format 'mypy --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
+  lintCommand = 'mypy --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
   lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
   rootMarkers = { 'mypy.ini', 'pyproject.toml', 'setup.cfg' },
 }
 local jq_lint = {
   prefix = 'jq',
   lintSource = 'jq',
-  lintCommand = string.format 'jq',
+  lintCommand = 'jq',
   lintStdin = true,
   lintOffset = 1,
   lintFormats = { '%m at line %l, column %c' },
 }
 local jq_format = {
   prefix = 'jq',
-  formatCommand = string.format 'jq',
+  formatCommand = 'jq',
   formatStdin = true,
 }
 local shfmt = {
   prefix = 'shfmt',
-  formatCommand = string.format 'shfmt -filename ${INPUT} -',
+  formatCommand = 'shfmt -filename ${INPUT} -',
   formatStdin = true,
+}
+
+local selene = {
+  prefix = 'selene',
+  lintSource = 'selene',
+  lintStdin = true,
+  lintCommand = 'selene --display-style quiet -',
+  lintFormats = { '%f:%l:%c: %trror%m', '%f:%l:%c: %tarning%m', '%f:%l:%c: %tote%m' },
 }
 
 local langs = {
