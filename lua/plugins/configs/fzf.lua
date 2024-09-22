@@ -89,6 +89,7 @@ for _, mapping in ipairs {
   { key = 'fs', cmd = 'grep_cword' },
   { key = 'fS', cmd = 'grep_cWORD' },
   { key = 'ft', cmd = 'git_status' },
+  { key = 'fv', cmd = 'loclist' },
 } do
   vim.keymap.set('n', '<leader>' .. mapping.key, function()
     require('fzf-lua')[mapping.cmd]()
