@@ -1,11 +1,5 @@
 return {
-  ui = {
-    icons = {
-      package_installed = '\u{2714}',
-      package_pending = '\u{26A1}',
-      package_uninstalled = '\u{2716}',
-    },
-  },
+  ui = { icons = { package_installed = '', package_pending = '', package_uninstalled = '' } },
   vim.api.nvim_create_user_command('MasonInstallAll', function()
     vim.cmd('MasonInstall ' .. table.concat({
       'lua-language-server',
