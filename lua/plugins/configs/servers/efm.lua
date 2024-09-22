@@ -95,20 +95,6 @@ local chktex = {
   lintSeverity = 2,
 }
 local latexindent = { formatCommand = 'latexindent -', formatStdin = true }
-local ruff_lint = {
-  prefix = 'ruff',
-  lintSource = 'ruff',
-  lintStdin = true,
-  lintCommand = 'ruff check  --stdin-filename ${INPUT} ',
-  lintFormats = { '%.%#:%l:%c: %t%n %m' },
-  lintSeverity = 4,
-  rootMarkers = { 'ruff.toml', 'pyproject.toml', 'setup.cfg' },
-}
-local ruff_format = {
-  formatCommand = 'ruff format --no-cache --stdin-filename ${INPUT} ',
-  formatStdin = true,
-  rootMarkers = { 'ruff.toml', 'pyproject.toml', 'setup.cfg' },
-}
 local luacheck = {
   prefix = 'luacheck',
   lintSource = 'luacheck',
