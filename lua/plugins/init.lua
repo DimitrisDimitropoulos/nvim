@@ -9,33 +9,16 @@ local plugins = {
     lazy = false,
     name = "melange",
     priority = 1000,
-    -- config = function() vim.cmd.colorscheme "melange" end,
-  },
-
-  {
-    "rebelot/kanagawa.nvim",
-    enabled = false,
-    lazy = false,
-    name = "kanagawa",
-    priority = 1000,
-    -- config = function() vim.cmd.colorscheme "kanagawa-wave" end,
+    config = function() vim.cmd.colorscheme "melange" end,
   },
 
   {
     "catppuccin/nvim",
+    enabled = false,
     lazy = false,
     name = "catppuccin",
     priority = 1000,
     config = function() vim.cmd.colorscheme "catppuccin" end,
-  },
-
-  {
-    "nyoom-engineering/oxocarbon.nvim",
-    enabled = false,
-    lazy = false,
-    name = "oxocarbon",
-    priority = 1000,
-    -- config = function() vim.cmd.colorscheme "oxocarbon" end,
   },
 
   -- Statusline
@@ -51,12 +34,7 @@ local plugins = {
     keys = "<C-b>",
     config = function()
       require("nvim-tree").setup(
-        map(
-          "n",
-          "<C-b>",
-          function() require("nvim-tree.api").tree.toggle() end,
-          { desc = "toggle nvimtree" }
-        )
+        map("n", "<C-b>", function() require("nvim-tree.api").tree.toggle() end, { desc = "toggle nvimtree" })
       )
     end,
   },
@@ -97,9 +75,7 @@ local plugins = {
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("plugins.configs.luasnip").luasnip(opts)
-        end,
+        config = function(_, opts) require("plugins.configs.luasnip").luasnip(opts) end,
       },
 
       -- autopairs , autocompletes ()[] etc
@@ -143,7 +119,17 @@ local plugins = {
     dependencies = {
       -- formatting , linting
       {
+        'creativenull/efmls-configs-nvim',
+        version = 'v0.2.x', -- tag is optional
+      },
+      {
+        "nvimdev/guard.nvim",
+        enabled = false,
+        config = function() require "plugins.configs.guard" end,
+      },
+      {
         "jose-elias-alvarez/null-ls.nvim",
+        enabled = false,
         config = function() require "plugins.configs.null" end,
       },
     },
@@ -234,26 +220,18 @@ local plugins = {
     keys = "<leader>tr",
     lazy = true,
     config = function()
-      require("trouble").setup(
-        map(
-          "n",
-          "<leader>tr",
-          function() require("trouble").toggle() end,
-          { desc = "trouble" }
-        )
-      )
+      require("trouble").setup(map("n", "<leader>tr", function() require("trouble").toggle() end, { desc = "trouble" }))
     end,
   },
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", '"', "'", "`", "c", "v", "Z" },
+    keys = { "<leader>", '"', "'", "`", "c", "v" },
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
     opts = function() return require "plugins.configs.whichkey" end,
   },
-
   {
     "NvChad/nvim-colorizer.lua",
     ft = { "lua", "css", "scss" },
