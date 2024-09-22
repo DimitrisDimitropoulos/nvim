@@ -44,3 +44,10 @@ require("nvim-treesitter.configs").setup {
     },
   },
 }
+
+-- hl groups for the comments
+-- NOTE: Treesitter is prone to breaking changes, @2023-07-24 17:05:41
+local comms_hl = { "@text.todo", "@text.danger", "@text.warning", "@text.note" }
+for _, hl in ipairs(comms_hl) do
+  vim.api.nvim_set_hl(0, hl, { bold = true, underline = true })
+end

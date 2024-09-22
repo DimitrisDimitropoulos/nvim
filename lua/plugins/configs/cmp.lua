@@ -1,4 +1,5 @@
 local cmp = require "cmp"
+local ls = require "luasnip"
 local lspkind = require "lspkind"
 
 local function border(hl_name)
@@ -29,7 +30,7 @@ cmp.setup {
   },
 
   snippet = {
-    expand = function(args) require("luasnip").lsp_expand(args.body) end,
+    expand = function(args) ls.lsp_expand(args.body) end,
   },
 
   mapping = cmp.mapping.preset.insert {
@@ -44,7 +45,7 @@ cmp.setup {
       select = false,
     },
     ["<A-j>"] = cmp.mapping(function(fallback)
-      if require("luasnip").expand_or_jumpable() then
+      if ls.expand_or_jumpable() then
         vim.fn.feedkeys(
           vim.api.nvim_replace_termcodes(
             "<Plug>luasnip-expand-or-jump",
@@ -62,7 +63,7 @@ cmp.setup {
       "s",
     }),
     ["<A-k>"] = cmp.mapping(function(fallback)
-      if require("luasnip").jumpable(-1) then
+      if ls.jumpable(-1) then
         vim.fn.feedkeys(
           vim.api.nvim_replace_termcodes(
             "<Plug>luasnip-jump-prev",
@@ -84,7 +85,7 @@ cmp.setup {
   sources = cmp.config.sources {
     { name = "luasnip" },
     { name = "nvim_lsp" },
-    { name = "buffer" },
+    { name = "buffer",  max_item_count = 3 },
     { name = "nvim_lua" },
     { name = "path" },
     -- { name = "copilot" },

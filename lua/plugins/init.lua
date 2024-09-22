@@ -1,9 +1,4 @@
 local map = vim.keymap.set
-local opts = {
-  noremap = true,
-  silent = false,
-}
-local n = "n"
 
 local plugins = {
   "nvim-lua/plenary.nvim",
@@ -21,13 +16,11 @@ local plugins = {
     keys = "<C-b>",
     config = function()
       require("nvim-tree").setup(
-
         map(
-          n,
+          "n",
           "<C-b>",
           function() require("nvim-tree.api").tree.toggle() end,
-          { desc = "toggle nvimtree" },
-          opts
+          { desc = "toggle nvimtree" }
         )
       )
     end,
@@ -83,9 +76,9 @@ local plugins = {
       {
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
-        options = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, options)
-          require("plugins.configs.luasnip").luasnip(options)
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("plugins.configs.luasnip").luasnip(opts)
         end,
       },
 
@@ -173,8 +166,8 @@ local plugins = {
       "gc",
       "gb",
       "<leader>/",
+      "V", -- enable visual mode
     },
-    -- require("Comment").setup(
     config = function() require "plugins.configs.comment" end,
   },
 
@@ -200,6 +193,7 @@ local plugins = {
 
   {
     "beauwilliams/focus.nvim",
+    lazy = true,
     event = "BufLeave",
     config = function() require("focus").setup() end,
   },
@@ -222,11 +216,10 @@ local plugins = {
     config = function()
       require("trouble").setup(
         map(
-          n,
+          "n",
           "<leader>tr",
           function() require("trouble").toggle() end,
-          { desc = "trouble" },
-          opts
+          { desc = "trouble" }
         )
       )
     end,
@@ -243,6 +236,7 @@ local plugins = {
 
   {
     "NvChad/nvim-colorizer.lua",
+    ft = { "lua", "css", "scss" },
     config = function() require "plugins.configs.colorizer" end,
   },
 

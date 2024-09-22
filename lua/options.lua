@@ -1,28 +1,6 @@
 local opt = vim.opt
 local g = vim.g
 
-local signs = {
-  { hl = "DiagnosticSignError", txt = "■" },
-  { hl = "DiagnosticSignWarn", txt = "△" },
-  { hl = "DiagnosticSignInfo", txt = "○" },
-  { hl = "DiagnosticSignHint", txt = "󰨔" },
-}
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.hl, { text = sign.txt, texthl = sign.hl })
-end
-
-vim.diagnostic.config {
-  underline = true,
-  virtual_text = true,
-  signs = true,
-  update_in_insert = false,
-  float = {
-    source = "always",
-    border = "rounded",
-    show_header = true,
-  },
-}
-
 -- performance
 g.do_filetype_lua = 1
 opt.syntax = "off"
@@ -33,8 +11,8 @@ opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
 vim.opt.numberwidth = 3
-vim.opt.statuscolumn =
-"%=%{ &nu? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
+-- vim.opt.statuscolumn =
+-- "%=%{ &nu? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
 opt.cursorlineopt = "number"
 opt.cursorcolumn = false
 vim.opt_local.cursorcolumn = false
@@ -71,15 +49,9 @@ opt.undofile = true
 opt.timeoutlen = 400
 opt.updatetime = 250
 
--- VimTeX options
-g.vimtex_quickfix_mode = 0
-g.Tex_BibtexFlavor = "biber"
-g.vimtex_view_method = "zathura"
-g.vimtex_syntax_enabled = 0
-
 -- LuaSnip options
-g.vscode_snippets_path = "~/.config/nvim/snippets/"
-g.lua_snippets_path = "~/.config/nvim/lua_snippets/"
+g.vscode_snippets_path = "~/.config/nvim/snippets/json_snippets/"
+g.lua_snippets_path = "~/.config/nvim/snippets/lua_snippets/"
 
 -- disable some default providers
 local providers = { "node", "perl", "python3", "ruby" }
