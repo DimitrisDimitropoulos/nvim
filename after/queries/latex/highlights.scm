@@ -10,3 +10,7 @@
 ((generic_command) @punctuation.bracket
   (#eq? @punctuation.bracket "\\bigg")
   (#set! "priority" 105))
+
+((generic_command) @operator
+  (#any-of? @operator "\\hat" "\\cdot" "\\int" "\\div" "\\in" "\\leq" "\\sum" "\\neq" "\\geq" "\\times" "\\pm" "\\mp" "\\partial")
+  (#set! "priority" 105))
