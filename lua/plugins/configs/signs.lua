@@ -7,9 +7,7 @@ local gitsigns_ok, gitsigns = pcall(require, 'gitsigns')
 if not gitsigns_ok then
   return
 end
-local feedkeys = vim.api.nvim_feedkeys
 local map = vim.keymap.set
-local schedule = vim.schedule
 
 gitsigns.setup {
   on_attach = function()
@@ -32,13 +30,7 @@ gitsigns.setup {
         if vim.wo.diff then
           return nav.key
         end
-        schedule(function()
-          gs[nav.cmd]()
-        end)
-        schedule(function()
-          feedkeys('zz', 'n', false)
-        end)
-        return '<Ignore>'
+        gs[nav.cmd]()
       end, { desc = 'git ' .. nav.cmd })
     end
 
