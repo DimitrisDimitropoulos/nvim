@@ -1,4 +1,3 @@
-local map = vim.keymap.set
 local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
@@ -29,7 +28,7 @@ autocmd('FileType', {
   pattern = { 'help', 'lspinfo', 'man', 'qf', 'query', 'checkhealth' },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    map('n', 'q', function()
+    vim.keymap.set('n', 'q', function()
       vim.cmd.close {}
     end, { buffer = event.buf, silent = true })
   end,
@@ -57,9 +56,9 @@ autocmd('BufWritePre', {
 local function toggle_option(opt)
   vim.opt[opt] = not vim.opt[opt]:get()
 end
-map('n', '<A-s>', function()
+vim.keymap.set('n', '<A-s>', function()
   toggle_option [[spell]]
 end, { silent = false, noremap = true })
-map('n', '<A-z>', function()
+vim.keymap.set('n', '<A-z>', function()
   toggle_option [[wrap]]
 end, { silent = false, noremap = true })

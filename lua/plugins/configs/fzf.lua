@@ -56,7 +56,7 @@ fzf_lua.setup {
   },
 }
 
-local fzf_maps = {
+for _, mapping in ipairs {
   { key = 'ff', cmd = 'files' },
   { key = 'fr', cmd = 'oldfiles' },
   { key = 'f;', cmd = 'commands' },
@@ -77,8 +77,7 @@ local fzf_maps = {
   { key = 'fg', cmd = 'live_grep' },
   { key = 'fs', cmd = 'grep_cword' },
   { key = 'fS', cmd = 'grep_cWORD' },
-}
-for _, mapping in ipairs(fzf_maps) do
+} do
   vim.keymap.set('n', '<leader>' .. mapping.key, function()
     require('fzf-lua')[mapping.cmd]()
   end, { desc = 'fzf-lua ' .. mapping.cmd:gsub('_', ' ') })
