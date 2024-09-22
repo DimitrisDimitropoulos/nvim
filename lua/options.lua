@@ -1,4 +1,5 @@
 vim.g.mapleader = ' '
+vim.g.latex_flavor = 'latex'
 
 local opt = vim.opt
 
