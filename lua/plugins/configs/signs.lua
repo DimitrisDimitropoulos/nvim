@@ -1,7 +1,8 @@
 -- Do not load up plugin when in diff mode.
 if vim.opt.diff:get() then return end
 
-local gitsigns = require 'gitsigns'
+local gitsigns_ok, gitsigns = pcall(require, 'gitsigns')
+if not gitsigns_ok then return end
 local feedkeys = vim.api.nvim_feedkeys
 local map = vim.keymap.set
 local schedule = vim.schedule

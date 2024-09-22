@@ -15,16 +15,9 @@ require('nvim-treesitter.configs').setup {
     'comment',
     'query',
   },
-  highlight = {
-    enable = true,
-    use_languagetree = true,
-    additional_vim_regex_highlighting = false,
-  },
+  highlight = { enable = true, use_languagetree = true, additional_vim_regex_highlighting = false },
   indent = { enable = true },
-  refactor = {
-    highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = true },
-  },
+  refactor = { highlight_definitions = { enable = true }, highlight_current_scope = { enable = true } },
   autopairs = { enable = true },
 }
 

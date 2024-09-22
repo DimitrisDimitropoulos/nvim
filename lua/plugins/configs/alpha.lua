@@ -2,10 +2,7 @@ local alpha_ok, alpha = pcall(require, 'alpha')
 if not alpha_ok then return end
 local dashboard = require 'alpha.themes.dashboard'
 
-dashboard.section.header.opts = {
-  hl = 'Comment',
-  position = 'center',
-}
+dashboard.section.header.opts = { hl = 'Comment', position = 'center' }
 
 dashboard.section.header.val = {
   -- "                                                     ",
@@ -16,7 +13,7 @@ dashboard.section.header.val = {
   ' ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
   ' ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
   ' ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
-  '             ~ brain.exist() == null; ~             ',
+  -- '             ~ brain.exist() == null; ~             ',
 
   -- '⡏⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿',
   -- '⣿⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠁⠀⣿',
@@ -48,10 +45,7 @@ dashboard.section.buttons.val = {
   dashboard.button('q', '󰩈  > Quit NVIM', ':qa<CR>'),
 }
 
-dashboard.section.footer.opts = {
-  hl = 'PeanutHLGroup',
-  position = 'center',
-}
+dashboard.section.footer.opts = { hl = 'PeanutHLGroup', position = 'center' }
 
 local function footer()
   local stats = require('lazy').stats()

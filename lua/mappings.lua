@@ -1,8 +1,7 @@
 local map = vim.keymap.set
 
-map({ 'i', 'n' }, '<C-s>', function() vim.cmd 'w' end)
+map({ 'i', 'n' }, '<C-s>', function() vim.cmd.write {} end)
 map('t', '<C-[><C-[>', '<C-\\><C-n>', { silent = true })
-map('n', '<C-]><C-]>', function() vim.cmd 'bd!' end, { silent = true })
 
 vim.keymap.set('n', 'ZZ', function()
   vim.o.timeout = true
@@ -26,3 +25,7 @@ local commands = {
 for _, command in ipairs(commands) do
   map('n', command.key, function() vim.cmd(command.cmd) end, { noremap = true })
 end
+
+local function moving_wrap(direction) return (vim.v.count == 0) and 'g' .. direction or direction end
+map({ 'n', 'x' }, '<Up>', function() return moving_wrap 'k' end, { expr = true, silent = true })
+map({ 'n', 'x' }, '<Down>', function() return moving_wrap 'j' end, { expr = true, silent = true })
