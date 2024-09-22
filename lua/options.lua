@@ -27,6 +27,22 @@ if vim.fn.has 'unix' == 1 then
       paste = { ['+'] = 'xclip -selection clipboard -o', ['*'] = 'xclip -selection clipboard -o' },
     }
   end
+  if vim.fn.executable 'xsel' == 1 then
+    vim.g.clipboard = {
+      copy = { ['+'] = 'xsel --clipboard', ['*'] = 'xsel --clipboard' },
+      paste = { ['+'] = 'xsel --clipboard --output', ['*'] = 'xsel --clipboard --output' },
+    }
+  end
+  if
+    vim.fn.executable 'wl-copy' == 1
+    and vim.fn.executable 'wl-paste' == 1
+    and vim.fn.exists '$WAYLAND_DISPLAY' == 1
+  then
+    vim.g.clipboard = {
+      copy = { ['+'] = 'wl-copy --type text/plain', ['*'] = 'wl-copy --primary --type text/plain' },
+      paste = { ['+'] = 'wl-paste --no-newline', ['*'] = 'wl-paste --no-newline --primary' },
+    }
+  end
 end
 if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
   vim.g.clipboard = {
