@@ -16,7 +16,7 @@ This config begun from the [NvChad](https://github.com/NvChad/NvChad) minimal [c
 10. Scripts to backup and restore your Lazy lock-files, in `bash` and `pwsh`
 11. Custom efm language server with formatters and linters, no plugin dependencies
 12. Heavy use of lua wherever feasible
-13. LaTeX preview based on `texlab` with `zathura` on linux and `SumatraPDF` on windows
+13. LaTeX preview based on `texlab` with `zathura` on linux and [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
 14. Some features for the [ConTeXt](https://wiki.contextgarden.net/Comparison_between_ConTeXt_and_other_typesetting_programs) typesetting system, mainly compilation and preview with [zathura](https://pwmt.org/projects/zathura/)
 
 ## Installation
@@ -172,5 +172,3 @@ This `PowerShell` script is designed to restore the `lazy-lock.json` file from t
 13. Finally, the script prints a "Done" message to the console. If the user didn't confirm the restore, the script prints an "Aborted" message.
 
 ## TODO
-
--   [ ] Add more windows support, with [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for `LaTeX` previewing in Windows
