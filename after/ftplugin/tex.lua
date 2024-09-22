@@ -232,3 +232,5 @@ end
 vim.keymap.set('n', 'gO', function()
   show_toc()
 end, { silent = true, noremap = true, desc = 'User: show LaTeX TOC' })
+
+vim.cmd [[packadd matchit]]
