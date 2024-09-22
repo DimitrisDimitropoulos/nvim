@@ -36,7 +36,12 @@ for _, vitex in ipairs(vimtex_keymap) do
   end, { desc = vitex.decr })
 end
 
-vim.keymap.set("n", "<leader>tx", Disable_tree_sitter_highlight, { desc = "disable treesitter" })
+vim.keymap.set(
+  "n",
+  "<leader>tx",
+  Disable_tree_sitter_highlight,
+  { desc = "disable treesitter" }
+)
 
 -- map up and down to gj and gk
 vim.keymap.set("n", "<Up>", function()

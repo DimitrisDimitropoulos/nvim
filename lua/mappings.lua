@@ -3,6 +3,7 @@ local opts = {
   noremap = true,
   silent = false,
 }
+
 local n = "n"
 
 -- Save mappings there are problems
@@ -16,12 +17,12 @@ vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
 vim.keymap.set("n", "ZZ", function()
   vim.o.timeout = true
   vim.o.timeoutlen = 300
-  vim.cmd("wqa")
+  vim.cmd "wqa"
 end, { desc = "save and quit", silent = false })
 vim.keymap.set("n", "ZQ", function()
   vim.o.timeout = true
   vim.o.timeoutlen = 300
-  vim.cmd("qa!")
+  vim.cmd "qa!"
 end, { desc = "quit with no save", silent = false })
 
 -- Command mappings
@@ -93,15 +94,15 @@ for _, mapping in ipairs(telescope_mappings) do
 end
 
 map(n, "<leader>ts", function()
-  require("telescope.builtin").treesitter({ default_text = "function" })
+  require("telescope.builtin").treesitter { default_text = "function" }
 end, { desc = "find treesitter" }, opts)
 map(n, "<leader>fa", function()
-  require("telescope.builtin").find_files({
+  require("telescope.builtin").find_files {
     hidden = true,
     follow = true,
     no_ignore = true,
     file_ignore_patterns = { ".git" },
-  })
+  }
 end, { desc = "find files" }, opts)
 
 -- NvimTree
@@ -114,7 +115,12 @@ map(n, "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
 end, { desc = "comment line" }, opts)
 
--- map("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
+-- map(
+--   "v",
+--   "<leader>/",
+--   "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+--   opts
+-- )
 
 map("v", "<leader>/", function()
   local esc = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
@@ -126,3 +132,25 @@ end, { desc = "comment in visual mode" })
 map(n, "<leader>tr", function()
   require("trouble").toggle()
 end, { desc = "trouble" }, opts)
+
+-- Gitsigns
+local git_nav = {
+  { key = "[g", cmd = "prev_hunk" },
+  { key = "]g", cmd = "next_hunk" },
+}
+for _, nav in ipairs(git_nav) do
+  map(n, nav.key, function()
+    local gs = package.loaded.gitsigns
+    if vim.wo.diff then
+      return nav.key
+    end
+    vim.schedule(function()
+      gs[nav.cmd]()
+    end)
+    return "<Ignore>"
+  end, { desc = "git " .. nav.cmd }, opts)
+end
+
+map(n, "<leader>gf", function()
+  require("gitsigns").diffthis()
+end, { desc = "diff this" }, opts)
