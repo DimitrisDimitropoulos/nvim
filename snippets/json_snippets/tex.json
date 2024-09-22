@@ -203,7 +203,7 @@
     "body": [
       "\\\\begin{enumerate}",
       "\t\\item $0",
-      "\\\\end{enumerate}\n$0"
+      "\\\\end{enumerate}"
     ],
     "description": "LaTeX enumerate"
   },
@@ -212,7 +212,7 @@
     "body": [
       "\\\\begin{description}",
       "\t\\item[$1] $0",
-      "\\\\end{description}\n$0"
+      "\\\\end{description}"
     ],
     "description": "LaTeX description"
   },
