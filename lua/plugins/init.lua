@@ -68,28 +68,7 @@ local plugins = {
     config = function() require 'plugins.configs.cmp' end,
   },
 
-  {
-    'neovim/nvim-lspconfig',
-    event = evs,
-    config = function() require 'plugins.configs.lsp' end,
-    dependencies = {
-      {
-        'mfussenegger/nvim-lint',
-        enabled = false,
-        config = function()
-          require('lint').linters_by_ft = { python = { 'ruff' } }
-          vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost', 'BufReadPre', 'InsertEnter' }, {
-            group = vim.api.nvim_create_augroup('Lint', { clear = true }),
-            callback = function()
-              local lint_status, lint = pcall(require, 'lint')
-              if lint_status then lint.try_lint() end
-            end,
-            desc = 'lint setup',
-          })
-        end,
-      },
-    },
-  },
+  { 'neovim/nvim-lspconfig', event = evs, config = function() require 'plugins.configs.lsp' end },
 
   {
     'williamboman/mason.nvim',
