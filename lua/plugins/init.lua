@@ -10,7 +10,6 @@ require('lazy').setup({
     lazy = false,
     init = function()
       vim.cmd.colorscheme 'melange'
-      require 'statusline'
     end,
   },
 
