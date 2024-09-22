@@ -4,11 +4,11 @@ local lsp = vim.lsp.buf
 local n = "n"
 
 -- general mappings
-keymapp("n", "<C-s>", "<cmd> w <CR>")
+keymapp(n, "<C-s>", "<cmd> w <CR>")
 keymapp(n, "<ESC>", "<cmd> nohl <CR>", { desc = "clear search" }, opts)
 
 -- comment.nvim
-keymapp("n", "<leader>/", function()
+keymapp(n, "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
 end)
 
@@ -71,6 +71,7 @@ local function toggle_spell_check()
 end
 keymapp(n, "<A-z>", toggle_spell_check, { desc = "toggle spell check" }, opts)
 
+-- Telescope
 keymapp(n, "<leader>ff", "<cmd> Telescope find_files <CR>")
 keymapp(
   n,
@@ -101,3 +102,6 @@ keymapp(
 keymapp(n, "<leader>ld", "<cmd> Telescope lsp_definitions <CR>", { desc = "find lsp definitions" }, opts)
 keymapp(n, "<leader>sp", "<cmd> Telescope spell_suggest <CR>", { desc = "find spell suggestions" }, opts)
 keymapp(n, "<leader>fz", "<cmd> Telescope current_buffer_fuzzy_find <CR>", { desc = "find current buffer fuzzy" }, opts)
+
+-- NvimTree
+keymapp(n, "<C-b>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" }, opts)
