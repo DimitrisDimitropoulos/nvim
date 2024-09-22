@@ -112,16 +112,6 @@ local plugins = {
   },
 
   {
-    'lukas-reineke/indent-blankline.nvim',
-    enabled = false,
-    version = '2.20.7',
-    event = evs,
-    config = function()
-      require 'plugins.configs.indent'
-    end,
-  },
-
-  {
     'lewis6991/gitsigns.nvim',
     event = evs,
     config = function()
