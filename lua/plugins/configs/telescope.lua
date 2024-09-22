@@ -3,12 +3,6 @@ if not telescope_ok then
   return
 end
 
-local extras = {
-  fzf = { case_mode = 'smart_case' },
-}
-
-local previewers = require 'telescope.previewers'
-
 telescope.setup {
   defaults = {
     mappings = {
@@ -17,11 +11,7 @@ telescope.setup {
       },
     },
     prompt_prefix = '>',
-    -- prompt_prefix = '   ',
-    file_previewer = previewers.vim_buffer_cat.new,
-    grep_previewer = previewers.vim_buffer_vimgrep.new,
-    qflist_previewer = previewers.vim_buffer_qflist.new,
-    path_display = { 'filename_first' },
+    path_display = { 'truncate' },
     file_ignore_patterns = { '.git', 'build', 'LICENSE', 'lockfiles', 'spell', 'png', 'jpg', 'jpeg', 'gif', 'webp' },
     sorting_strategy = 'ascending',
     layout_config = {
@@ -38,7 +28,7 @@ telescope.setup {
     preview = {
       treesitter = false,
       filesize_limit = 1,
-      timeout = 250,
+      timeout = 100,
       -- truncate for preview
       filesize_hook = function(filepath, bufnr, opts)
         local path = require('plenary.path'):new(filepath)
@@ -48,20 +38,12 @@ telescope.setup {
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
       end,
     },
-    vimgrep_arguments = {
-      'rg',
-      '-L',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case',
-    },
   },
   pickers = { diagnostics = { path_display = 'hidden' } },
   set_env = { ['COLORTERM'] = 'truecolor' },
-  extensions = extras,
+  extensions = {
+    fzf = { case_mode = 'smart_case' },
+  },
 }
 
 for _, plug in ipairs { 'fzf' } do
