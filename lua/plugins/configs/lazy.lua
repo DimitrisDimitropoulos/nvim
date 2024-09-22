@@ -1,5 +1,5 @@
 return {
-  install = { colorscheme = { 'tokyonight' } },
+  install = { colorscheme = { 'melange' } },
   defaults = { lazy = true },
   ui = { icons = { ft = '', loaded = '', not_loaded = '' } },
   performance = {
