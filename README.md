@@ -2,9 +2,7 @@
 
 It follows the structure of NvChad
 
-## Features
-
-Some extra features include
+## Features of this configuration
 
 1. Snippets with VsCode like syntax ready to be added
 2. Spell suggest from multiple languages with easy toggle
