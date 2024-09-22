@@ -107,6 +107,15 @@ local selene = {
 --   lintFormats = '%f:%l:%c: %m',
 -- }
 
+local chktex = {
+  prefix = 'chktex',
+  lintSource = 'chktex',
+  lintStdin = true,
+  lintCommand = 'chktex -q -v0',
+  lintIgnoreExitCode = true,
+  lintFormats = { '%f:%l:%c:%m' },
+}
+
 local langs = {
   json = { jq_lint, jq_format },
   python = { black, mypy, flake8 },
@@ -117,7 +126,6 @@ local langs = {
   bash = { shfmt },
   zsh = { beautysh },
   haskell = { fourmolu },
-  cmake = { gersemi },
   cpp = { cppcheck },
   c = { cppcheck },
   lua = { stylua },

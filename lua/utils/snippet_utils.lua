@@ -37,4 +37,9 @@ function M.get_indentation()
   return #indentation
 end
 
+-- local function split(str) return str:gsub(',', ',\n'):gsub('{', '{\n'):gsub('}', '\n}') end
+-- local function split(str) return str:gsub(',', ',\n'):gsub('(', '(\n'):gsub(')', '\n)') end
+-- '<,'>s/}/\r}/g | '<,'>s/,/,\r/g  | '<,'>s/{/{\r/g | nohl
+-- '<,'>s/)/\r)/g | '<,'>s/,/,\r/g  | '<,'>s/(/(\r/g | nohl
+
 return M
