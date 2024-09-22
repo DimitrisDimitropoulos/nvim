@@ -1,6 +1,4 @@
-vim.keymap.set({ 'i', 'n' }, '<C-s>', function()
-  vim.cmd.write {}
-end)
+vim.keymap.set('n', '<C-s>', vim.cmd.write)
 vim.keymap.set('t', '<C-[><C-[>', '<C-\\><C-n>', { silent = true })
 
 for _, b in ipairs { 'bd', 'bn', 'bp' } do

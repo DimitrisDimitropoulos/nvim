@@ -18,7 +18,7 @@ end, { desc = 'lsp async format' })
 map('n', '<leader>wl', function()
   print(vim.inspect(lsp.list_workspace_folders()))
 end, { desc = 'lsp list workspace folders' })
-map('i', '<C-S-k>', lsp.signature_help, { desc = 'lsp signature help' })
+map('i', '<C-s>', lsp.signature_help, { desc = 'lsp signature help' })
 
 for _, mapping in ipairs {
   { key = 'gi', cmd = 'implementation' },
