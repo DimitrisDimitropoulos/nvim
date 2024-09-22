@@ -1,4 +1,4 @@
-require("indent_blankline").setup({
+require("indent_blankline").setup {
   indentLine_enabled = 1,
   filetype_exclude = {
     "help",
@@ -17,14 +17,14 @@ require("indent_blankline").setup({
   show_current_context = true,
   show_current_context_start = true,
   indent_blankline_use_treesitter = true,
-})
+}
 
 -- Mini textobjects
-require("mini.ai").setup({
+require("mini.ai").setup {
   custom_textobjects = {
     -- Whole buffer textobject
     M = function(ai_type)
-      local n_lines = vim.fn.line("$")
+      local n_lines = vim.fn.line "$"
       local start_line, end_line = 1, n_lines
       if ai_type == "i" then
         -- Skip first and last blank lines for `i` textobject
@@ -45,21 +45,22 @@ require("mini.ai").setup({
       }
     end,
   },
-})
+}
 -- Mini splitjoins arguments no TS required
-require("mini.splitjoin").setup({})
+require("mini.splitjoin").setup {}
 -- Mini bracketed textobjects
-require("mini.bracketed").setup({})
+require("mini.bracketed").setup {}
 -- Mini jump extension to FfTf
-require("mini.jump").setup({})
+require("mini.jump").setup {}
 
-require("colorizer").setup({
+require("colorizer").setup {
   filetypes = {
     "css",
     "javascript",
     "lua",
+    "ini",
     html = {
       mode = "foreground",
     },
   },
-})
+}
