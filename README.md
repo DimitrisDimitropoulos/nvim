@@ -1,4 +1,4 @@
-# Custom Neovim config
+# ✨ Custom Neovim config
 
 This config begun from the [NvChad](https://github.com/NvChad/NvChad) minimal
 [config](https://github.com/NvChad/basic-config), at this point the config is
@@ -20,12 +20,12 @@ maintained the original spirit of vim and neovim, while adding these features.
 > -   [zathura](https://pwmt.org/projects/zathura/) or [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for pdf functionality when previewing LaTeX documents
 > -   [pwsh.exe](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) if you want to use it as the shell for windows usage
 
-## Showcase
+## 🔥 Showcase
 
 ![2024-07-25-14:25:58](https://github.com/user-attachments/assets/02033bd9-ac45-428f-b338-61991be638e4)
 ![2024-07-25-18:50:21](https://github.com/user-attachments/assets/79f0f9dd-fc5c-418a-b9ee-c0005215847c)
 
-## Features of this configuration
+## ⚒️ Features of this configuration
 
 1. Based on the [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
 2. Snippets utilizing both json and lua formats, enabling support for other
@@ -44,7 +44,7 @@ maintained the original spirit of vim and neovim, while adding these features.
     [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
 13. Custom treesitter queries for highlighting `lua` and `LaTeX`
 
-## Installation
+## 🚀 Installation
 
 Before installing make sure to backup your config, plugins, data and cache.
 Then remove it, or better rename it to something like <folder>.bak, for more
@@ -93,7 +93,7 @@ nvim
 
 After launching all plugins make sure to run a `:checkhealth` command and install all the dependencies you may lack like `xclip`, `pwsh.exe`, `rg`, `fd` and `fzf`
 
-## Plugins
+## 🔌 Plugins
 
 -   [savq/melange-nvim](https://github.com/savq/melange-nvim)
 -   [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
@@ -124,7 +124,7 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 -   [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
 -   [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)
 
-## Scripts
+## 📄 Scripts
 
 The following scripts are based on the features of the lazy.nvim plugin
 manager. The main usage of those scripts is to restore the plugin state into a
@@ -237,4 +237,4 @@ confirmation before performing the restore operation. It proceeds as follows:
 13. Finally, the script prints a "Done" message to the console. If the user
     didn't confirm the restore, the script prints an "Aborted" message.
 
-## TODO
+## 🚗 TODO
