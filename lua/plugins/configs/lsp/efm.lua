@@ -25,10 +25,10 @@ local beautysh = { prefix = 'beautysh', formatCommand = 'beautysh -', formatStdi
 local black = { prefix = 'black', formatCommand = 'black --fast -', formatStdin = true }
 local pylint = {
   prefix = 'pylint',
+  lintSource = 'pylint',
   lintCommand = 'pylint --score=no ${INPUT}',
   lintStdin = false,
   lintFormats = { '%.%#:%l:%c: %t%.%#: %m' },
-  rootMarkers = {},
 }
 local stylua = {
   prefix = 'stylua',
@@ -38,6 +38,7 @@ local stylua = {
 }
 local flake8 = {
   prefix = 'flake8',
+  lintSource = 'flake8',
   lintCommand = 'flake8 -',
   lintStdin = true,
   lintFormats = { 'stdin:%l:%c: %t%n %m' },
@@ -45,6 +46,7 @@ local flake8 = {
 }
 local cppcheck = {
   prefix = 'cppcheck',
+  lintSource = 'cppcheck',
   lintCommand = string.format 'cppcheck --quiet --force --enable=warning,style,performance,portability --error-exitcode=1 ${INPUT}',
   lintStdin = false,
   lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
@@ -55,22 +57,41 @@ local shellcheck = {
   lintCommand = 'shellcheck --color=never --format=gcc -',
   lintStdin = true,
   lintFormats = { '-:%l:%c: %trror: %m', '-:%l:%c: %tarning: %m', '-:%l:%c: %tote: %m' },
-  rootMarkers = {},
 }
 local mypy = {
   prefix = 'mypy',
-  lintCommand = 'mypy --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
-  lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
   lintSource = 'mypy',
+  lintCommand = string.format 'mypy --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
+  lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
+  rootMarkers = { 'mypy.ini', 'pyproject.toml', 'setup.cfg' },
+}
+local jq_lint = {
+  prefix = 'jq',
+  lintSource = 'jq',
+  lintCommand = string.format 'jq',
+  lintStdin = true,
+  lintOffset = 1,
+  lintFormats = { '%m at line %l, column %c' },
+}
+local jq_format = {
+  prefix = 'jq',
+  formatCommand = string.format 'jq',
+  formatStdin = true,
+}
+local shfmt = {
+  prefix = 'shfmt',
+  formatCommand = string.format 'shfmt -filename ${INPUT} -',
+  formatStdin = true,
 }
 
 local langs = {
-  python = { black, flake8 },
+  json = { jq_lint, jq_format },
+  python = { black, mypy, flake8 },
   markdown = { prettier },
   css = { prettier },
   yaml = { prettier },
-  sh = { beautysh, shellcheck },
-  bash = { beautysh, shellcheck },
+  sh = { shfmt },
+  bash = { shfmt },
   zsh = { beautysh },
   haskell = { fourmolu },
   cmake = { gersemi },
@@ -80,7 +101,9 @@ local langs = {
 }
 
 require('lspconfig').efm.setup {
-  init_options = { documentFormatting = true },
+  init_options = {
+    documentFormatting = true,--[[ , codeAction = true ]]
+  },
   filetypes = vim.tbl_keys(langs),
   settings = {
     lintDebounce = 100,

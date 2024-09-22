@@ -61,9 +61,7 @@
     "description": "LaTeX hyperref-setup"
   },
   "environment": {
-    "prefix": [
-      "envu"
-    ],
+    "prefix": "envu",
     "body": [
       "\\begin{${1:environment}}",
       "\t$2",
@@ -72,9 +70,7 @@
     "description": "LaTeX environment"
   },
   "Latex-Table": {
-    "prefix": [
-      "tabu"
-    ],
+    "prefix": "tabu",
     "body": [
       "",
       "\\begin{table}[ht]",
@@ -159,9 +155,7 @@
     "description": "LaTeX itemize"
   },
   "Enumerate": {
-    "prefix": [
-      "enum"
-    ],
+    "prefix": "enum",
     "body": [
       "\\\\begin{enumerate}",
       "\t\\item $0",
@@ -170,9 +164,7 @@
     "description": "LaTeX enumerate"
   },
   "Description": {
-    "prefix": [
-      "description"
-    ],
+    "prefix": "description",
     "body": [
       "\\\\begin{description}",
       "\t\\item[$1] $0",
@@ -181,9 +173,7 @@
     "description": "LaTeX description"
   },
   "Latex-equation": {
-    "prefix": [
-      "eq"
-    ],
+    "prefix": "eq",
     "body": [
       "\\begin{equation}\\label{eq:$1}",
       "\t$2",
@@ -235,9 +225,7 @@
     "description": "fraction-snippet"
   },
   "integral": {
-    "prefix": [
-      "int"
-    ],
+    "prefix": "int",
     "body": "\\int_{${1:lower}}^{${2:upper}} ${4:math} d${3:variable}",
     "description": "LaTeX integral"
   },
@@ -249,18 +237,14 @@
     "description": "LaTeX derivative"
   },
   "Summation-Series": {
-    "prefix": [
-      "series"
-    ],
+    "prefix": "series",
     "body": [
       "\\sum_{${1:n}=${2:0}}^{${3:\\infty}}$0"
     ],
     "description": "LaTeX summation-series"
   },
   "Inline Summation": {
-    "prefix": [
-      "suminline"
-    ],
+    "prefix": "suminline",
     "body": [
       "\\sum_{$1}^{$2}$3"
     ],
@@ -297,72 +281,52 @@
     "description": "LaTeX display math"
   },
   "squareroot": {
-    "prefix": [
-      "sqrt"
-    ],
+    "prefix": "sqrt",
     "body": "\\sqrt{${1:math}}",
     "description": "LaTeX square root"
   },
   "cos": {
-    "prefix": [
-      "cos"
-    ],
+    "prefix": "cos",
     "body": "\\cos($1)",
     "description": "LaTeX cosine"
   },
   "sin": {
-    "prefix": [
-      "sin"
-    ],
+    "prefix": "sin",
     "body": "\\sin($1)",
     "description": "LaTeX sine"
   },
   "tan": {
-    "prefix": [
-      "tan"
-    ],
+    "prefix": "tan",
     "body": "\\tan($1)",
     "description": "LaTeX tangent"
   },
   "log": {
-    "prefix": [
-      "log"
-    ],
+    "prefix": "log",
     "body": "\\log($1)",
     "description": "LaTeX logarithm"
   },
   "ln": {
-    "prefix": [
-      "ln"
-    ],
+    "prefix": "ln",
     "body": "\\ln ($1)",
     "description": "LaTeX natural logarithm"
   },
   "vector": {
-    "prefix": [
-      "vec"
-    ],
+    "prefix": "vec",
     "body": "\\vec{$1}",
     "description": "LaTeX vector"
   },
   "over_dot": {
-    "prefix": [
-      "dot"
-    ],
+    "prefix": "dot",
     "body": "\\dot{${1:math}}",
     "description": "LaTeX dot"
   },
   "over_ddot": {
-    "prefix": [
-      "ddot"
-    ],
+    "prefix": "ddot",
     "body": "\\ddot{${1:math}}",
     "description": "LaTeX ddot"
   },
   "underline": {
-    "prefix": [
-      "underline"
-    ],
+    "prefix": "underline",
     "body": [
       "\\underline{$1}$0"
     ],
@@ -378,9 +342,7 @@
     "description": "underline"
   },
   "cdot": {
-    "prefix": [
-      "cdot"
-    ],
+    "prefix": "cdot",
     "body": "\\cdot",
     "description": "LaTeX cdot"
   },

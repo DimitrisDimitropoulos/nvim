@@ -1,16 +1,15 @@
 --- @diagnostic disable: different-requires
-local map = vim.keymap.set
 
 local plugins = {
 
-  {
-    'savq/melange-nvim',
-    lazy = false,
-    enabled = false,
-    name = 'melange',
-    priority = 1000,
-    config = function() vim.cmd.colorscheme 'melange' end,
-  },
+  -- {
+  --   'savq/melange-nvim',
+  --   lazy = false,
+  --   enabled = false,
+  --   name = 'melange',
+  --   priority = 1000,
+  --   config = function() vim.cmd.colorscheme 'melange' end,
+  -- },
 
   {
     'folke/tokyonight.nvim',
@@ -21,17 +20,12 @@ local plugins = {
 
   {
     'rebelot/heirline.nvim',
-    -- enabled = false,
-    event = 'BufReadPre',
-    -- priority = 900,
-    -- lazy = false,
+    priority = 900,
+    lazy = false,
     config = function() require 'plugins.configs.heirline' end,
   },
 
-  {
-    'nvim-tree/nvim-web-devicons',
-    config = function() require('nvim-web-devicons').setup() end,
-  },
+  { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup() end },
 
   {
     'nvim-treesitter/nvim-treesitter',
@@ -44,13 +38,11 @@ local plugins = {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-      -- cmp sources
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
-      -- 'onsails/lspkind-nvim',
 
       {
         'L3MON4D3/LuaSnip',
@@ -82,7 +74,7 @@ local plugins = {
   {
     'williamboman/mason.nvim',
     build = ':MasonUpdate',
-    cmd = { 'Mason' },
+    cmd = 'Mason',
     config = function() require 'plugins.configs.mason' end,
   },
 
@@ -92,13 +84,11 @@ local plugins = {
     config = function() require 'plugins.configs.lsp' end,
     dependencies = {
 
-      -- { 'DimitrisDimitropoulos/efmls-configs-nvim', branch = 'add-formatters-fix-cppcheck' },
-
       -- {
       --   'mfussenegger/nvim-lint',
       --   config = function()
       --     require('lint').linters_by_ft = {
-      --       python = { 'mypy', 'ruff' },
+      --       python = { 'ruff' },
       --     }
       --     vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost' }, {
       --       callback = function()
@@ -144,12 +134,7 @@ local plugins = {
     config = function() require 'plugins.configs.comment' end,
   },
 
-  {
-    'goolord/alpha-nvim',
-    enabled = false,
-    lazy = true,
-    config = function() require 'plugins.configs.alpha' end,
-  },
+  { 'goolord/alpha-nvim', lazy = false, config = function() require 'plugins.configs.alpha' end },
 
   {
     'echasnovski/mini.nvim',
@@ -160,16 +145,18 @@ local plugins = {
 
   {
     'folke/trouble.nvim',
+    enabled = false,
     keys = '<leader>tr',
     cmd = 'Trouble',
     config = function()
+      local map = vim.keymap.set
       require('trouble').setup(map('n', '<leader>tr', function() require('trouble').toggle() end, { desc = 'trouble' }))
     end,
   },
 
   {
     'folke/which-key.nvim',
-    keys = { '<leader>', '"', "'", '`', 'c', 'v' },
+    keys = { '<leader>', '"', "'", '`', ',', 'c', 'v' },
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -187,16 +174,9 @@ local plugins = {
     end,
   },
 
-  {
-    'lervag/vimtex',
-    enabled = false,
-    ft = 'tex',
-    config = function() require 'plugins.configs.vimtex' end,
-  },
-  {
-    'github/copilot.vim',
-    event = 'InsertEnter',
-  },
+  { 'lervag/vimtex', enabled = false, ft = 'tex', config = function() require 'plugins.configs.vimtex' end },
+
+  { 'github/copilot.vim', event = 'InsertEnter' },
 }
 
 require('lazy').setup(plugins, require 'plugins.configs.lazy')

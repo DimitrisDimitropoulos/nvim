@@ -2,25 +2,26 @@ local map = vim.keymap.set
 local lsp = vim.lsp.buf
 local lsp_mappings = {
   -- stylua: ignore start
-  { key = "gd", cmd = "definition",              desc = "goto def" },
-  { key = "gD", cmd = "declaration",             desc = "goto dec" },
-  { key = "gi", cmd = "implementation",          desc = "goto impl" },
-  { key = "ln", cmd = "rename",                  desc = "rename" },
-  { key = "kk", cmd = "signature_help",          desc = "signature" },
-  { key = "gr", cmd = "references",              desc = "references" },
-  { key = "gh", cmd = "type_definition",         desc = "type definition" },
-  { key = "wa", cmd = "add_workspace_folder",    desc = "add work folder" },
-  { key = "wr", cmd = "remove_workspace_folder", desc = "rm work folder" },
+  { key = 'gd', cmd = 'definition',              desc = 'goto def' },
+  { key = 'gD', cmd = 'declaration',             desc = 'goto dec' },
+  { key = 'gi', cmd = 'implementation',          desc = 'goto impl' },
+  { key = 'ln', cmd = 'rename',                  desc = 'rename' },
+  { key = 'kk', cmd = 'signature_help',          desc = 'signature' },
+  { key = 'gr', cmd = 'references',              desc = 'references' },
+  { key = 'gh', cmd = 'type_definition',         desc = 'type definition' },
+  { key = 'wa', cmd = 'add_workspace_folder',    desc = 'add work folder' },
+  { key = 'wr', cmd = 'remove_workspace_folder', desc = 'rm work folder' },
   -- stylua: ignore stop
 }
 
 local diagno = {
   -- stylua: ignore start
-  { key = "<leader>df", cmd = "open_float", descr = "diagnostics float" },
-  { key = "<leader>ds", cmd = "show",       descr = "diagnostics show" },
-  { key = "<leader>dh", cmd = "hide",       descr = "diagnostics hide" },
-  { key = "[d",         cmd = "goto_prev",  descr = "diagnostics prev" },
-  { key = "]d",         cmd = "goto_next",  descr = "diagnostics next" },
+  { key = '<leader>df', cmd = 'open_float', descr = 'diagnostics float' },
+  { key = '<leader>ds', cmd = 'show',       descr = 'diagnostics show' },
+  { key = '<leader>dh', cmd = 'hide',       descr = 'diagnostics hide' },
+  { key = '<leader>dl', cmd = 'setloclist', descr = 'diagnostics to loclist' },
+  { key = '[d',         cmd = 'goto_prev',  descr = 'diagnostics prev' },
+  { key = ']d',         cmd = 'goto_next',  descr = 'diagnostics next' },
   -- stylua: ignore stop
 }
 
