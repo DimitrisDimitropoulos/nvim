@@ -29,7 +29,7 @@ local function separate_with_commentstring()
     return commentstring .. string.rep(commentstring, 79)
   end
   return commentstring .. string.rep(commentstring, 39)
-  -- ATTENTION: Lua numbering starts at 1, @2023-07-23 19:34:46
+  -- NOTE: lua numbering begins @1, @2023-07-24 17:13:23
 end
 
 return {
@@ -49,7 +49,6 @@ return {
         sn(nil, { t "NOTE: ", i(1) }),
         sn(nil, { t "HACK: ", i(1) }),
         sn(nil, { t "OK: ", i(1) }),
-        sn(nil, { t "ATTENTION: ", i(1) }),
         sn(nil, { t "", i(1) }),
       }),
       f(function( --[[ args ]])
