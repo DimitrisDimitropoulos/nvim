@@ -1,6 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.tex_flavor = 'latex'
-vim.g.border_style = 'rounded' ---@type string
+vim.g.border_style = 'single' ---@type string
 
 local opt = vim.o
 
