@@ -323,6 +323,16 @@ local Spell = {
   hl = { bold = true, fg = 'orange', bg = 'bg' },
 }
 
+local Keymap = {
+  condition = function()
+    return vim.bo.filetype == 'tex' and vim.opt.keymap:get() ~= ''
+  end,
+  provider = function()
+    return ' [' .. vim.opt.keymap:get() .. ']'
+  end,
+  hl = { bold = true, fg = 'orange', bg = 'bg' },
+}
+
 local FileEncoding = {
   condition = function()
     return vim.bo.fenc ~= 'utf-8' and vim.bo.fenc ~= ''
@@ -360,6 +370,7 @@ local Statusline = {
   { FileType },
   { FileEncoding },
   { Spell },
+  { Keymap },
   { Space },
   { Ruler },
   { Space },
