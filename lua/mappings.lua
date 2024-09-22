@@ -16,12 +16,12 @@ vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
 vim.keymap.set("n", "ZZ", function()
   vim.o.timeout = true
   vim.o.timeoutlen = 300
-  vim.cmd "wqa"
+  vim.cmd("wqa")
 end, { desc = "save and quit", silent = false })
 vim.keymap.set("n", "ZQ", function()
   vim.o.timeout = true
   vim.o.timeoutlen = 300
-  vim.cmd "qa!"
+  vim.cmd("qa!")
 end, { desc = "quit with no save", silent = false })
 
 -- Command mappings
@@ -33,7 +33,13 @@ local commands = {
   { key = "<leader>bn", cmd = "enew",      descr = "buffer new" },
 }
 for _, command in ipairs(commands) do
-  map(n, command.key, "<cmd> " .. command.cmd .. " <CR>", { desc = command.descr }, opts)
+  map(
+    n,
+    command.key,
+    "<cmd> " .. command.cmd .. " <CR>",
+    { desc = command.descr },
+    opts
+  )
 end
 
 -- Diagnostic mappings
@@ -60,21 +66,25 @@ end
 
 -- Telescope
 local telescope_mappings = {
-  { key = "ff", cmd = "fd",                        desc = "files" },
-  { key = "fr", cmd = "oldfiles",                  desc = "old files" },
-  { key = "f;", cmd = "commands",                  desc = "commands" },
-  { key = "lg", cmd = "live_grep",                 desc = "live grep" },
-  { key = "fs", cmd = "grep_string",               desc = "string mark" },
-  { key = "fb", cmd = "buffers",                   desc = "buffers" },
-  { key = "fh", cmd = "help_tags",                 desc = "help tags" },
-  { key = "fm", cmd = "marks",                     desc = "marks" },
-  { key = "fk", cmd = "keymaps",                   desc = "keymaps" },
-  { key = "re", cmd = "registers",                 desc = "registers" },
-  { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
-  { key = "ch", cmd = "command_history",           desc = "command history" },
-  { key = "ld", cmd = "lsp_definitions",           desc = "lsp definitions" },
-  { key = "sp", cmd = "spell_suggest",             desc = "spell suggestions" },
-  { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "current buffer fuzzy" },
+  { key = "ff", cmd = "fd",              desc = "files" },
+  { key = "fr", cmd = "oldfiles",        desc = "old files" },
+  { key = "f;", cmd = "commands",        desc = "commands" },
+  { key = "lg", cmd = "live_grep",       desc = "live grep" },
+  { key = "fs", cmd = "grep_string",     desc = "string mark" },
+  { key = "fb", cmd = "buffers",         desc = "buffers" },
+  { key = "fh", cmd = "help_tags",       desc = "help tags" },
+  { key = "fm", cmd = "marks",           desc = "marks" },
+  { key = "fk", cmd = "keymaps",         desc = "keymaps" },
+  { key = "re", cmd = "registers",       desc = "registers" },
+  { key = "fd", cmd = "diagnostics",     desc = "diagnostics" },
+  { key = "ch", cmd = "command_history", desc = "command history" },
+  { key = "ld", cmd = "lsp_definitions", desc = "lsp definitions" },
+  { key = "sp", cmd = "spell_suggest",   desc = "spell suggestions" },
+  {
+    key = "fz",
+    cmd = "current_buffer_fuzzy_find",
+    desc = "current buffer fuzzy",
+  },
 }
 for _, mapping in ipairs(telescope_mappings) do
   map(n, "<leader>" .. mapping.key, function()
@@ -83,15 +93,15 @@ for _, mapping in ipairs(telescope_mappings) do
 end
 
 map(n, "<leader>ts", function()
-  require("telescope.builtin").treesitter { default_text = "function" }
+  require("telescope.builtin").treesitter({ default_text = "function" })
 end, { desc = "find treesitter" }, opts)
 map(n, "<leader>fa", function()
-  require("telescope.builtin").find_files {
+  require("telescope.builtin").find_files({
     hidden = true,
     follow = true,
     no_ignore = true,
     file_ignore_patterns = { ".git" },
-  }
+  })
 end, { desc = "find files" }, opts)
 
 -- NvimTree
