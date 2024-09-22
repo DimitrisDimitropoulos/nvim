@@ -36,13 +36,6 @@ local cppcheck = {
   lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
   rootMarkers = { 'CmakeLists.txt', 'compile_commands.json', '.git' },
 }
-local shellcheck = {
-  prefix = 'shellcheck',
-  lintCommand = 'shellcheck --color=never --format=gcc -',
-  lintIgnoreExitCode = true,
-  lintStdin = true,
-  lintFormats = { '-:%l:%c: %trror: %m', '-:%l:%c: %tarning: %m', '-:%l:%c: %tote: %m' },
-}
 local jq_lint = {
   prefix = 'jq',
   lintSource = 'jq',
