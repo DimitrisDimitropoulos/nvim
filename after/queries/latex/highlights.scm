@@ -19,13 +19,10 @@
   (#any-of? @type "\\mathrm" "\\mathcal" "\\mathbb" "\\mathbf" "\\mathit" "\\mathsf" "\\mathtt")
   (#set! "priority" 105))
 
-;; General environments
-; (begin
-;   command: _ @module
-;   name: (curly_group_text (text) @label @nospell)
-;   (#not-has-ancestor? @label math_environment))
-;
-; (end
-;   command: _ @module
-;   name: (curly_group_text (text) @label @nospell)
-;   (#not-has-ancestor? @label math_environment))
+(math_environment
+  begin: (begin
+    name: (curly_group_text
+      text: (text) @markup.math))
+  end: (end
+    name: (curly_group_text
+      text: (text) @markup.math)))
