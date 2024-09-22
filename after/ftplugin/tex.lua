@@ -28,7 +28,7 @@ local function dependency_graph(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if texlab_client then
     texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
-      if err then error(tostring(err)) end
+      if err then vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR) end
       vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
     end, 0)
   else
