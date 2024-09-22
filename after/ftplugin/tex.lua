@@ -27,6 +27,7 @@ end, { silent = false, noremap = true, desc = 'toggle greek keymap' })
 vim.cmd.syntax 'spell toplevel'
 
 local bufnr = vim.api.nvim_get_current_buf() ---@type number
+---@return table: A list of label entries with their text, line, column, and file path
 local function get_labels()
   local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
   local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
@@ -42,7 +43,7 @@ local function get_labels()
       local entry = {
         text = text,
         line = line,
-        start = col,
+        col = col,
         path = vim.api.nvim_buf_get_name(0),
       }
       table.insert(labels, entry)
@@ -51,6 +52,7 @@ local function get_labels()
   return labels
 end
 
+---@return table: A list of heading entries with their text, line, column, and file path
 local function get_headings()
   local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
   local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
@@ -78,7 +80,7 @@ local function get_headings()
         local entry = {
           text = text,
           line = line,
-          start = col,
+          col = col,
           path = vim.api.nvim_buf_get_name(0), ---@type string
         }
         table.insert(headings, entry)
@@ -92,6 +94,8 @@ local function get_headings()
   return headings
 end
 
+---@param entry table: A list of entries with their text, line, and column information
+---@param title string: The title for the location list
 local function gen_loclist(entry, title)
   local bufname = vim.fn.bufname '%' ---@type string
   -- Get location list info
@@ -107,7 +111,7 @@ local function gen_loclist(entry, title)
     table.insert(toc, {
       bufnr = bufnr,
       lnum = i.line, ---@type integer
-      col = i.start, ---@type integer
+      col = i.col, ---@type integer
       text = i.text,
     })
   end
