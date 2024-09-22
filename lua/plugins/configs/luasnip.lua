@@ -25,16 +25,15 @@ ls.config.set_config {
   },
 }
 
-local function cicle(dir)
-  if ls.choice_active() then
-    ls.change_choice(dir)
-  end
-end
 vim.keymap.set({ 'i', 's' }, '<A-l>', function()
-  cicle(1)
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
 end)
 vim.keymap.set({ 'i', 's' }, '<A-h>', function()
-  cicle(-1)
+  if ls.choice_active() then
+    ls.change_choice(-1)
+  end
 end)
 vim.keymap.set({ 'i', 's' }, '<A-j>', function()
   ls.jump(1)
