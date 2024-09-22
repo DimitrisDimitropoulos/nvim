@@ -19,8 +19,7 @@ map('i', '<C-s>', lsp.signature_help, { desc = 'lsp signature help' })
 
 for _, mapping in ipairs {
   { key = 'gi', cmd = 'implementation' },
-  { key = 'gd', cmd = 'definition' },
-  { key = 'gD', cmd = 'declaration' },
+  { key = 'gd', cmd = 'declaration' },
   { key = 'gh', cmd = 'type_definition' },
 } do
   map('n', '<leader>' .. mapping.key, lsp[mapping.cmd], { desc = 'lsp ' .. mapping.cmd:gsub('_', ' ') })
