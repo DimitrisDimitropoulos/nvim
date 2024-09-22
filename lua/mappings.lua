@@ -2,16 +2,12 @@ local map = vim.keymap.set
 
 map({ 'i', 'n' }, '<C-s>', function() vim.cmd.write {} end)
 map('t', '<C-[><C-[>', '<C-\\><C-n>', { silent = true })
-map('i', '<C-H>', '<C-W>')
+map('i', '<C-H>', '<C-w>')
+map('i', '<C-BS>', '<C-w>')
 
-local commands = {
-  { key = '<leader>bd', cmd = 'bd', descr = 'delete' },
-  { key = '<leader>bn', cmd = 'bn', descr = 'next' },
-  { key = '<leader>bp', cmd = 'bp', descr = 'previous' },
-}
-for _, command in ipairs(commands) do
-  map('n', command.key, function() vim.cmd(command.cmd) end, { noremap = true, desc = 'buffer ' .. command.descr })
-end
+map('n', '<leader>bd', function() vim.cmd 'bd' end, { noremap = true, desc = 'delete buffer' })
+map('n', '<leader>bn', function() vim.cmd 'bn' end, { noremap = true, desc = 'next buffer' })
+map('n', '<leader>bp', function() vim.cmd 'bp' end, { noremap = true, desc = 'previous buffer' })
 
 local arrows = { '<Up>', '<Down>', '<Left>', '<Right>' }
 for _, arrow in ipairs(arrows) do
