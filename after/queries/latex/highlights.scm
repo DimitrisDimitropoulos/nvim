@@ -18,3 +18,6 @@
 ((command_name) @type
   (#any-of? @type "\\mathrm" "\\mathcal" "\\mathbb" "\\mathbf" "\\mathit" "\\mathsf" "\\mathtt")
   (#set! "priority" 105))
+
+(label_definition
+  name: (curly_group_text) @label)
