@@ -96,7 +96,7 @@ This script achieves the same task with the `sh` one in `PowerShell`. However, t
 
 10. Finally, the script prints a message to the console indicating the new name of the copied and renamed file, and specifies the date format used in the new file name.
 
-### resore.ps1
+### restore.ps1
 
 This `PowerShell` script is designed to restore the `lazy-lock.json` file from the most recent backup in the `lockfiles` directory. It prompts the user for confirmation before performing the restore operation. It proceeds as follows:
 
