@@ -9,6 +9,11 @@ fzf_lua.setup {
     prompt = 'rg> ',
     rg_opts = '--hidden --no-heading --color=never --smart-case --max-columns=4096 --glob !.git --glob !build --glob !spell --glob !lockfiles --glob !LICENSE',
   },
+  files = {
+    cmd = 'rg --files --glob !.git --glob !build --glob !spell --glob !lockfiles',
+    cwd_prompt = true,
+    cwd_prompt_shorten_len = 1,
+  },
   keymap = {
     builtin = {
       ['<A-a>'] = 'toggle-fullscreen',
@@ -39,6 +44,7 @@ fzf_lua.setup {
 }
 
 local fzf_maps = {
+  { key = 'ff', cmd = 'files' },
   { key = 'fr', cmd = 'oldfiles' },
   { key = 'f;', cmd = 'commands' },
   { key = 'fg', cmd = 'live_grep' },
@@ -65,11 +71,6 @@ for _, mapping in ipairs(fzf_maps) do
   end, { desc = 'fzf-lua ' .. mapping.cmd:gsub('_', ' ') })
 end
 
-vim.keymap.set('n', '<leader>ff', function()
-  require('fzf-lua').files {
-    cmd = 'rg --files --glob !.git --glob !build --glob !spell --glob !lockfiles',
-  }
-end, { desc = 'fzf-lua all files' })
 vim.keymap.set('n', '<leader>fa', function()
   require('fzf-lua').files { cmd = 'rg --files --hidden -u' }
 end, { desc = 'fzf-lua all files' })
