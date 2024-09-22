@@ -31,15 +31,35 @@ return {
         sn(nil, { t "", i(1) }),
       }),
       f(function() return os.date "%Y-%m-%d %H:%M:%S" end),
-    }),
-    { description = "Comment" }
+    })
   ),
 
   s({
-    trig = "separate",
+    trig = "sepcomm",
     name = "Comment-Separate",
     dscr = "Separate with commentstring",
   }, f(sn_ut.separate_with_commentstring)),
+
+  s({
+    trig = "sepeq",
+    name = "Equals-Separate",
+    dscr = "Separate with equals",
+  }, f(sn_ut.separate_with_equals)),
+
+  s(
+    {
+      trig = "titlesep",
+      name = "Title-Separate",
+      dscr = "Separate with title",
+    },
+    fmt("{}\n{} {} {}\n{}", {
+      f(sn_ut.separate_with_equals),
+      f(sn_ut.get_comment_string),
+      i(1, "Title"),
+      f(sn_ut.get_comment_string),
+      f(sn_ut.separate_with_equals),
+    })
+  ),
 
   s("time", p(vim.fn.strftime, "%H:%M:%S")),
   s("shrug", { t "¯\\_(ツ)_/¯" }),
