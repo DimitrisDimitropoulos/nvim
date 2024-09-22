@@ -175,7 +175,7 @@ local plugins = {
 
   {
     'nvimdev/indentmini.nvim',
-    -- enabled = false,
+    enabled = false,
     event = evs,
     config = function()
       require('indentmini').setup { minlevel = 2 }
