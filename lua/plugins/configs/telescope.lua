@@ -66,35 +66,32 @@ end
 -- =============================================================================
 --  Mapps for Telescope and it's extensions --
 -- =============================================================================
-local map = vim.keymap.set
 
 local telescope_mappings = {
-  -- stylua: ignore start
-  { key = 'ff', cmd = 'fd',                        desc = 'files' },
-  { key = 'fr', cmd = 'oldfiles',                  desc = 'old files' },
-  { key = 'f;', cmd = 'commands',                  desc = 'commands' },
-  { key = 'fg', cmd = 'live_grep',                 desc = 'live grep' },
-  { key = 'fs', cmd = 'grep_string',               desc = 'cursor string' },
-  { key = 'fb', cmd = 'buffers',                   desc = 'buffers' },
-  { key = 'fh', cmd = 'help_tags',                 desc = 'help tags' },
-  { key = 'f/', cmd = 'search_history',            desc = 'history' },
-  { key = 'fm', cmd = 'marks',                     desc = 'marks' },
-  { key = 'fk', cmd = 'keymaps',                   desc = 'keymaps' },
-  { key = 'fe', cmd = 'registers',                 desc = 'registers' },
-  { key = 'fd', cmd = 'diagnostics',               desc = 'diagnostics' },
-  { key = 'fc', cmd = 'command_history',           desc = 'command history' },
-  { key = 'fl', cmd = 'lsp_document_symbols',      desc = 'lsp document symbols' },
-  { key = 'sp', cmd = 'spell_suggest',             desc = 'spell suggest' },
-  { key = 'fz', cmd = 'current_buffer_fuzzy_find', desc = 'buf fuzzy' },
-  { key = 'f.', cmd = 'resume',                    desc = 'last' },
-  -- stylua: ignore stop
+  { key = 'ff', cmd = 'fd' },
+  { key = 'fr', cmd = 'oldfiles' },
+  { key = 'f;', cmd = 'commands' },
+  { key = 'fg', cmd = 'live_grep' },
+  { key = 'fs', cmd = 'grep_string' },
+  { key = 'fb', cmd = 'buffers' },
+  { key = 'fh', cmd = 'help_tags' },
+  { key = 'f/', cmd = 'search_history' },
+  { key = 'fm', cmd = 'marks' },
+  { key = 'fk', cmd = 'keymaps' },
+  { key = 'fe', cmd = 'registers' },
+  { key = 'fd', cmd = 'diagnostics' },
+  { key = 'fc', cmd = 'command_history' },
+  { key = 'fl', cmd = 'lsp_document_symbols' },
+  { key = 'sp', cmd = 'spell_suggest' },
+  { key = 'fz', cmd = 'current_buffer_fuzzy_find' },
+  { key = 'f.', cmd = 'resume' },
 }
 for _, mapping in ipairs(telescope_mappings) do
-  map('n', '<leader>' .. mapping.key, function()
+  vim.keymap.set('n', '<leader>' .. mapping.key, function()
     require('telescope.builtin')[mapping.cmd]()
-  end, { desc = 'telescope ' .. mapping.desc })
+  end, { desc = 'telescope ' .. mapping.cmd:gsub('_', ' ') })
 end
 
-map('n', '<leader>fa', function()
+vim.keymap.set('n', '<leader>fa', function()
   require('telescope.builtin').fd { hidden = true, follow = true, no_ignore = true, file_ignore_patterns = { '.git' } }
 end, { desc = 'telescope all files' })
