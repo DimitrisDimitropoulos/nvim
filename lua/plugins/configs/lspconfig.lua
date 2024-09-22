@@ -77,6 +77,10 @@ local servers = {
   "html",
   "cssls",
   "texlab",
+  -- "ltex",
+  "julials",
+  "pyright",
+  "bashls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -88,4 +92,15 @@ end
 lspconfig.clangd.setup({
   capabilities = capabilities,
   cmd = { "clangd", "--background-index", "--clang-tidy" },
+})
+
+lspconfig.rust_analyzer.setup({
+  capabilities = capabilities,
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        command = "clippy",
+      },
+    },
+  },
 })
