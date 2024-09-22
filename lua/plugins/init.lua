@@ -10,6 +10,7 @@ local plugins = {
     lazy = false,
     init = function()
       vim.cmd.colorscheme 'melange'
+      require 'statusline'
     end,
   },
 
@@ -23,6 +24,7 @@ local plugins = {
   },
   {
     'rebelot/heirline.nvim',
+    enabled = false,
     event = evs,
     config = function()
       require 'plugins.configs.heirline'
