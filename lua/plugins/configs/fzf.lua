@@ -19,6 +19,7 @@ fzf_lua.setup {
     rg_opts = '--hidden --no-heading --color=always --max-columns=4096 --smart-case --line-number --column --with-filename --glob !.git --glob !build --glob !spell --glob !lockfiles --glob !LICENSE',
   },
   files = {
+    formatter = 'path.dirname_first',
     cmd = 'rg --files --smart-case --color=never --follow --glob !.git --glob !build --glob !spell --glob !lockfiles',
     cwd_prompt = true,
     cwd_prompt_shorten_len = 1,
