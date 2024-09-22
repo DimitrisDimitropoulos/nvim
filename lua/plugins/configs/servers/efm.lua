@@ -22,26 +22,10 @@ local gersemi = { formatCommand = 'gersemi -', formatStdin = true }
 local fourmolu = { formatCommand = 'fourmolu --stdin-input-file ${INPUT} -', formatStdin = true }
 local beautysh = { formatCommand = 'beautysh -', formatStdin = true }
 local black = { formatCommand = 'black --fast -', formatStdin = true }
-local pylint = {
-  prefix = 'pylint',
-  lintSource = 'pylint',
-  lintCommand = 'pylint --score=no ${INPUT}',
-  lintStdin = false,
-  lintFormats = { '%.%#:%l:%c: %t%.%#: %m' },
-}
 local stylua = {
   formatCommand = 'stylua --search-parent-directories --stdin-filepath ${INPUT} -',
   formatStdin = true,
   rootMarkers = { 'stylua.toml', '.stylua.toml' },
-}
-local flake8 = {
-  prefix = 'flake8',
-  lintSource = 'flake8',
-  lintCommand = 'flake8 -',
-  lintIgnoreExitCode = true,
-  lintStdin = true,
-  lintFormats = { 'stdin:%l:%c: %t%n %m' },
-  rootMarkers = { 'setup.cfg', 'tox.ini', '.flake8' },
 }
 local cppcheck = {
   prefix = 'cppcheck',
@@ -58,13 +42,6 @@ local shellcheck = {
   lintIgnoreExitCode = true,
   lintStdin = true,
   lintFormats = { '-:%l:%c: %trror: %m', '-:%l:%c: %tarning: %m', '-:%l:%c: %tote: %m' },
-}
-local mypy = {
-  prefix = 'mypy',
-  lintSource = 'mypy',
-  lintCommand = 'mypy --strict --strict-equality --ignore-missing-imports --show-column-numbers --hide-error-codes --hide-error-context --no-color-output --no-error-summary --no-pretty',
-  lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
-  rootMarkers = { 'mypy.ini', 'pyproject.toml', 'setup.cfg' },
 }
 local jq_lint = {
   prefix = 'jq',
