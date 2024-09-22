@@ -57,6 +57,7 @@ opt.updatetime = 250
 vig.vimtex_quickfix_mode = 0
 vig.Tex_BibtexFlavor = "biber"
 vig.vscode_snippets_path = "~/.config/nvim/snippets/"
+vig.vimtex_view_method = "zathura"
 
 -- disable some default providers
 local providers = { "node", "perl", "python3", "ruby" }
