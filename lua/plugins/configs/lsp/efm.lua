@@ -101,10 +101,9 @@ local latexindent = { formatCommand = 'latexindent -', formatStdin = true }
 --   prefix = 'ruff',
 --   lintSource = 'ruff',
 --   lintStdin = true,
---   lintCommand = 'ruff --stdin-filename ${INPUT} --no-fix -',
+--   lintCommand = 'ruff --force-exclude --quiet --stdin-filename ${INPUT} --no-fix -',
 --   lintIgnoreExitCode = true,
---   -- path/to/file:line:col: code message
---   lintFormats = '%f:%l:%c: %m',
+--   lintFormats = { '%f:%l:%c: %n %m' },
 -- }
 
 local langs = {

@@ -9,14 +9,14 @@ local opt = vim.opt
 opt.incsearch = true
 
 opt.spelllang = 'el,en'
-opt.laststatus = 3
-opt.showmode = false
+opt.laststatus = 0
+-- opt.showmode = false
 opt.scrolloff = 3
 opt.sidescrolloff = 3
 
 opt.numberwidth = 3
-opt.cursorlineopt = 'number'
-opt.cursorline = false
+opt.cursorlineopt = 'both'
+opt.cursorline = true
 opt.cursorcolumn = false
 opt.clipboard = 'unnamedplus'
 vim.g.clipboard = {
@@ -32,18 +32,19 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
+opt.linebreak = true
 opt.pumheight = 10
 
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = 'c'
 
-opt.number = true
+opt.number = false
 opt.relativenumber = true
 opt.numberwidth = 2
-opt.ruler = false
+opt.ruler = true
 
-opt.shortmess:append 'sI'
+-- opt.shortmess:append 'sI'
 -- opt.fillchars = { eob = ' ' }
 
 opt.signcolumn = 'yes'
