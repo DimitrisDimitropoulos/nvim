@@ -2,8 +2,6 @@ local map = vim.keymap.set
 
 -- Save mappings there are problems
 vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
--- Increasing the timeoutlen to 300ms
--- helps with stabillity when slow
 
 vim.keymap.set("n", "ZZ", function()
   vim.o.timeout = true

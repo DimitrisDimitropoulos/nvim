@@ -164,24 +164,22 @@ local plugins = {
     config = function() require "plugins.configs.comment" end,
   },
 
+  -- {
+  --   "github/copilot.vim",
+  --   event = "InsertEnter",
+  -- },
+
   {
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
     event = "InsertEnter",
+    cmd = "Copilot",
+    config = function() require "plugins.configs.copilot" end,
   },
 
   -- {
-  --   "zbirenbaum/copilot.lua",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("plugins.configs.copilot")
-  --   end,
-  -- },
-  -- {
   --   "zbirenbaum/copilot-cmp",
   --   event = "InsertEnter",
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --   end,
+  --   config = function() require("copilot_cmp").setup() end,
   -- },
 
   {
