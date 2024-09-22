@@ -2,8 +2,9 @@ local alpha = require "alpha"
 local dashboard = require "alpha.themes.dashboard"
 
 dashboard.section.header.opts = {
-  hl = "Comment",
+  -- hl = "Comment",
   -- hl = "VioletHLGroup",
+  hl = "PeanutHLGroup",
   position = "center",
 }
 
@@ -31,13 +32,11 @@ dashboard.section.header.val = {
   "██║╚████║ ╚████╔╝ ██╔═══╝ ██║  ██║██╔══╝  ",
   "██║ ╚███║  ╚██╔╝  ██║     ██████╔╝███████╗",
   "╚═╝  ╚══╝   ╚═╝   ╚═╝     ╚═════╝ ╚══════╝",
-  "        ~ brain.exist() == null; ~        ",
+  -- "        ~ brain.exist() == null; ~        ",
 }
 
-dashboard.section.buttons.opts.hl = "Comment"
-
 dashboard.section.buttons.val = {
-  -- { type = "text", val = "~ brain.exist() == NULL; ~", opts = { hl = "String", position = "center" } },
+  { type = "text", val = "~ brain.exist() == NULL; ~", opts = { hl = "Comment", position = "center" } },
   dashboard.button("e", "󰈔  > New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button("f", "󰈞  > Find file", ":Telescope fd<CR>"),
   dashboard.button("l", "󱉶  > Live grep", ":Telescope live_grep<CR>"),
@@ -45,12 +44,13 @@ dashboard.section.buttons.val = {
   dashboard.button("m", "  > Marks  ", ":Telescope marks<CR>"),
   dashboard.button("L", "󰒲  > Lazy ", ":Lazy<CR>"),
   dashboard.button("M", "󱌢  > Mason ", ":Mason<CR>"),
-  dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h | wincmd k | pwd | Telescope find_files<CR>"),
+  dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h | wincmd k | Telescope find_files<CR>"),
   dashboard.button("q", "󰩈  > Quit NVIM", ":qa<CR>"),
 }
 
 dashboard.section.footer.opts = {
-  hl = "Function",
+  -- hl = "Function",
+  hl = "VioletHLGroup",
   position = "center",
 }
 
@@ -65,3 +65,6 @@ end
 dashboard.section.footer.val = footer()
 
 alpha.setup(dashboard.opts)
+
+vim.api.nvim_set_hl(0, "VioletHLGroup", { fg = "#d4bfff" })
+vim.api.nvim_set_hl(0, "PeanutHLGroup", { fg = "#ffd899" })

@@ -18,32 +18,9 @@ local options = {
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
-    i = {
-      "j",
-      "k",
-      "d",
-      "c",
-      "y",
-      "h",
-      "l",
-      "f",
-      "F",
-      "t",
-      "T",
-    },
-    v = {
-      "j",
-      "k",
-      "d",
-      "c",
-      "y",
-      "h",
-      "l",
-      "f",
-      "F",
-      "t",
-      "T",
-    },
+    n = { "j", "k", "d", "c", "y", "h", "l", "f", "F", "t", "T" },
+    i = { "j", "k", "d", "c", "y", "h", "l", "f", "F", "t", "T" },
+    x = { "j", "k", "d", "c", "y", "h", "l", "f", "F", "t", "T" },
   },
 }
 
