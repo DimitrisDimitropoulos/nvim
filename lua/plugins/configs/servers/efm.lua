@@ -85,7 +85,6 @@ local selene = {
   lintCommand = 'selene --display-style quiet -',
   lintFormats = { '%f:%l:%c: %trror%m', '%f:%l:%c: %tarning%m', '%f:%l:%c: %tote%m' },
 }
-local latexindent = { formatCommand = 'latexindent -', formatStdin = true }
 local luacheck = {
   prefix = 'luacheck',
   lintSource = 'luacheck',
