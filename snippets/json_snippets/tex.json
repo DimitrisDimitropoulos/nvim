@@ -319,7 +319,7 @@
   },
   "siunits-declare": {
     "prefix": "sideclaru",
-    "body": "\\DeclareSIUnit\\${1:unit_call}{${2:unit_show}}$0",
+    "body": "\\DeclareSIUnit\\{${1:unit_call}}{${2:unit_show}}$0",
     "description": "siunitx declare unit"
   },
   "squareroot": {
