@@ -15,9 +15,11 @@
   (#any-of? @operator "\\hat" "\\cdot" "\\int" "\\div" "\\in" "\\leq" "\\sum" "\\neq" "\\geq" "\\times" "\\pm" "\\mp" "\\partial")
   (#set! "priority" 105))
 
-((command_name) @type
-  (#any-of? @type "\\mathrm" "\\mathcal" "\\mathbb" "\\mathbf" "\\mathit" "\\mathsf" "\\mathtt")
-  (#set! "priority" 105))
+((generic_command
+  command: (command_name) @_name
+  arg: (curly_group
+    (_) @markup))
+  (#eq? @_name "\\mathrm"))
 
 (math_environment
   begin: (begin

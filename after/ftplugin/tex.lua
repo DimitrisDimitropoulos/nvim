@@ -1,5 +1,9 @@
 vim.opt_local.wrap = true
 vim.api.nvim_set_hl(0, '@module', { link = '@function.builtin' })
+vim.api.nvim_set_hl(0, '@markup.math', { link = 'Special' })
+vim.api.nvim_set_hl(0, '@markup', { fg = 'white' })
+vim.api.nvim_set_hl(0, '@markup.strong', { fg = 'white', bold = true })
+vim.api.nvim_set_hl(0, '@markup.italic', { fg = 'white', italic = true })
 
 local function moving_wrap(direction)
   return (vim.v.count == 0) and 'g' .. direction or direction
