@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "close with q",
 })
 
--- close some filetypes with <q> From LazyVim
+-- Enable filetype specific keymaps
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("TroubleOpen"),
   pattern = {
@@ -65,13 +65,11 @@ vim.api.nvim_create_autocmd("FileType", {
     "python",
     "julia",
   },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "<leader>tr", "<cmd> TroubleToggle <CR>", { buffer = event.buf, silent = true })
+  callback = function()
+    vim.keymap.set("n", "<leader>tr", "<cmd> TroubleToggle <CR>")
   end,
   desc = "trouble",
 })
-
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
