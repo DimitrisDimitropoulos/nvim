@@ -13,14 +13,14 @@ end
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("YankHighlight"),
+  group = augroup "YankHighlight",
   command = "lua vim.highlight.on_yank()",
   desc = "highlight on yank",
 })
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup("last_loc"),
+  group = augroup "last_loc",
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
     local lcount = vim.api.nvim_buf_line_count(0)
@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- close some filetypes with <q> From LazyVim
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
+  group = augroup "close_with_q",
   pattern = {
     "PlenaryTestPopup",
     "help",
@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Enable filetype specific keymaps
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("TroubleOpen"),
+  group = augroup "TroubleOpen",
   pattern = {
     "lua",
     "cpp",
@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
+  group = augroup "wrap_spell",
   pattern = {
     "gitcommit",
     "markdown",
@@ -90,7 +90,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Autoformatting on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-  group = augroup("AutoFormat"),
+  group = augroup "AutoFormat",
   pattern = {
     "*tex",
     "*lua",
@@ -100,9 +100,23 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     "*yaml",
   },
   callback = function()
-    vim.lsp.buf.format({ async = true })
+    vim.lsp.buf.format { async = true }
   end,
   desc = "format on save",
+})
+
+-- Make scripts executable
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = augroup "MakeExecutable",
+  pattern = {
+    "*.sh",
+    "*.bash",
+    "*.zsh",
+  },
+  callback = function()
+    vim.fn.system("chmod +x " .. vim.fn.expand "%")
+  end,
+  desc = "make executable",
 })
 
 -- toggle diagnostics
