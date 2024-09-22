@@ -34,4 +34,4 @@ for _, command in ipairs(vimtex_keymap) do
 end
 
 keymapp("n", "<leader>tx", Disable_tree_sitter_highlight, { desc = "disable treesitter" })
--- vim.keymap.del("n", "<leader>tr") -- disable Trouble-nvim
+keymapp("n", "<leader>tr", "")
