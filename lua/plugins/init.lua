@@ -125,6 +125,14 @@ local plugins = {
     end,
   },
 
+  {
+    'NeogitOrg/neogit',
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    config = true,
+    cmd = 'Neogit',
+    opts = { status = { recent_commit_count = 30 } },
+  },
+
   { 'lervag/vimtex', enabled = false, ft = 'tex', config = function() require 'plugins.configs.vimtex' end },
 
   { 'github/copilot.vim', event = 'InsertEnter' },
