@@ -120,3 +120,18 @@ cmp.setup {
     },
   },
 }
+
+local hl = vim.api.nvim_set_hl
+hl(0, 'PeanutHLGroup', { fg = '#ffd899' })
+hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = '#ffd899', bold = true })
+hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpIntemAbbrMatch' })
+hl(0, 'CmpItemKindMethod', { bg = 'NONE', fg = '#b3de81' })
+hl(0, 'CmpItemKindStruct', { link = 'CmpItemKindMethod' })
+hl(0, 'CmpItemKindField', { link = 'CmpItemKindMethod' })
+hl(0, 'CmpItemKindVariable', { bg = 'NONE', fg = '#9CDCFE' })
+hl(0, 'CmpItemKindInterface', { link = 'CmpItemKindVariable' })
+hl(0, 'CmpItemKindText', { bg = 'NONE', fg = '#D4D4D4' })
+hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindText' })
+hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindText' })
+hl(0, 'CmpItemKindKeyword', { link = 'VioletHLGroup' })
+hl(0, 'CmpItemKindSnippet', { link = 'VioletHLGroup' })
