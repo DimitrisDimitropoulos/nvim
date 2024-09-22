@@ -28,6 +28,7 @@ map('n', '<leader>lh', function()
 end, { desc = 'lsp toggle inlay hints' })
 map('n', '<leader>lf', function()
   lsp.format { async = true }
+  vim.notify('The buffer has been formatted', vim.log.levels.INFO)
 end, { desc = 'lsp async format' })
 map('n', '<leader>wl', function()
   print(vim.inspect(lsp.list_workspace_folders()))
