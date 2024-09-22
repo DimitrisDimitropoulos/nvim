@@ -36,16 +36,9 @@ keymapp(n, "ZZ", "<cmd> wqa <CR>", opts)
 keymapp(n, "ZQ", "<cmd> qa! <CR>", opts)
 
 -- Window management
-local windows = {
-  { key = "<A-w>", cmd = "w" },
-  { key = "<C-q>", cmd = "q" },
-  { key = "<C-h>", cmd = "h" },
-  { key = "<C-j>", cmd = "j" },
-  { key = "<C-k>", cmd = "k" },
-  { key = "<C-l>", cmd = "l" },
-}
-for _, window in ipairs(windows) do
-  keymapp(n, window.key, "<C-w>" .. window.cmd, { desc = "window " .. window.cmd }, opts)
+local window = { "w", "q", "h", "j", "k", "l" }
+for _, win in ipairs(window) do
+  keymapp(n, "<C-" .. win .. ">", "<C-w>" .. win, { desc = "window " .. win }, opts)
 end
 
 -- Telescope
