@@ -52,6 +52,9 @@ opt.softtabstop = 2
 
 opt.linebreak = true
 opt.pumheight = 20
+if vim.version().minor >= 11 then
+  opt.completeopt = { 'menuone', 'popup', 'noselect', 'fuzzy' }
+end
 
 opt.incsearch = true
 opt.smartcase = true
