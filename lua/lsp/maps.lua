@@ -15,9 +15,6 @@ map('n', '<leader>lf', function()
   lsp.format { async = true }
   vim.notify('The buffer has been formatted', vim.log.levels.INFO)
 end, { desc = 'lsp async format' })
-map('n', '<leader>wl', function()
-  print(vim.inspect(lsp.list_workspace_folders()))
-end, { desc = 'lsp list workspace folders' })
 map('i', '<C-s>', lsp.signature_help, { desc = 'lsp signature help' })
 
 for _, mapping in ipairs {
@@ -25,8 +22,6 @@ for _, mapping in ipairs {
   { key = 'gd', cmd = 'definition' },
   { key = 'gD', cmd = 'declaration' },
   { key = 'gh', cmd = 'type_definition' },
-  { key = 'wa', cmd = 'add_workspace_folder' },
-  { key = 'wr', cmd = 'remove_workspace_folder' },
 } do
   map('n', '<leader>' .. mapping.key, lsp[mapping.cmd], { desc = 'lsp ' .. mapping.cmd:gsub('_', ' ') })
 end
