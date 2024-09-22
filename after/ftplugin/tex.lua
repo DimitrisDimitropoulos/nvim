@@ -66,20 +66,30 @@ vim.api.nvim_create_user_command('TexlabPrettyEnvs', function()
 end, { nargs = 0, desc = 'Find environments at cursor and display as popup' })
 
 local bufnr = vim.api.nvim_get_current_buf() ---@type number
----@brief
--- Extracts all LaTeX section headings from the current buffer.
---
--- This function uses Tree-sitter to parse the current buffer and identify
--- various LaTeX sectioning commands such as `part`, `chapter`, `section`,
--- `subsection`, etc. It constructs and executes queries for each sectioning
--- command to locate the headings in the document.
---
----@return table: A list of heading entries, where each entry is a table with the following keys:
---   - `type` (string): The type of sectioning command (e.g., 'section').
---   - `text` (string): The text of the heading.
---   - `line` (integer): The 1-based line number of the heading.
---   - `start` (integer): The starting column of the heading text.
---   - `path` (string): The path of the current buffer.
+local function get_labels()
+  local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
+  local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
+  local query_string = '(label_definition (curly_group_text (text) @label_title))' ---@type string
+  local query = vim.treesitter.query.parse('latex', query_string) ---@type table<integer, TSQuery>
+  local labels = {}
+  for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
+    for _, node in pairs(match) do
+      local text = vim.treesitter.get_node_text(node, 0) ---@type string
+      local line, col, _, _ = node:range() ---@type integer, integer, integer, integer
+      line = line + 1
+      col = col + 1
+      local entry = {
+        text = text,
+        line = line,
+        start = col,
+        path = vim.api.nvim_buf_get_name(0),
+      }
+      table.insert(labels, entry)
+    end
+  end
+  return labels
+end
+
 local function get_headings()
   local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
   local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
@@ -100,13 +110,14 @@ local function get_headings()
     for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
       for _, node in pairs(match) do
         local text = vim.treesitter.get_node_text(node, bufnr) ---@type string
-        local line, start, _, _ = node:range() ---@type integer, integer, integer, integer
+        local line, col, _, _ = node:range() ---@type integer, integer, integer, integer
         line = line + 1
+        col = col + 1
+        text = string.upper(command:sub(1, 1)) .. command:sub(2) .. ': ' .. text
         local entry = {
-          type = command,
           text = text,
           line = line,
-          start = start,
+          start = col,
           path = vim.api.nvim_buf_get_name(0), ---@type string
         }
         table.insert(headings, entry)
@@ -120,22 +131,7 @@ local function get_headings()
   return headings
 end
 
----@brief
--- Generates and displays a table of contents (TOC) for the current LaTeX buffer.
---
--- This function checks if a location list window is already open for the
--- current buffer. If so, it reopens the location list. Otherwise, it creates a
--- new location list populated with headings extracted from the LaTeX document.
--- It also sets a title for the location list.
---
----@return nil
---
--- This function does not return any value. It updates the location list window
--- with TOC entries and ensures that the list is associated with the current
--- buffer.
---
----@see get_headings: This function is used to fetch the headings from the current LaTeX document.
-local function show_toc()
+local function gen_loclist(entry, title)
   local bufname = vim.fn.bufname '%' ---@type string
   -- Get location list info
   local info = vim.fn.getloclist(0, { winid = 1 })
@@ -146,23 +142,20 @@ local function show_toc()
   end
   -- Generate TOC from headings
   local toc = {}
-  for _, heading in ipairs(get_headings()) do
+  for _, i in ipairs(entry) do
     table.insert(toc, {
       bufnr = bufnr,
-      lnum = heading.line, ---@type integer
-      col = heading.start + 1, ---@type integer
-      -- Capitalize the first letter of the heading type
-      text = string.format('%s: %s', string.upper(heading.type:sub(1, 1)) .. heading.type:sub(2), heading.text),
+      lnum = i.line, ---@type integer
+      col = i.start, ---@type integer
+      text = i.text,
     })
   end
   -- Set the location list with TOC entries
   vim.fn.setloclist(0, toc)
   -- Set the title for the location list
-  local title = 'LaTeX TOC'
   if vim.g.document_title then
     title = title .. ' - "' .. vim.g.document_title .. '"'
   end
-
   -- Update the location list with the title
   vim.fn.setloclist(0, {}, 'r', { title = title })
   vim.cmd 'lopen'
@@ -173,7 +166,10 @@ local function show_toc()
   end
 end
 vim.keymap.set('n', 'gO', function()
-  show_toc()
+  gen_loclist(get_headings(), 'LaTeX TOC')
 end, { silent = true, noremap = true, desc = 'User: show LaTeX TOC' })
+vim.api.nvim_create_user_command('GetLatexLabels', function()
+  gen_loclist(get_labels(), 'LaTeX Labels')
+end, { nargs = 0, desc = 'Generate a location list with LaTeX labels' })
 
 vim.cmd [[packadd matchit]]
