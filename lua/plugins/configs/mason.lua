@@ -1,4 +1,4 @@
-require("mason").setup({
+require("mason").setup {
   ui = {
     icons = {
       package_installed = "✓",
@@ -16,7 +16,7 @@ require("mason").setup({
       cancel_installation = "<C-c>",
     },
   },
-})
+}
 
 local options = {
   ensure_installed = {
