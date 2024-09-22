@@ -7,7 +7,7 @@
       "\t${4:/*Code*/}",
       "}\n"
     ],
-    "description": "foreach 语句的代码片段"
+    "description": "foreach"
   },
   "if": {
     "prefix": "if",
@@ -17,35 +17,35 @@
       "\t${2:/*Code*/}",
       "}\n"
     ],
-    "description": "if 语句的代码片段"
+    "description": "if"
   },
   "vec": {
     "prefix": "vec",
     "body": [
       "std::vector<${1:type}> ${2:vec}\n"
     ],
-    "description": "vector 容器的代码片段"
+    "description": "vector"
   },
   "cout": {
     "prefix": "cout",
     "body": [
       "\nstd::cout << \"${1:/*Text*/}\" << \"\\n\";\n"
     ],
-    "description": "cout 语句的代码片段"
+    "description": "cout"
   },
   "lambda": {
     "prefix": "lambda",
     "body": [
       "[](${1:/*Args*/}){${2:/*Code*/}};\n"
     ],
-    "description": "lambda 表达式的代码片段"
+    "description": "lambda"
   },
   "trail": {
     "prefix": "trail",
     "body": [
       "auto ${1:/*Name*/}(${2:/*Args*/}) -> ${3:/*Return Type*/};"
     ],
-    "description": "trail function 语句的代码片段"
+    "description": "trail function"
   },
   "Print Matrix": {
     "prefix": "mtrx",
