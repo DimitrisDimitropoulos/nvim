@@ -1,8 +1,12 @@
 -- Do not load up plugin when in diff mode.
-if vim.opt.diff:get() then return end
+if vim.opt.diff:get() then
+  return
+end
 
 local gitsigns_ok, gitsigns = pcall(require, 'gitsigns')
-if not gitsigns_ok then return end
+if not gitsigns_ok then
+  return
+end
 local feedkeys = vim.api.nvim_feedkeys
 local map = vim.keymap.set
 local schedule = vim.schedule
@@ -14,7 +18,9 @@ gitsigns.setup {
     map('n', ',+', gs.stage_hunk, { desc = 'git stage hunk' })
     map('n', ',-', gs.reset_hunk, { desc = 'git reset hunk' })
     map('n', ',g', gs.preview_hunk, { desc = 'preview hunk' })
-    map('n', ',b', function() gs.blame_line { full = true } end, { desc = 'git blame line' })
+    map('n', ',b', function()
+      gs.blame_line { full = true }
+    end, { desc = 'git blame line' })
     map('n', ',r', gs.refresh, { desc = 'git refresh' })
 
     local git_nav = {
@@ -23,9 +29,15 @@ gitsigns.setup {
     }
     for _, nav in ipairs(git_nav) do
       map('n', nav.key, function()
-        if vim.wo.diff then return nav.key end
-        schedule(function() gs[nav.cmd]() end)
-        schedule(function() feedkeys('zz', 'n', false) end)
+        if vim.wo.diff then
+          return nav.key
+        end
+        schedule(function()
+          gs[nav.cmd]()
+        end)
+        schedule(function()
+          feedkeys('zz', 'n', false)
+        end)
         return '<Ignore>'
       end, { desc = 'git ' .. nav.cmd })
     end
@@ -41,7 +53,9 @@ gitsigns.setup {
           break
         end
       end
-      if not is_git_buf then require('gitsigns').diffthis() end
+      if not is_git_buf then
+        require('gitsigns').diffthis()
+      end
     end, { desc = 'toggle git diff' })
   end,
 

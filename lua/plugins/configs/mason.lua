@@ -16,11 +16,9 @@ require('mason').setup {
       package_uninstalled = '\u{2716}',
     },
   },
-  vim.api.nvim_create_user_command(
-    'MasonInstallAll',
-    function() vim.cmd('MasonInstall ' .. table.concat(ensure_installed, ' ')) end,
-    {}
-  ),
+  vim.api.nvim_create_user_command('MasonInstallAll', function()
+    vim.cmd('MasonInstall ' .. table.concat(ensure_installed, ' '))
+  end, {}),
   PATH = 'skip',
   max_concurrent_installers = 20,
 }
