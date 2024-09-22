@@ -152,5 +152,17 @@ for _, nav in ipairs(git_nav) do
 end
 
 map(n, "<leader>gf", function()
-  require("gitsigns").diffthis()
-end, { desc = "diff this" }, opts)
+  local buffers = vim.api.nvim_list_bufs()
+  local is_git_buf = false
+  for _, buf in ipairs(buffers) do
+    local filename = vim.api.nvim_buf_get_name(buf)
+    if string.match(filename, "/%.git/") then
+      is_git_buf = true
+      vim.api.nvim_buf_delete(buf, { force = true })
+      break
+    end
+  end
+  if not is_git_buf then
+    require("gitsigns").diffthis()
+  end
+end, { desc = "toggle git diff" }, opts)
