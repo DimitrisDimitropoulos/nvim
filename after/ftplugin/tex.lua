@@ -10,6 +10,14 @@ vim.keymap.set({ 'n', 'x' }, 'j', function()
   return moving_wrap 'j'
 end, { expr = true, silent = true })
 
+vim.keymap.set({ 'i', 'n' }, '<A-b>', function()
+  if vim.opt.keymap:get() == 'greek_utf-8' then
+    vim.opt.keymap = ''
+  else
+    vim.opt.keymap = 'greek_utf-8'
+  end
+end, { silent = false, noremap = true, desc = 'toggle greek keymap' })
+
 -- BUG: For some reason this does not work, @2024-01-25 01:51:09
 vim.cmd.syntax 'spell toplevel'
 
