@@ -3,7 +3,7 @@
     "prefix": "biblatex-setup",
     "body": [
       "\\usepackage[backend=biber,language=auto,autolang=other,style=ieee,sorting=nyt,defernumbers=true,doi=false]{biblatex}",
-      "\\addbibresource{${2:file}}"
+      "\\addbibresource{${2:file}}\n$0"
     ],
     "description": "BibLaTeX setup"
   },
@@ -24,7 +24,7 @@
       "\tnumbers=left,",
       "\tstepnumber=1,",
       "\tbreaklines=true,",
-      "}"
+      "}\n$0"
     ],
     "description": "LaTeX code setup"
   },
@@ -43,7 +43,7 @@
       "\\newcommand{\\incFig}[1]{%",
       "\t\\def\\svgwidth{0.5\\textwidth}",
       "\t\\import{./figures/}{#1}",
-      "}"
+      "}\n$0"
     ],
     "description": "LaTeX Inkscape"
   },
@@ -59,7 +59,7 @@
       "\t linkcolor=black,",
       "\t urlcolor=black",
       "}",
-      "\\hypersetup{linktocpage}"
+      "\\hypersetup{linktocpage}\n$0"
     ],
     "description": "LaTeX hyperref-setup"
   },
@@ -68,7 +68,7 @@
     "body": [
       "\\usepackage{tikz}",
       "\\usepackage{pgfplots}",
-      "\\pgfplotsset{compat=1.18}"
+      "\\pgfplotsset{compat=1.18}\n$0"
     ],
     "description": "LaTeX tikz setup"
   },
@@ -77,7 +77,7 @@
     "body": [
       "\\begin{${1:environment}}",
       "\t$2",
-      "\\end{${1:environment}}"
+      "\\end{${1:environment}}\n$0"
     ],
     "description": "LaTeX environment"
   },
@@ -90,7 +90,7 @@
       "\t\t$1",
       "\t\\end{tikzpicture}",
       "\t\\caption{${2:λεζάντα}}\\label{fig:${3:label}}",
-      "\\end{figure}"
+      "\\end{figure}\n$0"
     ],
     "description": "LaTeX tikz"
   },
@@ -110,7 +110,7 @@
       "\t\t&  & ",
       "\t\t\\\\\\\\ \\bottomrule",
       "\t\t\\end{tabular}",
-      "\\end{table}",
+      "\\end{table}\n$0",
       ""
     ],
     "description": "LaTeX table"
@@ -130,7 +130,7 @@
       "\t\t&  & ",
       "\t\t\\\\\\\\ \\bottomrule",
       "\t\\end{tabularx}",
-      "\\end{table}"
+      "\\end{table}\n$0"
     ],
     "description": "LaTeX tabularx"
   },
@@ -144,7 +144,7 @@
       "\t\\centering",
       "\t\\includegraphics[width = \\textwidth]{${2:file name of the figure}}",
       "\t\\caption{${3:λεζάντα της εικόνας}}\\label{fig:${1:label of the figure}}",
-      "\\end{figure}\n"
+      "\\end{figure}\n$0"
     ],
     "description": "LaTeX figure"
   },
@@ -154,7 +154,7 @@
       "\\newpage",
       "\\section{Βιβλιογρφία}",
       "\\bibliography{${1:file}}",
-      "\\bibliographystyle{${2:style_eg_acm}}"
+      "\\bibliographystyle{${2:style_eg_acm}}\n$0"
     ],
     "description": "BibTeX bibliography"
   },
@@ -164,7 +164,7 @@
       "\\newpage",
       "\\section{Βιβλιογρφία}",
       "\\nocite{*}",
-      "\\printbibliography[heading=none]"
+      "\\printbibliography[heading=none]\n$0"
     ],
     "description": "BibLaTeX bibliography"
   },
@@ -174,7 +174,7 @@
       "\\newpage",
       "\\par\\noindent\\rule{\\textwidth}{0.4pt}",
       "\\lstinputlisting[language=${1|Matlab,C++,C,Python,Julia|}, caption=${2:Λεζάντα}]{${3:file}}",
-      "\\par\\noindent\\rule{\\textwidth}{0.4pt}"
+      "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n$0"
     ],
     "description": "LaTeX code listing"
   },
@@ -183,7 +183,7 @@
     "body": [
       "\\newpage",
       "\\section{Περιεχόμενα}",
-      "\\tableofcontents"
+      "\\tableofcontents\n$0"
     ],
     "description": "LaTeX contents"
   },
@@ -194,7 +194,7 @@
     "body": [
       "\\begin{itemize}",
       "\t\\item ${1:text}",
-      "\\end{itemize}"
+      "\\end{itemize}\n$0"
     ],
     "description": "LaTeX itemize"
   },
@@ -203,7 +203,7 @@
     "body": [
       "\\\\begin{enumerate}",
       "\t\\item $0",
-      "\\\\end{enumerate}"
+      "\\\\end{enumerate}\n$0"
     ],
     "description": "LaTeX enumerate"
   },
@@ -212,7 +212,7 @@
     "body": [
       "\\\\begin{description}",
       "\t\\item[$1] $0",
-      "\\\\end{description}"
+      "\\\\end{description}\n$0"
     ],
     "description": "LaTeX description"
   },
@@ -232,7 +232,7 @@
       "\\begin{cases}",
       "\t$1 & $2 \\\\\\\\",
       "\t$3 & $4 \\\\\\\\",
-      "\\end{cases} $0"
+      "\\end{cases}\n$0"
     ],
     "description": "LaTeX cases"
   },
@@ -242,7 +242,7 @@
       "\\begin{${1|matrix,pmatrix,bmatrix,Bmatrix,Vmatrix,vmatrix|}}",
       "\t$2 & $3\\\\\\\\",
       "\t$4 & $5\\\\\\\\",
-      "\\end{$1} $0"
+      "\\end{$1}\n$0"
     ],
     "description": "LaTeX matrix"
   },
@@ -252,25 +252,25 @@
       "\\begin{array}{${1:c}}",
       "\t$2\\\\\\\\",
       "\t$3\\\\\\\\$4",
-      "\\end{array} $0"
+      "\\end{array}\n$0"
     ],
     "description": "LaTeX array"
   },
   "one over": {
     "prefix": "over",
-    "body": "\\frac{1}{${1:fraction}}",
+    "body": "\\frac{1}{${1:fraction}}$0",
     "description": "special fraction"
   },
   "fraction": {
     "prefix": [
       "fr"
     ],
-    "body": "\\frac{${1:top}}{${2:bottom}}",
+    "body": "\\frac{${1:top}}{${2:bottom}}$0",
     "description": "fraction-snippet"
   },
   "integral": {
     "prefix": "int",
-    "body": "\\int_{${1:lower}}^{${2:upper}} ${4:math} d${3:variable}",
+    "body": "\\int_{${1:lower}}^{${2:upper}} ${4:math} d${3:variable} $0",
     "description": "LaTeX integral"
   },
   "derivative": {
@@ -283,14 +283,14 @@
   "Summation-Series": {
     "prefix": "series",
     "body": [
-      "\\sum_{${1:n}=${2:0}}^{${3:\\infty}}$0"
+      "\\sum_{${1:n}=${2:0}}^{${3:\\infty}} $0"
     ],
     "description": "LaTeX summation-series"
   },
   "Inline Summation": {
     "prefix": "suminline",
     "body": [
-      "\\sum_{$1}^{$2}$3"
+      "\\sum_{$1}^{$2}$3 $0"
     ],
     "description": "LaTeX inline summation notation."
   },
@@ -299,7 +299,7 @@
       "parentheses",
       "parenth"
     ],
-    "body": "\\left($1\\right)",
+    "body": "\\left($0\\right)",
     "description": "LaTeX parentheses"
   },
   "square_bracket": {
@@ -307,78 +307,78 @@
       "bracku",
       "square_bracket"
     ],
-    "body": "\\left[$1\\right]",
+    "body": "\\left[$0\\right]",
     "description": "LaTeX square bracket"
   },
   "inline_math": {
     "prefix": [
       "\\()"
     ],
-    "body": "\\($1\\",
+    "body": "\\($0\\",
     "description": "LaTeX inline math"
   },
   "display_math": {
     "prefix": [
       "\\[]"
     ],
-    "body": "\\[\n$1\n\\",
+    "body": "\\[\n$0\n\\",
     "description": "LaTeX display math"
   },
   "tikz-data": {
     "prefix": [
       "tizk_datu"
     ],
-    "body": "\\addplot table [x =${2:collumn_name}, y =${3:collumn_name}, col sep=comma] {${1:file}};",
+    "body": "\\addplot table [x =${2:collumn_name}, y =${3:collumn_name}, col sep=comma] {${1:file}};\n$0",
     "description": "tikz plot data from csv"
   },
   "siunits-declare": {
     "prefix": "sideclaru",
-    "body": "\\DeclareSIUnit\\${1:unit_call}{${2:unit_show}}",
+    "body": "\\DeclareSIUnit\\${1:unit_call}{${2:unit_show}}$0",
     "description": "siunitx declare unit"
   },
   "squareroot": {
     "prefix": "sqrt",
-    "body": "\\sqrt{${1:math}}",
+    "body": "\\sqrt{$1}$0",
     "description": "LaTeX square root"
   },
   "cos": {
     "prefix": "cos",
-    "body": "\\cos($1)",
+    "body": "\\cos($1)$0",
     "description": "LaTeX cosine"
   },
   "sin": {
     "prefix": "sin",
-    "body": "\\sin($1)",
+    "body": "\\sin($1)$0",
     "description": "LaTeX sine"
   },
   "tan": {
     "prefix": "tan",
-    "body": "\\tan($1)",
+    "body": "\\tan($1)$0",
     "description": "LaTeX tangent"
   },
   "log": {
     "prefix": "log",
-    "body": "\\log($1)",
+    "body": "\\log($1)$0",
     "description": "LaTeX logarithm"
   },
   "ln": {
     "prefix": "ln",
-    "body": "\\ln ($1)",
+    "body": "\\ln ($1)$0",
     "description": "LaTeX natural logarithm"
   },
   "vector": {
     "prefix": "vec",
-    "body": "\\vec{$1}",
+    "body": "\\vec{$1}$0",
     "description": "LaTeX vector"
   },
   "over_dot": {
     "prefix": "dot",
-    "body": "\\dot{${1:math}}",
+    "body": "\\dot{${1:math}}$0",
     "description": "LaTeX dot"
   },
   "over_ddot": {
     "prefix": "ddot",
-    "body": "\\ddot{${1:math}}",
+    "body": "\\ddot{${1:math}}$0",
     "description": "LaTeX ddot"
   },
   "underline": {
@@ -390,7 +390,7 @@
   },
   "newpage": {
     "prefix": "np",
-    "body": "\\newpage\n",
+    "body": "\\newpage\n$0",
     "description": "LaTeX newpage"
   },
   "after-underline": {
