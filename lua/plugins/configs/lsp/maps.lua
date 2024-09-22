@@ -24,19 +24,19 @@ local diagno = {
   -- stylua: ignore stop
 }
 
-map("n", "<S-k>", lsp.hover, { desc = "hover" })
-map("n", "<leader>qf", lsp.code_action, { desc = "code actions", silent = true })
-map("n", "<A-f>", function() lsp.format { async = true } end, { desc = "format code" })
+map('n', '<S-k>', lsp.hover, { desc = 'hover' })
+map('n', '<leader>qa', lsp.code_action, { desc = 'code actions', silent = true })
+map('n', '<A-f>', function() lsp.format { async = true } end, { desc = 'format code' })
 map(
-  "n",
-  "<space>wl",
+  'n',
+  '<space>wl',
   function() print(vim.inspect(lsp.list_workspace_folders())) end,
-  { desc = "list workspace folders" }
+  { desc = 'list workspace folders' }
 )
 for _, mapping in ipairs(lsp_mappings) do
-  map("n", "<leader>" .. mapping.key, lsp[mapping.cmd], { desc = mapping.desc })
+  map('n', '<leader>' .. mapping.key, lsp[mapping.cmd], { desc = mapping.desc })
 end
 
 for _, diag in ipairs(diagno) do
-  map("n", diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr })
+  map('n', diag.key, vim.diagnostic[diag.cmd], { desc = diag.descr })
 end

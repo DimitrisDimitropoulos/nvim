@@ -1,33 +1,28 @@
 local map = vim.keymap.set
 
-vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
-map("t", "<C-space>", "<C-\\><C-n>", { desc = "exit tesrminal mode", silent = true })
+map({ 'i', 'n' }, '<C-s>', function() vim.cmd 'w' end)
+map('t', '<C-[><C-[>', '<C-\\><C-n>', { silent = true })
+map('n', '<C-]><C-]>', function() vim.cmd 'bd!' end, { silent = true })
 
-vim.keymap.set("n", "ZZ", function()
+vim.keymap.set('n', 'ZZ', function()
   vim.o.timeout = true
   vim.o.timeoutlen = 300
-  vim.cmd "wqa"
-end, { desc = "save and quit", silent = false })
-vim.keymap.set("n", "ZQ", function()
+  vim.cmd 'wqa'
+end, { desc = 'save and quit', silent = false })
+vim.keymap.set('n', 'ZQ', function()
   vim.o.timeout = true
   vim.o.timeoutlen = 300
-  vim.cmd "qa!"
-end, { desc = "quit with no save", silent = false })
+  vim.cmd 'qa!'
+end, { desc = 'quit with no save', silent = false })
 
 local commands = {
   -- stylua: ignore start
-  { key = "<ESC>",      cmd = "nohl",      descr = "clear search" },
-  { key = "<TAB>",      cmd = "bnext",     descr = "next buffer" },
-  { key = "<S-Tab>",    cmd = "bprevious", descr = "previous buffer" },
-  { key = "<leader>bd", cmd = "bd",        descr = "delete buffer" },
+  { key = "<ESC>",      cmd = "nohl"      },
+  { key = "<leader>bd", cmd = "bd"        },
+  { key = "<TAB>",      cmd = "bnext"     },
+  { key = "<S-Tab>",    cmd = "bprevious" },
   -- stylua: ignore stop
 }
 for _, command in ipairs(commands) do
-  map("n", command.key, "<cmd> " .. command.cmd .. " <CR>", { desc = command.descr, silent = false, noremap = true })
-end
-
--- Window management
-local window = { "w", "q", "h", "j", "k", "l" }
-for _, win in ipairs(window) do
-  map("n", "<C-" .. win .. ">", "<C-w>" .. win, { desc = "window " .. win, silent = false, noremap = true })
+  map('n', command.key, function() vim.cmd(command.cmd) end, { noremap = true })
 end

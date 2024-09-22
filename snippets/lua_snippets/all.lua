@@ -6,6 +6,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local c = ls.choice_node
 local extras = require 'luasnip.extras'
+local l = extras.lambda
 local p = extras.partial
 local fmt = require('luasnip.extras.fmt').fmt
 
@@ -52,8 +53,9 @@ return {
       name = 'Title-Separate',
       dscr = 'Separate with title',
     },
-    fmt('{}\n{} {} {}\n{}', {
+    fmt('{}\n{}{}{} {}\n{}', {
       f(sn_ut.separate_with_equals),
+      f(sn_ut.get_comment_string),
       f(sn_ut.get_comment_string),
       i(1, 'Title'),
       f(sn_ut.get_comment_string),
