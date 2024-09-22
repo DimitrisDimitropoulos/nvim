@@ -135,7 +135,7 @@ FileNameBlock = utils.insert(
   FileIcon,
   utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
   FileFlags,
-  { provider = '%<' } -- this means that the statusline is cut here when there's not enough space
+  { provider = '%<' }                      -- this means that the statusline is cut here when there's not enough space
 )
 
 local FileType = {
@@ -216,7 +216,7 @@ local Diagnostics = {
     provider = function(self) return self.hints > 0 and (self.hint_icon .. self.hints) end,
     hl = { fg = 'diag_hint', bg = 'bg' },
   },
-  { provider = ']', hl = { fg = 'peanut', bg = 'bg' } },
+  { provider = ']',  hl = { fg = 'peanut', bg = 'bg' } },
 }
 
 local FileSize = {
