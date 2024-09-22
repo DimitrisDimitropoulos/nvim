@@ -11,6 +11,11 @@ local previewers = require 'telescope.previewers'
 
 telescope.setup {
   defaults = {
+    mappings = {
+      i = {
+        ['<A-h>'] = require('telescope.actions.layout').toggle_preview,
+      },
+    },
     prompt_prefix = '>',
     -- prompt_prefix = '   ',
     file_previewer = previewers.vim_buffer_cat.new,
