@@ -15,14 +15,6 @@ require('lazy').setup({
   },
 
   {
-    'goolord/alpha-nvim',
-    enabled = false,
-    event = 'VimEnter',
-    config = function()
-      require 'plugins.configs.alpha'
-    end,
-  },
-  {
     'rebelot/heirline.nvim',
     enabled = false,
     event = evs,
