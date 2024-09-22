@@ -352,33 +352,29 @@ local FileEncoding = {
 local Space = { provider = ' ', hl = { bg = 'bg' } }
 local Align = { provider = '%=', hl = { bg = 'bg' } }
 
-local Statusline = {
-  { ViMode },
-  { Space },
-  { FileNameBlock },
-  { Space },
-  { FileSize },
-  { Space },
-  { Git },
-  -- { Space },
-  { Diagnostics },
-  { Align },
-  { LSPMessages },
-  { Align },
-  { LSPActive },
-  { Space },
-  { FileType },
-  { FileEncoding },
-  { Spell },
-  { Keymap },
-  { Space },
-  { Ruler },
-  { Space },
-}
-
 require('heirline').setup {
-  statusline = Statusline,
-  opts = {
-    colors = color,
+  statusline = {
+    { ViMode },
+    { Space },
+    { FileNameBlock },
+    { Space },
+    { FileSize },
+    { Space },
+    { Git },
+    -- { Space },
+    { Diagnostics },
+    { Align },
+    { LSPMessages },
+    { Align },
+    { LSPActive },
+    { Space },
+    { FileType },
+    { FileEncoding },
+    { Spell },
+    { Keymap },
+    { Space },
+    { Ruler },
+    { Space },
   },
+  opts = { colors = color },
 }
