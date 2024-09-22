@@ -7,10 +7,22 @@ local n = "n"
 
 -- Save mappings there are problems
 vim.keymap.set({ "i", "n" }, "<C-s>", ": w <CR>")
-vim.keymap.set("n", "<leader>zz", ": wqa <CR>")
-vim.keymap.set("n", "ZZ", ": wqa <CR>")
-vim.keymap.set("n", "ZQ", ": wq! <CR>")
-vim.keymap.set("n", "<leader>zq", ": wq! <CR>")
+-- vim.keymap.set("n", "<leader>zz", ": wqa <CR>")
+-- vim.keymap.set("n", "<leader>zq", ": wq! <CR>")
+-- vim.keymap.set("n", "ZQ", ": wq! <CR>")
+-- vim.keymap.set("n", "ZZ", ": wqa <CR>")
+-- Increasing the timeoutlen to 300ms
+-- helps with stabillity when slow
+vim.keymap.set("n", "ZZ", function()
+  vim.o.timeout = true
+  vim.o.timeoutlen = 300
+  vim.cmd "wqa"
+end, { desc = "save and quit", silent = false })
+vim.keymap.set("n", "ZQ", function()
+  vim.o.timeout = true
+  vim.o.timeoutlen = 300
+  vim.cmd "qa!"
+end, { desc = "quit with no save", silent = false })
 
 -- Command mappings
 local commands = {
@@ -90,7 +102,7 @@ end, { desc = "toggle nvimtree" }, opts)
 -- Comment
 map(n, "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
-end)
+end, { desc = "comment line" }, opts)
 
 -- keymapp("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
