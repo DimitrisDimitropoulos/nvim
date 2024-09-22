@@ -19,7 +19,7 @@ local bins = {
 	-- diagnostics.gccdiag,
 
 	-- WebDev
-	format.prettierd,
+	format.prettier,
 	diagnostics.jsonlint,
 
 	-- LaTex

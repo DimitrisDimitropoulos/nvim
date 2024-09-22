@@ -32,6 +32,7 @@ local options = {
     -- "black",
     -- "flake8",
     -- "fourmolu",
+    -- "jsonlint",
   },
   PATH = "skip",
   max_concurrent_installers = 10,
