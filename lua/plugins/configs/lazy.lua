@@ -1,5 +1,9 @@
 return {
 
+  install = {
+    colorscheme = { "melange" },
+  },
+
   defaults = {
     lazy = true,
   },

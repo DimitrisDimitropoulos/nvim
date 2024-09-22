@@ -1,3 +1,10 @@
+local map = vim.keymap.set
+local opts = {
+  noremap = true,
+  silent = false,
+}
+local n = "n"
+
 local plugins = {
   "nvim-lua/plenary.nvim",
 
@@ -11,18 +18,25 @@ local plugins = {
   -- file tree
   {
     "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    keys = "<C-b>",
     config = function()
-      require("nvim-tree").setup()
+      require("nvim-tree").setup(
+
+        map(
+          n,
+          "<C-b>",
+          function() require("nvim-tree.api").tree.toggle() end,
+          { desc = "toggle nvimtree" },
+          opts
+        )
+      )
     end,
   },
 
   -- icons, for UI related plugins
   {
     "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("nvim-web-devicons").setup()
-    end,
+    config = function() require("nvim-web-devicons").setup() end,
   },
 
   -- syntax highlighting
@@ -30,18 +44,14 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require "plugins.configs.treesitter"
-    end,
+    config = function() require "plugins.configs.treesitter" end,
   },
 
   -- Statusline
   {
     "freddiehaddad/feline.nvim",
     lazy = false,
-    config = function()
-      require "plugins.configs.feline"
-    end,
+    config = function() require "plugins.configs.feline" end,
   },
 
   -- {
@@ -73,8 +83,8 @@ local plugins = {
       {
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
+        options = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, options)
           require("plugins.configs.luasnip").luasnip(opts)
         end,
       },
@@ -92,9 +102,7 @@ local plugins = {
         end,
       },
     },
-    config = function()
-      require "plugins.configs.cmp"
-    end,
+    config = function() require "plugins.configs.cmp" end,
   },
 
   {
@@ -108,9 +116,7 @@ local plugins = {
       "MasonUninstallAll",
       "MasonLog",
     },
-    config = function()
-      require "plugins.configs.mason"
-    end,
+    config = function() require "plugins.configs.mason" end,
   },
 
   -- lsp
@@ -120,16 +126,12 @@ local plugins = {
       "BufReadPre",
       "BufNewFile",
     },
-    config = function()
-      require "plugins.configs.lspconfig"
-    end,
+    config = function() require "plugins.configs.lspconfig" end,
     dependencies = {
       -- formatting , linting
       {
         "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "plugins.configs.null"
-        end,
+        config = function() require "plugins.configs.null" end,
       },
     },
   },
@@ -147,13 +149,10 @@ local plugins = {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    config = function()
-      require "plugins.configs.telescope"
-    end,
-  },
-  {
-    "natecraddock/telescope-zf-native.nvim",
-    dependencies = "nvim-telescope/telescope.nvim",
+    config = function() require "plugins.configs.telescope" end,
+    dependencies = {
+      { "natecraddock/telescope-zf-native.nvim" },
+    },
   },
 
   -- git status on signcolumn etc
@@ -163,9 +162,7 @@ local plugins = {
       "BufReadPre",
       "BufNewFile",
     },
-    config = function()
-      require("gitsigns").setup()
-    end,
+    config = function() require "plugins.configs.signs" end,
   },
 
   {
@@ -173,10 +170,10 @@ local plugins = {
     keys = {
       "gc",
       "gb",
+      "<leader>/",
     },
-    config = function()
-      require("Comment").setup()
-    end,
+    -- require("Comment").setup(
+    config = function() require "plugins.configs.comment" end,
   },
 
   {
@@ -202,32 +199,34 @@ local plugins = {
   {
     "beauwilliams/focus.nvim",
     event = "BufLeave",
-    config = function()
-      require("focus").setup()
-    end,
+    config = function() require("focus").setup() end,
   },
   {
     "goolord/alpha-nvim",
     enabled = true,
     lazy = false,
-    config = function()
-      require "plugins.configs.alpha"
-    end,
+    config = function() require "plugins.configs.alpha" end,
   },
   {
     "echasnovski/mini.nvim",
     version = false,
     event = "InsertEnter",
-    config = function()
-      require "plugins.configs.other"
-    end,
+    config = function() require "plugins.configs.other" end,
   },
   {
     "folke/trouble.nvim",
-    cmd = "TroubleToggle",
+    keys = "<leader>tr",
     lazy = true,
     config = function()
-      require("trouble").setup()
+      require("trouble").setup(
+        map(
+          n,
+          "<leader>tr",
+          function() require("trouble").toggle() end,
+          { desc = "trouble" },
+          opts
+        )
+      )
     end,
   },
   {
@@ -237,13 +236,13 @@ local plugins = {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = function()
-      return require "plugins.configs.whichkey"
-    end,
+    opts = function() return require "plugins.configs.whichkey" end,
   },
+
   {
     "NvChad/nvim-colorizer.lua",
   },
+
   {
     "lervag/vimtex",
     ft = "tex",
