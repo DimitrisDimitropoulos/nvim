@@ -33,7 +33,12 @@ if vim.fn.has 'unix' == 1 then
     }
   end
 end
-
+if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
+  vim.g.clipboard = {
+    copy = { ['+'] = 'win32yank.exe -i --crlf', ['*'] = 'win32yank.exe -i --crlf' },
+    paste = { ['+'] = 'win32yank.exe -o --lf', ['*'] = 'win32yank.exe -o --lf' },
+  }
+end
 opt.foldenable = false
 
 opt.expandtab = true
