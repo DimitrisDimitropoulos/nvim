@@ -56,22 +56,6 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "close with q",
 })
 
--- Enable filetype specific keymaps
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup "TroubleOpen",
-  pattern = {
-    "lua",
-    "cpp",
-    "c",
-    "python",
-    "julia",
-  },
-  callback = function()
-    vim.keymap.set("n", "<leader>tr", "<cmd> TroubleToggle <CR>")
-  end,
-  desc = "trouble",
-})
-
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup "wrap_spell",

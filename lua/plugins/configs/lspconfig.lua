@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { desc = "list workspace folders" }, opts)
     keymapp(n, "<A-f>", function()
-      vim.lsp.buf.format({ async = true })
+      vim.lsp.buf.format { async = true }
     end, { desc = "format code" }, opts)
 
     local lsp_mappings = {
@@ -57,13 +57,10 @@ capabilities.textDocument.completion.completionItem = {
   },
 }
 -- Setup language servers.
-local lspconfig = require("lspconfig")
+local lspconfig = require "lspconfig"
 
 -- setup multiple servers with same default options
 local servers = {
-  "tsserver",
-  "html",
-  "cssls",
   "texlab",
   -- "ltex",
   "julials",
@@ -72,12 +69,12 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup({
+  lspconfig[lsp].setup {
     capabilities = capabilities,
-  })
+  }
 end
 
-lspconfig.lua_ls.setup({
+lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -86,14 +83,14 @@ lspconfig.lua_ls.setup({
       },
     },
   },
-})
+}
 
-lspconfig.clangd.setup({
+lspconfig.clangd.setup {
   capabilities = capabilities,
   cmd = { "clangd", "--background-index", "--clang-tidy" },
-})
+}
 
-lspconfig.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup {
   capabilities = capabilities,
   settings = {
     ["rust-analyzer"] = {
@@ -102,4 +99,4 @@ lspconfig.rust_analyzer.setup({
       },
     },
   },
-})
+}
