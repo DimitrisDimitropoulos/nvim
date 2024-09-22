@@ -95,6 +95,16 @@ local selene = {
   lintCommand = 'selene --display-style quiet -',
   lintFormats = { '%f:%l:%c: %trror%m', '%f:%l:%c: %tarning%m', '%f:%l:%c: %tote%m' },
 }
+local chktex = {
+  prefix = 'chktex',
+  lintSource = 'chktex',
+  lintStdin = true,
+  lintCommand = 'chktex -q -v0',
+  lintIgnoreExitCode = true,
+  lintFormats = { '%f:%l:%c:%n:%m' },
+  lintSeverity = 2,
+}
+local latexindent = { prefix = 'latexindent', formatCommand = 'latexindent -', formatStdin = true }
 
 -- -- FIXME: ruff, @2023-08-29 17:16:40
 -- local ruff = {
@@ -107,16 +117,8 @@ local selene = {
 --   lintFormats = '%f:%l:%c: %m',
 -- }
 
-local chktex = {
-  prefix = 'chktex',
-  lintSource = 'chktex',
-  lintStdin = true,
-  lintCommand = 'chktex -q -v0',
-  lintIgnoreExitCode = true,
-  lintFormats = { '%f:%l:%c:%m' },
-}
-
 local langs = {
+  -- tex = { chktex, latexindent },
   json = { jq_lint, jq_format },
   python = { black, mypy, flake8 },
   markdown = { prettier },
