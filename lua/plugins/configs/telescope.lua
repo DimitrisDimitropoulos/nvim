@@ -1,6 +1,11 @@
 local telescope_ok, telescope = pcall(require, 'telescope')
 if not telescope_ok then return end
 
+local extras = {
+  fzf = { case_mode = 'smart_case' },
+  file_browser = { theme = 'ivy', layout_config = { height = 0.95 } },
+}
+
 telescope.setup {
   defaults = {
     file_previewer = require('telescope.previewers').vim_buffer_cat.new,
@@ -45,10 +50,7 @@ telescope.setup {
   },
   pickers = { diagnostics = { path_display = 'hidden' } },
   set_env = { ['COLORTERM'] = 'truecolor' },
-  extensions = {
-    fzf = { case_mode = 'smart_case' },
-    file_browser = { theme = 'ivy', layout_config = { height = 0.95 } },
-  },
+  extensions = extras,
 }
 
 local tel_plugs = { 'fzf', 'file_browser' }
@@ -105,4 +107,9 @@ map(
   { desc = 'find all files' }
 )
 
-map('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { desc = 'file browser' })
+map(
+  'n',
+  '<leader>fb',
+  function() require('telescope').extensions.file_browser.file_browser() end,
+  { desc = 'file browser' }
+)
