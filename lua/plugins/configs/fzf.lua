@@ -4,7 +4,15 @@ if not fzf_lua_ok then
 end
 
 fzf_lua.setup {
-  fzf_opts = { ['--no-scrollbar'] = true, ['--cycle'] = true, ['--info'] = 'inline' },
+  fzf_opts = {
+    ['--no-scrollbar'] = true,
+    ['--cycle'] = true,
+    ['--info'] = 'inline',
+    ['--separator'] = ' ',
+    ['--pointer'] = '>',
+    ['--preview-window'] = 'border-left',
+  },
+  fzf_colors = { ['gutter'] = { 'bg', 'Normal' } },
   grep = {
     prompt = 'rg>',
     rg_opts = '--hidden --no-heading --color=always --max-columns=4096 --smart-case --line-number --column --with-filename --glob !.git --glob !build --glob !spell --glob !lockfiles --glob !LICENSE',
@@ -39,6 +47,7 @@ fzf_lua.setup {
   winopts = {
     height = 0.97,
     width = 0.95,
+    border = vim.g.border_style,
     preview = {
       default = 'bat',
       horizontal = 'right:50%',
