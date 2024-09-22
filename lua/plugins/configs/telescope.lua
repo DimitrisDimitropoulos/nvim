@@ -97,12 +97,7 @@ map(
   'n',
   '<leader>fa',
   function()
-    require('telescope.builtin').fd {
-      hidden = true,
-      follow = true,
-      no_ignore = true,
-      file_ignore_patterns = { '.git' },
-    }
+    require('telescope.builtin').fd { hidden = true, follow = true, no_ignore = true, file_ignore_patterns = { '.git' } }
   end,
   { desc = 'find all files' }
 )

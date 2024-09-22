@@ -40,6 +40,7 @@ local flake8 = {
   prefix = 'flake8',
   lintSource = 'flake8',
   lintCommand = 'flake8 -',
+  lintIgnoreExitCode = true,
   lintStdin = true,
   lintFormats = { 'stdin:%l:%c: %t%n %m' },
   rootMarkers = { 'setup.cfg', 'tox.ini', '.flake8' },
@@ -48,6 +49,7 @@ local cppcheck = {
   prefix = 'cppcheck',
   lintSource = 'cppcheck',
   lintCommand = 'cppcheck --quiet --force --enable=warning,style,performance,portability --error-exitcode=1 ${INPUT}',
+  lintIgnoreExitCode = true,
   lintStdin = false,
   lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
   rootMarkers = { 'CmakeLists.txt', 'compile_commands.json', '.git' },
@@ -55,6 +57,7 @@ local cppcheck = {
 local shellcheck = {
   prefix = 'shellcheck',
   lintCommand = 'shellcheck --color=never --format=gcc -',
+  lintIgnoreExitCode = true,
   lintStdin = true,
   lintFormats = { '-:%l:%c: %trror: %m', '-:%l:%c: %tarning: %m', '-:%l:%c: %tote: %m' },
 }
@@ -69,6 +72,7 @@ local jq_lint = {
   prefix = 'jq',
   lintSource = 'jq',
   lintCommand = 'jq',
+  lintIgnoreExitCode = true,
   lintStdin = true,
   lintOffset = 1,
   lintFormats = { '%m at line %l, column %c' },
@@ -83,10 +87,10 @@ local shfmt = {
   formatCommand = 'shfmt -filename ${INPUT} -',
   formatStdin = true,
 }
-
 local selene = {
   prefix = 'selene',
   lintSource = 'selene',
+  lintIgnoreExitCode = true,
   lintStdin = true,
   lintCommand = 'selene --display-style quiet -',
   lintFormats = { '%f:%l:%c: %trror%m', '%f:%l:%c: %tarning%m', '%f:%l:%c: %tote%m' },
@@ -109,13 +113,7 @@ local langs = {
 }
 
 require('lspconfig').efm.setup {
-  init_options = {
-    documentFormatting = true,--[[ , codeAction = true ]]
-  },
+  init_options = { documentFormatting = true },
   filetypes = vim.tbl_keys(langs),
-  settings = {
-    lintDebounce = 100,
-    languages = langs,
-    -- logLevel = 5,
-  },
+  settings = { lintDebounce = 100, languages = langs, logLevel = 1 },
 }
