@@ -10,6 +10,8 @@ g.latex_view_general_viewer = 'zathura'
 g.vimtex_compiler_progname = 'nvr'
 g.tex_flavor = 'latex'
 
+vim.keymap.set('n', 'K', '<nop>', { nowait = true })
+
 local vimtex_keymap = {
   -- stylua: ignore start
   { key = 'll', cmd = 'Compile',   decr = 'compile' },

@@ -3,13 +3,12 @@ local ensure_installed = {
   'bash-language-server',
   'shellcheck',
   'beautysh',
-  'latexindent',
   'pyright',
   'black',
   'flake8',
   'fourmolu',
-  'jsonlint',
   'prettier',
+  'gersemi',
 }
 
 require('mason').setup {

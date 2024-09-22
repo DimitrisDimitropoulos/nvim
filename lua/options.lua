@@ -40,7 +40,7 @@ opt.relativenumber = true
 opt.ruler = false
 
 -- disable nvim intro
-opt.shortmess:append 'sI'
+-- opt.shortmess:append 'sI'
 
 opt.signcolumn = 'yes'
 opt.splitbelow = true

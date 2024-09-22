@@ -98,7 +98,7 @@ local telescope_mappings = {
   { key = "fe", cmd = "registers",                 desc = "registers" },
   { key = "fd", cmd = "diagnostics",               desc = "diagnostics" },
   { key = "fc", cmd = "command_history",           desc = "command history" },
-  { key = "ld", cmd = "lsp_document_symbols",      desc = "lsp definitions" },
+  { key = "ld", cmd = "lsp_document_symbols",      desc = "lsp document symbols" },
   { key = "sp", cmd = "spell_suggest",             desc = "spell suggest" },
   { key = "fz", cmd = "current_buffer_fuzzy_find", desc = "buf fuzzy" },
   { key = "gs", cmd = "git_status",                desc = "git status" },

@@ -306,7 +306,7 @@ local Git = {
 }
 
 local Spell = {
-  condition = function() return vim.wo.spell end,
+  condition = function() return vim.wo.spell and vim.bo.filetype ~= 'markdown' and vim.bo.filetype ~= 'tex' end,
   provider = ' [SPELL]',
   hl = { bold = true, fg = 'orange', bg = 'bg' },
 }
