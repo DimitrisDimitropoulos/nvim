@@ -7,6 +7,8 @@ local n = "n"
 
 -- Save mappings
 keymapp({ "i", "n" }, "<C-s>", "<cmd> w <CR>", opts)
+keymapp("n", "ZZ", "<cmd> wqa <CR>", opts)
+keymapp("n", "ZQ", "<cmd> qa! <CR>", opts)
 
 -- Command mappings
 local commands = {
@@ -15,8 +17,6 @@ local commands = {
   { key = "<S-Tab>",    cmd = "bprevious", descr = "previous buffer" },
   { key = "<leader>bd", cmd = "bd",        descr = "delete buffer" },
   { key = "<leader>bn", cmd = "enew",      descr = "buffer new" },
-  { key = "<ZZ>",       cmd = "wqa",       descr = "save and quit" },
-  { key = "<ZQ>",       cmd = "qa!",       descr = "quit without saving" },
 }
 for _, command in ipairs(commands) do
   keymapp(n, command.key, "<cmd> " .. command.cmd .. " <CR>", { desc = command.descr }, opts)

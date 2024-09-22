@@ -23,7 +23,7 @@ require("indent_blankline").setup({
 require("mini.ai").setup({
   custom_textobjects = {
     -- Whole buffer textobject
-    Z = function(ai_type)
+    M = function(ai_type)
       local n_lines = vim.fn.line("$")
       local start_line, end_line = 1, n_lines
       if ai_type == "i" then
