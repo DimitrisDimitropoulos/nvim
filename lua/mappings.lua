@@ -90,7 +90,8 @@ keymapp(n, "<leader>fr", "<cmd> Telescope oldfiles <CR>", { desc = "find old fil
 keymapp(n, "<leader>fk", "<cmd> Telescope keymaps <CR>", { desc = "find keymaps" }, opts)
 keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
 keymapp(n, "<leader>re", "<cmd> Telescope registers <CR>", { desc = "find registers" }, opts)
-keymapp(n, "<leader>dd", "<cmd> Telescope diagnostics <CR>", { desc = "find diagnostics" }, opts)
+keymapp(n, "<leader>fd", "<cmd> Telescope diagnostics <CR>", { desc = "find diagnostics" }, opts)
+keymapp(n, "<leader>fm", "<cmd> Telescope marks <CR>", { desc = "find marks" }, opts)
 keymapp(n, "<leader>ch", "<cmd> Telescope command_history <CR>", { desc = "find command history" }, opts)
 keymapp(
   n,
