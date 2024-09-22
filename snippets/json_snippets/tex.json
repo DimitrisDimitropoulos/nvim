@@ -310,20 +310,6 @@
     "body": "\\left[$0\\right]",
     "description": "LaTeX square bracket"
   },
-  "inline_math": {
-    "prefix": [
-      "\\()"
-    ],
-    "body": "\\($0\\",
-    "description": "LaTeX inline math"
-  },
-  "display_math": {
-    "prefix": [
-      "\\[]"
-    ],
-    "body": "\\[\n$0\n\\",
-    "description": "LaTeX display math"
-  },
   "tikz-data": {
     "prefix": [
       "tizk_datu"
