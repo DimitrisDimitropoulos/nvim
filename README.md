@@ -129,4 +129,3 @@ This `PowerShell` script is designed to restore the `lazy-lock.json` file from t
 ## TODO
 
 -   [ ] Add more windows support, with [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for `LaTeX` previewing in Windows
--   [ ] Add gui support for [Neovide](https://neovide.dev/) 
