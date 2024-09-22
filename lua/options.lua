@@ -53,7 +53,7 @@ opt.softtabstop = 2
 opt.linebreak = true
 opt.pumheight = 20
 if vim.version().minor >= 11 then
-  vim.opt.completeopt = { 'menuone', 'popup', 'noselect', 'fuzzy' }
+  vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' } -- noselect is broken
 end
 
 opt.incsearch = true
