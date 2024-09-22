@@ -43,6 +43,7 @@ local plugins = {
 
   {
     'nvim-telescope/telescope.nvim',
+    enabled = false,
     keys = { '<leader>f', '<leader>s' },
     cmd = 'Telescope',
     config = function()
@@ -171,7 +172,7 @@ local plugins = {
 
   {
     'ibhagwan/fzf-lua',
-    enabled = false,
+    enabled = true,
     cmd = 'FzfLua',
     keys = { '<leader>f', '<leader>s' },
     config = function()
