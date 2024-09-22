@@ -22,7 +22,7 @@ require('heirline').load_colors(color)
 
 local ViMode = {
   init = function(self)
-    self.mode = vim.fn.mode(1) -- :h mode()
+    self.mode = vim.api.nvim_get_mode().mode
   end,
   static = {
     mode_names = {
@@ -85,9 +85,15 @@ local ViMode = {
     local mode = self.mode:sub(1, 1) -- get only the first mode character
     return { fg = 'black', bg = self.mode_colors[mode], bold = true }
   end,
-  update = { 'ModeChanged', pattern = '*:*', callback = vim.schedule_wrap(function()
-    vim.cmd 'redrawstatus'
-  end) },
+  update = {
+    'ModeChanged',
+    pattern = '*:*',
+    callback = vim.schedule_wrap(function()
+      if string.find(vim.api.nvim_get_mode().mode, '^[n]') then
+        vim.cmd 'redrawstatus'
+      end
+    end),
+  },
 }
 
 local FileNameBlock = {
