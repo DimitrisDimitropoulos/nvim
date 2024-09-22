@@ -98,31 +98,3 @@ end
 vim.keymap.set('n', '<leader>fa', function()
   require('fzf-lua').files { cmd = 'rg --files --hidden -u --glob !.git' }
 end, { desc = 'fzf-lua all files' })
-
-local document_symbols = function()
-  local symbols = {
-    'All',
-    'Variable',
-    'Function',
-    'Module',
-    'Constant',
-    'Class',
-    'Property',
-    'Method',
-    'Enum',
-    'Interface',
-    'Boolean',
-    'Number',
-    'String',
-    'Array',
-    'Constructor',
-  }
-  vim.ui.select(symbols, { prompt = 'Select which symbol' }, function(item)
-    if item == 'All' then
-      require('fzf-lua').lsp_workspace_symbols()
-    else
-      require('fzf-lua').lsp_workspace_symbols { query = item }
-    end
-  end)
-end
-vim.keymap.set('n', '<leader>fW', document_symbols, { desc = 'fzf-lua select lsp workspace symbols' })
