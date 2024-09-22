@@ -118,10 +118,8 @@ local plugins = {
   {
     'numToStr/Comment.nvim',
     enabled = false,
-    keys = { 'gc', 'gb', '<leader>/', 'V' },
-    config = function()
-      require 'plugins.configs.comment'
-    end,
+    keys = { 'gc', 'gb' },
+    opts = {},
   },
 
   {
