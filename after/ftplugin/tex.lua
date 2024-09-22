@@ -43,19 +43,19 @@ local function buf_find_envs(bufnr)
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
   local pos = vim.api.nvim_win_get_cursor(0)
-  local params = {
-    command = 'texlab.findEnvironments',
-    arguments = { {
-      textDocument = { uri = vim.uri_from_bufnr(bufnr), },
-      position = { line = pos[1] - 1, character = pos[2] },
-    } },
-  }
-  texlab_client.request('workspace/executeCommand', params, function(err, result)
-    if err then
-      return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
-    end
-    return vim.notify('The environments are:\n' .. vim.inspect(result), vim.log.levels.INFO)
-  end, bufnr)
+  texlab_client.request('workspace/executeCommand', {
+      command = 'texlab.findEnvironments',
+      arguments = { {
+        textDocument = { uri = vim.uri_from_bufnr(bufnr), },
+        position = { line = pos[1] - 1, character = pos[2] },
+      } },
+    },
+    function(err, result)
+      if err then
+        return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
+      end
+      return vim.notify('The environments are:\n' .. vim.inspect(result), vim.log.levels.INFO)
+    end, bufnr)
 end
 vim.api.nvim_create_user_command(
   'TexlabFindEnvironments',
