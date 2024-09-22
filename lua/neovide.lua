@@ -1,4 +1,5 @@
 local G = vim.g
+vim.opt.mouse = 'a'
 G.neovide_scroll_animation_length = 0
 G.neovide_refresh_rate = 60
 G.neovide_touch_drag_timeout = 0
@@ -35,3 +36,4 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<C-+>', function() resize_guifont(1) end, opts)
 vim.keymap.set('n', '<C-->', function() resize_guifont(-1) end, opts)
 vim.keymap.set('n', '<C-0>', function() reset_guifont() end, opts)
+
