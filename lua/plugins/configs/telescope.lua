@@ -1,25 +1,20 @@
-local telescope_ok, telescope = pcall(require, "telescope")
+local telescope_ok, telescope = pcall(require, 'telescope')
 if not telescope_ok then return end
 
 telescope.setup {
   defaults = {
-    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-    file_ignore_patterns = {
-      ".git",
-      "build",
-    },
-    sorting_strategy = "ascending",
+    file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+    grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+    qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+    file_ignore_patterns = { '.git', 'build' },
+    sorting_strategy = 'ascending',
     layout_config = {
       horizontal = {
-        prompt_position = "top",
+        prompt_position = 'top',
         preview_width = 0.55,
         results_width = 0.8,
       },
-      vertical = {
-        mirror = false,
-      },
+      vertical = { mirror = false },
       width = 0.97,
       height = 0.90,
       preview_cutoff = 120,
@@ -30,37 +25,37 @@ telescope.setup {
       timeout = 250,
       -- truncate for preview
       filesize_hook = function(filepath, bufnr, opts)
-        local path = require("plenary.path"):new(filepath)
+        local path = require('plenary.path'):new(filepath)
         -- opts exposes winid
         local height = vim.api.nvim_win_get_height(opts.winid)
-        local lines = vim.split(path:head(height), "[\r]?\n")
+        local lines = vim.split(path:head(height), '[\r]?\n')
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
       end,
     },
     vimgrep_arguments = {
-      "rg",
-      "-L",
-      "--color=never",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
+      'rg',
+      '-L',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
     },
   },
   mappings = {
-    n = { ["q"] = require("telescope.actions").close },
+    n = { ['q'] = require('telescope.actions').close },
   },
   pickers = {
     diagnostics = {
-      path_display = "hidden",
+      path_display = 'hidden',
     },
   },
-  path_display = { "truncate" },
+  path_display = { 'truncate' },
   color_devicons = true,
-  set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+  set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
   extensions = {
-    ["zf-native"] = {
+    ['zf-native'] = {
       file = {
         enable = true,
         highlight_results = true,
@@ -72,19 +67,18 @@ telescope.setup {
         match_filename = false,
       },
     },
+    file_browser = { theme = 'ivy' },
   },
 }
 
-local tel_plugs = {
-  "zf-native",
-}
+local tel_plugs = { 'zf-native', 'file_browser' }
 for _, plug in ipairs(tel_plugs) do
-  require("telescope").load_extension(plug)
+  require('telescope').load_extension(plug)
 end
 
---------------------------------------------------------------------------------
--- Maps
---------------------------------------------------------------------------------
+-- =============================================================================
+--  Mapps for Telescope and it's extensions --
+-- =============================================================================
 local map = vim.keymap.set
 
 local telescope_mappings = {
@@ -94,7 +88,7 @@ local telescope_mappings = {
   { key = "f;", cmd = "commands",                  desc = "commands" },
   { key = "fg", cmd = "live_grep",                 desc = "live grep" },
   { key = "fs", cmd = "grep_string",               desc = "cursor string" },
-  { key = "fb", cmd = "buffers",                   desc = "buffers" },
+  { key = "bb", cmd = "buffers",                   desc = "buffers" },
   { key = "fh", cmd = "help_tags",                 desc = "help tags" },
   { key = "fm", cmd = "marks",                     desc = "marks" },
   { key = "fk", cmd = "keymaps",                   desc = "keymaps" },
@@ -108,34 +102,41 @@ local telescope_mappings = {
 }
 for _, mapping in ipairs(telescope_mappings) do
   map(
-    "n",
-    "<leader>" .. mapping.key,
-    function() require("telescope.builtin")[mapping.cmd]() end,
-    { desc = "find " .. mapping.desc }
+    'n',
+    '<leader>' .. mapping.key,
+    function() require('telescope.builtin')[mapping.cmd]() end,
+    { desc = 'find ' .. mapping.desc }
   )
 end
 
 map(
-  "n",
-  "<leader>ts",
+  'n',
+  '<leader>ts',
   function()
-    require("telescope.builtin").treesitter {
-      default_text = "function",
-      initial_mode = "normal",
+    require('telescope.builtin').treesitter {
+      default_text = 'function',
+      initial_mode = 'normal',
     }
   end,
-  { desc = "find treesitter" }
+  { desc = 'find treesitter' }
 )
 map(
-  "n",
-  "<leader>fa",
+  'n',
+  '<leader>fa',
   function()
-    require("telescope.builtin").fd {
+    require('telescope.builtin').fd {
       hidden = true,
       follow = true,
       no_ignore = true,
-      file_ignore_patterns = { ".git" },
+      file_ignore_patterns = { '.git' },
     }
   end,
-  { desc = "find files" }
+  { desc = 'find files' }
+)
+
+map(
+  'n',
+  '<leader>fb',
+  function() require('telescope').extensions.file_browser.file_browser { initial_mode = 'normal' } end,
+  { desc = 'file browser', noremap = true }
 )

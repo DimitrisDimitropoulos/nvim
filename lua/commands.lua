@@ -1,12 +1,11 @@
 -- keymap wrapper
 local map = vim.keymap.set
-
 -- augroup wrapper
 local function augroup(name) return vim.api.nvim_create_augroup(name, { clear = true }) end
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup "YankHighlight",
-  callback = function() vim.highlight.on_yank { timeout = 250, higroup = "Visual" } end,
+  callback = function() vim.highlight.on_yank { timeout = 230, higroup = "Visual" } end,
   desc = "highlight on yank",
 })
 
@@ -25,7 +24,8 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "help", "lspinfo", "man", "qf", "query", "checkhealth" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    -- vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    map("n", "q", function() vim.cmd "close" end, { buffer = event.buf, silent = true })
   end,
   desc = "close with q",
 })
