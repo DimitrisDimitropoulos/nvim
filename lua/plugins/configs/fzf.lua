@@ -6,8 +6,8 @@ end
 fzf_lua.setup {
   fzf_opts = { ['--no-scrollbar'] = true },
   grep = {
-    prompt = 'rg> ',
-    rg_opts = '--hidden --no-heading --color=never --smart-case --max-columns=4096 --glob !.git --glob !build --glob !spell --glob !lockfiles --glob !LICENSE',
+    prompt = 'rg>',
+    rg_opts = '--hidden --no-heading --color=never --max-columns=4096 --smart-case --line-number --column --with-filename --glob !.git --glob !build --glob !spell --glob !lockfiles --glob !LICENSE',
   },
   files = {
     cmd = 'rg --files --glob !.git --glob !build --glob !spell --glob !lockfiles',
