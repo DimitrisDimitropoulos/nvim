@@ -91,6 +91,7 @@ local function get_labels()
       local text = vim.treesitter.get_node_text(node, 0) ---@type string
       local line, start, _, _ = node:range() ---@type integer, integer, integer, integer
       line = line + 1
+      start = start + 1
       local entry = {
         text = text,
         line = line,
