@@ -12,14 +12,7 @@ local plugins = {
       vim.cmd.colorscheme 'melange'
     end,
   },
-  {
-    'folke/tokyonight.nvim',
-    enabled = false,
-    lazy = false,
-    init = function()
-      vim.cmd.colorscheme 'tokyonight-storm'
-    end,
-  },
+
   {
     'goolord/alpha-nvim',
     enabled = false,
