@@ -13,8 +13,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.border_style })
     vim.lsp.handlers['textDocument/signatureHelp'] =
       vim.lsp.with(vim.lsp.handlers.signature_help, { border = vim.g.border_style })
-    local lsp_utils = { 'diagnostics', 'maps', 'format' }
-    for _, lsp in ipairs(lsp_utils) do
+    for _, lsp in ipairs { 'diagnostics', 'maps', 'format' } do
       require('lsp.' .. lsp)
     end
   end,

@@ -20,11 +20,10 @@ gitsigns.setup {
     end, { desc = 'git blame line' })
     vim.keymap.set('n', ',r', gs.refresh, { desc = 'git refresh' })
 
-    local git_nav = {
+    for _, nav in ipairs {
       { key = '[g', cmd = 'prev_hunk' },
       { key = ']g', cmd = 'next_hunk' },
-    }
-    for _, nav in ipairs(git_nav) do
+    } do
       vim.keymap.set('n', nav.key, function()
         if vim.wo.diff then
           return nav.key
@@ -34,9 +33,8 @@ gitsigns.setup {
     end
 
     vim.keymap.set('n', '<leader>gf', function()
-      local buffers = vim.api.nvim_list_bufs()
       local is_git_buf = false
-      for _, buf in ipairs(buffers) do
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         local filename = vim.api.nvim_buf_get_name(buf)
         if string.match(filename, '/%.git/') then
           is_git_buf = true

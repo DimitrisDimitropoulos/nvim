@@ -78,8 +78,7 @@ opt.timeoutlen = 400
 opt.undofile = true
 opt.updatetime = 2500
 
-local providers = { 'node', 'perl', 'python3', 'ruby' }
-for _, provider in ipairs(providers) do
+for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0
 end
 
