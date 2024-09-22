@@ -56,9 +56,11 @@ local plugins = {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = evs,
-    config = function()
-      require 'plugins.configs.treesitter'
-    end,
+    opts = {
+      highlight = { enable = true, use_languagetree = true, additional_vim_regex_highlighting = false },
+      indent = { enable = false },
+      incremental_selection = { enable = false },
+    },
   },
 
   {
