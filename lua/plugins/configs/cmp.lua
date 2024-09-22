@@ -104,6 +104,7 @@ cmp.setup {
 
 local hl = vim.api.nvim_set_hl
 hl(0, 'PeanutHLGroup', { fg = '#ffd899' })
+hl(0, 'VioletHLGroup', { fg = '#d4bfff' })
 hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = '#ffd899', bold = true })
 hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpIntemAbbrMatch' })
 hl(0, 'CmpItemKindMethod', { bg = 'NONE', fg = '#b3de81' })
