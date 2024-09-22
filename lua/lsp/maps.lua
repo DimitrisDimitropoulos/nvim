@@ -2,6 +2,8 @@ local map = vim.keymap.set
 local lsp = vim.lsp.buf
 local lsp_mappings = {
   { key = 'gi', cmd = 'implementation' },
+  { key = 'gd', cmd = 'definition' },
+  { key = 'gD', cmd = 'declaration' },
   { key = 'kk', cmd = 'signature_help' },
   { key = 'gh', cmd = 'type_definition' },
   { key = 'wa', cmd = 'add_workspace_folder' },
