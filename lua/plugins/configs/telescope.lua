@@ -72,7 +72,7 @@ local telescope_mappings = {
   { key = 'f;', cmd = 'commands',                  desc = 'commands' },
   { key = 'fg', cmd = 'live_grep',                 desc = 'live grep' },
   { key = 'fs', cmd = 'grep_string',               desc = 'cursor string' },
-  { key = 'bb', cmd = 'buffers',                   desc = 'buffers' },
+  { key = 'fb', cmd = 'buffers',                   desc = 'buffers' },
   { key = 'fh', cmd = 'help_tags',                 desc = 'help tags' },
   { key = 'f/', cmd = 'search_history',            desc = 'history' },
   { key = 'fm', cmd = 'marks',                     desc = 'marks' },
@@ -91,7 +91,7 @@ for _, mapping in ipairs(telescope_mappings) do
     'n',
     '<leader>' .. mapping.key,
     function() require('telescope.builtin')[mapping.cmd]() end,
-    { desc = 'find ' .. mapping.desc }
+    { desc = 'telescope ' .. mapping.desc }
   )
 end
 
@@ -101,5 +101,5 @@ map(
   function()
     require('telescope.builtin').fd { hidden = true, follow = true, no_ignore = true, file_ignore_patterns = { '.git' } }
   end,
-  { desc = 'find all files' }
+  { desc = 'telescope all files' }
 )

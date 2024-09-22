@@ -1,0 +1,50 @@
+{
+  "for each": {
+    "prefix": "foreach",
+    "body": [
+      "\nfor each (${1:auto} ${2:var} in ${3:collection_to_loop})",
+      "{",
+      "\t${4:/*Code*/}",
+      "}\n"
+    ],
+    "description": "foreach 语句的代码片段"
+  },
+  "if": {
+    "prefix": "if",
+    "body": [
+      "\nif (${1:/*Condition*/})",
+      "{",
+      "\t${2:/*Code*/}",
+      "}\n"
+    ],
+    "description": "if 语句的代码片段"
+  },
+  "vec": {
+    "prefix": "vec",
+    "body": [
+      "std::vector<${1:type}> ${2:vec}\n"
+    ],
+    "description": "vector 容器的代码片段"
+  },
+  "cout": {
+    "prefix": "cout",
+    "body": [
+      "\nstd::cout << \"${1:/*Text*/}\" << \"\\n\";\n"
+    ],
+    "description": "cout 语句的代码片段"
+  },
+  "lambda": {
+    "prefix": "lambda",
+    "body": [
+      "[](${1:/*Args*/}){${2:/*Code*/}};\n"
+    ],
+    "description": "lambda 表达式的代码片段"
+  },
+  "trail": {
+    "prefix": "trail",
+    "body": [
+      "auto ${1:/*Name*/}(${2:/*Args*/}) -> ${3:/*Return Type*/};"
+    ],
+    "description": "trail function 语句的代码片段"
+  }
+}

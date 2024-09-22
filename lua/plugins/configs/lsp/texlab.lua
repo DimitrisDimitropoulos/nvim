@@ -8,6 +8,8 @@ return {
     settings = {
       texlab = {
         build = {
+          auxDirectory = 'build',
+          logDirectory = 'build',
           onSave = true,
           args = {
             '-pdf',
