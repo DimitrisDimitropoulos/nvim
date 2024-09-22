@@ -1,21 +1,54 @@
 local util = require 'lspconfig.util'
 
-local function memory_usage(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function format_mem_tree(node, padding)
+  local result = {}
+  -- Add the total memory usage at the top level
+  if padding == '' then
+    table.insert(result, string.format('Total: self = %s, total = %s', node._self, node._total))
+  end
+  -- Recursively format the memory tree
+  for child_name, child_node in pairs(node) do
+    if child_name ~= '_self' and child_name ~= '_total' then
+      table.insert(
+        result,
+        padding .. string.format('%s: self = %s, total = %s', child_name, child_node._self, child_node._total)
+      )
+      -- Recursively format the "preamble" node
+      if child_name ~= 'preamble' then
+        vim.list_extend(result, format_mem_tree(child_node, padding .. '  '))
+      end
+    end
+  end
+  return result
+end
+
+local function mem_handler(err, result)
+  if err or not result then
+    return
+  end
+  vim.cmd 'split MemoryUsage'
+  local bufnr = vim.api.nvim_get_current_buf()
+  local lines = format_mem_tree(result, '')
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, lines)
+  vim.bo[bufnr].modifiable = false
+  vim.bo[bufnr].buftype = 'nofile'
+  vim.bo[bufnr].bufhidden = 'wipe'
+  vim.api.nvim_win_set_height(0, math.min(#lines, 20))
+  vim.keymap.set('n', 'q', '<cmd>q<CR>', { noremap = true, silent = true, buffer = bufnr })
+end
+
+local function show_memory_usage()
+  local bufnr = vim.api.nvim_get_current_buf()
   local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
-  vim.lsp.buf_request(0, '$/memoryUsage', nil, function(err, res)
-    if err then
-      return
-    end
-    return vim.notify('Memory usage:\n' .. vim.inspect(res), vim.log.levels.INFO)
-  end)
+  clangd_client.request('$/memoryUsage', nil, mem_handler, bufnr)
 end
-vim.api.nvim_create_user_command('ClangdMemoryUsage', function()
-  memory_usage(0)
-end, { nargs = 0 })
+
+vim.api.nvim_create_user_command('ClangdShowMemoryUsage', function()
+  show_memory_usage()
+end, { nargs = 0, desc = 'Show memory usage with optional preamble expansion' })
 
 local function format_hier_tree(node, padding)
   local result = {}
