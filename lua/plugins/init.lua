@@ -105,13 +105,7 @@ local plugins = {
     end,
   },
 
-  {
-    'williamboman/mason.nvim',
-    cmd = 'Mason',
-    config = function()
-      require 'plugins.configs.mason'
-    end,
-  },
+  { 'williamboman/mason.nvim', cmd = 'Mason', opts = require 'plugins.configs.mason' },
 
   {
     'lewis6991/gitsigns.nvim',
