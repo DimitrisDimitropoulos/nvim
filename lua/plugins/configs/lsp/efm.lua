@@ -122,7 +122,6 @@ local fish_indent = { formatCommand = 'fish_indent', formatStdin = true }
 
 local langs = {
   json = { jq_lint, jq_format },
-  python = { ruff_format, ruff_lint },
   markdown = { prettier },
   css = { prettier },
   yaml = { prettier },

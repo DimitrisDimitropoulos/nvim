@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig = require 'lspconfig'
-local servers = { 'julials', 'bashls', 'neocmake', 'clangd' }
+local servers = { 'julials', 'bashls', 'neocmake', 'clangd', 'ruff' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup { capabilities = capabilities }
 end
