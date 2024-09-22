@@ -11,6 +11,7 @@ opt.langmap =
 opt.list = true
 opt.listchars = {
   -- lead = '\\U000021b3', eol = '\\U000021b5',
+  tab = '  ',
   extends = '\\U00002192',
   precedes = '\\U00002190',
   trail = '\\U00002022',
