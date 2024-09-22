@@ -8,7 +8,7 @@
 )
 
 ((generic_command) @punctuation.bracket
-  (#eq? @punctuation.bracket "\\bigg")
+  (#any-of? @punctuation.bracket "\\big" "\\Big" "\\bigg" "\\Bigg")
   (#set! "priority" 105))
 
 ((generic_command) @operator
