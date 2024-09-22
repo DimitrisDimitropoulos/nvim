@@ -2,7 +2,7 @@
 
 local evs = { 'BufReadPre', 'BufNewFile' }
 
-local plugins = {
+require('lazy').setup({
 
   {
     'savq/melange-nvim',
@@ -177,6 +177,4 @@ local plugins = {
     cmd = 'ColorizerAttachToBuffer',
     opts = {},
   },
-}
-
-require('lazy').setup(plugins, require 'plugins.configs.lazy')
+}, require 'plugins.configs.lazy')
