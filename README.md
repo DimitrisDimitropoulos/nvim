@@ -54,7 +54,7 @@ Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
 Then
 
 ```
-git clone https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nvim
+git clone -b windows https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nvim
 nvim
 ```
 
