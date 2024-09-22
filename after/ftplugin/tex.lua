@@ -166,6 +166,10 @@ local function get_headings()
           path = vim.api.nvim_buf_get_name(0), ---@type string
         }
         table.insert(headings, entry)
+        -- make sure they are sorted by line number
+        table.sort(headings, function(a, b)
+          return a.line < b.line
+        end)
       end
     end
   end
