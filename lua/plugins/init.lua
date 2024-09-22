@@ -30,11 +30,6 @@ require('lazy').setup({
       require 'plugins.configs.heirline'
     end,
   },
-  {
-    'nvim-tree/nvim-web-devicons',
-    enabled = false,
-    opts = {},
-  },
 
   {
     'nvim-telescope/telescope.nvim',

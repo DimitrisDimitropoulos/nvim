@@ -102,20 +102,6 @@ local FileNameBlock = {
   end,
 }
 
-local FileIcon = {
-  init = function(self)
-    local filename = self.filename
-    local extension = vim.fn.fnamemodify(filename, ':e')
-    self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
-  end,
-  provider = function(self)
-    return ' ' .. self.icon .. ' ' and ' ' .. self.icon .. ' '
-  end,
-  hl = function(self)
-    return { fg = self.icon_color, bg = 'bg' }
-  end,
-}
-
 local FileName = {
   provider = function(self)
     local filename = vim.fn.fnamemodify(self.filename, ':.')
