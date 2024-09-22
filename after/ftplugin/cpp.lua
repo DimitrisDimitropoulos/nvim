@@ -11,7 +11,7 @@ local function symbol_info(bufnr)
     textDocument = { uri = vim.uri_from_bufnr(0) },
     position = { line = pos[1] - 1, character = pos[2] },
   }, function(err, res)
-    if err then
+    if err or #res == 0 then
       return
     end
     local container = string.format('container: %s', res[1].containerName) ---@type string
