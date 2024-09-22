@@ -7,7 +7,10 @@ local n = "n"
 
 -- Save mappings
 keymapp({ "i", "n" }, "<C-s>", "<cmd> w <CR>", opts)
+-- There is a interfierence, best way is to first unmap and then map
+keymapp("n", "ZZ", "")
 keymapp("n", "ZZ", "<cmd> wqa <CR>", opts)
+keymapp("n", "ZQ", "")
 keymapp("n", "ZQ", "<cmd> qa! <CR>", opts)
 
 -- Command mappings
