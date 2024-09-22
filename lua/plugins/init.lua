@@ -30,7 +30,7 @@ require('lazy').setup({
     config = function()
       require 'plugins.configs.telescope'
     end,
-    dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' } },
+    dependencies = 'nvim-lua/plenary.nvim',
   },
 
   {

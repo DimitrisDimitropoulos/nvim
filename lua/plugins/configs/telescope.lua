@@ -41,14 +41,7 @@ telescope.setup {
   },
   pickers = { diagnostics = { path_display = 'hidden' } },
   set_env = { ['COLORTERM'] = 'truecolor' },
-  extensions = {
-    fzf = { case_mode = 'smart_case' },
-  },
 }
-
-for _, plug in ipairs { 'fzf' } do
-  require('telescope').load_extension(plug)
-end
 
 -- =============================================================================
 --  Mapps for Telescope and it's extensions --
