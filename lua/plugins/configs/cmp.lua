@@ -3,34 +3,6 @@ if not cmp_ok then
   return
 end
 
-local kind_icons = {
-  Text = '',
-  Method = '󰆧',
-  Function = '󰊕',
-  Constructor = '',
-  Field = '󰇽',
-  Variable = '󰀫',
-  Class = '󰠱',
-  Interface = '',
-  Module = '',
-  Property = '󰜢',
-  Unit = '',
-  Value = '󰎠',
-  Enum = '',
-  Keyword = '󰌋',
-  Snippet = '',
-  Color = '󰏘',
-  File = '󰈙',
-  Reference = '',
-  Folder = '󰉋',
-  EnumMember = '',
-  Constant = '󰏿',
-  Struct = '󰙅',
-  Event = '',
-  Operator = '󰆕',
-  TypeParameter = '󰅲',
-}
-
 cmp.setup {
 
   window = {
@@ -45,13 +17,6 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
-  },
-
-  formatting = {
-    format = function(_, vim_item)
-      vim_item.kind = (kind_icons[vim_item.kind] or '') .. ' ' .. vim_item.kind
-      return vim_item
-    end,
   },
 
   sources = cmp.config.sources {
