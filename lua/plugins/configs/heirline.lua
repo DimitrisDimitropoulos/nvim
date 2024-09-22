@@ -331,9 +331,9 @@ local Spell = {
 }
 
 local FileEncoding = {
-  -- condition = function() return vim.bo.fenc ~= 'utf-8' and vim.bo.fenc ~= '' end,
   condition = function()
-    return vim.bo.fenc
+    return vim.bo.fenc ~= 'utf-8' and vim.bo.fenc ~= ''
+    --   return vim.bo.fenc
   end,
   provider = function()
     return ' [' .. vim.bo.fenc:upper() .. ']'
