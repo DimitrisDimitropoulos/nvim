@@ -32,6 +32,7 @@ local plugins = {
     keys = "<C-b>",
     config = function()
       require("nvim-tree").setup(
+        { view = { adaptive_size = false, width = 30, side = "right", preserve_window_proportions = true } },
         map("n", "<C-b>", function() require("nvim-tree.api").tree.toggle() end, { desc = "toggle nvimtree" })
       )
     end,
@@ -100,11 +101,11 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    config = function() require "plugins.configs.lspconfig" end,
+    config = function() require "plugins.configs.lsp" end,
     dependencies = {
       {
         "creativenull/efmls-configs-nvim",
-        version = "v0.2.x", -- tag is optional
+        version = "v0.2.x",
       },
       -- {
       --   "jose-elias-alvarez/null-ls.nvim",
