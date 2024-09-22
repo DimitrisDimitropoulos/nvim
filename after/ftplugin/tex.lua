@@ -69,16 +69,27 @@ local bufnr = vim.api.nvim_get_current_buf() ---@type number
 local ansi_codes = require('fzf-lua.utils').ansi_codes
 local make_entry = require 'fzf-lua.make_entry'
 local config = require 'fzf-lua.config'
+---@brief Extracts all LaTeX labels from the current buffer.
+---
+--- This function uses Tree-sitter to parse the current buffer and identify
+--- LaTeX label definitions. It constructs and executes a query to locate
+--- the labels in the document.
+---
+---@return table: A list of label entries, where each entry is a table with the following keys:
+---   - `text` (string): The text of the label.
+---   - `line` (integer): The 1-based line number of the label.
+---   - `start` (integer): The starting column of the label text.
+---   - `path` (string): The path of the current buffer.
 local function get_labels()
-  local parser = vim.treesitter.get_parser(bufnr, 'latex')
-  local root = parser:parse()[1]:root()
-  local query_string = '(label_definition (curly_group_text (text) @label_title))'
-  local query = vim.treesitter.query.parse('latex', query_string)
+  local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
+  local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
+  local query_string = '(label_definition (curly_group_text (text) @label_title))' ---@type string
+  local query = vim.treesitter.query.parse('latex', query_string) ---@type table<integer, TSQuery>
   local labels = {}
   for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
     for _, node in pairs(match) do
-      local text = vim.treesitter.get_node_text(node, 0)
-      local line, start, _, _ = node:range()
+      local text = vim.treesitter.get_node_text(node, 0) ---@type string
+      local line, start, _, _ = node:range() ---@type integer, integer, integer, integer
       line = line + 1
       local entry = {
         text = text,
@@ -94,6 +105,19 @@ end
 vim.api.nvim_create_user_command('GetLabels', function()
   get_labels()
 end, { nargs = 0 })
+
+---@brief Prepares LaTeX labels for display in fzf.
+---
+--- This function formats each label entry into a string suitable for fzf display.
+--- The format includes the file path, line number, start column, and the label text
+--- highlighted in magenta.
+---
+---@param labels table: A list of label entries, where each entry is a table with the following keys:
+---   - `text` (string): The text of the label.
+---   - `line` (integer): The 1-based line number of the label.
+---   - `start` (integer): The starting column of the label text.
+---   - `path` (string): The path of the current buffer.
+---@return table: A list of formatted label entries as strings.
 local function prepare_labels(labels)
   local res = {}
   for _, label in ipairs(labels) do
@@ -107,6 +131,13 @@ local function prepare_labels(labels)
   end
   return res
 end
+
+---@brief Displays LaTeX labels using fzf.
+---
+--- This function retrieves LaTeX labels from the current buffer, prepares them
+--- for display, and then invokes fzf with the prepared entries. The fzf prompt
+--- is customized, and options are normalized and configured for the fzf
+--- execution.
 local function fzf_label()
   local labels = get_labels()
   local entries = prepare_labels(labels)
