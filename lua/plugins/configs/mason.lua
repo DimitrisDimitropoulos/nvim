@@ -8,9 +8,9 @@ require("mason").setup({
     keymaps = {
       toggle_server_expand = "<CR>",
       install_server = "i",
-      update_server = "u",
+      update_server = "s",
       check_server_version = "c",
-      update_all_servers = "U",
+      update_all_servers = "S",
       check_outdated_servers = "C",
       uninstall_server = "X",
       cancel_installation = "<C-c>",
