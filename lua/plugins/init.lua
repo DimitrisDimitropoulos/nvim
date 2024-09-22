@@ -14,15 +14,6 @@ require('lazy').setup({
   },
 
   {
-    'rebelot/heirline.nvim',
-    enabled = false,
-    event = evs,
-    config = function()
-      require 'plugins.configs.heirline'
-    end,
-  },
-
-  {
     'nvim-telescope/telescope.nvim',
     enabled = false,
     keys = { '<leader>f', '<leader>s' },
