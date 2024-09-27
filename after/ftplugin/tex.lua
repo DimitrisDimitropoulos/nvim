@@ -138,32 +138,3 @@ vim.api.nvim_create_user_command('GetLatexLabels', function()
 end, { nargs = 0, desc = 'Generate a location list with LaTeX labels' })
 
 vim.cmd [[packadd matchit]]
-
--- snippet support
-if false then
-  vim.keymap.set({ 'i', 's' }, '<A-j>', function()
-    if vim.snippet.active { direction = 1 } then
-      vim.schedule(function()
-        vim.snippet.jump(1)
-      end)
-      return
-    end
-  end, { silent = true })
-  vim.keymap.set({ 'i', 's' }, '<A-k>', function()
-    if vim.snippet.active { direction = -1 } then
-      vim.schedule(function()
-        vim.snippet.jump(-1)
-      end)
-      return
-    end
-  end, { silent = true })
-
-  -- find the snippets file in the config directory
-  local snips_path = vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/tex.json'
-  -- read it as a string
-  local snips = require('snippet').read_file(snips_path)
-  -- parse it and format it
-  local lsp_snip = require('snippet').process_snippets(snips, 'USR')
-  -- start the mock LSP server and load it with the snippets
-  require('snippet').start_mock_lsp(lsp_snip)
-end

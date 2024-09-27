@@ -52,3 +52,54 @@ autocmd('BufWritePre', {
   end,
   desc = 'make executable',
 })
+
+if false then
+  vim.api.nvim_create_autocmd('InsertEnter', {
+    group = vim.api.nvim_create_augroup('snippet_compl', { clear = true }),
+    callback = function()
+      -- keymaps
+      vim.keymap.set({ 'i', 's' }, '<A-j>', function()
+        if vim.snippet.active { direction = 1 } then
+          vim.schedule(function()
+            vim.snippet.jump(1)
+          end)
+          return
+        end
+      end, { silent = true })
+      vim.keymap.set({ 'i', 's' }, '<A-k>', function()
+        if vim.snippet.active { direction = -1 } then
+          vim.schedule(function()
+            vim.snippet.jump(-1)
+          end)
+          return
+        end
+      end, { silent = true })
+
+      -- paths table
+      local pkg_path_fr = vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json' ---@type string
+      local paths = require('snippet').parse_pkg(pkg_path_fr, vim.bo.filetype) ---@type table<string>
+      local usr_paths = require('snippet').parse_pkg(
+        vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/package.json',
+        vim.bo.filetype
+      ) ---@type table<string>
+      table.insert(paths, usr_paths[1])
+
+      -- create all the snippets from all the paths
+      local all_snippets = { isIncomplete = false, items = {} } -- Initialize the table for merged snippets
+      for _, snips_path in ipairs(paths) do
+        local snips = require('snippet').read_file(snips_path)
+        local lsp_snip = require('snippet').process_snippets(snips, 'USR')
+        -- Merge the processed snippets (lsp_snip) into all_snippets
+        if lsp_snip and lsp_snip.items then
+          for _, snippet_item in ipairs(lsp_snip.items) do
+            table.insert(all_snippets.items, snippet_item)
+          end
+        end
+      end
+
+      -- fire up the mock lsp
+      require('snippet').start_mock_lsp(all_snippets)
+    end,
+    desc = 'completion groups',
+  })
+end
