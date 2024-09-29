@@ -55,35 +55,10 @@ for name, attr in pairs {
   CmpItemAbbrMatch = { fg = '#ffd899', bold = true },
   CmpItemAbbrMatchFuzzy = { fg = '#ffd899', bold = true },
   CmpItemKindVariable = { fg = '#9CDCFE' },
-  CmpItemKindValue = '@constant',
-  CmpItemKindUnit = '@constant',
-  CmpItemKindTypeParameter = '@variable.parameter',
-  CmpItemKindText = '@text',
   CmpItemKindStruct = { fg = '#b3de81' },
   CmpItemKindSnippet = { fg = '#d4bfff' },
-  CmpItemKindReference = '@type',
-  CmpItemKindProperty = '@property',
-  CmpItemKindOperator = '@operator',
-  CmpItemKindModule = '@namespace',
   CmpItemKindMethod = { fg = '#b3de81' },
-  CmpItemKindKeyword = '@keyword',
-  CmpItemKindInterface = '@type',
-  CmpItemKindFunction = '@function',
-  CmpItemKindFolder = '@string.special.path',
-  CmpItemKindFile = '@string.special.path',
   CmpItemKindField = { fg = '#b3de81' },
-  CmpItemKindEvent = '@type',
-  CmpItemKindEnumMember = '@field',
-  CmpItemKindEnum = '@type',
-  CmpItemKindConstructor = '@constructor',
-  CmpItemKindConstant = '@constant',
-  CmpItemKindColor = '@constant',
-  CmpItemKindClass = '@type',
 } do
-  if type(attr) == 'table' then
-    vim.api.nvim_set_hl(0, name, attr)
-  end
-  if type(attr) == 'string' then
-    vim.api.nvim_set_hl(0, name, { link = attr })
-  end
+  vim.api.nvim_set_hl(0, name, attr)
 end
