@@ -77,7 +77,11 @@ require('lazy').setup({
     end,
   },
 
-  { 'williamboman/mason.nvim', cmd = 'Mason', opts = require 'plugins.configs.mason' },
+  {
+    'williamboman/mason.nvim',
+    cmd = 'Mason',
+    opts = { PATH = 'skip', max_concurrent_installers = 20 },
+  },
 
   {
     'lewis6991/gitsigns.nvim',
