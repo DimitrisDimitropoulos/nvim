@@ -15,3 +15,5 @@ local qf_statusline = {
   '%{nr2char(32)}', -- A space character.
 }
 vim.opt_local.statusline = table.concat(qf_statusline)
+
+vim.cmd.packadd 'cfilter'
