@@ -72,6 +72,8 @@ if vim.version().minor >= 11 then
   vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' } -- noselect is broken
 end
 
+vim.opt.diffopt = { 'filler', 'internal', 'hiddenoff', 'algorithm:histogram', 'indent-heuristic' }
+
 opt.incsearch = true
 opt.smartcase = true
 opt.mouse = 'c'
