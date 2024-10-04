@@ -23,3 +23,20 @@ end, { silent = false, noremap = true })
 vim.keymap.set('n', '<A-z>', function()
   toggle_option [[wrap]]
 end, { silent = false, noremap = true })
+
+vim.keymap.set({ 'i', 's' }, '<A-j>', function()
+  if vim.snippet.active { direction = 1 } then
+    vim.schedule(function()
+      vim.snippet.jump(1)
+    end)
+    return
+  end
+end, { silent = true })
+vim.keymap.set({ 'i', 's' }, '<A-k>', function()
+  if vim.snippet.active { direction = -1 } then
+    vim.schedule(function()
+      vim.snippet.jump(-1)
+    end)
+    return
+  end
+end, { silent = true })

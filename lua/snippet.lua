@@ -136,9 +136,9 @@ function M.start_mock_lsp(completion_source)
     on_init = function(client)
       vim.notify('Snippet LSP server initialized', vim.log.levels.INFO)
     end,
-    on_exit = function(code, signal)
-      vim.notify('Snippet LSP server exited with code ' .. code .. ' and signal ' .. signal, vim.log.levels.ERROR)
-    end,
+    -- on_exit = function(code, signal)
+    --   vim.notify('Snippet LSP server exited with code ' .. code .. ' and signal ' .. signal, vim.log.levels.ERROR)
+    -- end,
   }, dispatchers)
   return client_id
 end
