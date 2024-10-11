@@ -43,6 +43,7 @@ maintained the original spirit of vim and neovim, while adding these features.
 12. LaTeX preview based on `texlab` with `zathura` on linux and
     [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
 13. Custom treesitter queries for highlighting `lua` and `LaTeX`
+14. Powerful native snippets framework, with framework agnostic autocompletion
 
 ## 🚀 Installation
 
