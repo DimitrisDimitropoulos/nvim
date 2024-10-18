@@ -53,7 +53,7 @@ autocmd('BufWritePre', {
   desc = 'make executable',
 })
 
-if false then
+if true then
   local sn_group = vim.api.nvim_create_augroup('SnippetServer', { clear = true })
   -- Variable to track the last active LSP client ID
   local last_client_id = nil

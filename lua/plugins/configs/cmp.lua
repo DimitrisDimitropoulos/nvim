@@ -20,7 +20,7 @@ cmp.setup {
   },
 
   sources = cmp.config.sources {
-    { name = 'luasnip', priority = 9 },
+    -- { name = 'luasnip', priority = 9 },
     { name = 'nvim_lsp', priority = 9 },
     -- { name = 'nvim_lua', priority = 9 },
     { name = 'path', priority = 5 },

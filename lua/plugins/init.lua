@@ -37,6 +37,8 @@ require('lazy').setup({
     end,
   },
 
+  { 'rafamadriz/friendly-snippets' },
+
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -44,11 +46,12 @@ require('lazy').setup({
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
-      'saadparwaiz1/cmp_luasnip',
+      { 'saadparwaiz1/cmp_luasnip', enabled = false },
       -- 'hrsh7th/cmp-nvim-lua',
 
       {
         'L3MON4D3/LuaSnip',
+        enabled = false,
         dependencies = { 'rafamadriz/friendly-snippets' },
         config = function()
           require 'plugins.configs.luasnip'
