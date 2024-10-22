@@ -26,6 +26,8 @@ end, { silent = false, noremap = true, desc = 'toggle greek keymap' })
 -- BUG: For some reason this does not work, @2024-01-25 01:51:09
 vim.cmd.syntax 'spell toplevel'
 
+vim.opt_local.colorcolumn = '80'
+
 local bufnr = vim.api.nvim_get_current_buf() ---@type number
 ---@return table: A list of label entries with their text, line, column, and file path
 local function get_labels()
