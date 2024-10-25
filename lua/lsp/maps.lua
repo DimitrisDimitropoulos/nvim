@@ -1,9 +1,12 @@
 local map = vim.keymap.set
 local lsp = vim.lsp.buf
 
-map('n', 'grr', lsp.references, { desc = 'lsp references' })
-map('n', 'grn', lsp.rename, { desc = 'lsp rename' })
-map('n', 'gra', lsp.code_action, { desc = 'lsp code actions', silent = true })
+if vim.version().minor < 11 then
+  map('n', 'grr', lsp.references, { desc = 'lsp references' })
+  map('n', 'grn', lsp.rename, { desc = 'lsp rename' })
+  map('n', 'gra', lsp.code_action, { desc = 'lsp code actions', silent = true })
+  map('i', '<C-s>', lsp.signature_help, { desc = 'lsp signature help' })
+end
 map('n', '<leader>lh', function()
   if vim.lsp.inlay_hint.is_enabled() then
     vim.lsp.inlay_hint.enable(false)
@@ -15,7 +18,6 @@ map('n', '<leader>lf', function()
   lsp.format { async = true }
   vim.notify('The buffer has been formatted', vim.log.levels.INFO)
 end, { desc = 'lsp async format' })
-map('i', '<C-s>', lsp.signature_help, { desc = 'lsp signature help' })
 
 for _, mapping in ipairs {
   { key = 'gi', cmd = 'implementation' },
