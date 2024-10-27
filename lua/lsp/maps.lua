@@ -3,6 +3,7 @@ local lsp = vim.lsp.buf
 
 if vim.version().minor < 11 then
   map('n', 'grr', lsp.references, { desc = 'lsp references' })
+  map('n', 'gri', lsp.implementation, { desc = 'lsp implementation' })
   map('n', 'grn', lsp.rename, { desc = 'lsp rename' })
   map('n', 'gra', lsp.code_action, { desc = 'lsp code actions', silent = true })
   map('i', '<C-s>', lsp.signature_help, { desc = 'lsp signature help' })
@@ -20,7 +21,6 @@ map('n', '<leader>lf', function()
 end, { desc = 'lsp async format' })
 
 for _, mapping in ipairs {
-  { key = 'gi', cmd = 'implementation' },
   { key = 'gd', cmd = 'declaration' },
   { key = 'gh', cmd = 'type_definition' },
 } do
