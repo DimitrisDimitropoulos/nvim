@@ -20,12 +20,8 @@ map('n', '<leader>lf', function()
   vim.notify('The buffer has been formatted', vim.log.levels.INFO)
 end, { desc = 'lsp async format' })
 
-for _, mapping in ipairs {
-  { key = 'gd', cmd = 'declaration' },
-  { key = 'gh', cmd = 'type_definition' },
-} do
-  map('n', '<leader>' .. mapping.key, lsp[mapping.cmd], { desc = 'lsp ' .. mapping.cmd:gsub('_', ' ') })
-end
+map('n', 'grd', lsp.declaration, { desc = 'lsp declaration' })
+map('n', 'grt', lsp.type_definition, { desc = 'lsp type definition' })
 
 for _, diag in ipairs {
   { key = 'ds', cmd = 'show' },
