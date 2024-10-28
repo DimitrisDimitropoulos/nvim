@@ -23,11 +23,7 @@ end, { desc = 'lsp async format' })
 map('n', 'grd', lsp.declaration, { desc = 'lsp declaration' })
 map('n', 'grt', lsp.type_definition, { desc = 'lsp type definition' })
 
-for _, diag in ipairs {
-  { key = 'ds', cmd = 'show' },
-  { key = 'dh', cmd = 'hide' },
-  { key = 'dq', cmd = 'setqflist' },
-  { key = 'dl', cmd = 'setloclist' },
-} do
-  map('n', '<leader>' .. diag.key, vim.diagnostic[diag.cmd], { desc = 'diagnostics ' .. diag.cmd:gsub('_', ' ') })
-end
+map('n', '<leader>ds', vim.diagnostic.show, { desc = 'diagnostics show' })
+map('n', '<leader>dh', vim.diagnostic.hide, { desc = 'diagnostics hide' })
+map('n', '<leader>dq', vim.diagnostic.setqflist, { desc = 'diagnostics setqflist' })
+map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'diagnostics setloclist' })
