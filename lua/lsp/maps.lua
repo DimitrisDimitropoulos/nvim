@@ -1,12 +1,11 @@
 local map = vim.keymap.set
-local lsp = vim.lsp.buf
 
 if vim.version().minor < 11 then
-  map('n', 'grr', lsp.references, { desc = 'lsp references' })
-  map('n', 'gri', lsp.implementation, { desc = 'lsp implementation' })
-  map('n', 'grn', lsp.rename, { desc = 'lsp rename' })
-  map('n', 'gra', lsp.code_action, { desc = 'lsp code actions', silent = true })
-  map('i', '<C-s>', lsp.signature_help, { desc = 'lsp signature help' })
+  map('n', 'grr', vim.lsp.buf.references, { desc = 'lsp references' })
+  map('n', 'gri', vim.lsp.buf.implementation, { desc = 'lsp implementation' })
+  map('n', 'grn', vim.lsp.buf.rename, { desc = 'lsp rename' })
+  map('n', 'gra', vim.lsp.buf.code_action, { desc = 'lsp code actions', silent = true })
+  map('i', '<C-s>', vim.lsp.buf.signature_help, { desc = 'lsp signature help' })
 end
 map('n', '<leader>lh', function()
   if vim.lsp.inlay_hint.is_enabled() then
@@ -16,12 +15,12 @@ map('n', '<leader>lh', function()
   end
 end, { desc = 'lsp toggle inlay hints' })
 map('n', '<leader>lf', function()
-  lsp.format { async = true }
+  vim.lsp.buf.format { async = true }
   vim.notify('The buffer has been formatted', vim.log.levels.INFO)
 end, { desc = 'lsp async format' })
 
-map('n', 'grd', lsp.declaration, { desc = 'lsp declaration' })
-map('n', 'grt', lsp.type_definition, { desc = 'lsp type definition' })
+map('n', 'grd', vim.lsp.buf.declaration, { desc = 'lsp declaration' })
+map('n', 'grt', vim.lsp.buf.type_definition, { desc = 'lsp type definition' })
 
 map('n', '<leader>ds', vim.diagnostic.show, { desc = 'diagnostics show' })
 map('n', '<leader>dh', vim.diagnostic.hide, { desc = 'diagnostics hide' })
