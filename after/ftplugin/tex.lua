@@ -237,3 +237,131 @@ vim.api.nvim_create_user_command('GetLatexLabels', function()
 end, { nargs = 0, desc = 'Generate a location list with LaTeX labels' })
 
 vim.cmd [[packadd matchit]]
+
+if vim.version().minor >= 11 then
+  local util = require 'lspconfig.util'
+  local function buf_change_env()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local client = util.get_active_client_by_name(bufnr, 'texlab')
+    if not client then
+      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+    end
+    local new_env = vim.fn.input 'Enter the new environment name: '
+    if not new_env or new_env == '' then
+      return vim.notify('No environment name provided', vim.log.levels.WARN)
+    end
+    local pos = vim.api.nvim_win_get_cursor(0)
+    client:exec_cmd({
+      command = 'texlab.changeEnvironment',
+      arguments = {
+        {
+          textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+          position = { line = pos[1] - 1, character = pos[2] },
+          newName = tostring(new_env),
+        },
+      },
+    }, { bufnr = bufnr })
+  end
+  vim.api.nvim_create_user_command('TXChangeEnvironment', function()
+    buf_change_env()
+  end, { nargs = 0, desc = 'Change the current environment' })
+
+  local function buf_find_envs()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
+    if not texlab_client then
+      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+    end
+    local command = {
+      command = 'texlab.findEnvironments',
+      arguments = { vim.lsp.util.make_position_params() },
+    }
+    texlab_client:exec_cmd(command, { bufnr = bufnr }, function(err, result)
+      if err then
+        return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
+      end
+      if not result or vim.tbl_isempty(result) then
+        return vim.notify('No environments found', vim.log.levels.INFO)
+      end
+      local env_names = {}
+      local max_length = 1
+      for _, env in ipairs(result) do
+        table.insert(env_names, env.name.text)
+        max_length = math.max(max_length, string.len(env.name.text))
+      end
+      for i, name in ipairs(env_names) do
+        env_names[i] = string.rep(' ', i - 1) .. name
+      end
+      vim.lsp.util.open_floating_preview(env_names, '', {
+        height = #env_names,
+        width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
+        focusable = false,
+        focus = false,
+        border = require('lspconfig.ui.windows').default_options.border or 'single',
+        title = 'Environments',
+      })
+    end)
+  end
+  vim.api.nvim_create_user_command('TXFindEnvironments', function()
+    buf_find_envs()
+  end, { nargs = 0, desc = 'Find LaTeX environments' })
+
+  local function cleanArtifacts()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local client = util.get_active_client_by_name(bufnr, 'texlab')
+    if not client then
+      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+    end
+    local command = {
+      command = 'texlab.cleanArtifacts',
+      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+    }
+    client:exec_cmd(command, { bufnr = bufnr }, function(err, _)
+      if err then
+        vim.notify('Failed to clean artifacts: ' .. err.message, vim.log.levels.ERROR)
+      else
+        vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
+      end
+    end)
+  end
+  vim.api.nvim_create_user_command('TXCleanArtifacts', function()
+    cleanArtifacts()
+  end, { nargs = 0, desc = 'Clean LaTeX artifacts' })
+
+  local function cleanAuxiliary()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local client = util.get_active_client_by_name(bufnr, 'texlab')
+    if not client then
+      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+    end
+    local command = {
+      command = 'texlab.cleanAuxiliary',
+      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+    }
+    client:exec_cmd(command, { bufnr = bufnr }, function(err, _)
+      if err then
+        vim.notify('Failed to clean auxiliary files: ' .. err.message, vim.log.levels.ERROR)
+      else
+        vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
+      end
+    end)
+  end
+  vim.api.nvim_create_user_command('TXCleanAuxiliary', function()
+    cleanAuxiliary()
+  end, { nargs = 0, desc = 'Clean LaTeX auxiliary files' })
+
+  local function buf_cancel_build()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local client = util.get_active_client_by_name(bufnr, 'texlab')
+    if not client then
+      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+    end
+    local command = {
+      command = 'texlab.cancelBuild',
+    }
+    client:exec_cmd(command, { bufnr = bufnr })
+  end
+  vim.api.nvim_create_user_command('TXCancelBuild', function()
+    buf_cancel_build()
+  end, { nargs = 0, desc = 'Cancel the current build' })
+end
