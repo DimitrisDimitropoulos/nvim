@@ -30,9 +30,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
+    -- drop this after 0.11
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.border_style })
     vim.lsp.handlers['textDocument/signatureHelp'] =
       vim.lsp.with(vim.lsp.handlers.signature_help, { border = vim.g.border_style })
+    local hover = vim.lsp.buf.hover -- Store the original function in a local variable
+    vim.lsp.buf.hover = function()
+      return hover { border = vim.g.border_style } -- Use the original function
+    end
+    local signature_help = vim.lsp.buf.signature_help
+    vim.lsp.buf.signature_help = function()
+      return signature_help { border = vim.g.border_style }
+    end
+
     for _, lsp in ipairs { 'diagnostics', 'maps', 'format' } do
       require('lsp.' .. lsp)
     end
