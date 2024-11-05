@@ -10,8 +10,8 @@ opt.list = true
 vim.opt.listchars = {
   eol = '\\U000021b5',
   tab = '  ',
-  extends = '\\U00002192',
-  precedes = '\\U00002190',
+  extends = '>',
+  precedes = '<',
   trail = '\\U00002022',
   nbsp = '~',
 }
