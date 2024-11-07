@@ -62,7 +62,7 @@ if true then
     callback = function()
       -- Stop the previous LSP client if it exists
       if last_client_id then
-        vim.notify('Stopping previous LSP client: ' .. tostring(last_client_id))
+        -- vim.notify('Stopping previous LSP client: ' .. tostring(last_client_id))
         vim.lsp.stop_client(last_client_id)
         last_client_id = nil
       end
@@ -72,7 +72,7 @@ if true then
         local pkg_path_fr = vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json'
         local paths = require('snippet').parse_pkg(pkg_path_fr, vim.bo.filetype)
         if not paths or #paths == 0 then
-          vim.notify('No snippets found for filetype: ' .. vim.bo.filetype, vim.log.levels.WARN)
+          -- vim.notify('No snippets found for filetype: ' .. vim.bo.filetype, vim.log.levels.WARN)
           return
         end
         local usr_paths = require('snippet').parse_pkg(
