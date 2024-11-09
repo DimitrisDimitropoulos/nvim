@@ -366,7 +366,6 @@ if vim.version().minor >= 11 then
       vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
     end)
   end
-
   vim.api.nvim_create_user_command('TXShowDependencyGraph', function()
     dependency_graph()
   end, { nargs = 0, desc = 'Show LaTeX dependency graph' })
