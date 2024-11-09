@@ -350,6 +350,27 @@ if vim.version().minor >= 11 then
     cleanAuxiliary()
   end, { nargs = 0, desc = 'Clean LaTeX auxiliary files' })
 
+  local function dependency_graph()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local client = util.get_active_client_by_name(bufnr, 'texlab')
+    if not client then
+      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+    end
+    client:exec_cmd({
+      command = 'texlab.showDependencyGraph',
+      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+    }, { bufnr = bufnr }, function(err, result)
+      if err then
+        return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
+      end
+      vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
+    end)
+  end
+
+  vim.api.nvim_create_user_command('TXShowDependencyGraph', function()
+    dependency_graph()
+  end, { nargs = 0, desc = 'Show LaTeX dependency graph' })
+
   local function buf_cancel_build()
     local bufnr = vim.api.nvim_get_current_buf()
     local client = util.get_active_client_by_name(bufnr, 'texlab')
