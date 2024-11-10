@@ -306,50 +306,6 @@ if vim.version().minor >= 11 then
     buf_find_envs()
   end, { nargs = 0, desc = 'Find LaTeX environments' })
 
-  local function cleanArtifacts()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local client = util.get_active_client_by_name(bufnr, 'texlab')
-    if not client then
-      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-    end
-    local command = {
-      command = 'texlab.cleanArtifacts',
-      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-    }
-    client:exec_cmd(command, { bufnr = bufnr }, function(err, _)
-      if err then
-        vim.notify('Failed to clean artifacts: ' .. err.message, vim.log.levels.ERROR)
-      else
-        vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
-      end
-    end)
-  end
-  vim.api.nvim_create_user_command('TXCleanArtifacts', function()
-    cleanArtifacts()
-  end, { nargs = 0, desc = 'Clean LaTeX artifacts' })
-
-  local function cleanAuxiliary()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local client = util.get_active_client_by_name(bufnr, 'texlab')
-    if not client then
-      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-    end
-    local command = {
-      command = 'texlab.cleanAuxiliary',
-      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-    }
-    client:exec_cmd(command, { bufnr = bufnr }, function(err, _)
-      if err then
-        vim.notify('Failed to clean auxiliary files: ' .. err.message, vim.log.levels.ERROR)
-      else
-        vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
-      end
-    end)
-  end
-  vim.api.nvim_create_user_command('TXCleanAuxiliary', function()
-    cleanAuxiliary()
-  end, { nargs = 0, desc = 'Clean LaTeX auxiliary files' })
-
   local function dependency_graph()
     local bufnr = vim.api.nvim_get_current_buf()
     local client = util.get_active_client_by_name(bufnr, 'texlab')
@@ -369,19 +325,4 @@ if vim.version().minor >= 11 then
   vim.api.nvim_create_user_command('TXShowDependencyGraph', function()
     dependency_graph()
   end, { nargs = 0, desc = 'Show LaTeX dependency graph' })
-
-  local function buf_cancel_build()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local client = util.get_active_client_by_name(bufnr, 'texlab')
-    if not client then
-      return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-    end
-    local command = {
-      command = 'texlab.cancelBuild',
-    }
-    client:exec_cmd(command, { bufnr = bufnr })
-  end
-  vim.api.nvim_create_user_command('TXCancelBuild', function()
-    buf_cancel_build()
-  end, { nargs = 0, desc = 'Cancel the current build' })
 end
