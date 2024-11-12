@@ -1,5 +1,6 @@
 vim.o.spell = true
 vim.o.showmode = true
+vim.opt_local.colorcolumn = '80'
 
 local mail_statline = {
   '%{nr2char(32)}', -- A space character.
