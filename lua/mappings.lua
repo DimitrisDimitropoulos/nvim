@@ -41,4 +41,4 @@ vim.keymap.set({ 'i', 's' }, '<A-k>', function()
   end
 end, { silent = true })
 
-vim.keymap.set('x', '<leader>rl', '<cmd>g/^$/d<CR>', { noremap = true, desc = 'remove empty lines' })
+vim.keymap.set('x', '<leader>rl', ":<C-u>'<,'>g/^$/d<CR>", { noremap = true, desc = 'remove empty lines' })
