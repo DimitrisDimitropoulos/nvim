@@ -103,3 +103,42 @@ if true then
     desc = 'Handle LSP for buffer changes',
   })
 end
+
+if false then
+  local ffi = require 'ffi'
+  ffi.cdef [[
+  typedef int32_t linenr_T;
+  char *ml_get(linenr_T lnum);
+  bool pum_visible(void);
+  ]]
+  local pumvisible = ffi.C.pum_visible
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if not client or not client.supports_method 'textDocument/completion' then
+        return
+      end
+      vim.lsp.completion.enable(true, client.id, bufnr, {
+        autotrigger = true,
+        convert = function(item)
+          return { abbr = item.label:gsub('%b()', ''), kind = '' }
+        end,
+      })
+      vim.api.nvim_create_autocmd('InsertCharPre', {
+        buffer = bufnr,
+        callback = function()
+          if pumvisible() then
+            return
+          end
+          local triggerchars = vim.tbl_get(client, 'server_capabilities', 'completionProvider', 'triggerCharacters')
+            or {}
+          if vim.v.char:match '[%w_]' and not vim.list_contains(triggerchars, vim.v.char) then
+            vim.lsp.completion.trigger()
+          end
+        end,
+      })
+    end,
+  })
+end
