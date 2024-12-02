@@ -53,56 +53,54 @@ autocmd('BufWritePre', {
   desc = 'make executable',
 })
 
-if true then
-  local sn_group = vim.api.nvim_create_augroup('SnippetServer', { clear = true })
-  -- Variable to track the last active LSP client ID
-  local last_client_id = nil
-  vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-    group = sn_group,
-    callback = function()
-      -- Stop the previous LSP client if it exists
-      if last_client_id then
-        -- vim.notify('Stopping previous LSP client: ' .. tostring(last_client_id))
-        vim.lsp.stop_client(last_client_id)
-        last_client_id = nil
+local sn_group = vim.api.nvim_create_augroup('SnippetServer', { clear = true })
+-- Variable to track the last active LSP client ID
+local last_client_id = nil
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+  group = sn_group,
+  callback = function()
+    -- Stop the previous LSP client if it exists
+    if last_client_id then
+      -- vim.notify('Stopping previous LSP client: ' .. tostring(last_client_id))
+      vim.lsp.stop_client(last_client_id)
+      last_client_id = nil
+    end
+    -- Delay to ensure the previous server has fully stopped before starting a new one
+    vim.defer_fn(function()
+      -- paths table
+      local pkg_path_fr = vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json'
+      local paths = require('snippet').parse_pkg(pkg_path_fr, vim.bo.filetype)
+      if not paths or #paths == 0 then
+        -- vim.notify('No snippets found for filetype: ' .. vim.bo.filetype, vim.log.levels.WARN)
+        return
       end
-      -- Delay to ensure the previous server has fully stopped before starting a new one
-      vim.defer_fn(function()
-        -- paths table
-        local pkg_path_fr = vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json'
-        local paths = require('snippet').parse_pkg(pkg_path_fr, vim.bo.filetype)
-        if not paths or #paths == 0 then
-          -- vim.notify('No snippets found for filetype: ' .. vim.bo.filetype, vim.log.levels.WARN)
-          return
-        end
-        local usr_paths = require('snippet').parse_pkg(
-          vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/package.json',
-          vim.bo.filetype
-        )
-        table.insert(paths, usr_paths[1])
-        -- Concat all the snippets from all the paths
-        local all_snippets = { isIncomplete = false, items = {} }
-        for _, snips_path in ipairs(paths) do
-          local snips = require('snippet').read_file(snips_path)
-          local lsp_snip = require('snippet').process_snippets(snips, 'USR')
-          if lsp_snip and lsp_snip.items then
-            for _, snippet_item in ipairs(lsp_snip.items) do
-              table.insert(all_snippets.items, snippet_item)
-            end
+      local usr_paths = require('snippet').parse_pkg(
+        vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/package.json',
+        vim.bo.filetype
+      )
+      table.insert(paths, usr_paths[1])
+      -- Concat all the snippets from all the paths
+      local all_snippets = { isIncomplete = false, items = {} }
+      for _, snips_path in ipairs(paths) do
+        local snips = require('snippet').read_file(snips_path)
+        local lsp_snip = require('snippet').process_snippets(snips, 'USR')
+        if lsp_snip and lsp_snip.items then
+          for _, snippet_item in ipairs(lsp_snip.items) do
+            table.insert(all_snippets.items, snippet_item)
           end
         end
-        -- Start the new mock LSP server
-        local client_id = require('snippet').start_mock_lsp(all_snippets)
-        if client_id then
-          vim.notify('Started new LSP client with ID: ' .. tostring(client_id))
-        end
-        -- Store the new client ID for future buffer changes
-        last_client_id = client_id
-      end, 500) -- 500ms delay to ensure clean server shutdown
-    end,
-    desc = 'Handle LSP for buffer changes',
-  })
-end
+      end
+      -- Start the new mock LSP server
+      local client_id = require('snippet').start_mock_lsp(all_snippets)
+      if client_id then
+        vim.notify('Started new LSP client with ID: ' .. tostring(client_id))
+      end
+      -- Store the new client ID for future buffer changes
+      last_client_id = client_id
+    end, 500) -- 500ms delay to ensure clean server shutdown
+  end,
+  desc = 'Handle LSP for buffer changes',
+})
 
 if false then
   local ffi = require 'ffi'
