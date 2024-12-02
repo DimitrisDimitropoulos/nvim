@@ -28,6 +28,10 @@ vim.cmd.syntax 'spell toplevel'
 
 vim.opt_local.colorcolumn = '80'
 
+if vim.version().minor >= 11 then
+  vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+end
+
 local bufnr = vim.api.nvim_get_current_buf() ---@type number
 ---@return table: A list of label entries with their text, line, column, and file path
 local function get_labels()
