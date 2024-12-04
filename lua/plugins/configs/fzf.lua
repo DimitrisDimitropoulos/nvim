@@ -99,3 +99,7 @@ end
 vim.keymap.set('n', '<leader>fa', function()
   require('fzf-lua').files { cmd = 'rg --files --hidden -u --glob !.git' }
 end, { desc = 'fzf-lua all files' })
+
+vim.keymap.set('n', '<leader>fp', function()
+  require('fzf-lua').grep { search = [[TODO:|todo!\(.*\)]], no_esc = true }
+end, { desc = 'fzf-lua grep TODOs' })
