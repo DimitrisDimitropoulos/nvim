@@ -26,7 +26,20 @@ end, { silent = false, noremap = true, desc = 'toggle greek keymap' })
 -- BUG: For some reason this does not work, @2024-01-25 01:51:09
 vim.cmd.syntax 'spell toplevel'
 
-vim.opt_local.colorcolumn = '80'
+vim.api.nvim_create_autocmd('InsertEnter', {
+  group = vim.api.nvim_create_augroup('Colorcolumn', { clear = true }),
+  callback = function()
+    vim.opt_local.colorcolumn = '80'
+  end,
+  desc = 'set colorcolumn to 80 on InsertEnter',
+})
+vim.api.nvim_create_autocmd('InsertLeave', {
+  group = vim.api.nvim_create_augroup('Colorcolumn', { clear = true }),
+  callback = function()
+    vim.opt_local.colorcolumn = ''
+  end,
+  desc = 'unset colorcolumn on InsertLeave',
+})
 
 if vim.version().minor >= 11 then
   vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
