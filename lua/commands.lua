@@ -53,6 +53,12 @@ autocmd('BufWritePre', {
   desc = 'make executable',
 })
 
+autocmd({ 'BufDelete', 'BufWipeout' }, {
+  group = augroup 'WriteShaDa',
+  command = 'wshada',
+  desc = 'write deleted/wiped buffer to shada',
+})
+
 local sn_group = vim.api.nvim_create_augroup('SnippetServer', { clear = true })
 -- Variable to track the last active LSP client ID
 local last_client_id = nil
