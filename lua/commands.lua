@@ -178,3 +178,103 @@ if vim.fn.executable 'rg' == 1 then
     desc = 'Search for files containing the specified pattern using ripgrep',
   })
 end
+
+if vim.fn.executable 'rg' == 1 then
+  vim.api.nvim_create_user_command('Files', function(opts)
+    local pattern = opts.args
+    if pattern == '' then
+      return vim.notify('No search pattern provided', vim.log.levels.WARN)
+    end
+    -- Construct the original piped command
+    local cmd =
+      string.format("rg --files --color=never --hidden --glob '!*.git' | rg --smart-case --color=never '%s'", pattern)
+    -- Initialize pipes and result storage
+    local stdout = vim.uv.new_pipe(false)
+    local stderr = vim.uv.new_pipe(false)
+    local results = {}
+    -- Callback function when the process exits
+    local function on_exit(code, signal)
+      -- Nil checks before calling methods
+      if stdout then
+        stdout:read_stop()
+        stdout:close()
+      end
+      if stderr then
+        stderr:read_stop()
+        stderr:close()
+      end
+      vim.schedule(function()
+        if code > 1 then
+          vim.notify('Error running rg: exit code ' .. code, vim.log.levels.WARN)
+          return
+        end
+        if #results == 0 then
+          if code == 1 then
+            vim.notify('No matches found', vim.log.levels.INFO)
+          else
+            vim.notify('No matches found or an error occurred', vim.log.levels.WARN)
+          end
+          return
+        end
+        -- Prepare the quickfix list
+        local qf_list = {}
+        for _, line in ipairs(results) do
+          table.insert(qf_list, { filename = line })
+        end
+        -- Set the quickfix list with the results
+        vim.fn.setqflist(qf_list, 'r')
+        -- Set additional options like the title
+        vim.fn.setqflist({}, 'a', { title = string.format("Results for pattern: '%s'", pattern) })
+        -- Open the quickfix window
+        vim.cmd 'copen'
+        -- Resize the quickfix window if there are fewer than 10 results
+        if #results < 10 then
+          vim.cmd('resize ' .. #results)
+        end
+      end)
+      if code > 1 then
+        vim.schedule(function()
+          vim.notify('Error running rg: exit code ' .. code, vim.log.levels.WARN)
+        end)
+      end
+    end
+    -- Spawn a shell to run the piped command
+    local handle
+    handle = vim.uv.spawn(tostring(vim.opt.shell._value), {
+      args = { '-c', cmd },
+      stdio = { nil, stdout, stderr },
+    }, function(code, signal)
+      handle:close()
+      on_exit(code, signal)
+    end)
+    -- Read stdout and nil check before calling methods
+    if not stdout then
+      return
+    end
+    stdout:read_start(function(err, data)
+      assert(not err, err)
+      if data then
+        for line in data:gmatch '[^\r\n]+' do
+          table.insert(results, line)
+        end
+      end
+    end)
+    -- Read stderr and nil check before calling methods
+    if not stderr then
+      return
+    end
+    stderr:read_start(function(err, data)
+      assert(not err, err)
+      if data then
+        vim.schedule(function()
+          vim.notify('rg error: ' .. data, vim.log.levels.WARN)
+        end)
+      end
+    end)
+  end, {
+    nargs = 1,
+    desc = 'Search for files containing the specified pattern using ripgrep',
+  })
+else
+  vim.notify("'rg' is not executable on this system", vim.log.levels.ERROR)
+end
