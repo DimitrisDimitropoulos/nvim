@@ -52,6 +52,8 @@ if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
 end
 if vim.fn.has 'win32' == 1 and vim.fn.executable 'pwsh.exe' == 1 then
   opt.shell = 'pwsh.exe'
+  opt.shellxquote = ''
+  opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
 end
 if vim.fn.executable 'rg' == 1 then
   opt.grepprg = 'rg --vimgrep --smart-case --hidden --color=never --glob !.git'
