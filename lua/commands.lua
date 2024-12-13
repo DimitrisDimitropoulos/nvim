@@ -148,38 +148,6 @@ if false then
 end
 
 if vim.fn.executable 'rg' == 1 then
-  vim.api.nvim_create_user_command('RgFiles', function(opts)
-    local pattern = opts.args
-    if pattern == '' then
-      return vim.notify('No search pattern provided', vim.log.levels.WARN)
-    end
-    -- Run the shell command and capture the output as a list
-    local cmd =
-      string.format("rg --files --color=never --hidden --glob !.git | rg --smart-case --color=never '%s'", pattern)
-    local result = vim.fn.systemlist(cmd)
-    if vim.v.shell_error ~= 0 then
-      return vim.notify('Error running command: ' .. cmd, vim.log.levels.WARN)
-    end
-    -- Prepare the quickfix list
-    local qf_list = {}
-    for _, line in ipairs(result) do
-      table.insert(qf_list, { filename = line })
-    end
-    -- First, set the quickfix list with the results
-    vim.fn.setqflist(qf_list, 'r')
-    -- Then, set additional options like the title
-    vim.fn.setqflist({}, 'a', { title = string.format("Results for pattern: '%s'", pattern) })
-    vim.cmd 'copen'
-    if #result < 10 then
-      vim.cmd('resize ' .. #result)
-    end
-  end, {
-    nargs = 1,
-    desc = 'Search for files containing the specified pattern using ripgrep',
-  })
-end
-
-if vim.fn.executable 'rg' == 1 then
   vim.api.nvim_create_user_command('Files', function(opts)
     local pattern = opts.args
     if pattern == '' then
