@@ -85,7 +85,6 @@ for _, mapping in ipairs {
   { key = 'fw', cmd = 'lsp_workspace_symbols' },
   { key = 'sp', cmd = 'spell_suggest' },
   { key = 'f.', cmd = 'resume' },
-  { key = 'fg', cmd = 'live_grep' },
   { key = 'fs', cmd = 'grep_cword' },
   { key = 'fS', cmd = 'grep_cWORD' },
   { key = 'ft', cmd = 'git_status' },
