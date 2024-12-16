@@ -1,4 +1,10 @@
-local util = require 'lspconfig.util'
+local function get_active_client_by_name(buffer, servername)
+  for _, client in ipairs(vim.lsp.get_clients { bufnr = buffer }) do
+    if client.name == servername then
+      return client
+    end
+  end
+end
 
 local function format_mem_tree(node, padding)
   local result = {}
@@ -39,7 +45,7 @@ end
 
 local function show_memory_usage()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
+  local clangd_client = get_active_client_by_name(bufnr, 'clangd')
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
@@ -92,7 +98,7 @@ end
 
 local function type_hierarchy()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
+  local clangd_client = get_active_client_by_name(bufnr, 'clangd')
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
