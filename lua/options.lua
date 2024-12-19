@@ -60,6 +60,7 @@ if vim.fn.executable 'rg' == 1 then
   opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 end
 
+opt.path = opt.path .. '**'
 opt.foldenable = false
 
 opt.expandtab = true
