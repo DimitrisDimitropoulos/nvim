@@ -22,7 +22,6 @@ cmp.setup {
   sources = cmp.config.sources {
     -- { name = 'luasnip', priority = 9 },
     { name = 'nvim_lsp', priority = 9 },
-    -- { name = 'nvim_lua', priority = 9 },
     { name = 'path', priority = 5 },
     { name = 'buffer', keyword_length = 2, max_item_count = 3, priority = 1 },
   },
