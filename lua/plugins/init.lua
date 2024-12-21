@@ -81,7 +81,13 @@ require('lazy').setup({
   {
     'williamboman/mason.nvim',
     cmd = 'Mason',
-    opts = { PATH = 'skip', max_concurrent_installers = 20 },
+    opts = {
+      PATH = 'skip',
+      max_concurrent_installers = 20,
+      ui = {
+        icons = { package_installed = '', package_pending = '', package_uninstalled = '' },
+      },
+    },
   },
 
   {
