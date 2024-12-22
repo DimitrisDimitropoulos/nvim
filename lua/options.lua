@@ -61,7 +61,6 @@ if vim.fn.executable 'rg' == 1 then
 end
 
 opt.path = opt.path .. '**'
-opt.foldenable = false
 
 opt.expandtab = true
 opt.shiftwidth = 2
@@ -102,14 +101,14 @@ opt.timeoutlen = 400
 opt.undofile = true
 opt.updatetime = 2500
 
-vim.o.foldcolumn = '1'
-vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
-vim.o.foldenable = true
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldtext = ''
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldmethod = 'expr'
+opt.foldcolumn = '1'
+opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
+opt.foldenable = true
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldtext = ''
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldmethod = 'expr'
 
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0
