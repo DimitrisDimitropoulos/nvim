@@ -3,8 +3,14 @@ vim.keymap.set('n', '<C-s>', vim.cmd.write)
 for _, b in ipairs { 'bd', 'bn', 'bp' } do
   vim.keymap.set('n', '<leader>' .. b, function()
     vim.cmd(b)
-  end, { noremap = true, desc = b })
+  end, { noremap = true })
 end
+vim.keymap.set('n', '<leader>cn', function()
+  vim.cmd 'cn'
+end, { noremap = true })
+vim.keymap.set('n', '<leader>cp', function()
+  vim.cmd 'cp'
+end, { noremap = true })
 
 for _, arrow in ipairs { '<Up>', '<Down>', '<Left>', '<Right>' } do
   vim.keymap.set({ 'n', 'x', 'c' }, arrow, '')
@@ -39,6 +45,9 @@ vim.keymap.set({ 'i', 's' }, '<A-k>', function()
     end)
     return
   end
+end, { silent = true })
+vim.keymap.set({ 'i', 's', 'n' }, '<A-c>', function()
+  vim.snippet.stop()
 end, { silent = true })
 
 vim.keymap.set('x', '<leader>rl', ":<C-u>'<,'>g/^$/d<CR>", { noremap = true, desc = 'remove empty lines' })
