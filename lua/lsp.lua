@@ -30,17 +30,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- drop this after 0.11
-    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.border_style })
-    vim.lsp.handlers['textDocument/signatureHelp'] =
-      vim.lsp.with(vim.lsp.handlers.signature_help, { border = vim.g.border_style })
-    local hover = vim.lsp.buf.hover -- Store the original function in a local variable
-    vim.lsp.buf.hover = function()
-      return hover { border = vim.g.border_style } -- Use the original function
-    end
-    local signature_help = vim.lsp.buf.signature_help
-    vim.lsp.buf.signature_help = function()
-      return signature_help { border = vim.g.border_style }
+    if vim.version().minor < 11 then
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.border_style })
+      vim.lsp.handlers['textDocument/signatureHelp'] =
+        vim.lsp.with(vim.lsp.handlers.signature_help, { border = vim.g.border_style })
+    else
+      local hover = vim.lsp.buf.hover -- Store the original function in a local variable
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.lsp.buf.hover = function()
+        return hover { border = vim.g.border_style } -- Use the original function
+      end
+      local signature_help = vim.lsp.buf.signature_help
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.lsp.buf.signature_help = function()
+        return signature_help { border = vim.g.border_style }
+      end
     end
 
     vim.diagnostic.config {
