@@ -121,7 +121,7 @@ if false then
     callback = function(args)
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if not client or not client.supports_method 'textDocument/completion' then
+      if not client or not client:supports_method 'textDocument/completion' then
         return
       end
       vim.lsp.completion.enable(true, client.id, bufnr, {
