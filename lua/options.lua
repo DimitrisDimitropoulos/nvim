@@ -99,7 +99,7 @@ opt.termguicolors = true
 opt.timeout = true
 opt.timeoutlen = 400
 opt.undofile = true
-opt.updatetime = 2500
+opt.updatetime = 500
 
 opt.foldcolumn = '1'
 opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
