@@ -37,6 +37,14 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'saghen/blink.cmp',
+    enabled = false,
+    version = '*',
+    event = 'InsertEnter',
+    opts = require 'plugins.configs.blink',
+  },
+
   { 'rafamadriz/friendly-snippets' },
 
   {
