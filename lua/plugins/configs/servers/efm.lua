@@ -65,6 +65,7 @@ local luacheck = {
   rootMarkers = { '.luacheckrc' },
 }
 local fish_indent = { formatCommand = 'fish_indent', formatStdin = true }
+local tex_fmt = { formatCommand = 'tex-fmt -p -q' }
 
 local langs = {
   json = { jq_lint, jq_format },
