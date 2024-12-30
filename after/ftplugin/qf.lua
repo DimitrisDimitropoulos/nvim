@@ -1,6 +1,3 @@
-vim.api.nvim_set_hl(0, 'qfFileName', { link = '@string.special.path' })
-vim.api.nvim_set_hl(0, 'QuickFixLine', { link = 'PmenuMatch' })
-
 vim.opt_local.relativenumber = false
 vim.opt_local.wrap = false
 vim.opt_local.spell = false
