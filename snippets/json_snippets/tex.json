@@ -234,6 +234,15 @@
     ],
     "description": "LaTeX cases"
   },
+  "frame": {
+    "prefix": "framu",
+    "body": [
+      "\\begin{frame}{${1:title}}",
+      "\t$0",
+      "\\end{frame}\n"
+    ],
+    "description": "LaTeX frame"
+  },
   "matrix": {
     "prefix": "matrix",
     "body": [
