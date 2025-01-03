@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         },
       },
       update_in_insert = false,
-      float = { source = 'always', border = vim.g.border_style },
+      float = { source = true, border = vim.g.border_style },
       jump = { float = true },
     }
 
