@@ -16,7 +16,7 @@ G.neovide_padding_left = 0
 
 G.gui_font_default_size = 19
 G.gui_font_size = vim.g.gui_font_default_size
-G.gui_font_face = 'Comic Code,CaskaydiaCove Nerd Font'
+G.gui_font_face = 'Comic Code,JetBrainsMono Nerd Font'
 
 local set_guifont = function()
   vim.opt.guifont = string.format('%s:h%s', vim.g.gui_font_face, vim.g.gui_font_size)
