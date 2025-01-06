@@ -308,19 +308,24 @@ local function get_hl(name)
 end
 local bg = get_hl('Statusline').bg
 local fg = get_hl('Statusline').fg
-vim.api.nvim_set_hl(0, 'DiagnosticFloatError', { bg = bg, fg = get_hl('DiagnosticError').fg })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatWarn', { bg = bg, fg = get_hl('DiagnosticWarn').fg })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatHint', { bg = bg, fg = get_hl('DiagnosticHint').fg })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatInfo', { bg = bg, fg = get_hl('DiagnosticInfo').fg })
-vim.api.nvim_set_hl(0, 'StatuslineGitAdd', { bg = bg, fg = get_hl('GitSignsAdd').fg })
-vim.api.nvim_set_hl(0, 'StatuslineGitChange', { bg = bg, fg = get_hl('GitSignsChange').fg })
-vim.api.nvim_set_hl(0, 'StatuslineGitRemoved', { bg = bg, fg = get_hl('GitSignsDelete').fg })
-vim.api.nvim_set_hl(0, 'StatusLineMedium', { bg = bg, fg = '#f6d5a4', bold = true })
-vim.api.nvim_set_hl(0, 'StatusLineRuler', { bg = bg, fg = get_hl('Keyword').fg, bold = true })
-vim.api.nvim_set_hl(0, 'StatusLineLspMessages', { bg = bg, fg = '#f6d5a4' })
-vim.api.nvim_set_hl(0, 'StatusLineFileName', { bg = bg, fg = fg, italic = true })
-vim.api.nvim_set_hl(0, 'StatuslineModified', { bg = bg, fg = fg, italic = true, bold = true })
-vim.api.nvim_set_hl(0, 'StatuslineReadonly', { bg = bg, fg = fg })
+
+for name, attrs in pairs {
+  ['DiagnosticFloatError'] = { bg = bg, fg = get_hl('DiagnosticError').fg },
+  ['DiagnosticFloatWarn'] = { bg = bg, fg = get_hl('DiagnosticWarn').fg },
+  ['DiagnosticFloatHint'] = { bg = bg, fg = get_hl('DiagnosticHint').fg },
+  ['DiagnosticFloatInfo'] = { bg = bg, fg = get_hl('DiagnosticInfo').fg },
+  ['StatuslineGitAdd'] = { bg = bg, fg = get_hl('GitSignsAdd').fg },
+  ['StatuslineGitChange'] = { bg = bg, fg = get_hl('GitSignsChange').fg },
+  ['StatuslineGitRemoved'] = { bg = bg, fg = get_hl('GitSignsDelete').fg },
+  ['StatusLineMedium'] = { bg = bg, fg = '#f6d5a4', bold = true },
+  ['StatusLineRuler'] = { bg = bg, fg = get_hl('Keyword').fg, bold = true },
+  ['StatusLineLspMessages'] = { bg = bg, fg = '#f6d5a4' },
+  ['StatusLineFileName'] = { bg = bg, fg = fg, italic = true },
+  ['StatuslineModified'] = { bg = bg, fg = fg, italic = true, bold = true },
+  ['StatuslineReadonly'] = { bg = bg, fg = fg },
+} do
+  vim.api.nvim_set_hl(0, name, attrs)
+end
 
 local mode_colors = {
   ['n'] = '#d4bfff',
