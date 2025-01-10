@@ -1,10 +1,6 @@
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(args)
-    if false then
-      vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
-    end
-
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client then
       return
