@@ -243,6 +243,13 @@
     ],
     "description": "LaTeX frame"
   },
+  "note": {
+    "prefix": "notu",
+    "body": [
+      "\\note{\n\t$0\n}"
+    ],
+    "description": "LaTeX note"
+  },
   "matrix": {
     "prefix": "matrix",
     "body": [
