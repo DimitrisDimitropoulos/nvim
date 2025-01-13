@@ -76,15 +76,15 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
       -- paths table
       local pkg_path_fr = vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json'
       local paths = require('snippet').parse_pkg(pkg_path_fr, vim.bo.filetype)
-      if not paths or #paths == 0 then
-        -- vim.notify('No snippets found for filetype: ' .. vim.bo.filetype, vim.log.levels.WARN)
-        return
-      end
       local usr_paths = require('snippet').parse_pkg(
         vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/package.json',
         vim.bo.filetype
       )
       table.insert(paths, usr_paths[1])
+      if not paths or #paths == 0 then
+        -- vim.notify('No snippets found for filetype: ' .. vim.bo.filetype, vim.log.levels.WARN)
+        return
+      end
       -- Concat all the snippets from all the paths
       local all_snippets = { isIncomplete = false, items = {} }
       for _, snips_path in ipairs(paths) do
