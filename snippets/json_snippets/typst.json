@@ -1,0 +1,17 @@
+{
+  "code-listing": {
+    "prefix": "listu",
+    "body": "#raw(read(\"$1\"), lang: \"$2\")\n$0",
+    "description": "Code Listing"
+  },
+  "figure": {
+    "prefix": "figy",
+    "body": "#figure(\n\timage(\"$1\", width: $2),\n\tcaption: [\n\t\t$0\n\t],\n)\n",
+    "description": "Figure"
+  },
+  "equation": {
+    "prefix": "eq",
+    "body": "\\$\n$0\n\\$ <${1:label}>",
+    "description": "Equation"
+  }
+}

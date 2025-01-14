@@ -6,6 +6,12 @@
     "snippets": [
       {
         "language": [
+          "typst"
+        ],
+        "path": "./typst.json"
+      },
+      {
+        "language": [
           "tex"
         ],
         "path": "./tex.json"
