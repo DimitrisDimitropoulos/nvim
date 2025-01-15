@@ -276,6 +276,7 @@ if vim.version().minor >= 11 then
     end
     local pos = vim.api.nvim_win_get_cursor(0)
     client:exec_cmd({
+      title = 'Change Environment',
       command = 'texlab.changeEnvironment',
       arguments = {
         {
@@ -298,7 +299,7 @@ if vim.version().minor >= 11 then
     end
     local command = {
       command = 'texlab.findEnvironments',
-      arguments = { vim.lsp.util.make_position_params() },
+      arguments = { vim.lsp.util.make_position_params(vim.api.nvim_get_current_win(), texlab_client.offset_encoding) },
     }
     texlab_client:exec_cmd(command, { bufnr = bufnr }, function(err, result)
       if err then
@@ -337,6 +338,7 @@ if vim.version().minor >= 11 then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end
     client:exec_cmd({
+      title = 'Dependency Graph',
       command = 'texlab.showDependencyGraph',
       arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
     }, { bufnr = bufnr }, function(err, result)
