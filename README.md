@@ -1,12 +1,8 @@
 # ✨ Custom Neovim config
 
-This config begun from the [NvChad](https://github.com/NvChad/NvChad) minimal
-[config](https://github.com/NvChad/basic-config), at this point the config is
-very different and follows a distinct structure only a few items remain the
-same. This configuration of neovim does not try to replace vscode, but to
-simply add modern useful features into vim-neovim, like LSP, IDE completion,
-statusline, dashboard and other moderate ui features. I believe that i have
-maintained the original spirit of vim and neovim, while adding these features.
+This is a custom nvim config. The main focus is a bare bones ui, while
+leveraging native features with a few plugins, in order to achieve classic
+editing experience with a modern touch.
 
 > [!IMPORTANT]
 > It is suggested to have some dependencies when using this config for the best
@@ -96,33 +92,29 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 
 ## 🔌 Plugins
 
--   [savq/melange-nvim](https://github.com/savq/melange-nvim)
--   [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
--   [goolord/alpha-nvim](https://github.com/goolord/alpha-nvim)
--   [rebelot/heirline.nvim](https://github.com/rebelot/heirline.nvim)
--   [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
--   [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
--   [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-    -   [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
-    -   [nvim-telescope/telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
--   [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
--   [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-    -   [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
-    -   [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)
-    -   [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
-    -   [hrsh7th/cmp-nvim-lsp-signature-help](https://github.com/hrsh7th/cmp-nvim-lsp-signature-help)
-    -   [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
-    -   [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
-        -   [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-    -   [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
--   [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
--   [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
--   [nvimdev/indentmini.nvim](https://github.com/nvimdev/indentmini.nvim)
--   [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
--   [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
--   [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
--   [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
--   [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
--   [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)
+- [savq/melange-nvim](https://github.com/savq/melange-nvim)
+- [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)\*  
+  (disabled)
+    - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [saghen/blink.cmp](https://github.com/saghen/blink.cmp)\* (disabled)
+- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+- [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+  (disabled)
+    - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
+    - [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)
+    - [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
+    - [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)\* (disabled)
+    - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)\* (disabled)
+    - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)\* (disabled)
+- [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
+- [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+- [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
+- [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
+- [folke/which-key.nvim](https://github.com/folke/which-key.nvim)\* (disabled)
+- [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
+- [nvimdev/indentmini.nvim](https://github.com/nvimdev/indentmini.nvim)\* (disabled)
+- [brenoprata10/nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)
 
 ## 🚗 TODO
