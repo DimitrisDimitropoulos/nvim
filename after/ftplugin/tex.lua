@@ -45,9 +45,9 @@ if vim.version().minor >= 11 then
   vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
 end
 
-local bufnr = vim.api.nvim_get_current_buf() ---@type number
 ---@return table: A list of label entries with their text, line, column, and file path
 local function get_labels()
+  local bufnr = vim.api.nvim_get_current_buf() ---@type number
   local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
   local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
   local query_string = '(label_definition (curly_group_text (text) @label_title))' ---@type string
@@ -73,6 +73,7 @@ end
 
 ---@return table: A list of label entries with their text, line, column, and file path
 local function get_labels_11()
+  local bufnr = vim.api.nvim_get_current_buf() ---@type number
   local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
   local tree = parser:parse()[1]
   local root = tree:root() ---@type table<integer, TSTree>
@@ -109,6 +110,7 @@ end
 
 ---@return table: A list of heading entries with their text, line, column, and file path
 local function get_headings()
+  local bufnr = vim.api.nvim_get_current_buf() ---@type number
   local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
   local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
   -- List of LaTeX sectioning commands
@@ -151,6 +153,7 @@ end
 
 ---@return table: A list of heading entries with their text, line, column, and file path
 local function get_headings_11()
+  local bufnr = vim.api.nvim_get_current_buf() ---@type number
   local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
   local tree = parser:parse()[1]
   local root = tree:root() ---@type table<integer, TSTree>
@@ -216,7 +219,7 @@ local function gen_loclist(entry, title)
   local toc = {}
   for _, i in ipairs(entry) do
     table.insert(toc, {
-      bufnr = bufnr,
+      bufnr = vim.api.nvim_get_current_buf(),
       lnum = i.line, ---@type integer
       col = i.col, ---@type integer
       text = i.text,
