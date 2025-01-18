@@ -105,11 +105,9 @@ opt.updatetime = 500
 opt.foldcolumn = '1'
 opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
 opt.foldenable = true
-opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 opt.foldtext = ''
 opt.foldlevel = 99
 opt.foldlevelstart = 99
-opt.foldmethod = 'expr'
 
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0

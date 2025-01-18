@@ -59,6 +59,21 @@ autocmd({ 'BufDelete', 'BufWipeout' }, {
   desc = 'write deleted/wiped buffer to shada',
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('TreesitterFolds', { clear = true }),
+  desc = 'load treesitter folds later to copensate for async loading',
+  callback = function(args)
+    local bufnr = args.buf
+    -- check if treesitter is available
+    if pcall(vim.treesitter.start, bufnr) then
+      vim.wo[0][0].foldmethod = 'expr'
+      vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    else
+      vim.wo[0][0].foldmethod = 'manual'
+    end
+  end,
+})
+
 local sn_group = vim.api.nvim_create_augroup('SnippetServer', { clear = true })
 -- Variable to track the last active LSP client ID
 local last_client_id = nil
