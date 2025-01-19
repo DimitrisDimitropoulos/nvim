@@ -64,22 +64,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
     }
 
     -- works on 0.10.3 but multiple clients is now well supported, therefore use it only on 0.11.X
-    if vim.version().minor >= 11 then
-      if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-        local doc_hl = vim.api.nvim_create_augroup('DocumentHighlight', { clear = false })
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'InsertLeave' }, {
-          group = doc_hl,
-          desc = 'Highlight references under the cursor',
-          buffer = args.buf,
-          callback = vim.lsp.buf.document_highlight,
-        })
-        vim.api.nvim_create_autocmd({ 'CursorMoved', 'InsertEnter', 'BufLeave' }, {
-          group = doc_hl,
-          desc = 'Clear highlight references',
-          buffer = args.buf,
-          callback = vim.lsp.buf.clear_references,
-        })
-      end
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+      local doc_hl = vim.api.nvim_create_augroup('DocumentHighlight' .. tostring(args.buf), { clear = false })
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'InsertLeave' }, {
+        group = doc_hl,
+        desc = 'Highlight references under the cursor',
+        buffer = args.buf,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'InsertEnter', 'BufLeave' }, {
+        group = doc_hl,
+        desc = 'Clear highlight references',
+        buffer = args.buf,
+        callback = vim.lsp.buf.clear_references,
+      })
+      vim.api.nvim_create_autocmd('LspDetach', {
+        group = doc_hl,
+        buffer = args.buf,
+        callback = function(ev)
+          vim.lsp.buf.clear_references()
+          if ev.data.client_id == client.id then
+            vim.api.nvim_clear_autocmds { group = doc_hl, buffer = args.buf }
+          end
+        end,
+      })
     end
 
     local map = vim.keymap.set
