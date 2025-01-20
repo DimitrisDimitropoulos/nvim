@@ -259,17 +259,9 @@ end, { nargs = 0, desc = 'Generate a location list with LaTeX labels' })
 vim.cmd [[packadd matchit]]
 
 if vim.version().minor >= 11 then
-  local function get_active_client_by_name(buffer, servername)
-    for _, client in ipairs(vim.lsp.get_clients { bufnr = buffer }) do
-      if client.name == servername then
-        return client
-      end
-    end
-  end
-
   local function buf_change_env()
     local bufnr = vim.api.nvim_get_current_buf()
-    local client = get_active_client_by_name(bufnr, 'texlab')
+    local client = vim.lsp.get_clients({ filter = { name = 'texlab', buffer = bufnr } })[1]
     if not client then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end
@@ -296,7 +288,7 @@ if vim.version().minor >= 11 then
 
   local function buf_find_envs()
     local bufnr = vim.api.nvim_get_current_buf()
-    local texlab_client = get_active_client_by_name(bufnr, 'texlab')
+    local texlab_client = vim.lsp.get_clients({ filter = { name = 'texlab', buffer = bufnr } })[1]
     if not texlab_client then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end
@@ -336,7 +328,7 @@ if vim.version().minor >= 11 then
 
   local function dependency_graph()
     local bufnr = vim.api.nvim_get_current_buf()
-    local client = get_active_client_by_name(bufnr, 'texlab')
+    local client = vim.lsp.get_clients({ filter = { name = 'texlab', buffer = bufnr } })[1]
     if not client then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end
