@@ -45,69 +45,6 @@ if vim.version().minor >= 11 then
   vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
 end
 
----@return table: A list of label entries with their text, line, column, and file path
-local function get_labels()
-  local bufnr = vim.api.nvim_get_current_buf() ---@type number
-  local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
-  local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
-  local query_string = '(label_definition (curly_group_text (text) @label_title))' ---@type string
-  local query = vim.treesitter.query.parse('latex', query_string) ---@type table<integer, TSQuery>
-  local labels = {}
-  for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
-    for _, node in pairs(match) do
-      local text = vim.treesitter.get_node_text(node, 0) ---@type string
-      local line, col, _, _ = node:range() ---@type integer, integer, integer, integer
-      line = line + 1
-      col = col + 1
-      local entry = {
-        text = text,
-        line = line,
-        col = col,
-        path = vim.api.nvim_buf_get_name(0),
-      }
-      table.insert(labels, entry)
-    end
-  end
-  return labels
-end
-
----@return table: A list of label entries with their text, line, column, and file path
-local function get_labels_11()
-  local bufnr = vim.api.nvim_get_current_buf() ---@type number
-  local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
-  local tree = parser:parse()[1]
-  local root = tree:root() ---@type table<integer, TSTree>
-  -- Construct a query to extract LaTeX labels
-  local query_string = '(label_definition (curly_group_text (text) @label_title))'
-  local query = vim.treesitter.query.parse('latex', query_string)
-  local labels = {}
-  for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
-    -- Since match now returns a list of nodes, iterate over the list
-    for _, nodes in pairs(match) do
-      -- Iterate over all the nodes for each capture ID
-      for _, node in ipairs(nodes) do
-        -- Process each node as before
-        if node then
-          local text = vim.treesitter.get_node_text(node, bufnr) ---@type string
-          if text then
-            local line, col, _, _ = node:range() ---@type integer, integer, integer, integer
-            line = line + 1
-            col = col + 1
-            local entry = {
-              text = text,
-              line = line,
-              col = col,
-              path = vim.api.nvim_buf_get_name(0), ---@type string
-            }
-            table.insert(labels, entry)
-          end
-        end
-      end
-    end
-  end
-  return labels
-end
-
 ---@return table: A list of heading entries with their text, line, column, and file path
 local function get_headings()
   local bufnr = vim.api.nvim_get_current_buf() ---@type number
@@ -204,57 +141,20 @@ local function get_headings_11()
   return headings
 end
 
----@param entry table: A list of entries with their text, line, and column information
----@param title string: The title for the location list
-local function gen_loclist(entry, title)
-  local bufname = vim.fn.bufname '%' ---@type string
-  -- Get location list info
-  local info = vim.fn.getloclist(0, { winid = 1 })
-  -- Check if loclist is already open and corresponds to the current buffer
-  if info.winid ~= 0 and vim.api.nvim_win_get_var(info.winid, 'qf_toc') == bufname then
-    vim.cmd 'lopen'
-    return
-  end
-  -- Generate TOC from headings
-  local toc = {}
-  for _, i in ipairs(entry) do
-    table.insert(toc, {
-      bufnr = vim.api.nvim_get_current_buf(),
-      lnum = i.line, ---@type integer
-      col = i.col, ---@type integer
-      text = i.text,
-    })
-  end
-  -- Set the location list with TOC entries
-  vim.fn.setloclist(0, toc)
-  -- Set the title for the location list
-  if vim.g.document_title then
-    title = title .. ' - "' .. vim.g.document_title .. '"'
-  end
-  -- Update the location list with the title
-  vim.fn.setloclist(0, {}, 'r', { title = title })
-  vim.cmd 'lopen'
-  -- Set a variable in the location list window to identify it as the TOC for this buffer
-  local winid = vim.fn.getloclist(0, { winid = 1 }).winid
-  if winid ~= 0 then
-    vim.api.nvim_win_set_var(winid, 'qf_toc', bufname)
-  end
-end
-
 vim.keymap.set('n', 'gO', function()
+  local gen_loclist = require('utils').gen_loclist
   if vim.version().minor < 11 then
     gen_loclist(get_headings(), 'LaTeX TOC')
   else
     gen_loclist(get_headings_11(), 'LaTeX TOC')
   end
 end, { silent = true, noremap = true, desc = 'User: show LaTeX TOC' })
-vim.api.nvim_create_user_command('GetLatexLabels', function()
-  if vim.version().minor < 11 then
-    gen_loclist(get_labels(), 'LaTeX Labels')
-  else
-    gen_loclist(get_labels_11(), 'LaTeX Labels')
-  end
-end, { nargs = 0, desc = 'Generate a location list with LaTeX labels' })
+vim.api.nvim_create_user_command('GetLabels', function()
+  require('utils').gen_loclist(
+    require('utils').get_entries('(label_definition (curly_group_text (text) @label_title))', 'latex'),
+    'LaTeX Labels'
+  )
+end, { nargs = 0, desc = 'Get the LaTeX labels' })
 
 vim.cmd [[packadd matchit]]
 
