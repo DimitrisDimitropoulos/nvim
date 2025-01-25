@@ -121,7 +121,7 @@ end
 
 ---@param completion_source table: The completion source to be used by the mock
 ---LSP server
----@return number: The client ID of the started LSP client
+---@return integer: The client ID of the started LSP client
 function M.start_mock_lsp(completion_source)
   local server = new_server(completion_source)
   local dispatchers = {
@@ -132,15 +132,15 @@ function M.start_mock_lsp(completion_source)
   local client_id = vim.lsp.start({
     name = 'sn_ls',
     cmd = server,
-    root_dir = vim.loop.cwd(), -- not needed actually
+    root_dir = vim.uv.cwd(), -- not needed actually
     on_init = function(client)
-      vim.notify('Snippet LSP server initialized', vim.log.levels.INFO)
+      -- vim.notify('Snippet LSP server initialized', vim.log.levels.INFO)
     end,
-    -- on_exit = function(code, signal)
-    --   vim.notify('Snippet LSP server exited with code ' .. code .. ' and signal ' .. signal, vim.log.levels.ERROR)
-    -- end,
+    on_exit = function(code, signal)
+      --   vim.notify('Snippet LSP server exited with code ' .. code .. ' and signal ' .. signal, vim.log.levels.ERROR)
+    end,
   }, dispatchers)
-  return client_id
+  return client_id ---@type integer
 end
 
 return M

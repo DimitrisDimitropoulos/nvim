@@ -113,9 +113,9 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
       end
       -- Start the new mock LSP server
       local client_id = require('snippet').start_mock_lsp(all_snippets)
-      if client_id then
-        vim.notify('Started new LSP client with ID: ' .. tostring(client_id))
-      end
+      -- if client_id then
+      --   vim.notify('Started new LSP client with ID: ' .. tostring(client_id))
+      -- end
       -- Store the new client ID for future buffer changes
       last_client_id = client_id
     end, 500) -- 500ms delay to ensure clean server shutdown
