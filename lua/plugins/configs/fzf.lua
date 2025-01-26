@@ -23,9 +23,13 @@ fzf_lua.setup {
     cmd = 'rg --files --smart-case --color=never --follow --glob !.git --glob !build --glob !spell --glob !lockfiles',
     cwd_prompt = true,
     cwd_prompt_shorten_len = 1,
+    git_icons = true,
   },
   oldfiles = {
     include_current_session = true,
+  },
+  zoxide = {
+    preview = 'eza -laho --no-filesize --no-user --color-scale --no-git --time-style iso --color=always  {2}',
   },
   keymap = {
     builtin = {
@@ -33,13 +37,13 @@ fzf_lua.setup {
       ['<A-d>'] = 'preview-page-down',
       ['<A-u>'] = 'preview-page-up',
       ['<A-w>'] = 'toggle-preview-cw',
-      ['<A-h>'] = 'toggle-preview',
+      ['<A-o>'] = 'toggle-preview',
       ['<A-k>'] = 'first',
       ['<A-j>'] = 'last',
     },
     fzf = {
       ['ctrl-q'] = 'select-all+accept',
-      ['alt-h'] = 'toggle-preview',
+      ['alt-o'] = 'toggle-preview',
       ['alt-u'] = 'preview-page-up',
       ['alt-d'] = 'preview-page-down',
       ['alt-k'] = 'first',
@@ -89,6 +93,7 @@ for _, mapping in ipairs {
   { key = 'fS', cmd = 'grep_cWORD' },
   { key = 'ft', cmd = 'git_status' },
   { key = 'fv', cmd = 'loclist' },
+  { key = 'fz', cmd = 'zoxide' },
 } do
   vim.keymap.set('n', '<leader>' .. mapping.key, function()
     require('fzf-lua')[mapping.cmd]()
