@@ -6,6 +6,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
+    if false and client and client:supports_method 'textDocument/completion' then
+      vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+    end
+
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
       local inlay_hints_group = vim.api.nvim_create_augroup('InlayHintAuto', { clear = false })
       vim.defer_fn(function()
