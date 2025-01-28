@@ -1,5 +1,11 @@
 return {
   completion = {
+    list = {
+      max_items = 20,
+      selection = {
+        auto_insert = false,
+      },
+    },
     accept = {
       auto_brackets = {
         kind_resolution = {
@@ -36,21 +42,10 @@ return {
       scrollbar = false,
     },
   },
-  fuzzy = {
-    use_typo_resistance = true,
-    use_frecency = true,
-    use_proximity = true,
-    sorts = {
-      function(a, b)
-        if a.exact ~= b.exact then
-          return a.exact
-        end
-      end,
-      'score',
-      'sort_text',
-    },
+  keymap = {
+    preset = 'default',
+    ['<C-y>'] = { 'select_and_accept', 'fallback' },
   },
-  keymap = { preset = 'default' },
   appearance = {
     use_nvim_cmp_as_default = true,
   },
