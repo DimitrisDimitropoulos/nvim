@@ -53,12 +53,6 @@ autocmd('BufWritePre', {
   desc = 'make executable',
 })
 
-autocmd({ 'BufDelete', 'BufWipeout' }, {
-  group = augroup 'WriteShaDa',
-  command = 'wshada',
-  desc = 'write deleted/wiped buffer to shada',
-})
-
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('TreesitterFolds', { clear = true }),
   desc = 'load treesitter folds later to copensate for async loading',
