@@ -43,6 +43,7 @@ end
 ---@return table: A table containing completion results formatted for LSP
 function M.process_snippets(snips, desc)
   local snippets_table = {}
+  local snippet_descs = {}
   local completion_results = {
     isIncomplete = false,
     items = {},
@@ -62,12 +63,13 @@ function M.process_snippets(snips, desc)
     -- Add each prefix-body pair to the table
     for _, prefix in ipairs(prefixes) do
       snippets_table[prefix] = body
+      snippet_descs[prefix] = v.description
     end
   end
   -- Transform the snippets_table into completion_results
   for label, insertText in pairs(snippets_table) do
     table.insert(completion_results.items, {
-      detail = desc or 'User Snippet',
+      detail = tostring(desc or 'User Snippet') .. '|' .. tostring(snippet_descs[label] or 'User Snippet'),
       label = label,
       kind = vim.lsp.protocol.CompletionItemKind['Snippet'],
       documentation = {
@@ -76,7 +78,8 @@ function M.process_snippets(snips, desc)
       },
       insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet,
       insertText = insertText,
-      sortText = 1.02, -- Ensure a low score by setting a high sortText value, not sure
+      -- fix for blink.cmp
+      sortText = tostring(1.02), -- Ensure a low score by setting a high sortText value, not sure
     })
   end
   return completion_results
@@ -93,7 +96,7 @@ local function new_server(completion_source)
         handler(nil, {
           capabilities = {
             completionProvider = {
-              triggerCharacters = { '{', '(', '[', ' ', '}', ')', ']' },
+              triggerCharacters = { '{', '(', '[', ' ', '.', ':', ',' },
             },
           },
         })
