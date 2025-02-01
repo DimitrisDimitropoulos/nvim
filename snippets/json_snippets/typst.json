@@ -1,17 +1,168 @@
 {
+  "table-of-contents": {
+    "prefix": "tocu",
+    "body": "#outline()",
+    "description": "Table of Contents"
+  },
+  "list-of-figures": {
+    "prefix": "lofu",
+    "body": " #outline(title: \"Σχήματα\", target: figure.where(kind: image))",
+    "description": "List of Figures"
+  },
+  "list-of-tables": {
+    "prefix": "lotu",
+    "body": " #outline(title: \"Πίνακες\", target: figure.where(kind: table))",
+    "description": "List of Tables"
+  },
   "code-listing": {
     "prefix": "listu",
     "body": "#raw(read(\"$1\"), lang: \"$2\")\n$0",
-    "description": "Code Listing"
+    "description": "Code Listing from File"
   },
   "figure": {
-    "prefix": "figy",
-    "body": "#figure(\n\timage(\"$1\", width: $2),\n\tcaption: [\n\t\t$0\n\t],\n)\n",
+    "prefix": "figu",
+    "body": "#figure(\n\timage(\"$1\", width: 100%),\n\tcaption: [\n\t\t$0\n\t],\n) <fig:$2>\n",
     "description": "Figure"
+  },
+  "grid": {
+    "prefix": "gridu",
+    "body": [
+      "#grid(",
+      "\tcolumns: (1fr, 1fr),",
+      "\trows: 1,",
+      "\talign: top,",
+      "\tgutter: 0.5cm",
+      ")[",
+      "\t$0",
+      "][",
+      "\t",
+      "]\n"
+    ],
+    "description": "Two Column Grid"
+  },
+  "Simple Figure": {
+    "prefix": "",
+    "body": [
+      "#figure(",
+      "\timage(\"$1\", width: 100%),",
+      "\tcaption: [$0],",
+      ") <fig:$2>",
+      ""
+    ],
+    "description": "Simple Figure"
+  },
+  "Typst Table": {
+    "prefix": "tabu",
+    "body": [
+      "#figure(",
+      "\ttable(",
+      "\t\tcolumns: $1,",
+      "\t\tstroke: none,",
+      "\t\talign: (center, $2),",
+      "\t\ttable.hline(stroke: 0.05em),",
+      "\t\ttable.header[$5]$6,",
+      "\t\ttable.hline(stroke: 0.03em),",
+      "\t\t[$0],",
+      "\t\ttable.hline(stroke: 0.05em),",
+      "\t),",
+      "\tcaption: [$3],",
+      ") <tab:$4>",
+      ""
+    ],
+    "description": "Typst Table"
+  },
+  "midrule": {
+    "prefix": "midu",
+    "body": "table.hline(stroke: 0.03em),",
+    "description": "Midrule"
+  },
+  "toprule": {
+    "prefix": "topu",
+    "body": "table.hline(stroke: 0.05em),",
+    "description": "Toprule"
+  },
+  "bottomrule": {
+    "prefix": "bottu",
+    "body": "table.hline(stroke: 0.04em),",
+    "description": "Bottomrule"
+  },
+  "appendix": {
+    "prefix": "appu",
+    "body": "#counter(heading).update(0)\n#set heading(numbering: \"A.1\", supplement: [Appendix])\n#pagebreak()\n$0\n ",
+    "description": "Appendix"
   },
   "equation": {
     "prefix": "eq",
     "body": "\\$\n$0\n\\$ <${1:label}>",
     "description": "Equation"
+  },
+  "today-location": {
+    "prefix": "todau",
+    "body": "#let today = datetime.today().display(\"[day]/[month]/[year]\") + \"\\nΑθήνα\"",
+    "description": "Today Location"
+  },
+  "Title-Page-Function": {
+    "prefix": "title-fun",
+    "body": [
+      "#let title-page(",
+      "\ttitle: none,",
+      "\tsubtitle: none,",
+      "\tauthor: none,",
+      "\tbottom-text: none,",
+      "\tlogo: none,",
+      "\tinstitute: none,",
+      ") = page(\"a4\")[",
+      "\t#v(2.5%)",
+      "\t#align(center)[",
+      "\t\t#grid(",
+      "\t\t\tcolumns: (1fr, 2fr, 1fr), // First and third blocks are the same, middle block is larger",
+      "\t\t\trows: 1,",
+      "\t\t\talign: center,",
+      "\t\t\tgutter: 1cm // Spacing between the blocks",
+      "\t\t)[",
+      "\t\t\t#image(logo, width: 70%)",
+      "\t\t][",
+      "\t\t\t#align(left)[#text(institute, size: 14pt)]",
+      "\t\t][",
+      "\t\t\t// // Third block: Add content",
+      "\t\t\t// This is the third block. It has the same width as the first block.",
+      "\t\t]",
+      "\t]",
+      "\t#line(length: 100%)",
+      "\t#align(center)[#underline[#text(subtitle, size: 22pt)]]",
+      "\t#v(30pt)",
+      "\t#align(center)[#text(title, size: 32pt)]",
+      "\t#v(20pt)",
+      "\t#align(",
+      "\t\tcenter,",
+      "\t\ttext(size: 16pt)[",
+      "\t\t\t#author",
+      "\t\t],",
+      "\t)",
+      "\t#show table: set align(center)",
+      "\t#table(",
+      "\t\tcolumns: 2,",
+      "\t\talign: (left, center),",
+      "\t\tstroke: none,",
+      "\t\ttable.hline(stroke: 0.08em),",
+      "\t\ttable.header([Όνομα], [Αριθμός Μητρώου]),",
+      "\t\ttable.hline(stroke: 0.05em),",
+      "\t\t[Δημήτριος Δημητρόπουλος], [mc21021],",
+      "\t\ttable.hline(stroke: 0.08em),",
+      "\t)",
+      "\t#place(",
+      "\t\tbottom + center,",
+      "\t\t[",
+      "\t\t\t#align(",
+      "\t\t\t\tcenter,",
+      "\t\t\t\ttext(size: 19pt)[",
+      "\t\t\t\t\t#bottom-text",
+      "\t\t\t\t],",
+      "\t\t\t)",
+      "\t\t],",
+      "\t)",
+      "]\n$0"
+    ],
+    "description": "Title Page Function"
   }
 }
