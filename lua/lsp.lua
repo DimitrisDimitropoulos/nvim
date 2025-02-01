@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.diagnostic.config {
       underline = true,
       virtual_text = { prefix = '\u{1F5D9}' },
+      virtual_lines = { current_line = true },
       signs = {
         text = {
           [vim.diagnostic.severity.HINT] = '\u{25A1}',
