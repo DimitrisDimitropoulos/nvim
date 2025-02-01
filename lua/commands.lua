@@ -24,18 +24,6 @@ autocmd('BufReadPost', {
 })
 
 autocmd('FileType', {
-  group = augroup 'close_with_q',
-  pattern = { 'help', 'lspinfo', 'man', 'qf', 'query', 'checkhealth' },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set('n', 'q', function()
-      vim.cmd.close {}
-    end, { buffer = event.buf, silent = true })
-  end,
-  desc = 'close with q',
-})
-
-autocmd('FileType', {
   group = augroup 'spell',
   pattern = { 'gitcommit', 'markdown', 'tex', 'context' },
   callback = function()
