@@ -25,7 +25,7 @@ autocmd('BufReadPost', {
 
 autocmd('FileType', {
   group = augroup 'spell',
-  pattern = { 'gitcommit', 'markdown', 'tex', 'context' },
+  pattern = { 'gitcommit', 'markdown', 'tex', 'context', 'typst' },
   callback = function()
     vim.opt_local.spell = true
   end,
