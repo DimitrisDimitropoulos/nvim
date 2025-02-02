@@ -23,8 +23,6 @@ vim.keymap.set({ 'i', 'n' }, '<A-b>', function()
   end
 end, { silent = false, noremap = true, desc = 'toggle greek keymap' })
 
--- BUG: For some reason this does not work, @2024-01-25 01:51:09
-vim.cmd.syntax 'spell toplevel'
 
 vim.api.nvim_create_autocmd('InsertEnter', {
   group = vim.api.nvim_create_augroup('Colorcolumn', { clear = true }),
