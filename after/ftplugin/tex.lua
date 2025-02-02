@@ -150,8 +150,6 @@ vim.api.nvim_create_user_command('GetLabels', function()
   )
 end, { nargs = 0, desc = 'Get the LaTeX labels' })
 
-vim.cmd [[packadd matchit]]
-
 if vim.version().minor >= 11 then
   local function buf_change_env()
     local bufnr = vim.api.nvim_get_current_buf()
