@@ -5,15 +5,11 @@ vim.api.nvim_set_hl(0, '@markup', { fg = 'white' })
 vim.api.nvim_set_hl(0, '@markup.strong', { fg = 'white', bold = true })
 vim.api.nvim_set_hl(0, '@markup.italic', { fg = 'white', italic = true })
 
-local function moving_wrap(direction)
-  return (vim.v.count == 0) and 'g' .. direction or direction
+for _, dir in ipairs { 'j', 'k' } do
+  vim.keymap.set({ 'n', 'x' }, dir, function()
+    return (vim.v.count == 0) and 'g' .. dir or dir
+  end, { silent = true, noremap = true, expr = true })
 end
-vim.keymap.set({ 'n', 'x' }, 'k', function()
-  return moving_wrap 'k'
-end, { expr = true, silent = true })
-vim.keymap.set({ 'n', 'x' }, 'j', function()
-  return moving_wrap 'j'
-end, { expr = true, silent = true })
 
 vim.keymap.set({ 'i', 'n' }, '<A-b>', function()
   if vim.opt.keymap:get() == 'greek_utf-8' then
