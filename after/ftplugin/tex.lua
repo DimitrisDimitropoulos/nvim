@@ -19,16 +19,16 @@ vim.keymap.set({ 'i', 'n' }, '<A-b>', function()
   end
 end, { silent = false, noremap = true, desc = 'toggle greek keymap' })
 
-
+local colorcolumn_group = vim.api.nvim_create_augroup('Colorcolumn', { clear = true })
 vim.api.nvim_create_autocmd('InsertEnter', {
-  group = vim.api.nvim_create_augroup('Colorcolumn', { clear = true }),
+  group = colorcolumn_group,
   callback = function()
     vim.opt_local.colorcolumn = '80'
   end,
   desc = 'set colorcolumn to 80 on InsertEnter',
 })
 vim.api.nvim_create_autocmd('InsertLeave', {
-  group = vim.api.nvim_create_augroup('Colorcolumn', { clear = true }),
+  group = colorcolumn_group,
   callback = function()
     vim.opt_local.colorcolumn = ''
   end,
