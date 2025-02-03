@@ -21,7 +21,7 @@ local function create_tinymist_command(command_name)
   ---@return nil
   local function run_tinymist_command()
     local bufnr = vim.api.nvim_get_current_buf()
-    local client = vim.lsp.get_clients({ filter = { name = 'tinymist', buffer = bufnr } })[1]
+    local client = vim.lsp.get_clients({ name = 'tinymist', buffer = bufnr })[1]
     if not client then
       return vim.notify('No Tinymist client attached to the current buffer', vim.log.levels.ERROR)
     end
@@ -71,4 +71,3 @@ for _, command in ipairs {
   local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command)
   vim.api.nvim_create_user_command(cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
 end
-

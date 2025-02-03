@@ -153,7 +153,7 @@ end, { nargs = 0, desc = 'Get the LaTeX labels' })
 if vim.version().minor >= 11 then
   local function buf_change_env()
     local bufnr = vim.api.nvim_get_current_buf()
-    local client = vim.lsp.get_clients({ filter = { name = 'texlab', buffer = bufnr } })[1]
+    local client = vim.lsp.get_clients({ name = 'texlab', buffer = bufnr })[1]
     if not client then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end
@@ -180,7 +180,7 @@ if vim.version().minor >= 11 then
 
   local function buf_find_envs()
     local bufnr = vim.api.nvim_get_current_buf()
-    local texlab_client = vim.lsp.get_clients({ filter = { name = 'texlab', buffer = bufnr } })[1]
+    local texlab_client = vim.lsp.get_clients({ name = 'texlab', buffer = bufnr })[1]
     if not texlab_client then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end
@@ -251,7 +251,7 @@ if vim.version().minor >= 11 then
   -- Updated dependency_graph function with split buffer
   local function dependency_graph()
     local bufnr = vim.api.nvim_get_current_buf()
-    local client = vim.lsp.get_clients({ filter = { name = 'texlab', buffer = bufnr } })[1]
+    local client = vim.lsp.get_clients({ name = 'texlab', buffer = bufnr })[1]
     if not client then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end

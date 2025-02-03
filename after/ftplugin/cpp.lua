@@ -37,7 +37,7 @@ end
 
 local function show_memory_usage()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clangd_client = vim.lsp.get_clients({ filter = { name = 'clangd', buffer = bufnr } })[1]
+  local clangd_client = vim.lsp.get_clients({ name = 'clangd', buffer = bufnr })[1]
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
@@ -90,7 +90,7 @@ end
 
 local function type_hierarchy()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clangd_client = vim.lsp.get_clients({ filter = { name = 'clangd', buffer = bufnr } })[1]
+  local clangd_client = vim.lsp.get_clients({ name = 'clangd', buffer = bufnr })[1]
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
