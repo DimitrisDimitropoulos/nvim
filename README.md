@@ -48,7 +48,7 @@ Then remove it, or better rename it to something like <folder>.bak, for more
 context see [here](http://www.lazyvim.org/installation). Then just clone this
 repo to the appropriate folder and just open it. The plugins and treesitter
 parsers will be installed automatically and then you can open `Mason` and
-install manual or with the `MasonInstallAll` command.
+install any program manually.
 
 For more detailed instructions based on the LazyVim:
 
@@ -100,13 +100,12 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 - [saghen/blink.cmp](https://github.com/saghen/blink.cmp)\* (disabled)
 - [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-  (disabled)
     - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
     - [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)
     - [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
     - [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)\* (disabled)
     - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)\* (disabled)
-    - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)\* (disabled)
+    - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
