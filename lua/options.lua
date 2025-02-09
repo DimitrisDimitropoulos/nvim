@@ -18,6 +18,8 @@ vim.opt.listchars = {
 opt.showbreak = '\u{21AA} '
 
 opt.spelllang = 'el,en'
+opt.spellsuggest = 'fast'
+opt.spelloptions = 'camel'
 
 opt.clipboard = 'unnamedplus'
 if vim.fn.has 'unix' == 1 then
