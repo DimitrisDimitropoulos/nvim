@@ -110,6 +110,11 @@ opt.foldtext = ''
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 
+if vim.version().minor >= 11 then
+  opt.statuscolumn =
+    '%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%l%s'
+end
+
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0
 end
