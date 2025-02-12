@@ -53,14 +53,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.diagnostic.config {
       underline = true,
-      virtual_text = { prefix = '\u{1F5D9}' },
+      virtual_text = { prefix = '\u{23FA}' },
       virtual_lines = { current_line = true },
       signs = {
         text = {
-          [vim.diagnostic.severity.HINT] = '\u{25A1}',
-          [vim.diagnostic.severity.ERROR] = '\u{25A0}',
-          [vim.diagnostic.severity.INFO] = '\u{25CF}',
-          [vim.diagnostic.severity.WARN] = '\u{25B3}',
+          [vim.diagnostic.severity.HINT] = '\u{23FA}',
+          [vim.diagnostic.severity.ERROR] = '\u{23FA}',
+          [vim.diagnostic.severity.INFO] = '\u{23FA}',
+          [vim.diagnostic.severity.WARN] = '\u{23FA}',
+        },
+        numhl = {
+          [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+          [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+          [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+          [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
         },
       },
       update_in_insert = false,
