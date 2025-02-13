@@ -1,10 +1,11 @@
 local M = {}
 
----@param path string
----@return string buffer @content of file
+---Read the content of a file as a string.
+---the read is done with the permissions rrr (read only)
+---@param path string Path to the file
+---@return string buffer Contents of file as a string
 function M.read_file(path)
   -- permissions: rrr
-  --
   local fd = assert(vim.uv.fs_open(path, 'r', tonumber('0444', 8)))
   local stat = assert(vim.uv.fs_fstat(fd))
   -- read from offset 0.
@@ -13,10 +14,11 @@ function M.read_file(path)
   return buf
 end
 
----@param pkg_path string
----@param lang string
----@return table<string>
-function M.parse_pkg(pkg_path, lang)
+---Parse the pkg.json file and return a list of snippet paths
+---@param pkg_path string Path to the package.json file
+---@param lang string The language to filter the snippets by
+---@return string[] file_paths List of absolute paths to the snippet files
+local function parse_pkg(pkg_path, lang)
   local pkg = M.read_file(pkg_path)
   local data = vim.json.decode(pkg)
   local base_path = vim.fn.fnamemodify(pkg_path, ':h')
@@ -37,11 +39,11 @@ function M.parse_pkg(pkg_path, lang)
   return file_paths
 end
 
----@brief Process only one JSON encoded string
----@param snips string: JSON encoded string containing snippets
----@param desc string: Description for the snippets (optional)
----@return table: A table containing completion results formatted for LSP
-function M.process_snippets(snips, desc)
+---Process only one JSON encoded string
+---@param snips string JSON encoded string containing snippets
+---@param desc string Description for the snippets (optional)
+---@return table completion_results A table containing completion results formatted for LSP
+local function process_snippets(snips, desc)
   local snippets_table = {}
   local snippet_descs = {}
   local completion_results = {
@@ -63,13 +65,14 @@ function M.process_snippets(snips, desc)
     -- Add each prefix-body pair to the table
     for _, prefix in ipairs(prefixes) do
       snippets_table[prefix] = body
-      snippet_descs[prefix] = v.description
+      snippet_descs[prefix] = v.description or '-'
     end
   end
   -- Transform the snippets_table into completion_results
   for label, insertText in pairs(snippets_table) do
+    local long_desc = true
     table.insert(completion_results.items, {
-      detail = tostring(desc or 'User Snippet') .. '|' .. tostring(snippet_descs[label] or 'User Snippet'),
+      detail = tostring(desc) .. (long_desc and ('|' .. tostring(snippet_descs[label])) or ''),
       label = label,
       kind = vim.lsp.protocol.CompletionItemKind['Snippet'],
       documentation = {
@@ -85,13 +88,37 @@ function M.process_snippets(snips, desc)
   return completion_results
 end
 
----@param completion_source table: The completion result to be returned by the server
----@return function: A function that creates a new server instance
+---Concatenates all the snippets from all the given paths into a single source.
+---The simplest way to create a completion table source.
+---@param paths string[] List of paths to the pkg.json files
+---@param ft string The filetype
+---@param descs string[] A table of descriptions for each path
+---@return table all_snippets A table containing completion results formatted for LSP
+function M.concat_all(paths, ft, descs)
+  local all_snippets = { isIncomplete = false, items = {} }
+  for i, pkg_path in ipairs(paths) do
+    local snippet_paths = parse_pkg(pkg_path, ft)
+    for _, snips_path in ipairs(snippet_paths) do
+      local snips = M.read_file(snips_path)
+      local desc = descs and descs[i] or 'SN'
+      local lsp_snip = process_snippets(snips, desc)
+      if lsp_snip and lsp_snip.items then
+        for _, snippet_item in ipairs(lsp_snip.items) do
+          table.insert(all_snippets.items, snippet_item)
+        end
+      end
+    end
+  end
+  return all_snippets
+end
+
+---@param completion_source table The completion result to be returned by the server
+---@return function server A function that creates a new server instance
 local function new_server(completion_source)
   local function server(dispatchers)
     local closing = false
     local srv = {}
-    function srv.request(method, params, handler)
+    function srv.request(method, _params, handler)
       if method == 'initialize' then
         handler(nil, {
           capabilities = {
@@ -122,9 +149,11 @@ local function new_server(completion_source)
   return server
 end
 
----@param completion_source table: The completion source to be used by the mock
----LSP server
----@return integer: The client ID of the started LSP client
+---Start a mock LSP server with the given completion source. The id of the
+---client may not be that useful
+---@param completion_source table The completion source to be used by the mock
+---@return integer client_id The ID of the client that was started
+---@see yasp.CompTable
 function M.start_mock_lsp(completion_source)
   local server = new_server(completion_source)
   local dispatchers = {
@@ -136,14 +165,40 @@ function M.start_mock_lsp(completion_source)
     name = 'sn_ls',
     cmd = server,
     root_dir = vim.uv.cwd(), -- not needed actually
-    on_init = function(client)
+    on_init = function(_client)
       -- vim.notify('Snippet LSP server initialized', vim.log.levels.INFO)
     end,
-    on_exit = function(code, signal)
+    on_exit = function(_code, _signal)
       --   vim.notify('Snippet LSP server exited with code ' .. code .. ' and signal ' .. signal, vim.log.levels.ERROR)
     end,
   }, dispatchers)
   return client_id ---@type integer
+end
+
+---Create a callback to handle the destruction of the previous LSP client and
+---the creation of a new one. Basically a wrapper for usage with autocmds
+---@param paths string[] List of paths to the JSON snippet files
+---@param ft string Filetype of the current buffer
+---@param descs string[] List of descriptions for the snippet sources
+function M.snippet_handler(paths, ft, descs)
+  -- Stop the previous LSP client if it exists
+  local client = vim.lsp.get_clients({ name = 'sn_ls' })[1]
+  if client then
+    vim.lsp.stop_client(client.id)
+    if false then
+      vim.notify('Stopped previous sn_ls client with ' .. client.id, vim.log.levels.INFO)
+    end
+  end
+  -- Make sure the new server is started after the previous one is stopped
+  vim.defer_fn(function()
+    if ft ~= '' then -- do not run on empty filetype causes weird behavior
+      local all_snippets = M.concat_all(paths, ft, descs)
+      local client_id = M.start_mock_lsp(all_snippets)
+      if false then
+        vim.notify('Started new sn_ls client with ' .. client_id .. ' for ' .. ft, vim.log.levels.INFO)
+      end
+    end
+  end, 750)
 end
 
 return M

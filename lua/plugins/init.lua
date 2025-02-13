@@ -45,6 +45,23 @@ require('lazy').setup({
     opts = require 'plugins.configs.blink',
   },
 
+  {
+    'DimitrisDimitropoulos/yasp.nvim',
+    enabled = false,
+    event = 'InsertEnter',
+    opts = {
+      trigger_chars = {
+        ['*'] = { '{', '(', '[', ' ', '.', ':', ',' },
+        ['lua'] = { '.', ':' },
+      },
+      descs = { 'FR', 'USR' },
+      paths = {
+        vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json',
+        vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/package.json',
+      },
+    },
+  },
+
   { 'rafamadriz/friendly-snippets' },
 
   {
