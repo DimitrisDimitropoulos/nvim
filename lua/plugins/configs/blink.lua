@@ -49,9 +49,11 @@ return {
   appearance = {
     use_nvim_cmp_as_default = true,
   },
+  cmdline = {
+    sources = {},
+  },
   sources = {
     default = { 'lsp', 'path', 'buffer' },
-    cmdline = {},
     providers = {
       buffer = {
         min_keyword_length = 3,
