@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     }
 
     -- works on 0.10.3 but multiple clients is now well supported, therefore use it only on 0.11.X
-    if false and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
       local doc_hl = vim.api.nvim_create_augroup('DocumentHighlight' .. tostring(args.buf), { clear = false })
       vim.api.nvim_create_autocmd({ 'CursorHold', 'InsertLeave' }, {
         group = doc_hl,
