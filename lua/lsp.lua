@@ -8,6 +8,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if false and client and client:supports_method 'textDocument/completion' then
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+      vim.cmd [[
+      inoremap <C-j> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-j>"<CR>
+      inoremap <C-k> <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-k>"<CR>
+      ]]
     end
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
