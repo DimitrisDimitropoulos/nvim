@@ -1,7 +1,7 @@
 local M = {}
 
----@param entry table: A list of entries with their text, line, and column information
----@param title string: The title for the location list
+---@param entry table A list of entries with their text, line, and column information
+---@param title string The title for the location list
 function M.gen_loclist(entry, title)
   local bufname = vim.fn.bufname '%' ---@type string
   -- Get location list info
@@ -38,15 +38,18 @@ function M.gen_loclist(entry, title)
 end
 
 ---A unified function to capture nodes using a query string and language
----@param query_str string  -- The Treesitter query string
----@param lang string       -- The language of the Treesitter parser
----@return table            -- A list of entries with text, line, column, and file path
+---@param query_str string The Treesitter query string
+---@param lang string The language of the Treesitter parser
+---@return table entries list of entries with text, line, column, and file path
 function M.get_entries(query_str, lang)
   local bufnr = vim.api.nvim_get_current_buf() ---@type number
   -- Check Neovim version
   if vim.version().minor < 11 then
     -- Use the old Treesitter approach
-    local parser = vim.treesitter.get_parser(bufnr, lang) ---@type vim.treesitter.LanguageTree
+    local parser = vim.treesitter.get_parser(bufnr, lang) ---@type vim.treesitter.LanguageTree?
+    if not parser then
+      return {}
+    end
     local root = parser:parse()[1]:root() ---@type TSTree
     local query = vim.treesitter.query.parse(lang, query_str)
     local entries = {}
@@ -70,7 +73,10 @@ function M.get_entries(query_str, lang)
     return entries
   else
     -- Use the newer approach for 0.11+
-    local parser = vim.treesitter.get_parser(bufnr, lang) ---@type vim.treesitter.LanguageTree
+    local parser = vim.treesitter.get_parser(bufnr, lang) ---@type vim.treesitter.LanguageTree?
+    if not parser then
+      return {}
+    end
     local tree = parser:parse()[1]
     local root = tree:root() ---@type TSTree
     local query = vim.treesitter.query.parse(lang, query_str)
