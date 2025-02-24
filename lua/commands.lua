@@ -56,6 +56,45 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+local function input(opts, on_confirm)
+  local prompt = opts.prompt or 'Input: '
+  local default = opts.default or ''
+  on_confirm = on_confirm or function() end
+  local config = {
+    style = 'minimal',
+    border = vim.g.border_style,
+    width = 20,
+    height = 1,
+    relative = 'cursor',
+    row = -3,
+    col = 0,
+    focusable = true,
+    title = prompt,
+    noautocmd = true,
+    title_pos = 'center',
+  }
+  local buf = vim.api.nvim_create_buf(false, true)
+  local win = vim.api.nvim_open_win(buf, true, config)
+  vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, { default })
+  vim.cmd 'startinsert'
+  vim.api.nvim_win_set_cursor(win, { 1, #default })
+  vim.keymap.set({ 'n', 'i', 'v' }, '<CR>', function()
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, 1, false)
+    vim.cmd 'stopinsert'
+    vim.api.nvim_win_close(win, true)
+    on_confirm(lines[1])
+  end, { buffer = buf })
+  vim.keymap.set('n', '<ESC>', function()
+    vim.cmd 'stopinsert'
+    vim.api.nvim_win_close(win, true)
+    on_confirm(nil)
+  end, { buffer = buf })
+end
+---@diagnostic disable-next-line: duplicate-set-field
+vim.ui.input = function(opts, on_confirm)
+  input(opts, on_confirm)
+end
+
 local paths = {
   vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json',
   vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/package.json',
