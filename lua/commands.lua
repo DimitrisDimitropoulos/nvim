@@ -56,6 +56,43 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+local function select_ui(items, opts, on_choice)
+  local prompt = opts.prompt or 'Select an option:'
+  local config = {
+    style = 'minimal',
+    border = vim.g.border_style or 'single',
+    width = math.max(40, #prompt),
+    height = math.min(#items, 10),
+    relative = 'cursor',
+    row = 1,
+    col = 2,
+    focusable = true,
+    title = prompt,
+    noautocmd = true,
+    title_pos = 'center',
+  }
+  local buf = vim.api.nvim_create_buf(false, true)
+  local win = vim.api.nvim_open_win(buf, true, config)
+  local lines = {}
+  for _, item in ipairs(items) do
+    table.insert(lines, (opts.format_item and opts.format_item(item)) or tostring(item))
+  end
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.keymap.set({ 'n', 'i', 'v' }, '<CR>', function()
+    local row = vim.api.nvim_win_get_cursor(win)[1]
+    vim.api.nvim_win_close(win, true)
+    on_choice(items[row], row)
+  end, { buffer = buf })
+  vim.keymap.set('n', '<ESC>', function()
+    vim.api.nvim_win_close(win, true)
+    on_choice(nil, nil)
+  end, { buffer = buf })
+end
+---@diagnostic disable-next-line: duplicate-set-field
+vim.ui.select = function(items, opts, on_choice)
+  select_ui(items, opts, on_choice)
+end
+
 local function input(opts, on_confirm)
   local prompt = opts.prompt or 'Input: '
   local default = opts.default or ''
