@@ -36,6 +36,20 @@ vim.keymap.set('n', '<A-z>', function()
   toggle_option [[wrap]]
 end, { silent = false, noremap = true })
 
+vim.keymap.set('n', 'z=', function()
+  vim.ui.select(vim.fn.spellsuggest(vim.fn.expand '<cword>'), {
+    prompt = 'Select a word: ',
+    format_item = function(item)
+      return item
+    end,
+  }, function(choice)
+    if not choice then
+      return
+    end
+    vim.cmd('normal! "_ciw' .. choice)
+  end)
+end, { noremap = true, desc = 'spellsuggest' })
+
 vim.keymap.set({ 'i', 's' }, '<A-j>', function()
   if vim.snippet.active { direction = 1 } then
     vim.schedule(function()
