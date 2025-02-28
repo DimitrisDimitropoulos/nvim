@@ -5,47 +5,6 @@
 local statusline_augroup = vim.api.nvim_create_augroup('Statusline', { clear = true })
 local max = 80
 
-local modes = {
-  ['n'] = 'NORMAL',
-  ['no'] = 'NORMAL?',
-  ['nov'] = 'NORMAL?',
-  ['noV'] = 'NORMAL?',
-  ['no\22'] = 'NORMAL?',
-  ['niI'] = 'NORMALi',
-  ['niR'] = 'NORMALR',
-  ['niV'] = 'NORMALV',
-  ['nt'] = 'NORMALt',
-  ['v'] = 'VISUAL',
-  ['vs'] = 'VISUALs',
-  ['V'] = 'LINES',
-  ['Vs'] = 'LINESs',
-  ['\22'] = 'BLOCK',
-  ['\22s'] = 'BLOCK',
-  ['s'] = 'SUBSTITUTE',
-  ['S'] = 'S_',
-  ['\19'] = '^S',
-  ['i'] = 'INSERT',
-  ['ic'] = 'INSERTc',
-  ['ix'] = 'INSERTx',
-  ['R'] = 'REPLACE',
-  ['Rc'] = 'REPLACEc',
-  ['Rx'] = 'REPLACEx',
-  ['Rv'] = 'REPLACEv',
-  ['Rvc'] = 'REPLACEvc',
-  ['Rvx'] = 'REPLACEx',
-  ['c'] = 'COMMAND',
-  ['cv'] = 'Ex',
-  ['r'] = '...',
-  ['rm'] = 'M',
-  ['r?'] = '?',
-  ['!'] = '!',
-  ['t'] = 'TERMINAL',
-}
---- @return string
-local function mode()
-  return string.format('%%#StatusLineMode# %s %%* ', modes[vim.api.nvim_get_mode().mode])
-end
-
 --- @return string
 local function filename()
   local fname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
@@ -283,7 +242,7 @@ end
 StatusLine = {}
 StatusLine.active = function()
   return table.concat {
-    mode(),
+    ' ',
     filename(),
     full_git(),
     ' ',
@@ -306,6 +265,7 @@ vim.opt.statusline = '%!v:lua.StatusLine.active()'
 local function get_hl(name)
   return vim.api.nvim_get_hl(0, { name = name, link = false })
 end
+vim.api.nvim_set_hl(0, 'StatusLine', { link = 'CursorLine' })
 local bg = get_hl('Statusline').bg
 local fg = get_hl('Statusline').fg
 
@@ -326,33 +286,3 @@ for name, attrs in pairs {
 } do
   vim.api.nvim_set_hl(0, name, attrs)
 end
-
-local mode_colors = {
-  ['n'] = '#d4bfff',
-  ['i'] = '#fabd2f',
-  ['v'] = 'purple',
-  ['V'] = '#d3869b',
-  ['\22'] = 'magenta',
-  ['c'] = '#b8bb26',
-  ['s'] = 'purple',
-  ['S'] = 'purple',
-  ['\19'] = 'purple',
-  ['R'] = 'orange',
-  ['r'] = 'orange',
-  ['!'] = '#fb4934',
-  ['t'] = '#f6d5a4',
-}
-vim.api.nvim_create_autocmd('ModeChanged', {
-  group = statusline_augroup,
-  pattern = '*:*',
-  callback = function()
-    vim.api.nvim_set_hl(
-      0,
-      'StatusLineMode',
-      { fg = '#000000', bold = true, bg = mode_colors[vim.api.nvim_get_mode().mode:sub(1, 1)] }
-    )
-    vim.schedule_wrap(function()
-      vim.cmd.redrawstatus()
-    end)
-  end,
-})

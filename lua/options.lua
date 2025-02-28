@@ -82,7 +82,7 @@ opt.smartcase = true
 opt.mouse = 'c'
 
 opt.laststatus = 3
-opt.showmode = false
+opt.showmode = true
 opt.scrolloff = 3
 opt.sidescrolloff = 3
 opt.smoothscroll = true
