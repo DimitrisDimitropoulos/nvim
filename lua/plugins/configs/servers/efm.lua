@@ -83,7 +83,7 @@ local langs = {
 }
 
 require('lspconfig').efm.setup {
-  init_options = { documentFormatting = true },
+  init_options = { documentFormatting = true, codeAction = false },
   filetypes = vim.tbl_keys(langs),
   settings = { lintDebounce = 100, languages = langs, logLevel = 1 },
 }
