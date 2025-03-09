@@ -1,6 +1,6 @@
 local G = vim.g
-vim.opt.mouse = 'a'
-vim.opt.smoothscroll = true
+vim.o.mouse = 'a'
+vim.o.smoothscroll = true
 G.neovide_scroll_animation_length = 0
 G.neovide_refresh_rate = 60
 G.neovide_touch_drag_timeout = 0
@@ -19,7 +19,7 @@ G.gui_font_size = vim.g.gui_font_default_size
 G.gui_font_face = 'Comic Code,JetBrainsMono Nerd Font'
 
 local set_guifont = function()
-  vim.opt.guifont = string.format('%s:h%s', vim.g.gui_font_face, vim.g.gui_font_size)
+  vim.o.guifont = string.format('%s:h%s', vim.g.gui_font_face, vim.g.gui_font_size)
 end
 
 local resize_guifont = function(delta)

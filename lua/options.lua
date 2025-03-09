@@ -2,26 +2,19 @@ vim.g.mapleader = ' '
 vim.g.tex_flavor = 'latex'
 vim.g.border_style = 'rounded' ---@type string
 
-local opt = vim.o
+local o = vim.o
 
-opt.langmap =
+o.langmap =
   'ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,ΡR,ΣS,ΤT,ΘU,ΩV,WW,ΧX,ΥY,ΖZ,αa,βb,ψc,δd,εe,φf,γg,ηh,ιi,ξj,κk,λl,μm,νn,οo,πp,qq,ρr,σs,τt,θu,ωv,ςw,χx,υy,ζz'
-opt.list = true
-vim.opt.listchars = {
-  eol = '\\U000021b5',
-  tab = '  ',
-  extends = '>',
-  precedes = '<',
-  trail = '\\U00002022',
-  nbsp = '~',
-}
-opt.showbreak = '\u{21AA} '
+o.list = true
+o.listchars = 'eol:\\U000021b5,extends:>,nbsp:~,precedes:<,tab:  ,trail:\\U00002022'
+o.showbreak = '\u{21AA} '
 
-opt.spelllang = 'el,en'
-opt.spellsuggest = 'fast'
-opt.spelloptions = 'camel'
+o.spelllang = 'el,en'
+o.spellsuggest = 'fast'
+o.spelloptions = 'camel'
 
-opt.clipboard = 'unnamedplus'
+o.clipboard = 'unnamedplus'
 if vim.fn.has 'unix' == 1 then
   if vim.fn.executable 'xclip' == 1 then
     vim.g.clipboard = {
@@ -53,65 +46,65 @@ if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
   }
 end
 if vim.fn.has 'win32' == 1 and vim.fn.executable 'pwsh.exe' == 1 then
-  opt.shell = 'pwsh.exe'
-  opt.shellxquote = ''
-  opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
+  o.shell = 'pwsh.exe'
+  o.shellxquote = ''
+  o.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
 end
 if vim.fn.executable 'rg' == 1 then
-  opt.grepprg = 'rg --vimgrep --smart-case --hidden --color=never --glob !.git'
-  opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+  o.grepprg = 'rg --vimgrep --smart-case --hidden --color=never --glob !.git'
+  o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 end
 
-opt.path = opt.path .. '**'
+o.path = o.path .. '**'
 
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
+o.expandtab = true
+o.shiftwidth = 2
+o.smartindent = true
+o.tabstop = 2
+o.softtabstop = 2
 
-opt.linebreak = true
-opt.pumheight = 20
+o.linebreak = true
+o.pumheight = 20
 if vim.version().minor >= 11 then
-  vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' } -- noselect is broken
+  o.completeopt = 'menuone,popup,noinsert,fuzzy'
 end
 
-opt.diffopt = 'filler,internal,hiddenoff,algorithm:histogram,indent-heuristic,linematch:60,vertical'
-opt.incsearch = true
-opt.smartcase = true
-opt.mouse = 'c'
+o.diffopt = 'filler,internal,hiddenoff,algorithm:histogram,indent-heuristic,linematch:60,vertical'
+o.incsearch = true
+o.smartcase = true
+o.mouse = 'c'
 
-opt.laststatus = 3
-opt.showmode = true
-opt.scrolloff = 3
-opt.sidescrolloff = 3
-opt.smoothscroll = true
-opt.cursorlineopt = 'both'
-opt.cursorline = true
-opt.cursorcolumn = false
-opt.number = false
-opt.relativenumber = true
-opt.numberwidth = 2
-opt.ruler = true
-opt.signcolumn = 'yes'
+o.laststatus = 3
+o.showmode = true
+o.scrolloff = 3
+o.sidescrolloff = 3
+o.smoothscroll = true
+o.cursorlineopt = 'both'
+o.cursorline = true
+o.cursorcolumn = false
+o.number = false
+o.relativenumber = true
+o.numberwidth = 2
+o.ruler = true
+o.signcolumn = 'yes'
 
-opt.splitbelow = true
-opt.splitright = true
-opt.termguicolors = true
-opt.timeout = true
-opt.timeoutlen = 400
-opt.undofile = true
-opt.updatetime = 500
+o.splitbelow = true
+o.splitright = true
+o.termguicolors = true
+o.timeout = true
+o.timeoutlen = 400
+o.undofile = true
+o.updatetime = 500
 
-opt.foldcolumn = '1'
-opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
-opt.foldenable = true
-opt.foldtext = ''
-opt.foldlevel = 99
-opt.foldlevelstart = 99
+o.foldcolumn = '1'
+o.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
+o.foldenable = true
+o.foldtext = ''
+o.foldlevel = 99
+o.foldlevelstart = 99
 
 if vim.version().minor >= 11 then
-  opt.statuscolumn =
+  o.statuscolumn =
     '%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%l%s'
 end
 
