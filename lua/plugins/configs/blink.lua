@@ -17,7 +17,7 @@ return {
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 50,
-      update_delay_ms = 1,
+      update_delay_ms = 50,
       treesitter_highlighting = false,
       window = {
         border = vim.g.border_style,
