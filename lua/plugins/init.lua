@@ -140,6 +140,7 @@ require('lazy').setup({
           auto_trigger = true,
           debounce = 5,
           keymap = { accept = false },
+          hide_during_completion = false,
         },
       }
       vim.keymap.set('i', '<Tab>', function()
