@@ -157,7 +157,10 @@ if vim.version().minor >= 11 then
     if not client then
       return vim.notify('Texlab client not found', vim.log.levels.ERROR)
     end
-    local new_env = vim.fn.input 'Enter the new environment name: '
+    local new_env
+    vim.ui.input({ prompt = 'New environment name: ' }, function(input)
+      new_env = input
+    end)
     if not new_env or new_env == '' then
       return vim.notify('No environment name provided', vim.log.levels.WARN)
     end
