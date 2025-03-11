@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    if true and vim.version().minor >= 11 and client:supports_method 'textDocument/completion' then
+    if vim.version().minor >= 11 and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       local g = vim.api.nvim_create_augroup('UserCompletion', { clear = true })
       local bufnr = args.buf
       vim.lsp.completion.enable(true, client.id, bufnr, {
@@ -158,13 +158,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<leader>dq', vim.diagnostic.setqflist, { desc = 'diagnostics setqflist' })
     map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'diagnostics setloclist' })
 
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = vim.api.nvim_create_augroup('AutoFormat', { clear = true }),
-      pattern = { '*tex', '*lua', '*py', '*jl', '*json', '*yml', '*rs', '*sh', '*typ' },
-      callback = function()
-        vim.lsp.buf.format()
-      end,
-      desc = 'format on save',
-    })
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting) then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('AutoFormat', { clear = true }),
+        pattern = { '*tex', '*lua', '*py', '*jl', '*json', '*yml', '*rs', '*sh', '*typ' },
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+        desc = 'format on save',
+      })
+    end
   end,
 })
