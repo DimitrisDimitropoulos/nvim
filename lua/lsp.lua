@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    if false and vim.version().minor >= 11 and client:supports_method 'textDocument/completion' then
+    if true and vim.version().minor >= 11 and client:supports_method 'textDocument/completion' then
       local g = vim.api.nvim_create_augroup('UserCompletion', { clear = true })
       local bufnr = args.buf
       vim.lsp.completion.enable(true, client.id, bufnr, {
