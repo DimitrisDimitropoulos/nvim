@@ -6,7 +6,8 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd('TextYankPost', {
   group = augroup 'YankHighlight',
   callback = function()
-    vim.highlight.on_yank { timeout = 230, higroup = 'Visual' }
+    local hl = vim.hl or vim.highlight
+    hl.on_yank { timeout = 230, higroup = 'Visual' }
   end,
   desc = 'highlight on yank',
 })
