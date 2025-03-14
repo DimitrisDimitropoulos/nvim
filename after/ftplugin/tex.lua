@@ -39,14 +39,9 @@ if vim.version().minor >= 11 then
   vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
 end
 
----@return table: A list of heading entries with their text, line, column, and file path
+---@return table headings the list of headings
 local function get_headings()
-  local bufnr = vim.api.nvim_get_current_buf() ---@type number
-  local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
-  local root = parser:parse()[1]:root() ---@type table<integer, TSTree>
-  -- List of LaTeX sectioning commands
-  local headings = {}
-  for _, command in ipairs {
+  local commands = {
     'part',
     'chapter',
     'section',
@@ -54,81 +49,16 @@ local function get_headings()
     'subsubsection',
     'paragraph',
     'subparagraph',
-  } do
-    -- Construct a query for each LaTeX sectioning command
-    local query_string = string.format('(%s (curly_group (text) @heading_title))', command)
-    local query = vim.treesitter.query.parse('latex', query_string)
-    for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
-      for _, node in pairs(match) do
-        local text = vim.treesitter.get_node_text(node, bufnr) ---@type string
-        local line, col, _, _ = node:range() ---@type integer, integer, integer, integer
-        line = line + 1
-        col = col + 1
-        text = string.upper(command:sub(1, 1)) .. command:sub(2) .. ': ' .. text
-        local entry = {
-          text = text,
-          line = line,
-          col = col,
-          path = vim.api.nvim_buf_get_name(0), ---@type string
-        }
-        table.insert(headings, entry)
-        -- make sure they are sorted by line number
-        table.sort(headings, function(a, b)
-          return a.line < b.line
-        end)
-      end
-    end
-  end
-  return headings
-end
-
----@return table: A list of heading entries with their text, line, column, and file path
-local function get_headings_11()
-  local bufnr = vim.api.nvim_get_current_buf() ---@type number
-  local parser = vim.treesitter.get_parser(bufnr, 'latex') ---@type vim.treesitter.LanguageTree
-  local tree = parser:parse()[1]
-  local root = tree:root() ---@type table<integer, TSTree>
-  -- List of LaTeX sectioning commands
+  }
   local headings = {}
-  for _, command in ipairs {
-    'part',
-    'chapter',
-    'section',
-    'subsection',
-    'subsubsection',
-    'paragraph',
-    'subparagraph',
-  } do
-    -- Construct a query for each LaTeX sectioning command
+  for _, command in ipairs(commands) do
     local query_string = string.format('(%s (curly_group (text) @heading_title))', command)
-    local query = vim.treesitter.query.parse('latex', query_string)
-    for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
-      -- Since match now returns a list of nodes, iterate over the list
-      for _, nodes in pairs(match) do
-        -- Iterate over all the nodes for each capture ID
-        for _, node in ipairs(nodes) do
-          -- Process each node as before
-          if node then
-            local text = vim.treesitter.get_node_text(node, bufnr) ---@type string
-            if text then
-              local line, col, _, _ = node:range() ---@type integer, integer, integer, integer
-              line = line + 1
-              col = col + 1
-              text = string.upper(command:sub(1, 1)) .. command:sub(2) .. ': ' .. text
-              local entry = {
-                text = text,
-                line = line,
-                col = col,
-                path = vim.api.nvim_buf_get_name(0), ---@type string
-              }
-              table.insert(headings, entry)
-            end
-          end
-        end
-      end
+    local entries = require('utils').get_entries(query_string, 'latex')
+    for _, entry in ipairs(entries) do
+      entry.text = string.upper(command:sub(1, 1)) .. command:sub(2) .. ': ' .. entry.text
+      table.insert(headings, entry)
     end
   end
-  -- Ensure headings are sorted by line number
   table.sort(headings, function(a, b)
     return a.line < b.line
   end)
@@ -136,12 +66,7 @@ local function get_headings_11()
 end
 
 vim.keymap.set('n', 'gO', function()
-  local gen_loclist = require('utils').gen_loclist
-  if vim.version().minor < 11 then
-    gen_loclist(get_headings(), 'LaTeX TOC')
-  else
-    gen_loclist(get_headings_11(), 'LaTeX TOC')
-  end
+  require('utils').gen_loclist(get_headings(), 'LaTeX TOC')
 end, { silent = true, noremap = true, desc = 'User: show LaTeX TOC' })
 vim.api.nvim_create_user_command('GetLabels', function()
   require('utils').gen_loclist(
