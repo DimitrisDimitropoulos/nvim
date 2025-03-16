@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             or {}
           if vim.v.char:match '[%w_]' and not vim.list_contains(triggerchars, vim.v.char) then
             vim.schedule(function()
-              vim.lsp.completion.trigger()
+              vim.lsp.completion.get()
             end)
           end
         end,
