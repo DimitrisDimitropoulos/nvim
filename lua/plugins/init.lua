@@ -125,13 +125,6 @@ require('lazy').setup({
   },
 
   {
-    'numToStr/Comment.nvim',
-    enabled = false,
-    keys = { 'gc', 'gb' },
-    opts = {},
-  },
-
-  {
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
     config = function()
