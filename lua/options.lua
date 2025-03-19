@@ -88,6 +88,7 @@ o.numberwidth = 2
 o.ruler = true
 o.signcolumn = 'yes'
 
+o.winborder = 'rounded'
 o.splitbelow = true
 o.splitright = true
 o.termguicolors = true
