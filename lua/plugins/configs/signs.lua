@@ -48,6 +48,6 @@ gitsigns.setup {
     end, { desc = 'toggle git diff' })
   end,
 
-  max_file_length = 1000,
+  max_file_length = 2500,
   sign_priority = 1,
 }
