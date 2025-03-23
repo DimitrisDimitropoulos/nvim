@@ -35,6 +35,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.cmd [[
       inoremap <C-j> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-j>"<CR>
       inoremap <C-k> <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-k>"<CR>
+      inoremap <Enter> <C-e><Enter>
       ]]
     end
 
