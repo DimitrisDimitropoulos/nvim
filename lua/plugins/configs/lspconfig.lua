@@ -6,7 +6,7 @@ for _, lsp in ipairs {
   'ruff',
   'taplo',
   'yamlls',
-  'basedpyright',
+  -- 'basedpyright',
   'zls',
 } do
   require('lspconfig')[lsp].setup { capabilities = vim.lsp.protocol.make_client_capabilities() }
@@ -14,3 +14,12 @@ end
 for _, lsp in ipairs { 'texlab', 'rust_analyzer', 'efm', 'lua_ls', 'tinymist' } do
   require('plugins.configs.servers.' .. lsp)
 end
+
+require('lspconfig').basedpyright.setup {
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  settings = {
+    basedpyright = {
+      typeCheckingMode = 'standard',
+    },
+  },
+}
