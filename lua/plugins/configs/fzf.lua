@@ -20,7 +20,8 @@ fzf_lua.setup {
   },
   files = {
     formatter = 'path.dirname_first',
-    cmd = 'rg --files --smart-case --color=never --follow --glob !.git --glob !build --glob !spell --glob !lockfiles',
+    cmd = 'rg --files --smart-case --color=never --follow --glob !.git --glob !build --glob !spell',
+    hidden = false,
     cwd_prompt = true,
     cwd_prompt_shorten_len = 1,
     git_icons = true,
