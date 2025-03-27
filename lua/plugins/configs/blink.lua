@@ -20,12 +20,10 @@ return {
       update_delay_ms = 50,
       treesitter_highlighting = false,
       window = {
-        border = vim.g.border_style,
         scrollbar = false,
       },
     },
     menu = {
-      border = vim.g.border_style,
       scrollbar = false,
       draw = {
         columns = { { 'label', 'label_description', gap = 1 }, { 'kind' } },
@@ -38,7 +36,6 @@ return {
   signature = {
     enabled = true,
     window = {
-      border = vim.g.border_style,
       scrollbar = false,
     },
   },

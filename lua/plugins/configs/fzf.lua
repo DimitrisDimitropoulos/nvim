@@ -54,7 +54,7 @@ fzf_lua.setup {
   winopts = {
     height = 0.97,
     width = 0.95,
-    border = vim.g.border_style,
+    border = vim.o.winborder,
     preview = {
       default = 'bat',
       horizontal = 'right:50%',

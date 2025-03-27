@@ -6,8 +6,8 @@ end
 cmp.setup {
 
   window = {
-    documentation = { border = vim.g.border_style },
-    completion = { scrollbar = false, border = vim.g.border_style },
+    documentation = { border = vim.o.winborder },
+    completion = { scrollbar = false, border = vim.o.winborder },
   },
 
   mapping = cmp.mapping.preset.insert {

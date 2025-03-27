@@ -66,12 +66,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local hover = vim.lsp.buf.hover -- Store the original function in a local variable
     ---@diagnostic disable-next-line: duplicate-set-field
     vim.lsp.buf.hover = function()
-      return hover { border = vim.g.border_style, max_height = 20, max_width = 75 }
+      return hover { max_height = 20, max_width = 75 }
     end
     local signature_help = vim.lsp.buf.signature_help
     ---@diagnostic disable-next-line: duplicate-set-field
     vim.lsp.buf.signature_help = function()
-      return signature_help { border = vim.g.border_style, max_height = 20, max_width = 75 }
+      return signature_help { max_height = 20, max_width = 75 }
     end
 
     vim.diagnostic.config {
@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         },
       },
       update_in_insert = false,
-      float = { source = true, border = vim.g.border_style },
+      float = { source = true },
       jump = { float = true },
     }
 
