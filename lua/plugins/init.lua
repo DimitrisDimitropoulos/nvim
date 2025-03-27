@@ -66,7 +66,7 @@ require('lazy').setup({
 
   {
     'hrsh7th/nvim-cmp',
-    enabled = vim.version().minor <= 10,
+    enabled = vim.fn.has 'nvim-0.11' ~= 1,
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-buffer',

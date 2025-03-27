@@ -70,7 +70,7 @@ local function process_snippets(snips, desc)
   end
   -- Transform the snippets_table into completion_results
   for label, insertText in pairs(snippets_table) do
-    local long_desc = vim.version().minor <= 10
+    local long_desc = vim.fn.has 'nvim-0.11' ~= 1
     table.insert(completion_results.items, {
       detail = tostring(desc) .. (long_desc and ('|' .. tostring(snippet_descs[label])) or ''),
       label = label,

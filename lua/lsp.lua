@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    if vim.version().minor >= 11 and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       local g = vim.api.nvim_create_augroup('UserCompletion', { clear = true })
       local bufnr = args.buf
       vim.lsp.completion.enable(true, client.id, bufnr, {
@@ -63,21 +63,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    if vim.version().minor < 11 then
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.border_style })
-      vim.lsp.handlers['textDocument/signatureHelp'] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = vim.g.border_style })
-    else
-      local hover = vim.lsp.buf.hover -- Store the original function in a local variable
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.lsp.buf.hover = function()
-        return hover { border = vim.g.border_style, max_height = 20, max_width = 75 }
-      end
-      local signature_help = vim.lsp.buf.signature_help
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.lsp.buf.signature_help = function()
-        return signature_help { border = vim.g.border_style, max_height = 20, max_width = 75 }
-      end
+    local hover = vim.lsp.buf.hover -- Store the original function in a local variable
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.lsp.buf.hover = function()
+      return hover { border = vim.g.border_style, max_height = 20, max_width = 75 }
+    end
+    local signature_help = vim.lsp.buf.signature_help
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.lsp.buf.signature_help = function()
+      return signature_help { border = vim.g.border_style, max_height = 20, max_width = 75 }
     end
 
     vim.diagnostic.config {
@@ -132,13 +126,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local map = vim.keymap.set
 
-    if vim.version().minor < 11 then
-      map('n', 'grr', vim.lsp.buf.references, { desc = 'lsp references' })
-      map('n', 'gri', vim.lsp.buf.implementation, { desc = 'lsp implementation' })
-      map('n', 'grn', vim.lsp.buf.rename, { desc = 'lsp rename' })
-      map('n', 'gra', vim.lsp.buf.code_action, { desc = 'lsp code actions', silent = true })
-      map('i', '<C-s>', vim.lsp.buf.signature_help, { desc = 'lsp signature help' })
-    end
     map('n', '<leader>lh', function()
       if vim.lsp.inlay_hint.is_enabled() then
         vim.lsp.inlay_hint.enable(false)

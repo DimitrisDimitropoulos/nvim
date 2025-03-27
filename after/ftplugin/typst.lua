@@ -34,20 +34,12 @@ local function create_tinymist_command(command_name)
       -- If exporting, show the string result; else, show the table for inspection
       vim.notify(export_type and res or vim.inspect(res), vim.log.levels.INFO)
     end
-    if vim.fn.has 'nvim-0.11' == 1 then
-      -- For Neovim 0.11+
-      return client:exec_cmd({
-        title = title_str,
-        command = command_name,
-        arguments = arguments,
-      }, { bufnr = bufnr }, handler)
-    else
-      -- For Neovim < 0.11
-      return client.request('workspace/executeCommand', {
-        command = command_name,
-        arguments = arguments,
-      }, handler, bufnr)
-    end
+    -- For Neovim 0.11+
+    return client:exec_cmd({
+      title = title_str,
+      command = command_name,
+      arguments = arguments,
+    }, { bufnr = bufnr }, handler)
   end
   -- Construct a readable command name/desc
   local cmd_name = export_type and ('TinymistExport' .. cmd_display) or ('Tinymist' .. cmd_display)

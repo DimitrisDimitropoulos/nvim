@@ -44,7 +44,7 @@ end
 function M.get_entries(query_str, lang)
   local bufnr = vim.api.nvim_get_current_buf() ---@type number
   -- Check Neovim version
-  if vim.version().minor < 11 then
+  if vim.fn.has 'nvim-0.11' ~= 1 then
     -- Use the old Treesitter approach
     local parser = vim.treesitter.get_parser(bufnr, lang) ---@type vim.treesitter.LanguageTree?
     if not parser then

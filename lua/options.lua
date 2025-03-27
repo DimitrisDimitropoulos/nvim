@@ -65,9 +65,7 @@ o.softtabstop = 2
 
 o.linebreak = true
 o.pumheight = 20
-if vim.version().minor >= 11 then
-  o.completeopt = 'menuone,popup,noinsert,fuzzy'
-end
+o.completeopt = 'menuone,popup,noinsert,fuzzy'
 
 o.diffopt = 'filler,internal,hiddenoff,algorithm:histogram,indent-heuristic,linematch:60,vertical'
 o.incsearch = true
@@ -104,10 +102,7 @@ o.foldtext = ''
 o.foldlevel = 99
 o.foldlevelstart = 99
 
-if vim.version().minor >= 11 then
-  o.statuscolumn =
-    '%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%l%s'
-end
+o.statuscolumn = '%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%l%s'
 
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0

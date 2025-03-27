@@ -1,19 +1,5 @@
 vim.keymap.set('n', '<C-s>', vim.cmd.write)
 
-if vim.version().minor < 11 then
-  vim.keymap.set('n', '[b', function()
-    vim.cmd 'bp'
-  end, { noremap = true, desc = 'previous buffer' })
-  vim.keymap.set('n', ']b', function()
-    vim.cmd 'bn'
-  end, { noremap = true, desc = 'next buffer' })
-  vim.keymap.set('n', '[q', function()
-    vim.cmd 'cprev'
-  end, { noremap = true, desc = 'previous quickfix' })
-  vim.keymap.set('n', ']q', function()
-    vim.cmd 'cnext'
-  end, { noremap = true, desc = 'next quickfix' })
-end
 vim.keymap.set('n', '<leader>bd', function()
   vim.cmd 'bd'
 end, { noremap = true, desc = 'delete buffer' })
