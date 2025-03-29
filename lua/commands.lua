@@ -38,15 +38,17 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('TreesitterFolds', { clear = true }),
-  desc = 'load treesitter folds later to copensate for async loading',
+  group = vim.api.nvim_create_augroup('UserTreesitter', { clear = true }),
+  desc = 'handle the loading and usage of treesitter',
   callback = function(args)
     local bufnr = args.buf
-    -- check if treesitter is available
-    if pcall(vim.treesitter.start, bufnr) then
+    if pcall(vim.treesitter.start, bufnr, vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)) then
+      vim.treesitter.start(bufnr, vim.treesitter.language.get_lang(vim.bo[bufnr].filetype))
+      vim.cmd [[ syntax off ]]
       vim.wo[0][0].foldmethod = 'expr'
       vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     else
+      vim.cmd [[ syntax on ]]
       vim.wo[0][0].foldmethod = 'manual'
     end
   end,
