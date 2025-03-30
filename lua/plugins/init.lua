@@ -27,10 +27,13 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    branch = 'main',
     event = evs,
     config = function()
-      require('nvim-treesitter').setup {}
+      require('nvim-treesitter.configs').setup {
+        highlight = { enable = true, use_languagetree = true, additional_vim_regex_highlighting = false },
+        indent = { enable = false },
+        incremental_selection = { enable = false },
+      }
     end,
   },
 
