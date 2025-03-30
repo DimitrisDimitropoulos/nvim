@@ -110,21 +110,16 @@ if vim.fn.executable 'rg' == 1 then
           end
           return
         end
-        -- Prepare the quickfix list
-        local qf_list = {}
-        for _, line in ipairs(results) do
-          table.insert(qf_list, { filename = line })
-        end
-        -- Set the quickfix list with the results
-        vim.fn.setqflist(qf_list, 'r')
-        -- Set additional options like the title
-        vim.fn.setqflist({}, 'a', { title = string.format("Results for pattern: '%s'", pattern) })
-        -- Open the quickfix window
-        vim.cmd 'copen'
-        -- Resize the quickfix window if there are fewer than 10 results
-        if #results < 10 then
-          vim.cmd('resize ' .. #results)
-        end
+        vim.ui.select(results, {
+          prompt = string.format("Results for pattern: '%s'", pattern),
+          format_item = function(item)
+            return item
+          end,
+        }, function(choice)
+          if choice then
+            vim.cmd('edit ' .. choice)
+          end
+        end)
       end)
       if code > 1 then
         vim.schedule(function()
