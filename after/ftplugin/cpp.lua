@@ -41,7 +41,7 @@ local function show_memory_usage()
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
-  clangd_client.request('$/memoryUsage', nil, mem_handler, bufnr)
+  clangd_client:request('$/memoryUsage', nil, mem_handler, bufnr)
 end
 
 vim.api.nvim_create_user_command('ClangdShowMemoryUsage', function()
@@ -95,7 +95,7 @@ local function type_hierarchy()
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
   local pos = vim.api.nvim_win_get_cursor(0)
-  clangd_client.request('textDocument/typeHierarchy', {
+  clangd_client:request('textDocument/typeHierarchy', {
     textDocument = { uri = vim.uri_from_bufnr(0) },
     position = { line = pos[1] - 1, character = pos[2] },
     resolve = 3,
