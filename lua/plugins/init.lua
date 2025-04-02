@@ -14,17 +14,6 @@ require('lazy').setup({
   },
 
   {
-    'nvim-telescope/telescope.nvim',
-    enabled = false,
-    keys = { '<leader>f', '<leader>s' },
-    cmd = 'Telescope',
-    config = function()
-      require 'plugins.configs.telescope'
-    end,
-    dependencies = 'nvim-lua/plenary.nvim',
-  },
-
-  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = evs,
