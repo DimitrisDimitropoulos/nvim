@@ -35,8 +35,6 @@ vim.api.nvim_create_autocmd('InsertLeave', {
   desc = 'unset colorcolumn on InsertLeave',
 })
 
-vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
-
 ---@return table headings the list of headings
 local function get_headings()
   local commands = {
