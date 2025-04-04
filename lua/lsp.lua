@@ -6,6 +6,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_foldingRange) then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
+
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       local g = vim.api.nvim_create_augroup('UserCompletion', { clear = true })
       local bufnr = args.buf
