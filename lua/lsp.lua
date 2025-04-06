@@ -129,27 +129,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    local map = vim.keymap.set
-
-    map('n', '<leader>lh', function()
+    vim.keymap.set('n', '<leader>lh', function()
       if vim.lsp.inlay_hint.is_enabled() then
         vim.lsp.inlay_hint.enable(false)
       else
         vim.lsp.inlay_hint.enable(true)
       end
     end, { desc = 'lsp toggle inlay hints' })
-    map('n', '<leader>lf', function()
+    vim.keymap.set('n', '<leader>lf', function()
       vim.lsp.buf.format { async = true }
       vim.notify('The buffer has been formatted', vim.log.levels.INFO)
     end, { desc = 'lsp async format' })
 
-    map('n', 'grd', vim.lsp.buf.declaration, { desc = 'lsp declaration' })
-    map('n', 'grt', vim.lsp.buf.type_definition, { desc = 'lsp type definition' })
+    vim.keymap.set('n', 'grd', vim.lsp.buf.declaration, { desc = 'lsp declaration' })
+    vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, { desc = 'lsp type definition' })
 
-    map('n', '<leader>ds', vim.diagnostic.show, { desc = 'diagnostics show' })
-    map('n', '<leader>dh', vim.diagnostic.hide, { desc = 'diagnostics hide' })
-    map('n', '<leader>dq', vim.diagnostic.setqflist, { desc = 'diagnostics setqflist' })
-    map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'diagnostics setloclist' })
+    vim.keymap.set('n', '<leader>ds', vim.diagnostic.show, { desc = 'diagnostics show' })
+    vim.keymap.set('n', '<leader>dh', vim.diagnostic.hide, { desc = 'diagnostics hide' })
+    vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist, { desc = 'diagnostics setqflist' })
+    vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'diagnostics setloclist' })
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting) then
       vim.api.nvim_create_autocmd('BufWritePre', {
