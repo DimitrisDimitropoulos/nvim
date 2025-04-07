@@ -102,7 +102,7 @@ for _, mapping in ipairs {
 end
 
 vim.keymap.set('n', '<leader>fa', function()
-  require('fzf-lua').files { cmd = 'rg --files --hidden -u --glob !.git' }
+  require('fzf-lua').files { cmd = 'rg --files --hidden -u --glob !.git', hidden = true }
 end, { desc = 'fzf-lua all files' })
 
 vim.keymap.set('n', '<leader>fp', function()
