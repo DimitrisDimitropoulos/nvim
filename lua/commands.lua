@@ -166,3 +166,37 @@ if vim.fn.executable 'rg' == 1 then
 else
   vim.notify("'rg' is not executable on this system", vim.log.levels.ERROR)
 end
+
+local function selectOldFile()
+  vim.ui.input({ prompt = 'Pattern: ' }, function(input)
+    if not input then
+      vim.notify('No pattern provided', vim.log.levels.WARN)
+      return
+    end
+    local matches = {}
+    for _, file in ipairs(vim.v.oldfiles) do
+      if file:match(input) then
+        table.insert(matches, file)
+      end
+    end
+    if #matches == 0 then
+      vim.notify('No matching oldfiles found', vim.log.levels.INFO)
+      return
+    end
+    vim.ui.select(matches, {
+      prompt = 'Select oldfile:',
+      format_item = function(item)
+        return vim.fn.fnamemodify(item, ':~')
+      end,
+    }, function(choice)
+      if choice then
+        vim.cmd('edit ' .. vim.fn.fnameescape(choice))
+      end
+    end)
+  end)
+end
+
+-- Create command
+vim.api.nvim_create_user_command('FindOldfiles', function()
+  selectOldFile()
+end, {})
