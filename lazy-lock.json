@@ -1,16 +1,16 @@
 {
   "blink.cmp": { "branch": "main", "commit": "49f211fe5d729df53df4c042d7c3464cf47d199e" },
-  "copilot.lua": { "branch": "master", "commit": "20723713aa5fbfd535fcf0cd28753a899ca3d526" },
+  "copilot.lua": { "branch": "master", "commit": "d1b6e6ced09fbe15b96741de5fa84e89479f3144" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
-  "fzf-lua": { "branch": "main", "commit": "1dcef2467af609e0688f8136b8ea720645c9c41c" },
-  "gitsigns.nvim": { "branch": "main", "commit": "7010000889bfb6c26065e0b0f7f1e6aa9163edd9" },
+  "fzf-lua": { "branch": "main", "commit": "47b85a25c0c0b2c20b4e75199ed01bb71e7814f5" },
+  "gitsigns.nvim": { "branch": "main", "commit": "17ab794b6fce6fce768430ebc925347e349e1d60" },
   "indentmini.nvim": { "branch": "main", "commit": "8922b7ec3f1d556b0805d025f0122e50da387303" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "mason.nvim": { "branch": "main", "commit": "fc98833b6da5de5a9c5b1446ac541577059555be" },
   "melange-nvim": { "branch": "master", "commit": "2db5407f2f6d6d6286f50f2f7365728d66f6f3ae" },
-  "mini.splitjoin": { "branch": "main", "commit": "efe24ba54f9623cb05698355981ec05278976788" },
-  "nvim-highlight-colors": { "branch": "main", "commit": "7eeaa05eab26fb840c4fe7bca91710bf37cb13ed" },
-  "nvim-lspconfig": { "branch": "master", "commit": "85e0dd26b710e834a105d679200d01e326a3d2b0" },
-  "nvim-treesitter": { "branch": "main", "commit": "abafea3800b7330f032d13d4ad5db26c0d246f88" },
+  "mini.splitjoin": { "branch": "main", "commit": "70240d5d3881ff1b2b1d7902450f98a6fa303800" },
+  "nvim-highlight-colors": { "branch": "main", "commit": "982543ec460199de5bdc491745dc9faa6bcc19b6" },
+  "nvim-lspconfig": { "branch": "master", "commit": "94dda50b2d9a29d0b76562a9027029538840e2d7" },
+  "nvim-treesitter": { "branch": "master", "commit": "0e21ee8df6235511c02bab4a5b391d18e165a58d" },
   "which-key.nvim": { "branch": "main", "commit": "8ab96b38a2530eacba5be717f52e04601eb59326" }
 }
