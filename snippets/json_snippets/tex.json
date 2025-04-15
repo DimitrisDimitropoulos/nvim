@@ -2,7 +2,15 @@
   "BibLaTex-Setup": {
     "prefix": "biblatex-setup",
     "body": [
-      "\\usepackage[backend=biber,language=auto,autolang=other,style=ieee,sorting=nyt,defernumbers=true,doi=false]{biblatex}",
+      "\\usepackage[",
+      "\tbackend=biber,",
+      "\tlanguage=auto,",
+      "\tautolang=other,",
+      "\tstyle=ieee,",
+      "\tsorting=nyt,",
+      "\tdefernumbers=true,",
+      "\tdoi=false",
+      "]{biblatex}",
       "\\addbibresource{$1}\n$0"
     ],
     "description": "BibLaTeX setup"
