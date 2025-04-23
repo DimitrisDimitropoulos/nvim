@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
     end
 
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
+    if false and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       local g = vim.api.nvim_create_augroup('UserCompletion', { clear = true })
       local bufnr = args.buf
       vim.lsp.completion.enable(true, client.id, bufnr, {

@@ -28,7 +28,7 @@ require('lazy').setup({
 
   {
     'saghen/blink.cmp',
-    enabled = false,
+    enabled = true,
     version = '*',
     event = 'InsertEnter',
     opts = require 'plugins.configs.blink',
