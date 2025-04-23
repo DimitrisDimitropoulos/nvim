@@ -1,3 +1,19 @@
+vim.lsp.enable {
+  'texlab',
+  'lua_ls',
+  'efm',
+  'julials',
+  'bashls',
+  'neocmake',
+  'clangd',
+  'ruff',
+  'taplo',
+  'yamlls',
+  'tinymist',
+  'basedpyright',
+  'rust_analyzer',
+}
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(args)

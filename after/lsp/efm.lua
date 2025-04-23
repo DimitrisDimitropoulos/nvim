@@ -82,7 +82,9 @@ local langs = {
   fish = { fish_indent },
 }
 
-require('lspconfig').efm.setup {
+return {
+  cmd = { 'efm-langserver' },
+  root_markers = { '.git' },
   init_options = { documentFormatting = true, codeAction = false },
   filetypes = vim.tbl_keys(langs),
   settings = { lintDebounce = 100, languages = langs, logLevel = 1 },

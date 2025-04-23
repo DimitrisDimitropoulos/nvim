@@ -89,9 +89,6 @@ require('lazy').setup({
   {
     'neovim/nvim-lspconfig',
     event = evs,
-    config = function()
-      require 'plugins.configs.lspconfig'
-    end,
   },
 
   {

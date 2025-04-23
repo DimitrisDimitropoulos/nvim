@@ -1,6 +1,4 @@
-require('lspconfig').tinymist.setup {
-  capabilities = vim.lsp.protocol.make_client_capabilities(),
-  single_file_support = true,
+return {
   settings = {
     exportPdf = 'onSave',
     formatterMode = 'typstyle',
