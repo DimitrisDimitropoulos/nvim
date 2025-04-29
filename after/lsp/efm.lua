@@ -85,7 +85,7 @@ local langs = {
 return {
   cmd = { 'efm-langserver' },
   root_markers = { '.git' },
-  init_options = { documentFormatting = true, codeAction = false },
+  init_options = { documentFormatting = true, codeAction = false, colorProvider = false },
   filetypes = vim.tbl_keys(langs),
   settings = { lintDebounce = 100, languages = langs, logLevel = 1 },
 }
