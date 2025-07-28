@@ -17,13 +17,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = evs,
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        highlight = { enable = true, use_languagetree = true, additional_vim_regex_highlighting = false },
-        indent = { enable = false },
-        incremental_selection = { enable = false },
-      }
-    end,
+    branch = 'main',
   },
 
   {
