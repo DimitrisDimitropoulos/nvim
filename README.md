@@ -93,19 +93,9 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 ## 🔌 Plugins
 
 - [savq/melange-nvim](https://github.com/savq/melange-nvim)
-- [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)\*  
-  (disabled)
-    - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- [saghen/blink.cmp](https://github.com/saghen/blink.cmp)\* (disabled)
+- [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
 - [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-- [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-    - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
-    - [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)
-    - [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
-    - [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)\* (disabled)
-    - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)\* (disabled)
-    - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
@@ -114,6 +104,6 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)\* (disabled)
 - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
 - [nvimdev/indentmini.nvim](https://github.com/nvimdev/indentmini.nvim)\* (disabled)
-- [brenoprata10/nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)
+- [brenoprata10/nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)\* (disabled)
 
 ## 🚗 TODO
