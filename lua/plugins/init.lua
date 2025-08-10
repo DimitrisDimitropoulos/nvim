@@ -128,6 +128,9 @@ require('lazy').setup({
 
   {
     'brenoprata10/nvim-highlight-colors',
+    -- lua_ls and others supports documentColor, which is builtin in 0.12,
+    -- granding this plugin uneeded
+    enabled = vim.fn.has 'nvim-0.12' ~= 1,
     cmd = 'HighlightColors',
     opts = {},
   },
