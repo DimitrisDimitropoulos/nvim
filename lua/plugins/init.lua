@@ -1,5 +1,3 @@
---- @diagnostic disable: different-requires
-
 local evs = { 'BufReadPre', 'BufNewFile' }
 
 require('lazy').setup({
@@ -46,39 +44,6 @@ require('lazy').setup({
   },
 
   { 'rafamadriz/friendly-snippets' },
-
-  {
-    'hrsh7th/nvim-cmp',
-    enabled = vim.fn.has 'nvim-0.11' ~= 1,
-    event = 'InsertEnter',
-    dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lsp',
-      { 'saadparwaiz1/cmp_luasnip', enabled = false },
-
-      {
-        'L3MON4D3/LuaSnip',
-        enabled = false,
-        dependencies = { 'rafamadriz/friendly-snippets' },
-        config = function()
-          require 'plugins.configs.luasnip'
-        end,
-      },
-
-      {
-        'windwp/nvim-autopairs',
-        enabled = false,
-        config = function()
-          require('nvim-autopairs').setup()
-          require('cmp').event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
-        end,
-      },
-    },
-    config = function()
-      require 'plugins.configs.cmp'
-    end,
-  },
 
   {
     'neovim/nvim-lspconfig',
