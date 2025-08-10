@@ -11,7 +11,7 @@ editing experience with a modern touch.
 > installation methods like `winget` or `scoop`. On linux use your distro's
 > package manager like `apt` or `dnf`
 >
-> -   [xclip](https://github.com/astrand/xclip) for clipboard on X11
+> -   [xsel](https://github.com/kfish/xsel) for clipboard on X11
 > -   [fd](https://github.com/sharkdp/fd) [ripgrep](https://github.com/BurntSushi/ripgrep) [fzf](https://github.com/junegunn/fzf) for the picker either fzf-lua or telescope
 > -   [zathura](https://pwmt.org/projects/zathura/) or [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for pdf functionality when previewing LaTeX documents
 > -   [pwsh.exe](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) if you want to use it as the shell for windows usage
@@ -88,7 +88,7 @@ git clone https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nv
 nvim
 ```
 
-After launching all plugins make sure to run a `:checkhealth` command and install all the dependencies you may lack like `xclip`, `pwsh.exe`, `rg`, `fd` and `fzf`
+After launching all plugins make sure to run a `:checkhealth` command and install all the dependencies you may lack like `xsel`, `pwsh.exe`, `rg`, `fd` and `fzf`
 
 ## 🔌 Plugins
 
