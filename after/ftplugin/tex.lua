@@ -127,7 +127,7 @@ vim.keymap.set('n', 'gO', function()
 end, { silent = true, noremap = true, desc = 'User: show LaTeX TOC' })
 vim.api.nvim_create_user_command('GetLabels', function()
   require('utils').gen_loclist(
-    require('utils').get_entries('(label_definition (curly_group_text (text) @label_title))', 'latex'),
+    require('utils').get_entries('(label_definition name: (curly_group_label label: (label) @label_title))', 'latex'),
     'LaTeX Labels'
   )
 end, { nargs = 0, desc = 'Get the LaTeX labels' })
