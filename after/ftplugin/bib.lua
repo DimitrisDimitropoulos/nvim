@@ -1,5 +1,5 @@
-vim.opt_local.spell = true
-vim.opt_local.colorcolumn = '80'
+vim.wo[0][0].spell = true
+vim.wo[0][0].colorcolumn = '80'
 
 vim.api.nvim_create_user_command('GetBibEntries', function()
   require('utils').gen_loclist(

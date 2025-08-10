@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('SpellOn', { clear = true }),
   pattern = { 'gitcommit', 'markdown', 'tex', 'context', 'typst' },
   callback = function()
-    vim.opt_local.spell = true
+    vim.wo[0][0].spell = true
   end,
   desc = 'spell on specific filetypes',
 })

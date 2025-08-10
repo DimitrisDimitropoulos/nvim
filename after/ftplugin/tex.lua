@@ -1,4 +1,4 @@
-vim.opt_local.wrap = true
+vim.wo[0][0].wrap = true
 vim.api.nvim_set_hl(0, '@module', { link = '@function.builtin' })
 vim.api.nvim_set_hl(0, '@markup.math', { link = 'Special' })
 vim.api.nvim_set_hl(0, '@markup', { fg = 'white' })
@@ -12,25 +12,27 @@ for _, dir in ipairs { 'j', 'k' } do
 end
 
 vim.keymap.set({ 'i', 'n' }, '<A-b>', function()
-  if vim.opt.keymap:get() == 'greek_utf-8' then
-    vim.opt.keymap = ''
+  if vim.o.keymap == 'greek_utf-8' then
+    vim.o.keymap = ''
   else
-    vim.opt.keymap = 'greek_utf-8'
+    vim.o.keymap = 'greek_utf-8'
   end
 end, { silent = false, noremap = true, desc = 'toggle greek keymap' })
 
 local colorcolumn_group = vim.api.nvim_create_augroup('Colorcolumn', { clear = true })
 vim.api.nvim_create_autocmd('InsertEnter', {
   group = colorcolumn_group,
+  pattern = { 'tex' },
   callback = function()
-    vim.opt_local.colorcolumn = '80'
+    vim.wo[0][0].colorcolumn = '80'
   end,
   desc = 'set colorcolumn to 80 on InsertEnter',
 })
 vim.api.nvim_create_autocmd('InsertLeave', {
   group = colorcolumn_group,
+  pattern = { 'tex' },
   callback = function()
-    vim.opt_local.colorcolumn = ''
+    vim.wo[0][0].colorcolumn = ''
   end,
   desc = 'unset colorcolumn on InsertLeave',
 })

@@ -1,6 +1,6 @@
-vim.o.spell = true
+vim.wo[0][0].spell = true
 vim.o.showmode = true
-vim.opt_local.colorcolumn = '80'
+vim.wo[0][0].colorcolumn = '80'
 
 local mail_statline = {
   '%{nr2char(32)}', -- A space character.
@@ -18,4 +18,4 @@ local mail_statline = {
   '%{nr2char(32)}', -- A space character.
   'c: %-3c', -- Current column number.
 }
-vim.opt_local.statusline = table.concat(mail_statline)
+vim.wo[0][0].statusline = table.concat(mail_statline)

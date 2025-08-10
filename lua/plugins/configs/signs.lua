@@ -1,5 +1,5 @@
 -- Do not load up plugin when in diff mode.
-if vim.opt.diff:get() then
+if vim.o.diff then
   return
 end
 

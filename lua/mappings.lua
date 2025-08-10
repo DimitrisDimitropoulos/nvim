@@ -13,7 +13,7 @@ vim.keymap.set('n', '<leader>mm', function()
 end, { noremap = true, desc = 'make' })
 
 local function toggle_option(opt)
-  vim.opt[opt] = not vim.opt[opt]:get()
+  vim.o[opt] = not vim.o[opt]
 end
 vim.keymap.set('n', '<A-s>', function()
   toggle_option [[spell]]
