@@ -132,76 +132,6 @@ vim.api.nvim_create_user_command('GetLabels', function()
   )
 end, { nargs = 0, desc = 'Get the LaTeX labels' })
 
-local function buf_change_env()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local client = vim.lsp.get_clients({ name = 'texlab', buffer = bufnr })[1]
-  if not client then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
-  local new_env
-  vim.ui.input({ prompt = 'New environment name: ' }, function(input)
-    new_env = input
-  end)
-  if not new_env or new_env == '' then
-    return vim.notify('No environment name provided', vim.log.levels.WARN)
-  end
-  local pos = vim.api.nvim_win_get_cursor(0)
-  client:exec_cmd({
-    title = 'Change Environment',
-    command = 'texlab.changeEnvironment',
-    arguments = {
-      {
-        textDocument = { uri = vim.uri_from_bufnr(bufnr) },
-        position = { line = pos[1] - 1, character = pos[2] },
-        newName = tostring(new_env),
-      },
-    },
-  }, { bufnr = bufnr })
-end
-vim.api.nvim_create_user_command('TXChangeEnvironment', function()
-  buf_change_env()
-end, { nargs = 0, desc = 'Change the current environment' })
-
-local function buf_find_envs()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local texlab_client = vim.lsp.get_clients({ name = 'texlab', buffer = bufnr })[1]
-  if not texlab_client then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
-  local command = {
-    command = 'texlab.findEnvironments',
-    arguments = { vim.lsp.util.make_position_params(vim.api.nvim_get_current_win(), texlab_client.offset_encoding) },
-  }
-  texlab_client:exec_cmd(command, { bufnr = bufnr }, function(err, result)
-    if err then
-      return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
-    end
-    if not result or vim.tbl_isempty(result) then
-      return vim.notify('No environments found', vim.log.levels.INFO)
-    end
-    local env_names = {}
-    local max_length = 1
-    for _, env in ipairs(result) do
-      table.insert(env_names, env.name.text)
-      max_length = math.max(max_length, string.len(env.name.text))
-    end
-    for i, name in ipairs(env_names) do
-      env_names[i] = string.rep(' ', i - 1) .. name
-    end
-    vim.lsp.util.open_floating_preview(env_names, '', {
-      height = #env_names,
-      width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
-      focusable = false,
-      focus = false,
-      border = require('lspconfig.ui.windows').default_options.border or 'single',
-      title = 'Environments',
-    })
-  end)
-end
-vim.api.nvim_create_user_command('TXFindEnvironments', function()
-  buf_find_envs()
-end, { nargs = 0, desc = 'Find LaTeX environments' })
-
 -- Enhanced function to parse DOT graph into a Lua table
 local function parse_dot(dot_str)
   local graph = { nodes = {}, edges = {} }
@@ -272,6 +202,6 @@ local function dependency_graph()
 end
 
 -- Create the user command
-vim.api.nvim_create_user_command('TXShowDependencyGraph', function()
+vim.api.nvim_create_user_command('TexlabShowDependencyGraph', function()
   dependency_graph()
 end, { nargs = 0, desc = 'Show LaTeX dependency graph' })
