@@ -37,71 +37,44 @@ function M.gen_loclist(entry, title)
   end
 end
 
----A unified function to capture nodes using a query string and language
----@param query_str string The Treesitter query string
----@param lang string The language of the Treesitter parser
----@return table entries list of entries with text, line, column, and file path
+--- A unified function to capture nodes using a query string and language
+--- @param query_str string The Treesitter query string
+--- @param lang string The language of the Treesitter parser
+--- @return table entries list of entries with text, line, column, and file path
 function M.get_entries(query_str, lang)
-  local bufnr = vim.api.nvim_get_current_buf() ---@type number
-  -- Check Neovim version
-  if vim.fn.has 'nvim-0.11' ~= 1 then
-    -- Use the old Treesitter approach
-    local parser = vim.treesitter.get_parser(bufnr, lang) ---@type vim.treesitter.LanguageTree?
-    if not parser then
-      return {}
-    end
-    local root = parser:parse()[1]:root() ---@type TSTree
-    local query = vim.treesitter.query.parse(lang, query_str)
-    local entries = {}
-    for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
-      for _, node in pairs(match) do
-        if node then
-          local text = vim.treesitter.get_node_text(node, bufnr) or ''
-          if text ~= '' then
-            local line, col, _, _ = node:range()
-            local entry = {
-              text = text,
-              line = line + 1,
-              col = col + 1,
-              path = vim.api.nvim_buf_get_name(0),
-            }
-            table.insert(entries, entry)
-          end
-        end
-      end
-    end
-    return entries
-  else
-    -- Use the newer approach for 0.11+
-    local parser = vim.treesitter.get_parser(bufnr, lang) ---@type vim.treesitter.LanguageTree?
-    if not parser then
-      return {}
-    end
-    local tree = parser:parse()[1]
-    local root = tree:root() ---@type TSTree
-    local query = vim.treesitter.query.parse(lang, query_str)
-    local entries = {}
-    for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
-      for _, nodes in pairs(match) do
-        for _, node in ipairs(nodes) do
-          if node then
-            local text = vim.treesitter.get_node_text(node, bufnr) or ''
-            if text ~= '' then
-              local line, col, _, _ = node:range()
-              local entry = {
-                text = text,
-                line = line + 1,
-                col = col + 1,
-                path = vim.api.nvim_buf_get_name(0),
-              }
-              table.insert(entries, entry)
-            end
-          end
-        end
-      end
-    end
-    return entries
+  local bufnr = vim.api.nvim_get_current_buf()
+  local parser = vim.treesitter.get_parser(bufnr, lang)
+  if not parser then
+    return {}
   end
+  local entries = {}
+  local filepath = vim.api.nvim_buf_get_name(bufnr)
+  local query = vim.treesitter.query.parse(lang, query_str)
+  local root = parser:parse()[1]:root()
+  local function process_node(node)
+    if not node then
+      return
+    end
+    local text = vim.treesitter.get_node_text(node, bufnr)
+    if not text or text == '' then
+      return
+    end
+    local line, col = node:range()
+    entries[#entries + 1] = {
+      text = text,
+      line = line + 1,
+      col = col + 1,
+      path = filepath,
+    }
+  end
+  for _, match, _ in query:iter_matches(root, bufnr, 0, -1) do
+    for _, nodes in pairs(match) do
+      for _, node in ipairs(nodes) do
+        process_node(node)
+      end
+    end
+  end
+  return entries
 end
 
 return M

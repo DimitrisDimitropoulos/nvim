@@ -49,32 +49,6 @@ local function get_headings()
     'subparagraph',
   }
   local headings = {}
-  for _, command in ipairs(commands) do
-    local query_string = string.format('(%s (curly_group (text) @heading_title))', command)
-    local entries = require('utils').get_entries(query_string, 'latex')
-    for _, entry in ipairs(entries) do
-      entry.text = string.upper(command:sub(1, 1)) .. command:sub(2) .. ': ' .. entry.text
-      table.insert(headings, entry)
-    end
-  end
-  table.sort(headings, function(a, b)
-    return a.line < b.line
-  end)
-  return headings
-end
-
----@return table headings the list of headings
-local function get_headings_parallel()
-  local commands = {
-    'part',
-    'chapter',
-    'section',
-    'subsection',
-    'subsubsection',
-    'paragraph',
-    'subparagraph',
-  }
-  local headings = {}
   local tasks = {}
   for _, command in ipairs(commands) do
     table.insert(
@@ -109,21 +83,8 @@ local function get_headings_parallel()
   return headings
 end
 
-vim.api.nvim_create_user_command('CompareParallel', function()
-  local start_seq = vim.uv.hrtime()
-  get_headings()
-  local end_seq = vim.uv.hrtime()
-  local start_par = vim.uv.hrtime()
-  get_headings_parallel()
-  local end_par = vim.uv.hrtime()
-  vim.notify(
-    string.format('Sequential: %d ms Parallel: %d ms', (end_seq - start_seq) / 1e6, (end_par - start_par) / 1e6),
-    vim.log.levels.INFO
-  )
-end, { nargs = 0, desc = 'Compare sequential and parallel heading extraction' })
-
 vim.keymap.set('n', 'gO', function()
-  require('utils').gen_loclist(get_headings_parallel(), 'LaTeX TOC')
+  require('utils').gen_loclist(get_headings(), 'LaTeX TOC')
 end, { silent = true, noremap = true, desc = 'User: show LaTeX TOC' })
 vim.api.nvim_create_user_command('GetLabels', function()
   require('utils').gen_loclist(
