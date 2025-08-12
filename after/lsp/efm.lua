@@ -87,5 +87,5 @@ return {
   root_markers = { '.git' },
   init_options = { documentFormatting = true, codeAction = false, colorProvider = false },
   filetypes = vim.tbl_keys(langs),
-  settings = { lintDebounce = 100, languages = langs, logLevel = 1 },
+  settings = { lintDebounce = 100, languages = langs, logLevel = 0 },
 }
