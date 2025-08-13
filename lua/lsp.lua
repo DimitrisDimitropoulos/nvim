@@ -27,37 +27,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
     end
 
-    if false and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
-      local g = vim.api.nvim_create_augroup('UserCompletion', { clear = true })
-      local bufnr = args.buf
-      vim.lsp.completion.enable(true, client.id, bufnr, {
-        autotrigger = true,
-      })
-      if #vim.api.nvim_get_autocmds { buffer = bufnr, event = 'InsertCharPre', group = g } ~= 0 then
-        return
-      end
-      vim.api.nvim_create_autocmd('InsertCharPre', {
-        buffer = bufnr,
-        group = g,
-        callback = function()
-          if tonumber(vim.fn.pumvisible()) == 1 then
-            return
-          end
-          local triggerchars = vim.tbl_get(client, 'server_capabilities', 'completionProvider', 'triggerCharacters')
-            or {}
-          if vim.v.char:match '[%w_]' and not vim.list_contains(triggerchars, vim.v.char) then
-            vim.schedule(function()
-              vim.lsp.completion.get()
-            end)
-          end
-        end,
-        desc = 'completion on character which not exist in lsp client triggerCharacters',
-      })
-      vim.cmd [[
-      inoremap <C-j> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-j>"<CR>
-      inoremap <C-k> <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-k>"<CR>
-      inoremap <Enter> <C-e><Enter>
-      ]]
+    if
+      false
+      and vim.fn.has 'nvim-0.12' == 1
+      and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion)
+    then
+      vim.o.complete = '.,o'
+      vim.o.autocomplete = true
+      vim.lsp.completion.enable(true, args.data.client_id, args.buf, {})
     end
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
