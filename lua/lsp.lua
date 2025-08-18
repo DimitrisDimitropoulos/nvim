@@ -92,7 +92,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
       },
       update_in_insert = false,
       float = { source = true },
-      jump = { float = true },
+      jump = vim.fn.has 'nvim-0.12' ~= 0 and {
+        on_jump = function()
+          vim.diagnostic.open_float()
+        end,
+      } or {
+        float = true,
+      },
     }
 
     -- works on 0.10.3 but multiple clients is now well supported, therefore use it only on 0.11.X
