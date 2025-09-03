@@ -46,18 +46,17 @@ end
 if vim.fn.executable 'rg' == 1 then
   o.grepprg = 'rg --vimgrep --smart-case --hidden --color=never --glob !.git'
   o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
-  function FindFunc(file_pattern)
-    -- return vim.fn.systemlist('fd  --color=never --type file --hidden --exclude=".git" "' .. file_pattern .. '"')
-    if vim.g.is_windows then
-      file_pattern = file_pattern:gsub([[\]], [[\\]])
+
+  if vim.fn.executable 'fzf' == 1 then
+    --- @param file string The pattern to search for.
+    --- @return string[] A list of found file paths. Returns an empty list on error.
+    function FindFunc(file)
+      return vim.fn.systemlist(
+        'rg --files --color=never --hidden --glob "!**/.git/*" --glob "!**/build/*" | fzf --filter="' .. file .. '"'
+      )
     end
-    return vim.fn.systemlist(
-      'rg --files --color=never --hidden --glob "!**/.git/*" --glob "!**/build/*" | rg --smart-case --color=never "'
-        .. file_pattern
-        .. '"'
-    )
+    o.findfunc = 'v:lua.FindFunc'
   end
-  o.findfunc = 'v:lua.FindFunc'
 end
 
 if vim.fn.has 'nvim-0.12' == 1 then
