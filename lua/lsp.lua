@@ -148,7 +148,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, { desc = 'lsp async format' })
 
     vim.keymap.set('n', 'grd', vim.lsp.buf.declaration, { desc = 'lsp declaration' })
-    vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, { desc = 'lsp type definition' })
+    if vim.fn.has 'nvim-0.12' ~= 1 then
+      vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, { desc = 'lsp type definition' })
+    end
 
     vim.keymap.set('n', '<leader>ds', vim.diagnostic.show, { desc = 'diagnostics show' })
     vim.keymap.set('n', '<leader>dh', vim.diagnostic.hide, { desc = 'diagnostics hide' })
