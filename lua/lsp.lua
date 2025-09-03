@@ -40,6 +40,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     then
       vim.o.complete = '.,o'
       vim.o.autocomplete = true
+      vim.o.autocompletedelay = 60
       vim.lsp.completion.enable(true, args.data.client_id, args.buf, {})
     end
 
