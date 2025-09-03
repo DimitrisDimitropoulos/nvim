@@ -28,6 +28,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     if
+      vim.fn.has 'nvim-0.12' == 1 and client:supports_method(vim.lsp.protocol.Methods.textDocument_onTypeFormatting)
+    then
+      vim.lsp.on_type_formatting.enable()
+    end
+
+    if
       false
       and vim.fn.has 'nvim-0.12' == 1
       and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion)
