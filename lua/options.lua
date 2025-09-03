@@ -3,6 +3,14 @@ vim.g.tex_flavor = 'latex'
 
 local o = vim.o
 
+if vim.fn.has 'nvim-0.12' == 1 then
+  require('vim._extui').enable {
+    enable = true,
+    msg = { target = 'msg' },
+  }
+  o.cmdheight = 0
+end
+
 o.langmap =
   'ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,ΡR,ΣS,ΤT,ΘU,ΩV,WW,ΧX,ΥY,ΖZ,αa,βb,ψc,δd,εe,φf,γg,ηh,ιi,ξj,κk,λl,μm,νn,οo,πp,qq,ρr,σs,τt,θu,ωv,ςw,χx,υy,ζz'
 o.list = true
