@@ -72,6 +72,7 @@ require('lazy').setup({
 
   {
     'zbirenbaum/copilot.lua',
+    enabled = not vim.fn.has 'nvim-0.12' == 1,
     event = 'InsertEnter',
     config = function()
       require('copilot').setup {

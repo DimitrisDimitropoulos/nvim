@@ -12,6 +12,7 @@ vim.lsp.enable {
   'tinymist',
   'basedpyright',
   'rust_analyzer',
+  'copilot',
 }
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -31,6 +32,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.fn.has 'nvim-0.12' == 1 and client:supports_method(vim.lsp.protocol.Methods.textDocument_onTypeFormatting)
     then
       vim.lsp.on_type_formatting.enable()
+    end
+
+    if
+      vim.fn.has 'nvim-0.12' == 1 and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion)
+    then
+      vim.lsp.inline_completion.enable()
+      vim.keymap.set('i', '<Tab>', function()
+        if not vim.lsp.inline_completion.get() then
+          return '<Tab>'
+        end
+      end, {
+        expr = true,
+        replace_keycodes = true,
+        desc = 'Get the current inline completion',
+      })
     end
 
     if
