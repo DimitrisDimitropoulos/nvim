@@ -2,7 +2,6 @@ vim.g.is_windows = vim.fn.has 'win32' == 1
 require 'options'
 require 'mappings'
 require 'commands'
-require 'lsp'
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
