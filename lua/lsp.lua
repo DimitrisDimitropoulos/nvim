@@ -54,10 +54,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       and vim.fn.has 'nvim-0.12' == 1
       and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion)
     then
+      vim.o.pumborder = vim.o.winborder
       vim.o.complete = '.,o'
       vim.o.autocomplete = true
       vim.o.autocompletedelay = 60
-      vim.lsp.completion.enable(true, args.data.client_id, args.buf, {})
+      vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
     end
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
@@ -97,6 +98,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.diagnostic.config {
       underline = true,
+      -- virtual_text = { prefix = '\u{23FA}', current_line = false },
       virtual_text = { prefix = '\u{23FA}' },
       virtual_lines = { current_line = true },
       signs = {
