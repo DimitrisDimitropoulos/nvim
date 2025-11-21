@@ -23,20 +23,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_foldingRange) then
+    if client:supports_method 'textDocument/foldingRange' then
       local win = vim.api.nvim_get_current_win()
       vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
     end
 
-    if
-      vim.fn.has 'nvim-0.12' == 1 and client:supports_method(vim.lsp.protocol.Methods.textDocument_onTypeFormatting)
-    then
+    if vim.fn.has 'nvim-0.12' == 1 and client:supports_method 'textDocument/onTypeFormatting' then
       vim.lsp.on_type_formatting.enable()
     end
 
-    if
-      vim.fn.has 'nvim-0.12' == 1 and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion)
-    then
+    if vim.fn.has 'nvim-0.12' == 1 and client:supports_method 'textDocument/inlineCompletion' then
       vim.lsp.inline_completion.enable()
       vim.keymap.set('i', '<Tab>', function()
         if not vim.lsp.inline_completion.get() then
@@ -49,11 +45,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    if
-      false
-      and vim.fn.has 'nvim-0.12' == 1
-      and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion)
-    then
+    if false and vim.fn.has 'nvim-0.12' == 1 and client:supports_method 'textDocument/completion' then
       vim.o.pumborder = vim.o.winborder
       vim.o.complete = '.,o'
       vim.o.autocomplete = true
@@ -61,7 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
     end
 
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+    if client:supports_method 'textDocument/inlayHint' then
       local inlay_hints_group = vim.api.nvim_create_augroup('InlayHintAuto', { clear = false })
       vim.defer_fn(function()
         local mode = vim.api.nvim_get_mode().mode
@@ -127,7 +119,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     }
 
     -- works on 0.10.3 but multiple clients is now well supported, therefore use it only on 0.11.X
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+    if client:supports_method 'textDocument/documentHighlight' then
       local doc_hl = vim.api.nvim_create_augroup('DocumentHighlight' .. tostring(args.buf), { clear = false })
       vim.api.nvim_create_autocmd({ 'CursorHold', 'InsertLeave' }, {
         group = doc_hl,
@@ -175,7 +167,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist, { desc = 'diagnostics setqflist' })
     vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'diagnostics setloclist' })
 
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting) then
+    if client:supports_method 'textDocument/formatting' then
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = vim.api.nvim_create_augroup('AutoFormat', { clear = true }),
         pattern = { '*tex', '*lua', '*py', '*jl', '*json', '*yml', '*rs', '*sh', '*typ' },
