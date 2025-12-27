@@ -67,10 +67,6 @@ if vim.fn.executable 'rg' == 1 then
   end
 end
 
-if vim.fn.has 'nvim-0.12' == 1 then
-  o.completefuzzycollect = 'keyword'
-end
-
 o.path = o.path .. '**'
 
 o.expandtab = true
