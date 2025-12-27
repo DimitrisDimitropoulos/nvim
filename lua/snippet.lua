@@ -184,7 +184,7 @@ function M.snippet_handler(paths, ft, descs)
   -- Stop the previous LSP client if it exists
   local client = vim.lsp.get_clients({ name = 'sn_ls' })[1]
   if client then
-    vim.lsp.stop_client(client.id)
+    client:stop()
     if false then
       vim.notify('Stopped previous sn_ls client with ' .. client.id, vim.log.levels.INFO)
     end
