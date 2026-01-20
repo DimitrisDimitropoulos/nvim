@@ -97,7 +97,7 @@ require('lazy').setup({
   },
 
   {
-    'echasnovski/mini.splitjoin',
+    'nvim-mini/mini.splitjoin',
     version = false,
     keys = 'gS',
     opts = {},
