@@ -12,7 +12,7 @@ editing experience with a modern touch.
 > package manager like `apt` or `dnf`
 >
 > -   [xsel](https://github.com/kfish/xsel) for clipboard on X11
-> -   [fd](https://github.com/sharkdp/fd) [ripgrep](https://github.com/BurntSushi/ripgrep) [fzf](https://github.com/junegunn/fzf) for the picker either fzf-lua or telescope
+> -   [fd](https://github.com/sharkdp/fd) [ripgrep](https://github.com/BurntSushi/ripgrep) [fzf](https://github.com/junegunn/fzf) for the `fzf-lua` picker
 > -   [zathura](https://pwmt.org/projects/zathura/) or [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for pdf functionality when previewing LaTeX documents
 > -   [pwsh.exe](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) if you want to use it as the shell for windows usage
 
@@ -24,22 +24,21 @@ editing experience with a modern touch.
 ## ⚒️ Features of this configuration
 
 1. Based on the [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
-2. Snippets utilizing both json and lua formats, enabling support for other
-   editors like vscode
-3. Default spell for greek and english
-4. Langmap for greek input
-5. Language Servers for multiple languages
-6. Custom keybinds neatly organized per use-case
-7. Telescope extensions for improved performance
-8. Powerful system with autocommands and a working ftplugin system
-9. Scripts to backup and restore your Lazy lock-files, in `bash` and `pwsh`
-10. Custom efm language server with formatters and linters, no plugin
-    dependencies
-11. Heavy use of lua wherever feasible
+2. Heavy use of native Neovim features (0.11+), including `vim.lsp.completion`, `vim.lsp.inline_completion`, and `vim.snippet`
+3. Custom snippet system in json `snippets/`, enabling compatibility with other
+   editors like VS Code and leveraging native `vim.snippet`
+4. Default spell for greek and english with custom `vim.ui.select` picker
+5. Langmap for greek input
+6. Language Servers for multiple languages (Python, Rust, Typst, Lua, etc.)
+7. Neovide support with dynamic font resizing and optimized animations
+8. Custom statusline and minimal UI for a distraction-free experience
+9. Powerful system with autocomcommands and a working ftplugin system
+10. Scripts to backup and restore your Lazy lock-files, in `bash` and `pwsh`
+11. Custom efm language server with formatters and linters for various languages
 12. LaTeX preview based on `texlab` with `zathura` on linux and
     [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
 13. Custom treesitter queries for highlighting `lua` and `LaTeX`
-14. Powerful native snippets framework, with framework agnostic autocompletion
+14. Fzf-lua integration for fast and efficient searching and picking
 
 ## 🚀 Installation
 
@@ -92,18 +91,17 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 
 ## 🔌 Plugins
 
-- [savq/melange-nvim](https://github.com/savq/melange-nvim)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
-- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
-- [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
-- [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
-- [folke/which-key.nvim](https://github.com/folke/which-key.nvim)\* (disabled)
+- [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua) (auto-disabled on 0.12+)
 - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
-- [nvimdev/indentmini.nvim](https://github.com/nvimdev/indentmini.nvim)\* (disabled)
-- [brenoprata10/nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)\* (disabled)
+- [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
+- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+- [DimitrisDimitropoulos/yasp.nvim](https://github.com/DimitrisDimitropoulos/yasp.nvim)
+- [savq/melange-nvim](https://github.com/savq/melange-nvim)
+- [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
+- [folke/which-key.nvim](https://github.com/folke/which-key.nvim) (Disabled)
 
 ## 🚗 TODO
