@@ -123,7 +123,7 @@ local function new_server(completion_source)
         handler(nil, {
           capabilities = {
             completionProvider = {
-              triggerCharacters = { '{', '(', '[', ' ', '.', ':', ',' },
+              triggerCharacters = { '' },
             },
           },
         })
