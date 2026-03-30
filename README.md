@@ -23,33 +23,28 @@ editing experience with a modern touch.
 
 ## ⚒️ Features of this configuration
 
-1. Based on the [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
-2. Heavy use of native Neovim features (0.11+), including `vim.lsp.completion`, `vim.lsp.inline_completion`, and `vim.snippet`
-3. Custom snippet system in json `snippets/`, enabling compatibility with other
-   editors like VS Code and leveraging native `vim.snippet`
+1. Based on native `vim.pack` (Neovim 0.12+)
+2. Heavy use of native Neovim features, including `vim.lsp.completion`, `vim.lsp.inline_completion`, and `vim.snippet`
+3. Custom snippet system in json `snippets/`, enabling compatibility with other editors like VS Code and leveraging native `vim.snippet`
 4. Default spell for greek and english with custom `vim.ui.select` picker
 5. Langmap for greek input
 6. Language Servers for multiple languages (Python, Rust, Typst, Lua, etc.)
 7. Neovide support with dynamic font resizing and optimized animations
 8. Custom statusline and minimal UI for a distraction-free experience
 9. Powerful system with autocomcommands and a working ftplugin system
-10. Scripts to backup and restore your Lazy lock-files, in `bash` and `pwsh`
-11. Custom efm language server with formatters and linters for various languages
-12. LaTeX preview based on `texlab` with `zathura` on linux and
-    [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
-13. Custom treesitter queries for highlighting `lua` and `LaTeX`
-14. Fzf-lua integration for fast and efficient searching and picking
+10. Custom efm language server with formatters and linters for various languages
+11. LaTeX preview based on `texlab` with `zathura` on linux and [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
+12. Custom treesitter queries for highlighting `lua` and `LaTeX`
+13. Fzf-lua integration for fast and efficient searching and picking
+14. Lazy-loading system via custom `lloader.lua` using `vim.pack` native API
 
 ## 🚀 Installation
 
 Before installing make sure to backup your config, plugins, data and cache.
-Then remove it, or better rename it to something like <folder>.bak, for more
-context see [here](http://www.lazyvim.org/installation). Then just clone this
+Then remove it, or better rename it to something like `<folder>.bak`. Then just clone this
 repo to the appropriate folder and just open it. The plugins and treesitter
 parsers will be installed automatically and then you can open `Mason` and
 install any program manually.
-
-For more detailed instructions based on the LazyVim:
 
 On Linux
 
@@ -72,7 +67,7 @@ nvim
 
 On Windows with PowerShell
 
-```
+```powershell
 # required
 Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
 
@@ -82,7 +77,7 @@ Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
 
 Then
 
-```
+```powershell
 git clone https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nvim
 nvim
 ```
@@ -91,17 +86,13 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 
 ## 🔌 Plugins
 
-- [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
-- [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
-- [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua) (auto-disabled on 0.12+)
-- [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
-- [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
-- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-- [DimitrisDimitropoulos/yasp.nvim](https://github.com/DimitrisDimitropoulos/yasp.nvim)
 - [savq/melange-nvim](https://github.com/savq/melange-nvim)
-- [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
-- [folke/which-key.nvim](https://github.com/folke/which-key.nvim) (Disabled)
+- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+- [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+- [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
+- [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
+- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 
 ## 🚗 TODO
