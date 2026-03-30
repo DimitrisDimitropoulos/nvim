@@ -3,18 +3,10 @@ require 'options'
 require 'mappings'
 require 'commands'
 
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.uv.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable',
-    lazypath,
-  }
-end
-vim.o.rtp = vim.o.rtp .. ',' .. lazypath
+vim.pack.add {
+  'https://github.com/savq/melange-nvim',
+  'https://github.com/rafamadriz/friendly-snippets',
+}
+vim.cmd.colorscheme 'melange'
 
-require 'plugins'
-require 'statusline'
+require('lloader').lazy_load(require 'plugins')
