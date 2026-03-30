@@ -28,11 +28,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
     end
 
-    if vim.fn.has 'nvim-0.12' == 1 and client:supports_method 'textDocument/onTypeFormatting' then
+    if client:supports_method 'textDocument/onTypeFormatting' then
       vim.lsp.on_type_formatting.enable()
     end
 
-    if vim.fn.has 'nvim-0.12' == 1 and client:supports_method 'textDocument/inlineCompletion' then
+    if client:supports_method 'textDocument/inlineCompletion' then
       vim.lsp.inline_completion.enable()
       vim.keymap.set('i', '<Tab>', function()
         if not vim.lsp.inline_completion.get() then
@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    if false and vim.fn.has 'nvim-0.12' == 1 and client:supports_method 'textDocument/completion' then
+    if client:supports_method 'textDocument/completion' then
       vim.o.pumborder = vim.o.winborder
       vim.o.complete = '.,o'
       vim.o.autocomplete = true
@@ -109,12 +109,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
       },
       update_in_insert = false,
       float = { source = true },
-      jump = vim.fn.has 'nvim-0.12' ~= 0 and {
+      jump = {
         on_jump = function()
           vim.diagnostic.open_float()
         end,
-      } or {
-        float = true,
       },
     }
 
@@ -158,9 +156,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, { desc = 'lsp async format' })
 
     vim.keymap.set('n', 'grd', vim.lsp.buf.declaration, { desc = 'lsp declaration' })
-    if vim.fn.has 'nvim-0.12' ~= 1 then
-      vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, { desc = 'lsp type definition' })
-    end
 
     vim.keymap.set('n', '<leader>ds', vim.diagnostic.show, { desc = 'diagnostics show' })
     vim.keymap.set('n', '<leader>dh', vim.diagnostic.hide, { desc = 'diagnostics hide' })
