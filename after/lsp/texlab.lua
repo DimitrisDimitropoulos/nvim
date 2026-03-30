@@ -1,5 +1,5 @@
 local exe, rgs
-if vim.g.is_windows == true then
+if vim.fn.has 'win32' == 1 then
   exe = vim.env.HOME .. '\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe'
   rgs = { '-reuse-instance', '%p', '-forward-search', '%f', '%l' }
 end

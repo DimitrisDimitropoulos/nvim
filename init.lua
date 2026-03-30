@@ -1,4 +1,3 @@
-vim.g.is_windows = vim.fn.has 'win32' == 1
 require 'options'
 require 'mappings'
 require 'commands'

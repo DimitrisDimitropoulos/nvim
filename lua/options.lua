@@ -131,7 +131,7 @@ for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
 end
 
 -- add binaries installed by mason.nvim to path
-vim.env.PATH = vim.env.PATH .. (vim.g.is_windows and ';' or ':') .. vim.fn.stdpath 'data' .. '/mason/bin'
+vim.env.PATH = vim.env.PATH .. ((vim.fn.has 'win32' == 1) and ';' or ':') .. vim.fn.stdpath 'data' .. '/mason/bin'
 
 -- Neovide config
 if vim.g.neovide then
