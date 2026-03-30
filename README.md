@@ -91,7 +91,7 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- [echasnovski/mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
+- [echasnovski/mini.splitjoin](https://github.com/nvim-mini/mini.splitjoin)
 - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 

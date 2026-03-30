@@ -30,7 +30,7 @@ return {
     },
   },
   {
-    src = 'https://github.com/echasnovski/mini.splitjoin',
+    src = 'https://github.com/nvim-mini/mini.splitjoin',
     data = {
       keys = { 'n', 'gS' },
       config = function()

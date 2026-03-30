@@ -22,7 +22,7 @@
     },
     "mini.splitjoin": {
       "rev": "8112e794cbb022b9d4b7af60b64e9896930f1697",
-      "src": "https://github.com/echasnovski/mini.splitjoin"
+      "src": "https://github.com/nvim-mini/mini.splitjoin"
     },
     "nvim-lspconfig": {
       "rev": "16812abf0e8d8175155f26143a8504e8253e92b0",
