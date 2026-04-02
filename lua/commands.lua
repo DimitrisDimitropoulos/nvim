@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 local paths = {
-  vim.fn.stdpath 'data' .. '/lazy/friendly-snippets/package.json',
+  vim.fn.stdpath 'data' .. '/site/pack/core/opt/friendly-snippets/package.json',
   vim.fn.expand('$MYVIMRC'):match '(.*[/\\])' .. 'snippets/json_snippets/package.json',
 }
 local descs = { 'FR', 'USR' }
