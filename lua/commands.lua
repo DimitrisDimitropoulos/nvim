@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd('FileType', {
   desc = 'spell on specific filetypes',
 })
 
-vim.api.nvim_create_autocmd('BufWritePre', {
+vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('MakeExecutable', { clear = true }),
   pattern = { '*.sh', '*.bash', '*.zsh' },
   callback = function()
