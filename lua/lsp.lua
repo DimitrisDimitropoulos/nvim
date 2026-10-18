@@ -51,6 +51,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.o.autocomplete = true
       vim.o.autocompletedelay = 60
       vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
+      vim.keymap.set('i', '<CR>', function()
+        if vim.fn.pumvisible() == 1 then
+          return '<C-e><CR>'
+        end
+        return '<CR>'
+      end, { expr = true, replace_keycodes = true, desc = 'Disable auto-completion on Enter' })
     end
 
     if client:supports_method 'textDocument/inlayHint' then
