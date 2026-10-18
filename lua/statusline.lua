@@ -150,25 +150,29 @@ end
 function Statusline:diagnostics()
   if package.loaded['vim.diagnostic'] == nil then
     return ''
-  else
-    local severities = {
+  end
+  local severities = self._diagnostic_severities
+  if not severities then
+    severities = {
       { level = vim.diagnostic.severity.ERROR, hl = 'DiagnosticFloatError', icon = self.config.icons.error },
       { level = vim.diagnostic.severity.WARN, hl = 'DiagnosticFloatWarn', icon = self.config.icons.warn },
       { level = vim.diagnostic.severity.HINT, hl = 'DiagnosticFloatHint', icon = self.config.icons.hint },
       { level = vim.diagnostic.severity.INFO, hl = 'DiagnosticFloatInfo', icon = self.config.icons.info },
     }
-    local parts = {}
-    for _, sev in ipairs(severities) do
-      local count = #vim.diagnostic.get(0, { severity = sev.level })
-      if count > 0 then
-        table.insert(parts, self:_wrap_hl(sev.hl, sev.icon .. count))
-      end
-    end
-    if #parts == 0 then
-      return ''
-    end
-    return '![' .. table.concat(parts, ' ') .. ']'
+    self._diagnostic_severities = severities
   end
+  local counts = vim.diagnostic.count(0)
+  local parts = {}
+  for _, sev in ipairs(severities) do
+    local count = counts[sev.level]
+    if count and count > 0 then
+      table.insert(parts, self:_wrap_hl(sev.hl, sev.icon .. count))
+    end
+  end
+  if #parts == 0 then
+    return ''
+  end
+  return '![' .. table.concat(parts, ' ') .. ']'
 end
 
 --- Renders the LSP progress message.
