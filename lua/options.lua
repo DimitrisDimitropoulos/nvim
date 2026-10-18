@@ -9,6 +9,7 @@ vim.g.loaded_spellfile_plugin = 1
 vim.g.loaded_matchit = 1
 vim.g.loaded_remote_file_loader = 1
 vim.g.loaded_remote_plugins = 1
+vim.g.loaded_fzf = 1
 
 vim.g.mapleader = ' '
 vim.g.tex_flavor = 'latex'
