@@ -15,6 +15,44 @@ vim.lsp.enable {
   'copilot',
 }
 
+vim.diagnostic.config {
+  underline = true,
+  virtual_text = { prefix = '\u{23FA}' },
+  virtual_lines = { current_line = true },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.HINT] = '\u{23FA}',
+      [vim.diagnostic.severity.ERROR] = '\u{23FA}',
+      [vim.diagnostic.severity.INFO] = '\u{23FA}',
+      [vim.diagnostic.severity.WARN] = '\u{23FA}',
+    },
+    numhl = {
+      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+    },
+  },
+  update_in_insert = false,
+  float = { source = true },
+  jump = {
+    on_jump = function()
+      vim.diagnostic.open_float()
+    end,
+  },
+}
+
+local hover = vim.lsp.buf.hover
+---@diagnostic disable-next-line: duplicate-set-field
+vim.lsp.buf.hover = function()
+  return hover { max_height = 20, max_width = 75 }
+end
+local signature_help = vim.lsp.buf.signature_help
+---@diagnostic disable-next-line: duplicate-set-field
+vim.lsp.buf.signature_help = function()
+  return signature_help { max_height = 20, max_width = 75 }
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(args)
@@ -82,45 +120,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end,
       })
     end
-
-    local hover = vim.lsp.buf.hover -- Store the original function in a local variable
-    ---@diagnostic disable-next-line: duplicate-set-field
-    vim.lsp.buf.hover = function()
-      return hover { max_height = 20, max_width = 75 }
-    end
-    local signature_help = vim.lsp.buf.signature_help
-    ---@diagnostic disable-next-line: duplicate-set-field
-    vim.lsp.buf.signature_help = function()
-      return signature_help { max_height = 20, max_width = 75 }
-    end
-
-    vim.diagnostic.config {
-      underline = true,
-      -- virtual_text = { prefix = '\u{23FA}', current_line = false },
-      virtual_text = { prefix = '\u{23FA}' },
-      virtual_lines = { current_line = true },
-      signs = {
-        text = {
-          [vim.diagnostic.severity.HINT] = '\u{23FA}',
-          [vim.diagnostic.severity.ERROR] = '\u{23FA}',
-          [vim.diagnostic.severity.INFO] = '\u{23FA}',
-          [vim.diagnostic.severity.WARN] = '\u{23FA}',
-        },
-        numhl = {
-          [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-          [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-          [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-          [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
-        },
-      },
-      update_in_insert = false,
-      float = { source = true },
-      jump = {
-        on_jump = function()
-          vim.diagnostic.open_float()
-        end,
-      },
-    }
 
     -- works on 0.10.3 but multiple clients is now well supported, therefore use it only on 0.11.X
     if client:supports_method 'textDocument/documentHighlight' then
