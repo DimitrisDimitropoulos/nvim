@@ -7,12 +7,12 @@ editing experience with a modern touch.
 > [!IMPORTANT]
 > It is suggested to have some dependencies when using this config for the best
 > experience. Most of the functionality will be kept if they are not installed,
-> except for fzf-lua, which requires `fzf` to work. For windows prefer safe
-> installation methods like `winget` or `scoop`. On linux use your distro's
-> package manager like `apt` or `dnf`
+> except for mini.pick, which requires `ripgrep` or `fd` for file and grep
+> pickers. For windows prefer safe installation methods like `winget` or
+> `scoop`. On linux use your distro's package manager like `apt` or `dnf`
 >
 > -   [xsel](https://github.com/kfish/xsel) for clipboard on X11
-> -   [fd](https://github.com/sharkdp/fd) [ripgrep](https://github.com/BurntSushi/ripgrep) [fzf](https://github.com/junegunn/fzf) for the `fzf-lua` picker
+> -   [fd](https://github.com/sharkdp/fd) [ripgrep](https://github.com/BurntSushi/ripgrep) for the `mini.pick` pickers
 > -   [zathura](https://pwmt.org/projects/zathura/) or [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for pdf functionality when previewing LaTeX documents
 > -   [pwsh.exe](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) if you want to use it as the shell for windows usage
 
@@ -35,7 +35,7 @@ editing experience with a modern touch.
 10. Custom efm language server with formatters and linters for various languages
 11. LaTeX preview based on `texlab` with `zathura` on linux and [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
 12. Custom treesitter queries for highlighting `lua` and `LaTeX`
-13. Fzf-lua integration for fast and efficient searching and picking
+13. Mini.pick integration for fast and efficient searching and picking
 14. Lazy-loading system via custom `lloader.lua` using `vim.pack` native API
 
 ## 🚀 Installation
@@ -82,7 +82,7 @@ git clone https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nv
 nvim
 ```
 
-After launching all plugins make sure to run a `:checkhealth` command and install all the dependencies you may lack like `xsel`, `pwsh.exe`, `rg`, `fd` and `fzf`
+After launching all plugins make sure to run a `:checkhealth` command and install all the dependencies you may lack like `xsel`, `pwsh.exe`, `rg` and `fd`
 
 ## 🔌 Plugins
 
@@ -92,7 +92,9 @@ After launching all plugins make sure to run a `:checkhealth` command and instal
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [echasnovski/mini.splitjoin](https://github.com/nvim-mini/mini.splitjoin)
-- [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)
+- [nvim-mini/mini.pick](https://github.com/nvim-mini/mini.pick)
+- [nvim-mini/mini.extra](https://github.com/nvim-mini/mini.extra)
+- [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua) (disabled fallback; requires `fzf`)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 
 ## 🚗 TODO
