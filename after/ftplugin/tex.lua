@@ -154,7 +154,11 @@ local function dependency_graph()
     vim.bo[new_bufnr].bufhidden = 'wipe'
     vim.bo[new_bufnr].buflisted = true
     -- Adjust split height and add keymap to quit the split
-    vim.api.nvim_win_set_height(0, math.min(#lines, 15))
+    if vim.fn.has 'nvim-0.13' == 1 then
+      vim.api.nvim_win_resize(0, -1, math.min(#lines, 15))
+    else
+      vim.api.nvim_win_set_height(0, math.min(#lines, 15))
+    end
     vim.keymap.set('n', 'q', '<cmd>q<CR>', { noremap = true, silent = true, buffer = new_bufnr })
     vim.keymap.set('n', 'P', function()
       vim.notify(result, vim.log.levels.INFO)
