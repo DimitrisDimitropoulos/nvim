@@ -38,15 +38,28 @@ return {
       end,
     },
   },
+  -- {
+  --   src = 'https://github.com/ibhagwan/fzf-lua',
+  --   data = {
+  --     keys = { 'n', '<leader>f' },
+  --     cmd = 'FzfLua',
+  --     config = function()
+  --       require 'plugins.configs.fzf'
+  --     end,
+  --   },
+  -- },
   {
-    src = 'https://github.com/ibhagwan/fzf-lua',
+    src = 'https://github.com/nvim-mini/mini.pick',
     data = {
       keys = { 'n', '<leader>f' },
-      cmd = 'FzfLua',
+      cmd = 'Pick',
       config = function()
-        require 'plugins.configs.fzf'
+        require 'plugins.configs.pick'
       end,
     },
+  },
+  {
+    src = 'https://github.com/nvim-mini/mini.extra',
   },
   {
     src = 'https://github.com/williamboman/mason.nvim',
