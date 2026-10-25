@@ -58,9 +58,15 @@ if vim.fn.has 'win32' == 1 or vim.fn.has 'wsl' == 1 then
   }
 end
 if vim.fn.has 'win32' == 1 and vim.fn.executable 'pwsh.exe' == 1 then
-  o.shell = 'pwsh.exe'
-  o.shellxquote = ''
-  o.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
+  vim.o.shell = 'pwsh.exe'
+  vim.o.shellxquote = ''
+  vim.o.shellquote = ''
+  -- Force UTF-8 encoding to prevent PowerShell from mangling native executable pipelines
+  vim.o.shellcmdflag =
+    '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+  -- Fix redirection so systemlist() captures output properly
+  vim.o.shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait'
+  vim.o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 end
 if vim.fn.executable 'rg' == 1 then
   o.grepprg = 'rg --vimgrep --smart-case --hidden --color=never --glob !.git'
@@ -70,9 +76,21 @@ if vim.fn.executable 'rg' == 1 then
     --- @param file string The pattern to search for.
     --- @return string[] A list of found file paths. Returns an empty list on error.
     function FindFunc(file)
-      return vim.fn.systemlist(
-        'rg --files --color=never --hidden --glob "!**/.git/*" --glob "!**/build/*" | fzf --filter="' .. file .. '"'
-      )
+      -- Add `--path-separator /` to rg for cross-platform consistency
+      local cmd = 'rg --files --color=never --hidden --path-separator / --glob "!**/.git/*" --glob "!**/build/*" | fzf --filter="'
+        .. file
+        .. '"'
+      local results = vim.fn.systemlist(cmd)
+      local clean_results = {}
+      -- Strip the rogue \r characters and whitespace from the file paths
+      for _, path in ipairs(results) do
+        -- gsub('\r', '') removes the carriage return, then we trim whitespace
+        local clean_path = path:gsub('\r', ''):match '^%s*(.-)%s*$'
+        if clean_path and clean_path ~= '' then
+          table.insert(clean_results, clean_path)
+        end
+      end
+      return clean_results
     end
     o.findfunc = 'v:lua.FindFunc'
   end
