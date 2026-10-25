@@ -1,52 +1,56 @@
 # ✨ Custom Neovim config
 
-This is a custom nvim config. The main focus is a bare bones ui, while
-leveraging native features with a few plugins, in order to achieve classic
-editing experience with a modern touch.
+A personal Neovim config for **Neovim 0.12+**. The focus is a bare-bones UI that
+leans on native features, supplemented by a small set of plugins, to deliver a
+classic editing experience with a modern touch.
 
 > [!IMPORTANT]
-> It is suggested to have some dependencies when using this config for the best
-> experience. Most of the functionality will be kept if they are not installed,
-> except for mini.pick, which requires `ripgrep` or `fd` for file and grep
-> pickers. For windows prefer safe installation methods like `winget` or
-> `scoop`. On linux use your distro's package manager like `apt` or `dnf`
+> Requires Neovim 0.12 or newer (built on the native `vim.pack` API).
 >
-> -   [xsel](https://github.com/kfish/xsel) for clipboard on X11
-> -   [fd](https://github.com/sharkdp/fd) [ripgrep](https://github.com/BurntSushi/ripgrep) for the `mini.pick` pickers
-> -   [zathura](https://pwmt.org/projects/zathura/) or [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) for pdf functionality when previewing LaTeX documents
-> -   [pwsh.exe](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) if you want to use it as the shell for windows usage
+> Most features work without the optional tools below. The exception is
+> `mini.pick`, whose file and grep pickers need `ripgrep` or `fd`.
+>
+> On Windows, prefer `winget` or `scoop`. On Linux, use your distro's package
+> manager (`apt`, `dnf`, `pacman`, ...).
+>
+> - [wl-clipboard](https://github.com/bugaevc/wl-clipboard) for clipboard on Wayland (`wl-copy`/`wl-paste`)
+> - [xclip](https://github.com/astrand/xclip) or [xsel](https://github.com/kfish/xsel) for clipboard on X11 (Neovim auto-detects either)
+> - [win32yank](https://github.com/equalsraf/win32yank) for clipboard on Windows and WSL
+> - [fd](https://github.com/sharkdp/fd) and [ripgrep](https://github.com/BurntSushi/ripgrep) for the `mini.pick` pickers
+> - [zathura](https://pwmt.org/projects/zathura/) (Linux) or [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) (Windows) for PDF preview of LaTeX and Typst documents
+> - [pwsh.exe](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) if you want to use PowerShell as the shell on Windows
+> - [fzf](https://github.com/junegunn/fzf) only if you re-enable the `fzf-lua` fallback
 
 ## 🔥 Showcase
 
 ![2024-07-25-14:25:58](https://github.com/user-attachments/assets/02033bd9-ac45-428f-b338-61991be638e4)
 ![2024-07-25-18:50:21](https://github.com/user-attachments/assets/79f0f9dd-fc5c-418a-b9ee-c0005215847c)
 
-## ⚒️ Features of this configuration
+## ⚒️ Features
 
-1. Based on native `vim.pack` (Neovim 0.12+)
-2. Heavy use of native Neovim features, including `vim.lsp.completion`, `vim.lsp.inline_completion`, and `vim.snippet`
-3. Custom snippet system in json `snippets/`, enabling compatibility with other editors like VS Code and leveraging native `vim.snippet`
-4. Default spell for greek and english with custom `vim.ui.select` picker
-5. Langmap for greek input
-6. Language Servers for multiple languages (Python, Rust, Typst, Lua, etc.)
-7. Neovide support with dynamic font resizing and optimized animations
-8. Custom statusline and minimal UI for a distraction-free experience
-9. Powerful system with autocomcommands and a working ftplugin system
-10. Custom efm language server with formatters and linters for various languages
-11. LaTeX preview based on `texlab` with `zathura` on linux and [SumatraPDF](https://www.sumatrapdfreader.org/free-pdf-reader) on windows
-12. Custom treesitter queries for highlighting `lua` and `LaTeX`
-13. Mini.pick integration for fast and efficient searching and picking
-14. Lazy-loading system via custom `lloader.lua` using `vim.pack` native API
+1. Built on the native `vim.pack` plugin manager (Neovim 0.12+) with a custom lazy-loader (`lua/lloader.lua`)
+2. Heavy use of native features: `vim.lsp.completion`, `vim.lsp.inline_completion`, and `vim.snippet`
+3. Custom JSON snippets in `snippets/`, compatible with VS Code-style snippet formats and loaded through native `vim.snippet`
+4. Greek and English spell checking by default, with a custom `vim.ui.select` picker for suggestions
+5. Langmap for typing Greek without switching keyboard layouts
+6. Language servers for Python (`basedpyright`, `ruff`), Rust (`rust_analyzer`), Typst (`tinymist`), LaTeX (`texlab`), Lua (`lua_ls`), C/C++ (`clangd`), CMake, Julia, Bash, YAML, TOML, and Copilot inline completion
+7. Custom statusline and minimal UI for a distraction-free experience
+8. Autocommands and a working ftplugin system (`after/ftplugin/`)
+9. Custom `efm` language server wiring formatters and linters for various languages
+10. LaTeX and Typst PDF preview: `texlab` forward/inverse search with `zathura` on Linux and SumatraPDF on Windows; `tinymist` PDF export for Typst
+11. Custom Treesitter queries for highlighting Lua, LaTeX, Typst, and BibTeX
+12. `mini.pick` integration for fast file, grep, and git-status pickers
+13. Bundled `melange` colorscheme
 
 ## 🚀 Installation
 
-Before installing make sure to backup your config, plugins, data and cache.
-Then remove it, or better rename it to something like `<folder>.bak`. Then just clone this
-repo to the appropriate folder and just open it. The plugins and treesitter
-parsers will be installed automatically and then you can open `Mason` and
-install any program manually.
+Back up your existing config, plugins, data, and cache before installing. Then
+move them aside (for example, rename them to `<folder>.bak`), clone this repo
+to the config path, and open Neovim. Plugins and Treesitter parsers install
+automatically on first launch. Open `:Mason` to install any language servers or
+tools you need.
 
-On Linux
+### Linux
 
 ```sh
 # required
@@ -58,14 +62,14 @@ mv ~/.local/state/nvim{,.bak}
 mv ~/.cache/nvim{,.bak}
 ```
 
-Then
+Then:
 
 ```sh
 git clone https://github.com/DimitrisDimitropoulos/nvim.git ~/.config/nvim
 nvim
 ```
 
-On Windows with PowerShell
+### Windows (PowerShell)
 
 ```powershell
 # required
@@ -75,26 +79,37 @@ Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
 Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
 ```
 
-Then
+Then:
 
 ```powershell
 git clone https://github.com/DimitrisDimitropoulos/nvim.git $env:LOCALAPPDATA\nvim
 nvim
 ```
 
-After launching all plugins make sure to run a `:checkhealth` command and install all the dependencies you may lack like `xsel`, `pwsh.exe`, `rg` and `fd`
+### After first launch
+
+Run `:checkhealth` and install any missing dependencies, such as `wl-clipboard`
+or `xclip`/`xsel`, `win32yank`, `pwsh.exe`, `rg`, and `fd`.
 
 ## 🔌 Plugins
 
-- [savq/melange-nvim](https://github.com/savq/melange-nvim)
-- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+Managed with `vim.pack`:
+
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- [echasnovski/mini.splitjoin](https://github.com/nvim-mini/mini.splitjoin)
+- [nvim-mini/mini.splitjoin](https://github.com/nvim-mini/mini.splitjoin)
 - [nvim-mini/mini.pick](https://github.com/nvim-mini/mini.pick)
 - [nvim-mini/mini.extra](https://github.com/nvim-mini/mini.extra)
-- [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua) (disabled fallback; requires `fzf`)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
+- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+
+Included in the repo, not fetched as plugins:
+
+- `melange` colorscheme in `colors/melange.lua` (originally from [savq/melange-nvim](https://github.com/savq/melange-nvim))
+
+Optional, currently disabled:
+
+- [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua) (fallback picker; uncomment in `lua/plugins.lua` and requires `fzf`)
 
 ## 🚗 TODO
