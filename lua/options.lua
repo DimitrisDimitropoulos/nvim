@@ -133,8 +133,3 @@ end
 
 -- add binaries installed by mason.nvim to path
 vim.env.PATH = vim.env.PATH .. ((vim.fn.has 'win32' == 1) and ';' or ':') .. vim.fn.stdpath 'data' .. '/mason/bin'
-
--- Neovide config
-if vim.g.neovide then
-  require 'neovide'
-end
