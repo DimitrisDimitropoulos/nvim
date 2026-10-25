@@ -34,12 +34,6 @@ o.spelloptions = 'camel'
 
 o.clipboard = 'unnamedplus'
 if vim.fn.has 'unix' == 1 then
-  if vim.fn.executable 'xsel' == 1 and not vim.fn.exists '$WAYLAND_DISPLAY' == 1 then
-    vim.g.clipboard = {
-      copy = { ['+'] = 'xsel --clipboard', ['*'] = 'xsel --clipboard' },
-      paste = { ['+'] = 'xsel --clipboard --output', ['*'] = 'xsel --clipboard --output' },
-    }
-  end
   if
     vim.fn.executable 'wl-copy' == 1
     and vim.fn.executable 'wl-paste' == 1
