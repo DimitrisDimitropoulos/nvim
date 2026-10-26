@@ -18,7 +18,7 @@ local o = vim.o
 
 require('vim._core.ui2').enable {
   enable = true,
-  msg = { target = 'msg' },
+  msg = { targets = 'msg' },
 }
 o.cmdheight = 1
 
